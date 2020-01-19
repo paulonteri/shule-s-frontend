@@ -17,7 +17,7 @@ export const getBooks = () => dispatch => {
     );
 };
 
-// // DELETE LEAD action method // (id)
+// // DELETE BOOK action method // (id)
 // export const deleteLead = id => dispatch => {
 //   axios
 //     .delete(`/api/books/${id}/`)
@@ -31,7 +31,7 @@ export const getBooks = () => dispatch => {
 //     .catch(err => console.log(err));
 // };
 
-// // ADD LEAD
+// // ADD BOOK
 // export const addLead = lead => dispatch => {
 //   axios
 //     .post("/api/books/", lead)
