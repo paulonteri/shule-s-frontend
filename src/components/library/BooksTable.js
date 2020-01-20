@@ -5,7 +5,7 @@ import PropTypes from "prop-types"; // we are gonna have some properties (prop)
 import { Table, Divider, Tag } from "antd";
 const { Column } = Table;
 
-import { getBooks } from "../../actions/library/books";
+import { getBooks, deleteBook } from "../../actions/library/books";
 
 // const data = books;
 
@@ -24,7 +24,7 @@ export class BooksTable extends Component {
   render() {
     return (
       <Fragment>
-        <p>BooksTable</p>
+        <p>Book List Table</p>
         <Table dataSource={this.props.books} rowKey="id">
           <Column title="ID" dataIndex="id" key="id" />
           <Column title="Title" dataIndex="name" key="name" />
@@ -32,11 +32,13 @@ export class BooksTable extends Component {
           <Column
             title="Action"
             key="action"
-            render={(text, record) => (
+            render={the_parameter => (
               <span>
-                <a>Edit {record.lastName}</a>
-                <Divider type="vertical" />
-                <a>Delete</a>
+                <button
+                  onClick={this.props.deleteBook.bind(this, the_parameter.id)}
+                >
+                  Delete
+                </button>
               </span>
             )}
           />
@@ -51,14 +53,12 @@ const mapStateToProps = state => ({
   data: state.booksReducer.books
 });
 
-export default connect(mapStateToProps, { getBooks })(BooksTable);
-
-git commit -m "Added and implemented ant.design table functonality in library(BooksTable.js)"
-
+export default connect(mapStateToProps, { getBooks, deleteBook })(BooksTable);
 
 // LOOP
 
-{/* <tbody>
+{
+  /* <tbody>
 {this.props.books.map(book => (
   <tr key={book.id}>
     <td>{book.id}</td>
@@ -76,4 +76,5 @@ git commit -m "Added and implemented ant.design table functonality in library(Bo
     </td>
   </tr>
 ))}
-</tbody> */}
+</tbody> */
+}

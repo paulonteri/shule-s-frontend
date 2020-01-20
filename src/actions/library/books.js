@@ -1,20 +1,31 @@
 import axios from "axios";
 
-import { GET_BOOKS } from "./types";
+import { GET_BOOKS, DELETE_BOOK } from "./types";
 
 // GET LEADS action method
 export const getBooks = () => dispatch => {
   axios
-    .get("api/library")
+    .get("api/library/")
     .then(res => {
       dispatch({
         type: GET_BOOKS, // in the types file
         payload: res.data // response data from the server (books)
       });
     })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => console.log(err));
+};
+
+// DELETE BOOKS
+export const deleteBook = id => dispach => {
+  axios
+    .delete(`api/library/${id}/`)
+    .then(res => {
+      dispach({
+        type: DELETE_BOOK,
+        payload: id
+      });
+    })
+    .catch(err => console.log(err));
 };
 
 // // DELETE BOOK action method // (id)
