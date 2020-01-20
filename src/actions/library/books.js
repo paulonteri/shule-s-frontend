@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_BOOKS, DELETE_BOOK } from "./types";
+import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
 
 // GET LEADS action method
 export const getBooks = () => dispatch => {
@@ -28,6 +28,19 @@ export const deleteBook = id => dispach => {
     .catch(err => console.log(err));
 };
 
+// ADD BOOK
+export const addBook = book => dispatch => {
+  axios
+    .post("/api/library/", book)
+    .then(res => {
+      dispatch({
+        type: ADD_BOOK,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
+
 // // DELETE BOOK action method // (id)
 // export const deleteLead = id => dispatch => {
 //   axios
@@ -43,16 +56,6 @@ export const deleteBook = id => dispach => {
 // };
 
 // // ADD BOOK
-// export const addLead = lead => dispatch => {
-//   axios
-//     .post("/api/books/", lead)
-//     .then(res => {
-//       dispatch(createMessage({ addLead: "Lead Added" }));
-//       dispatch({
-//         type: ADD_LEAD,
-//         payload: res.data
-//       });
-//     })
 //     .catch(err =>
 //       dispatch(returnErrors(err.response.data, err.response.status))
 //     );

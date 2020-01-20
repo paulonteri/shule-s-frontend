@@ -7,14 +7,11 @@ const { Column } = Table;
 
 import { getBooks, deleteBook } from "../../actions/library/books";
 
-// const data = books;
-
-//
-
 export class BooksTable extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    getBooks: PropTypes.func.isRequired
+    getBooks: PropTypes.func.isRequired,
+    deleteBook: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -24,25 +21,32 @@ export class BooksTable extends Component {
   render() {
     return (
       <Fragment>
-        <p>Book List Table</p>
-        <Table dataSource={this.props.books} rowKey="id">
-          <Column title="ID" dataIndex="id" key="id" />
-          <Column title="Title" dataIndex="name" key="name" />
-          <Column title="Author" dataIndex="author" key="author" />
-          <Column
-            title="Action"
-            key="action"
-            render={the_parameter => (
-              <span>
-                <button
-                  onClick={this.props.deleteBook.bind(this, the_parameter.id)}
-                >
-                  Delete
-                </button>
-              </span>
-            )}
-          />
-        </Table>
+        <div className="card card-body mt-4 mb-4">
+          <h2>Book List</h2>
+          <Table dataSource={this.props.books} rowKey="id">
+            <Column title="ID" dataIndex="id" key="id" />
+            <Column title="Title" dataIndex="name" key="name" />
+            <Column title="Author" dataIndex="author" key="author" />
+            <Column
+              title="Description"
+              dataIndex="description"
+              key="description"
+            />
+            <Column
+              title=""
+              key="action"
+              render={the_parameter => (
+                <span>
+                  <button
+                    onClick={this.props.deleteBook.bind(this, the_parameter.id)}
+                  >
+                    Delete
+                  </button>
+                </span>
+              )}
+            />
+          </Table>
+        </div>
       </Fragment>
     );
   }
