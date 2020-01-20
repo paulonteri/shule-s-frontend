@@ -38,6 +38,7 @@ export class BooksTable extends Component {
               render={the_parameter => (
                 <span>
                   <button
+                    className="btn btn-danger btn-sm"
                     onClick={this.props.deleteBook.bind(this, the_parameter.id)}
                   >
                     Delete

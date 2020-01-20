@@ -18,7 +18,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <Fragment>
-        <p>Library Dashboard</p>
+        <h1>Library Dashboard</h1>
         <BooksTable />
         <BookForm />
       </Fragment>
