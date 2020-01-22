@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
 import { GET_ERRORS } from "../types";
+import { createMessage } from "../messages";
 
 // GET LEADS action method
 export const getBooks = () => dispatch => {
@@ -17,11 +18,12 @@ export const getBooks = () => dispatch => {
 };
 
 // DELETE BOOKS
-export const deleteBook = id => dispach => {
+export const deleteBook = id => dispatch => {
   axios
     .delete(`api/library/${id}/`)
     .then(res => {
-      dispach({
+      dispatch(createMessage({ deleteBook: "Book Deleted" }));
+      dispatch({
         type: DELETE_BOOK,
         payload: id
       });
