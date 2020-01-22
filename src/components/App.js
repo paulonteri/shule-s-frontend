@@ -3,17 +3,29 @@ import ReactDOM from "react-dom";
 // import * as serviceWorker from "../serviceWorker";
 
 import Library from "./library/Library";
+import Alerts from "../layout/Alerts";
 
 import { Provider } from "react-redux";
 import store from "../store";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
+// Alerts Options
+const alertOptions = {
+  timeout: 3000,
+  position: "top center"
+};
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Fragment>
-          <Library />
-          <p>App.js</p>
+          <AlertProvider template={AlertTemplate} {...alertOptions}>
+            <Alerts />
+            <Library />
+            <p>App.js</p>
+          </AlertProvider>
         </Fragment>
       </Provider>
     );
