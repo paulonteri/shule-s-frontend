@@ -36,6 +36,7 @@ export const addBook = book => dispatch => {
   axios
     .post("/api/library/", book)
     .then(res => {
+      dispatch(createMessage({ addBook: "Book Added" }));
       dispatch({
         type: ADD_BOOK,
         payload: res.data

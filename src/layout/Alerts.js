@@ -18,6 +18,7 @@ export class Alerts extends Component {
     }
     if (message !== prevProps.message) {
       if (message.deleteBook) alert.success(message.deleteBook);
+      if (message.addBook) alert.success(message.addBook);
     }
   }
 
