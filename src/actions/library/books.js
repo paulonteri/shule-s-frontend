@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
+import { GET_ERRORS } from "../types";
 
 // GET LEADS action method
 export const getBooks = () => dispatch => {
@@ -38,7 +39,10 @@ export const addBook = book => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      const errors = { msg: err.response.data, status: err.response.status };
+      dispatch({ type: GET_ERRORS, payload: errors }); // dispach the errors to state
+    });
 };
 
 // // DELETE BOOK action method // (id)
