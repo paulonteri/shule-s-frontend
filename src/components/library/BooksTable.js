@@ -54,8 +54,7 @@ export class BooksTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  books: state.booksReducer.books,
-  data: state.booksReducer.books
+  books: state.booksReducer.books
 });
 
 export default connect(mapStateToProps, { getBooks, deleteBook })(BooksTable);
