@@ -1,8 +1,8 @@
 import axios from "axios";
 
 import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
-import { GET_ERRORS } from "../types";
-import { createMessage } from "../messages";
+// import { GET_ERRORS } from "../types"; // replaced by the returnErrors function
+import { createMessage, returnErrors } from "../messages";
 
 // GET LEADS action method
 export const getBooks = () => dispatch => {
@@ -14,7 +14,9 @@ export const getBooks = () => dispatch => {
         payload: res.data // response data from the server (books)
       });
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 // DELETE BOOKS
@@ -42,10 +44,13 @@ export const addBook = book => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => {
-      const errors = { msg: err.response.data, status: err.response.status };
-      dispatch({ type: GET_ERRORS, payload: errors }); // dispach the errors to state
-    });
+    .catch(
+      err => dispatch(returnErrors(err.response.data, err.response.status))
+      // {
+      //   const errors = { msg: err.response.data, status: err.response.status };
+      //   dispatch({ type: GET_ERRORS, payload: errors }); // dispach the errors to state
+      // }
+    );
 };
 
 // // DELETE BOOK action method // (id)
