@@ -72,9 +72,7 @@ export default connect(mapStateToProps, { getBooks, deleteBook })(BooksTable);
     <td>{book.message}</td>
     <td>
       <button
-        onClick={this.props.deletebook.bind(this, book.id)}
-        className="btn btn-danger btn-sm"
-      >
+        onClick={this.props.deletebook.bind(this, book.id)} className="btn btn-danger btn-sm">
         {" "}
         Delete
       </button>
