@@ -24,8 +24,8 @@ class App extends Component {
         <Fragment>
           <AlertProvider template={AlertTemplate} {...alertOptions}>
             <Alerts />
-            <Students />
             <Library />
+            <Students />
             <p>App.js</p>
           </AlertProvider>
         </Fragment>
