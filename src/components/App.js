@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 
 import Library from "./library/Library";
 import Alerts from "../layout/Alerts";
+import Students from "./students/Students";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -23,6 +24,7 @@ class App extends Component {
         <Fragment>
           <AlertProvider template={AlertTemplate} {...alertOptions}>
             <Alerts />
+            <Students />
             <Library />
             <p>App.js</p>
           </AlertProvider>

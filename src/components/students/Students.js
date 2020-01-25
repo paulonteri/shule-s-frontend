@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 
-import Studentstable from "./Studentstable";
+import StudentsList from "./StudentsList";
 
 export class Students extends Component {
   render() {
     return (
       <Fragment>
-        <Studentstable />
+        <StudentsList />
       </Fragment>
     );
   }

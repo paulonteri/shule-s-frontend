@@ -59,6 +59,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, { getBooks, deleteBook })(BooksTable);
 
+
 // LOOP
 
 {
