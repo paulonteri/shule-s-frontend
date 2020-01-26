@@ -19,8 +19,10 @@ import { Provider } from "react-redux";
 import store from "../store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import { Layout } from "antd";
-const { Content } = Layout;
+import { Layout, Menu, Breadcrumb, Icon } from "antd";
+
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 // Alerts Options
 const alertOptions = {
@@ -36,24 +38,24 @@ class App extends Component {
           <Router>
             <Fragment>
               <Alerts />
-              <Layout>
+              <Layout style={{ minHeight: "100vh" }}>
                 <AppSider />
-
-                <Layout style={{ marginLeft: 200 }}>
+                <Layout>
                   <AppHeader />
                   <Content
-                    style={{ margin: "24px 16px 0", overflow: "initial" }}
+                    style={{
+                      margin: "24px 16px",
+                      padding: 24,
+                      background: "#fff",
+                      minHeight: 280
+                    }}
                   >
-                    {/* <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>
-              </div> */}
-
                     <div className="container">
                       <Switch>
                         <Route exact path="/" component={Students} />
                         <Route exact path="/library" component={Library} />
                       </Switch>
                     </div>
-                    <p>App.js</p>
                   </Content>
                   <AppFooter />
                 </Layout>
@@ -73,4 +75,20 @@ ReactDOM.render(<App />, document.getElementById("app"));
 {
   /* <Library />
               <Students /> */
+}
+{
+  /* <Layout style={{ minHeight: "100vh" }}>
+                <AppSider />
+
+                <Layout style={{ marginLeft: 200, paddingTop: 0 }}>
+                  <AppHeader />
+                  <Content style={{ margin: "0 16px" }}>
+                   
+
+                    
+                    <p>App.js</p>
+                  </Content>
+                </Layout>
+                <AppFooter />
+              </Layout> */
 }

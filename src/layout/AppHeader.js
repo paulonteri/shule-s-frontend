@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { Layout } from "antd";
+import { Layout, Icon } from "antd";
 
 const { Header } = Layout;
 
 export class AppHeader extends Component {
   render() {
-    return <Header style={{ background: "#fff", padding: 0 }} />;
+    return (
+      <Header style={{ background: "#fff", padding: 0 }}>
+        <p>School</p>
+      </Header>
+    );
   }
 }
 
