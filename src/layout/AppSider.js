@@ -18,9 +18,14 @@ export class AppSider extends Component {
   render() {
     return (
       <Sider
-        collapsible
-        collapsed={this.state.collapsed}
-        onCollapse={this.onCollapse}
+        // collapsible
+        // collapsed={this.state.collapsed}
+        // onCollapse={this.onCollapse}
+        breakpoint="md"
+        collapsedWidth="0"
+        onBreakpoint={broken => {
+          console.log(broken);
+        }}
       >
         <div className="logo" />
 

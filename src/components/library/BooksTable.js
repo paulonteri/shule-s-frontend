@@ -21,9 +21,16 @@ export class BooksTable extends Component {
   render() {
     return (
       <Fragment>
-        <div className="card card-body mt-4 mb-4">
-          <h2>Book List</h2>
-          <Table dataSource={this.props.books} rowKey="id">
+        <div className="table-responsive card card-body shadow rounded mb-4">
+          <h3>Book List</h3>
+          <Table
+            dataSource={this.props.books}
+            rowKey="id"
+            bordered
+            // title={() => "Books"}
+            footer={() => "List of Books"}
+            pagination={{ pageSize: 20 }}
+          >
             <Column title="ID" dataIndex="id" key="id" />
             <Column title="Title" dataIndex="name" key="name" />
             <Column title="Author" dataIndex="author" key="author" />
@@ -58,7 +65,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getBooks, deleteBook })(BooksTable);
-
 
 // LOOP
 

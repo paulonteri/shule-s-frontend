@@ -8,6 +8,8 @@ import {
   Redirect
 } from "react-router-dom";
 
+import { browserHistory } from "react-router";
+
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import AppSider from "../layout/AppSider";
@@ -20,7 +22,6 @@ import store from "../store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { Layout } from "antd";
-
 const { Content } = Layout;
 
 // Alerts Options
@@ -37,24 +38,24 @@ class App extends Component {
           <Router>
             <Fragment>
               <Alerts />
+
               <Layout style={{ minHeight: "100vh" }}>
                 <AppSider />
                 <Layout>
                   <AppHeader />
                   <Content
                     style={{
-                      margin: "24px 16px",
-                      padding: 24,
-                      background: "#fff",
+                      margin: "15px ",
+                      marginTop: "1px ",
+                      //   padding: 20,
+                      //   background: "#fff",
                       minHeight: 280
                     }}
                   >
-                    <div className="container">
-                      <Switch>
-                        <Route exact path="/" component={Students} />
-                        <Route exact path="/library" component={Library} />
-                      </Switch>
-                    </div>
+                    <Switch>
+                      <Route exact path="/" component={Students} />
+                      <Route exact path="/library" component={Library} />
+                    </Switch>
                   </Content>
                   <AppFooter />
                 </Layout>
