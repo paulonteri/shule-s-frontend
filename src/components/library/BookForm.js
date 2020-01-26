@@ -14,11 +14,11 @@ export class BookForm extends Component {
     addBook: PropTypes.func.isRequired
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
 
   onSubmit = e => {
     e.preventDefault();
-    const { name, author, description } = this.state;
+    const { name, author, description } = this.state; // const name = state.name...  e.t.c
     const book = {
       // the values in the state to the book const
       name: name,
@@ -83,3 +83,4 @@ export class BookForm extends Component {
 }
 
 export default connect(null, { addBook })(BookForm);
+// null for mapStateToProps - we are not taking in the state
