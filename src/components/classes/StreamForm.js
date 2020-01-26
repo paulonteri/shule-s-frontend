@@ -37,7 +37,7 @@ export class StreamForm extends Component {
               onChange={this.onChange} // call the onChange function & update the state
               value={name}
             />
-            <small id="emailHelp" class="form-text text-muted">
+            <small id="emailHelp" className="form-text text-muted">
               {" "}
               Enter Stream. Eg: East, Blue, e.t.c
             </small>

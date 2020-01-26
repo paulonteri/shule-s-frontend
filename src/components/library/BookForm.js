@@ -49,7 +49,7 @@ export class BookForm extends Component {
               onChange={this.onChange} // call the onChange function
               value={name}
             />
-            <small id="emailHelp" class="form-text text-muted">
+            <small id="emailHelp" className="form-text text-muted">
               {" "}
               Enter Book Title
             </small>
