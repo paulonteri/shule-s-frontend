@@ -62,17 +62,41 @@ export class AppSider extends Component {
             <Menu.Item key="5">
               <Link to="/library">Library</Link>
             </Menu.Item>
-            <Menu.Item key="6">option6</Menu.Item>
-            <Menu.Item key="7">option7</Menu.Item>
+            <Menu.Item key="6">
+              <Link to="/library/bookstable">Books Table</Link>
+            </Menu.Item>
+            <Menu.Item key="7">
+              <Link to="/library/addbook">Add Book</Link>
+            </Menu.Item>
             <Menu.Item key="8">option8</Menu.Item>
           </SubMenu>
 
-          <Menu.Item key="1">
+          {/* classes SubMenu */}
+          <SubMenu
+            key="sub3"
+            title={
+              <span>
+                <Icon type="user" />
+                <span> Classes </span>
+              </span>
+            }
+          >
+            <Menu.Item key="9">
+              {" "}
+              <Link to="/classes">Classes</Link>
+            </Menu.Item>
+            <Menu.Item key="10">option2</Menu.Item>
+            <Menu.Item key="11">option3</Menu.Item>
+            <Menu.Item key="12">option4</Menu.Item>
+          </SubMenu>
+
+          {/* Others */}
+          <Menu.Item key="31">
             <Icon type="user" />
             <span className="nav-text">nav 1</span>
           </Menu.Item>
 
-          <Menu.Item key="2">
+          <Menu.Item key="32">
             <Icon type="video-camera" />
             <span className="nav-text">nav 2</span>
           </Menu.Item>
