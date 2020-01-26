@@ -17,10 +17,10 @@ export class StreamList extends Component {
   render() {
     return (
       <Fragment>
-        <div className="card px-4 py-2 text-center shadow">
+        <div className="card px-4 py-2 shadow h-100">
           <div className="row">
             <div className="col">
-              <h4>Streams Available:</h4>
+              <h3>Streams Available:</h3>
             </div>
           </div>
           {this.props.streams.map(str => (

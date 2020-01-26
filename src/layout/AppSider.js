@@ -85,7 +85,10 @@ export class AppSider extends Component {
               {" "}
               <Link to="/classes">Classes</Link>
             </Menu.Item>
-            <Menu.Item key="10">option2</Menu.Item>
+            <Menu.Item key="10">
+              {" "}
+              <Link to="classes/streams">Streams</Link>
+            </Menu.Item>
             <Menu.Item key="11">option3</Menu.Item>
             <Menu.Item key="12">option4</Menu.Item>
           </SubMenu>

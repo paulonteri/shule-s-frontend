@@ -43,17 +43,23 @@ export class BookForm extends Component {
             <label>Name</label>
             <input
               className="form-control"
+              placeholder="Book Title"
               type="text"
               name="name"
               onChange={this.onChange} // call the onChange function
               value={name}
             />
+            <small id="emailHelp" class="form-text text-muted">
+              {" "}
+              Enter Book Title
+            </small>
           </div>
 
           <div className="form-group">
             <label>Author</label>
             <input
               className="form-control"
+              placeholder="Book Author"
               type="author"
               name="author"
               onChange={this.onChange}
@@ -65,6 +71,7 @@ export class BookForm extends Component {
             <label>Description</label>
             <textarea
               className="form-control"
+              placeholder="Short Book Description"
               type="text"
               name="description"
               onChange={this.onChange}

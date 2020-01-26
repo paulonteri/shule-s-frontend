@@ -56,7 +56,7 @@ class App extends Component {
                     <Switch>
                       <Route exact path="/" component={Students} />
                       <Route path="/library" component={Library} />
-                      <Route exact path="/classes" component={Classes} />
+                      <Route path="/classes" component={Classes} />
                     </Switch>
                   </Content>
                   <AppFooter />

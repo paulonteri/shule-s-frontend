@@ -8,9 +8,20 @@ export class Students extends Component {
     return (
       <Fragment>
         <StudentsList />
-        <button>
-          <Link to="/library">Library</Link>
-        </button>
+        <div className="container">
+          <div className="row">
+            <div className="mx-2">
+              <Link to="/library">
+                <button className="btn btn-primary">Library</button>
+              </Link>
+            </div>
+            <div className="mx-2">
+              <Link to="/classes">
+                <button className="btn btn-primary">Classes</button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </Fragment>
     );
   }
