@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
     case ADD_BOOK:
       return {
         ...state,
-        books: [...state.books, action.payload] // books that are there plus the new one
+        books: [...state.books, action.payload] // books that are there plus the new one // reload state
       };
     //   case CLEAR_LEADS:
     //     return {
