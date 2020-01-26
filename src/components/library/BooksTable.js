@@ -21,7 +21,6 @@ export class BooksTable extends Component {
   render() {
     return (
       <Fragment>
-        <p>Books table</p>
         <div className="table-responsive card card-body shadow rounded mb-4">
           <h3>Book List</h3>
           <Table

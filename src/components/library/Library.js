@@ -8,13 +8,10 @@ export class Library extends Component {
   render() {
     return (
       <Fragment>
-        {/* <LibraryDashboard /> */}
-        <div>
-          <Switch>
-            <Route exact path="library/" component={LibraryDashboard} />
-            <Route exact path="/library/bookstable" component={BooksTable} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/library" component={LibraryDashboard} />
+          <Route exact path="/library/bookstable" component={BooksTable} />
+        </Switch>
       </Fragment>
     );
   }

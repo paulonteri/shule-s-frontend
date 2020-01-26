@@ -3,7 +3,7 @@ import React, { Fragment, Component } from "react";
 import BooksTable from "./BooksTable";
 import BookForm from "./BookForm";
 
-export default class Dashboard extends Component {
+export class LibraryDashboard extends Component {
   render() {
     return (
       <Fragment>
@@ -13,3 +13,5 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+export default LibraryDashboard;
