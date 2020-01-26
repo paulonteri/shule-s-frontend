@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 // import * as serviceWorker from "../serviceWorker";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 import Library from "./library/Library";
 import Alerts from "../layout/Alerts";
@@ -21,14 +27,20 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Fragment>
-          <AlertProvider template={AlertTemplate} {...alertOptions}>
-            <Alerts />
-            <Library />
-            <Students />
-            <p>App.js</p>
-          </AlertProvider>
-        </Fragment>
+        <AlertProvider template={AlertTemplate} {...alertOptions}>
+          <Router>
+            <Fragment>
+              <Alerts />
+              <div className="container">
+                <Switch>
+                  <Route exact path="/" component={Students} />
+                  <Route exact path="/library" component={Library} />
+                </Switch>
+              </div>
+              <p>App.js</p>
+            </Fragment>
+          </Router>
+        </AlertProvider>
       </Provider>
     );
   }
@@ -36,4 +48,9 @@ class App extends Component {
 
 ReactDOM.render(<App />, document.getElementById("app"));
 
-// serviceWorker.unregister();
+// serviceWorker.register();
+
+{
+  /* <Library />
+              <Students /> */
+}
