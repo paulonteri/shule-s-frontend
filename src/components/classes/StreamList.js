@@ -17,7 +17,7 @@ export class StreamList extends Component {
   render() {
     return (
       <Fragment>
-        <div className="card px-4 py-2 text-center">
+        <div className="card px-4 py-2 text-center shadow">
           <div className="row">
             <div className="col">
               <h4>Streams Available:</h4>
@@ -27,7 +27,7 @@ export class StreamList extends Component {
             <div className="row">
               <div className="col">
                 <h5>
-                  <li key="str.name"> {str.name}</li>
+                  <li key={str.name}> {str.name}</li>
                 </h5>
               </div>
             </div>
