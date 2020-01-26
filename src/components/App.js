@@ -19,10 +19,9 @@ import { Provider } from "react-redux";
 import store from "../store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Layout } from "antd";
 
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Content } = Layout;
 
 // Alerts Options
 const alertOptions = {
@@ -71,24 +70,3 @@ class App extends Component {
 ReactDOM.render(<App />, document.getElementById("app"));
 
 // serviceWorker.register();
-
-{
-  /* <Library />
-              <Students /> */
-}
-{
-  /* <Layout style={{ minHeight: "100vh" }}>
-                <AppSider />
-
-                <Layout style={{ marginLeft: 200, paddingTop: 0 }}>
-                  <AppHeader />
-                  <Content style={{ margin: "0 16px" }}>
-                   
-
-                    
-                    <p>App.js</p>
-                  </Content>
-                </Layout>
-                <AppFooter />
-              </Layout> */
-}
