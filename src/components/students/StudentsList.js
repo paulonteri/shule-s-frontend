@@ -20,10 +20,12 @@ export class StudentsList extends Component {
       <Fragment>
         <ul>
           <h3>Students List</h3>
-          {this.props.students.map(student => (
-            <li key={student.student_id}>
+          {this.props.students.map(stud => (
+            // fuction with the variable stud
+            // function (stud) { return stud.id
+            <li key={stud.student_id}>
               {" "}
-              {student.student_id} {student.first_name} {student.sir_name}
+              {stud.student_id} {stud.first_name} {stud.sir_name}
             </li>
           ))}
         </ul>

@@ -10,12 +10,13 @@ import {
 
 import { browserHistory } from "react-router";
 
+import Alerts from "../layout/Alerts";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import AppSider from "../layout/AppSider";
 import Library from "./library/Library";
-import Alerts from "../layout/Alerts";
 import Students from "./students/Students";
+import Classes from "./classes/Classes";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -54,7 +55,8 @@ class App extends Component {
                   >
                     <Switch>
                       <Route exact path="/" component={Students} />
-                      <Route exact path="/library" component={Library} />
+                      <Route path="/library" component={Library} />
+                      <Route exact path="/classes" component={Classes} />
                     </Switch>
                   </Content>
                   <AppFooter />

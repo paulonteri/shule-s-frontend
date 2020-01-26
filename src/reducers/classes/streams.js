@@ -7,7 +7,7 @@ export default function(state = initialState, action) {
     case GET_STREAMS:
       return {
         ...state,
-        students: action.payload
+        streams: action.payload
       };
     default:
       return state;
