@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 import { Table, Divider, Tag } from "antd";
 const { Column } = Table;
 
-import { getStudents } from "../../actions/students/students";
+import { getStudents, deleteStudent } from "../../actions/students/students";
 
 export class StudentsList extends Component {
   static propTypes = {
     students: PropTypes.array.isRequired,
-    getStudents: PropTypes.func.isRequired
+    getStudents: PropTypes.func.isRequired,
+    deleteStudent: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -18,17 +19,33 @@ export class StudentsList extends Component {
   render() {
     return (
       <Fragment>
-        <ul>
-          <h3>Students List</h3>
+        <div className="card px-4 py-2 shadow h-75">
+          <div className="row">
+            <div className="col">
+              <h3>Student List:</h3>
+            </div>
+          </div>
           {this.props.students.map(stud => (
-            // fuction with the variable stud
-            // function (stud) { return stud.id
-            <li key={stud.student_id}>
-              {" "}
-              {stud.student_id} {stud.first_name} {stud.sir_name}
-            </li>
+            <div className="row my-1">
+              <div className="col">
+                <h5>
+                  <li key={stud.student_id}>
+                    {" "}
+                    {stud.student_id} {stud.first_name} {stud.sir_name}
+                  </li>
+                </h5>
+              </div>
+              <div className="col ">
+                <button
+                  onClick={this.props.deleteStudent.bind(this, stud.student_id)}
+                  className="btn btn-danger btn-sm float-right"
+                >
+                  Delete Student
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </Fragment>
     );
   }
@@ -38,7 +55,9 @@ const mapStateToProps = state => ({
   students: state.studentsReducer.students
 });
 
-export default connect(mapStateToProps, { getStudents })(StudentsList);
+export default connect(mapStateToProps, { getStudents, deleteStudent })(
+  StudentsList
+);
 
 {
   /* <table className="table table-striped">

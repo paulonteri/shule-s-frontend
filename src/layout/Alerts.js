@@ -21,6 +21,7 @@ export class Alerts extends Component {
       if (message.addBook) alert.success(message.addBook);
       if (message.addStream) alert.success(message.addStream);
       if (message.deleteStream) alert.error(message.deleteStream);
+      if (message.deleteStudent) alert.error(message.deleteStudent);
     }
   }
 
