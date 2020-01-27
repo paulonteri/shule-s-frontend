@@ -1,4 +1,8 @@
-import { GET_STREAMS, ADD_STREAM } from "../../actions/classes/types";
+import {
+  GET_STREAMS,
+  ADD_STREAM,
+  DELETE_STREAM
+} from "../../actions/classes/types";
 
 const initialState = { streams: [] };
 
@@ -14,6 +18,12 @@ export default function(state = initialState, action) {
         ...state,
         streams: [...state.streams, action.payload] // streams that are there plus the new one // reload state
       };
+    case DELETE_STREAM:
+      return {
+        ...state,
+        streams: state.books.filter(stream => stream.name !== action.payload)
+      };
+
     default:
       return state;
   }
