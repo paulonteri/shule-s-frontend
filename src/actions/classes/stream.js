@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_STREAMS, ADD_STREAM } from "./types";
+import { GET_STREAMS, ADD_STREAM, DELETE_STREAM } from "./types";
 import { createMessage, returnErrors } from "../messages";
 
 // GET STREAMS ACTION
@@ -33,3 +33,19 @@ export const addStream = stream => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
+
+// DELETE STREAM ACTION
+export const deleteStream = stream => dispatch => {
+    axios
+    .delete(`/api/stream/${name}`)
+    .then(res => {
+        dispatch(createMessage({deleteStream: "Stream Deleted"}));
+        dispatch({
+            type: DELETE_STREAM,
+            payload: res.data
+        });
+    })
+    .catch(err =>
+        dispatch(returnErrors(err.response.data, err.response.status))
+      );
+}
