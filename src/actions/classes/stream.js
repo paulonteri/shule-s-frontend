@@ -35,17 +35,15 @@ export const addStream = stream => dispatch => {
 };
 
 // DELETE STREAM ACTION
-export const deleteStream = stream => dispatch => {
+export const deleteStream = name => dispatch => {
   axios
     .delete(`/api/stream/${name}`)
     .then(res => {
       dispatch(createMessage({ deleteStream: "Stream Deleted" }));
       dispatch({
         type: DELETE_STREAM,
-        payload: res.data
+        payload: name
       });
     })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => console.log(err));
 };

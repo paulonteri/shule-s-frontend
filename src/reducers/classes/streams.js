@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
     case DELETE_STREAM:
       return {
         ...state,
-        streams: state.books.filter(stream => stream.name !== action.payload)
+        streams: state.streams.filter(str => str.name !== action.payload)
       };
 
     default:
