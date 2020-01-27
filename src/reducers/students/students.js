@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
     case DELETE_STUDENT:
       return {
         ...state,
-        students: state.streams.filter(
+        students: state.students.filter(
           stud => stud.student_id !== action.payload
         )
       };
