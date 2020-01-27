@@ -17,9 +17,10 @@ export class Alerts extends Component {
         alert.error(`Description: ${error.msg.description.join()}`);
     }
     if (message !== prevProps.message) {
-      if (message.deleteBook) alert.success(message.deleteBook);
+      if (message.deleteBook) alert.error(message.deleteBook);
       if (message.addBook) alert.success(message.addBook);
       if (message.addStream) alert.success(message.addStream);
+      if (message.deleteStream) alert.error(message.deleteStream);
     }
   }
 
