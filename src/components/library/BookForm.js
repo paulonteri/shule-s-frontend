@@ -37,10 +37,12 @@ export class BookForm extends Component {
     const { name, author, description } = this.state;
     return (
       <div className="card card-body shadow rounded mt-1 mb-4">
-        <h2>Add Book Form</h2>
+        <h4>Add Book Form</h4>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Name</label>
+            <label>
+              <h6>Name</h6>
+            </label>
             <input
               className="form-control"
               placeholder="Book Title"
@@ -56,7 +58,9 @@ export class BookForm extends Component {
           </div>
 
           <div className="form-group">
-            <label>Author</label>
+            <label>
+              <h6>Author</h6>
+            </label>
             <input
               className="form-control"
               placeholder="Book Author"
@@ -68,7 +72,9 @@ export class BookForm extends Component {
           </div>
 
           <div className="form-group">
-            <label>Description</label>
+            <label>
+              <h6>Description</h6>
+            </label>
             <textarea
               className="form-control"
               placeholder="Short Book Description"

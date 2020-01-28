@@ -24,7 +24,7 @@ export class ClassNList extends Component {
         <div className="card px-4 py-2 shadow h-100">
           <div className="row">
             <div className="col">
-              <h3>Class Numerals Available:</h3>
+              <h4>Class Numerals Available:</h4>
             </div>
           </div>
           {this.props.classNumerals.map(classN => (

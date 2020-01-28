@@ -22,7 +22,7 @@ export class BooksTable extends Component {
     return (
       <Fragment>
         <div className="table-responsive card card-body shadow rounded mb-4">
-          <h3>Book List</h3>
+          <h4>Book List</h4>
           <Table
             dataSource={this.props.books}
             rowKey="id"

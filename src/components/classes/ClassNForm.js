@@ -24,7 +24,7 @@ export class ClassNForm extends Component {
     const { name } = this.state; // pull out of the state
     return (
       <div className="card px-4 py-2 shadow rounded h-100">
-        <h3>Add Class Numeral</h3>
+        <h4>Add Class Numeral</h4>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <input
