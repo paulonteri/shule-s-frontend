@@ -6,6 +6,7 @@ import StreamList from "./StreamList";
 import StreamForm from "./StreamForm";
 import Streams from "./Streams";
 import ClassNList from "./ClassNList";
+import ClassNForm from "./ClassNForm";
 
 export class Classes extends Component {
   render() {
@@ -17,6 +18,11 @@ export class Classes extends Component {
             exact
             path="/classes/classnumeralslist"
             component={ClassNList}
+          />
+          <Route
+            exact
+            path="/classes/classnumeralform"
+            component={ClassNForm}
           />
           <Route exact path="/classes/streams" component={Streams} />
           <Route exact path="/classes/streamlist" component={StreamList} />
