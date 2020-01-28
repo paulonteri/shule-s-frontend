@@ -43,6 +43,7 @@ export const deleteClassNumeral = name => dispatch => {
   axios
     .delete(`api/classNumeral/${name}`)
     .then(res => {
+      dispatch(createMessage({ deleteClassNumeral: "Class Numeral Deleted!" }));
       dispatch({
         type: DELETE_CLASSNUMERAL,
         payload: res.data
