@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import {
-  GET_CLASSNUMERAL,
+  GET_CLASSNUMERALS,
   ADD_CLASSNUMERAL,
   DELETE_CLASSNUMERAL
 } from "./types";
@@ -13,7 +13,7 @@ export const getClassNumeral = () => dispatch => {
     .get("api/classNumeral/")
     .then(res => {
       dispatch({
-        type: GET_CLASSNUMERAL,
+        type: GET_CLASSNUMERALS,
         payload: res.data
       });
     })
