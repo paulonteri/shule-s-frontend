@@ -21,3 +21,19 @@ export const getClassNumeral = () => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
+
+// ADD CLASS NUMERAL
+export const addClassNumeral = classNumeral => dispatch => {
+    axios
+      .post("api/classNumeral/")
+      .then(res => {
+        dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
+        dispatch({
+          type: ADD_CLASSNUMERAL,
+          payload: res.data
+        });
+      })
+      .catch(err =>
+        dispatch(returnErrors(err.response.data, err.response.status))
+      );
+  };
