@@ -24,16 +24,29 @@ export const getClassNumeral = () => dispatch => {
 
 // ADD CLASS NUMERAL
 export const addClassNumeral = classNumeral => dispatch => {
-    axios
-      .post("api/classNumeral/")
-      .then(res => {
-        dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
-        dispatch({
-          type: ADD_CLASSNUMERAL,
-          payload: res.data
-        });
-      })
-      .catch(err =>
-        dispatch(returnErrors(err.response.data, err.response.status))
-      );
-  };
+  axios
+    .post("api/classNumeral/", classNumeral)
+    .then(res => {
+      dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
+      dispatch({
+        type: ADD_CLASSNUMERAL,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// DELETE CLASS NUMERAL
+export const deleteClassNumeral = name => dispatch => {
+  axios
+    .delete(`api/classNumeral/${name}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_CLASSNUMERAL,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
