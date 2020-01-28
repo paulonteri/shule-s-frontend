@@ -4,11 +4,13 @@ import errors from "./errors";
 import messages from "./messages";
 import students from "./students/students";
 import streams from "./classes/streams";
+import classNumerals from "./classes/classNumeral";
 
 export default combineReducers({
   errorsReducer: errors,
   messagesReducer: messages,
   booksReducer: books,
   studentsReducer: students,
-  streamsReducer: streams
+  streamsReducer: streams,
+  classNumeralsReducer: classNumerals
 });
