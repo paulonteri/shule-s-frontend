@@ -18,6 +18,7 @@ export const addStudent = student => dispatch => {
     );
 };
 
+// GET STUDENTS
 export const getStudents = () => dispatch => {
   axios
     .get("api/students/")
@@ -32,7 +33,7 @@ export const getStudents = () => dispatch => {
     );
 };
 
-// DELETE STUDENT ACTION
+// DELETE STUDENT
 export const deleteStudent = student_id => dispatch => {
   axios
     .delete(`api/students/${student_id}`)

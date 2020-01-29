@@ -26,6 +26,7 @@ export class StudentsForm extends Component {
     gender: "",
     admission_date: "",
     is_enrolled: "",
+    home_country: "",
     home_county: "",
     home_town: "",
     religion: "",
@@ -62,6 +63,7 @@ export class StudentsForm extends Component {
       gender,
       admission_date,
       is_enrolled,
+      home_country,
       home_county,
       home_town,
       religion,
@@ -90,6 +92,7 @@ export class StudentsForm extends Component {
       gender,
       admission_date,
       is_enrolled,
+      home_country,
       home_county,
       home_town,
       religion,
@@ -121,6 +124,7 @@ export class StudentsForm extends Component {
       gender: "",
       admission_date: "",
       is_enrolled: "",
+      home_country: "",
       home_county: "",
       home_town: "",
       religion: "",
@@ -129,6 +133,34 @@ export class StudentsForm extends Component {
   };
 
   render() {
+    const {
+      student_id,
+      class_ns,
+      dormitory,
+      first_name,
+      sir_name,
+      other_name,
+      father_alive,
+      mother_alive,
+      father_first_name,
+      father_sir_name,
+      father_email,
+      father_phone,
+      mother_first_name,
+      mother_sir_name,
+      mother_email,
+      mother_phone,
+      date_of_birth,
+      gender,
+      admission_date,
+      is_enrolled,
+      home_country,
+      home_county,
+      home_town,
+      religion,
+      health
+    } = this.state; // get them from the state
+
     return (
       <Fragment>
         <div className=" card card-body shadow rounded mt-1 mb-4">
