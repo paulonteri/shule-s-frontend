@@ -1,6 +1,22 @@
 import axios from "axios";
-import { GET_STUDENTS, DELETE_STUDENT } from "./types";
+import { ADD_STUDENT, GET_STUDENTS, DELETE_STUDENT } from "./types";
 import { createMessage, returnErrors } from "../messages";
+
+// ADD STUDENT
+export const addStudent = student => dispatch => {
+  axios
+    .post("/api/library/", student)
+    .then(res => {
+      dispatch(createMessage({ addStudent: "Student Added" }));
+      dispatch({
+        type: ADD_STUDENT,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
 
 export const getStudents = () => dispatch => {
   axios
