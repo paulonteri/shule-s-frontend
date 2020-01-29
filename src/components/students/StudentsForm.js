@@ -1,14 +1,141 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-// test
+import { addStudent } from "../../actions/students/students";
 
 export class StudentsForm extends Component {
+  state = {
+    student_id: "",
+    class_ns: "",
+    dormitory: "",
+    first_name: "",
+    sir_name: "",
+    other_name: "",
+    father_alive: "",
+    mother_alive: "",
+    father_first_name: "",
+    father_sir_name: "",
+    father_email: "",
+    father_phone: "",
+    mother_first_name: "",
+    mother_sir_name: "",
+    mother_email: "",
+    mother_phone: "",
+    date_of_birth: "",
+    gender: "",
+    admission_date: "",
+    is_enrolled: "",
+    home_county: "",
+    home_town: "",
+    religion: "",
+    health: ""
+  };
+
+  static propTypes = {
+    addStudent: PropTypes.func.isRequired
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const {
+      student_id,
+      class_ns,
+      dormitory,
+      first_name,
+      sir_name,
+      other_name,
+      father_alive,
+      mother_alive,
+      father_first_name,
+      father_sir_name,
+      father_email,
+      father_phone,
+      mother_first_name,
+      mother_sir_name,
+      mother_email,
+      mother_phone,
+      date_of_birth,
+      gender,
+      admission_date,
+      is_enrolled,
+      home_county,
+      home_town,
+      religion,
+      health
+    } = this.state; // get them from the state
+
+    // values from the staate to the student const
+    const student = {
+      student_id: student_id,
+      class_ns: class_ns,
+      dormitory: dormitory,
+      first_name,
+      sir_name,
+      other_name,
+      father_alive,
+      mother_alive,
+      father_first_name,
+      father_sir_name,
+      father_email,
+      father_phone,
+      mother_first_name,
+      mother_sir_name,
+      mother_email,
+      mother_phone,
+      date_of_birth,
+      gender,
+      admission_date,
+      is_enrolled,
+      home_county,
+      home_town,
+      religion,
+      health
+    };
+
+    // pass the student const to the action
+    this.props.addStudent(student);
+
+    // empty the fields
+    this.setState({
+      student_id: "",
+      class_ns: "",
+      dormitory: "",
+      first_name: "",
+      sir_name: "",
+      other_name: "",
+      father_alive: "",
+      mother_alive: "",
+      father_first_name: "",
+      father_sir_name: "",
+      father_email: "",
+      father_phone: "",
+      mother_first_name: "",
+      mother_sir_name: "",
+      mother_email: "",
+      mother_phone: "",
+      date_of_birth: "",
+      gender: "",
+      admission_date: "",
+      is_enrolled: "",
+      home_county: "",
+      home_town: "",
+      religion: "",
+      health: ""
+    });
+  };
+
   render() {
     return (
       <Fragment>
         <div className=" card card-body shadow rounded mt-1 mb-4">
           <h4>Add Student Form</h4>
+
           <br />
+
           <form>
             {/* Student */}
             <div className="form-row">
@@ -20,6 +147,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className="form-control"
                   placeholder=" Student's first name"
+                  name="first_name"
+                  onChange={this.onChange}
+                  value={first_name}
                 />
               </div>
 
@@ -31,6 +161,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className="form-control"
                   placeholder=" Student's sir name"
+                  name="sir_name"
+                  onChange={this.onChange}
+                  value={sir_name}
                 />
               </div>
 
@@ -42,6 +175,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className="form-control"
                   placeholder=" Student's other name"
+                  name="other_name"
+                  onChange={this.onChange}
+                  value={other_name}
                 />
               </div>
             </div>
@@ -56,6 +192,9 @@ export class StudentsForm extends Component {
                   step="1"
                   className="form-control"
                   placeholder="Student's identification number"
+                  name="student_id"
+                  onChange={this.onChange}
+                  value={student_id}
                 />
               </div>
 
@@ -64,15 +203,27 @@ export class StudentsForm extends Component {
                 <label>
                   <h6>Class</h6>
                 </label>
-                <select className="form-control">
+                <select
+                  className="form-control"
+                  name="class_ns"
+                  onChange={this.onChange}
+                  value={class_ns}
+                >
                   <option>...</option>
                 </select>
               </div>
+
+              {/* Dormitory */}
               <div className="form-group col-md-3">
                 <label>
                   <h6>Dormitory</h6>
                 </label>
-                <select className="form-control">
+                <select
+                  className="form-control"
+                  name="dormitory"
+                  onChange={this.onChange}
+                  value={dormitory}
+                >
                   <option>...</option>
                 </select>
               </div>
@@ -87,6 +238,9 @@ export class StudentsForm extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Home Country"
+                    name="home_country"
+                    onChange={this.onChange}
+                    value={home_country}
                   />
                 </div>
 
@@ -98,6 +252,9 @@ export class StudentsForm extends Component {
                     type="text"
                     className="form-control"
                     placeholder="County/Province"
+                    name="home_county"
+                    onChange={this.onChange}
+                    value={home_county}
                   />
                 </div>
 
@@ -109,8 +266,13 @@ export class StudentsForm extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Home Town"
+                    name="home_town"
+                    onChange={this.onChange}
+                    value={home_town}
                   />
                 </div>
+
+                {/* Religion */}
                 <div className="form-group col-md-3">
                   <label>
                     <h6>Religion</h6>
@@ -119,6 +281,9 @@ export class StudentsForm extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Religion"
+                    name="religion"
+                    onChange={this.onChange}
+                    value={religion}
                   />
                 </div>
               </div>
@@ -138,6 +303,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className=" form-control"
                   placeholder="Male guardian's first name"
+                  name="father_first_name"
+                  onChange={this.onChange}
+                  value={father_first_name}
                 />
               </div>
 
@@ -149,6 +317,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className=" form-control"
                   placeholder="Male guardian's sir name"
+                  name="father_sir_name"
+                  onChange={this.onChange}
+                  value={father_sir_name}
                 />
               </div>
             </div>
@@ -164,6 +335,9 @@ export class StudentsForm extends Component {
                   step="1"
                   className=" form-control"
                   placeholder="Male guardian's phone number"
+                  name="father_phone"
+                  onChange={this.onChange}
+                  value={father_phone}
                 />
               </div>
 
@@ -175,6 +349,9 @@ export class StudentsForm extends Component {
                   type="email"
                   className=" form-control"
                   placeholder="Male guardian's email address"
+                  name="father_email"
+                  onChange={this.onChange}
+                  value={father_email}
                 />
               </div>
             </div>
@@ -185,6 +362,9 @@ export class StudentsForm extends Component {
                   className="form-check-input"
                   type="checkbox"
                   checked="checked"
+                  name="father_alive"
+                  onChange={this.onChange}
+                  value={father_alive}
                 />
                 <label className="form-check-label">Father is alive</label>
               </div>
@@ -202,6 +382,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className=" form-control"
                   placeholder="Female guardian's first name"
+                  name="mother_first_name"
+                  onChange={this.onChange}
+                  value={mother_first_name}
                 />
               </div>
 
@@ -213,6 +396,9 @@ export class StudentsForm extends Component {
                   type="text"
                   className=" form-control"
                   placeholder="Female guardian's sir name"
+                  name="mother_sir_name"
+                  onChange={this.onChange}
+                  value={mother_sir_name}
                 />
               </div>
             </div>
@@ -228,6 +414,9 @@ export class StudentsForm extends Component {
                   step="1"
                   className=" form-control"
                   placeholder="Female guardian's phone number"
+                  name="mother_phone"
+                  onChange={this.onChange}
+                  value={mother_phone}
                 />
               </div>
 
@@ -239,6 +428,9 @@ export class StudentsForm extends Component {
                   type="email"
                   className=" form-control"
                   placeholder="Female guardian's email address"
+                  name="mother_email"
+                  onChange={this.onChange}
+                  value={mother_email}
                 />
               </div>
             </div>
@@ -248,6 +440,9 @@ export class StudentsForm extends Component {
                   className="form-check-input"
                   type="checkbox"
                   checked="checked"
+                  name="mother_alive"
+                  onChange={this.onChange}
+                  value={mother_alive}
                 />
                 <label className="form-check-label">Mother is alive</label>
               </div>
@@ -256,6 +451,7 @@ export class StudentsForm extends Component {
             <hr />
             <br />
 
+            {/* Health */}
             <div className="form-group">
               <label>
                 <h6>Health</h6>
@@ -264,6 +460,9 @@ export class StudentsForm extends Component {
                 class="form-control"
                 rows="3"
                 placeholder="Any health issue"
+                name="health"
+                onChange={this.onChange}
+                value={health}
               ></textarea>
             </div>
 
@@ -277,4 +476,4 @@ export class StudentsForm extends Component {
   }
 }
 
-export default StudentsForm;
+export default connect(null, { addStudent })(StudentsForm);
