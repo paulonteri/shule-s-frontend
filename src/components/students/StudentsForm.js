@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Form, Icon, Input, Button } from "antd";
+
+import { Form, Icon, Input, Button, Select } from "antd";
 
 import { addStudent } from "../../actions/students/students";
 
@@ -184,89 +185,133 @@ export class StudentsForm extends Component {
 
     // Left blank error
     // Only show error after a field is touched and left blank
+    const genderError = isFieldTouched("gender") && getFieldError("gender");
     const first_nameError =
       isFieldTouched("first_name") && getFieldError("first_name");
     const sir_nameError =
-      isFieldTouched("last_name") && getFieldError("last_name");
+      isFieldTouched("sir_name") && getFieldError("sir_name");
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        {/* First Name */}
-        <Form.Item
-          validateStatus={first_nameError ? "error" : ""}
-          help={first_nameError || ""}
-        >
-          {getFieldDecorator("first_name", {
-            rules: [
-              {
-                required: true,
-                message: "Please input the student's first name!"
-              }
-            ]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="text"
-              placeholder=" Student's first name"
-              name="first_name"
-              onChange={this.onChange}
-            />
-          )}
-        </Form.Item>
+      <div className=" card card-body shadow rounded mt-1 mb-4 container">
+        <h5>Fill in a student's details</h5>
+        <Form onSubmit={this.handleSubmit}>
+          {/* First Name */}
+          <div className="row">
+            <div className="col-md-4">
+              <Form.Item
+                validateStatus={first_nameError ? "error" : ""}
+                help={first_nameError || ""}
+              >
+                {getFieldDecorator("first_name", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input the student's first name!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Student's first name"
+                    name="first_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
 
-        {/* Sir Name */}
-        <Form.Item
-          validateStatus={sir_nameError ? "error" : ""}
-          help={sir_nameError || ""}
-        >
-          {getFieldDecorator("sir_name", {
-            rules: [
-              {
-                required: true,
-                message: "Please input the student's sir name!"
-              }
-            ]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="text"
-              placeholder=" Student's sir name"
-              name="sir_name"
-              onChange={this.onChange}
-            />
-          )}
-        </Form.Item>
+            {/* Sir Name */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={sir_nameError ? "error" : ""}
+                help={sir_nameError || ""}
+              >
+                {getFieldDecorator("sir_name", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input the student's sir name!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Sir name"
+                    name="sir_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
 
-        {/* Other Name */}
-        <Form.Item>
-          {getFieldDecorator("other_name", {
-            rules: [
-              {
-                required: false
-              }
-            ]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="text"
-              placeholder=" Student's other name"
-              name="other_name"
-              onChange={this.onChange}
-            />
-          )}
-        </Form.Item>
+            {/* Other Name */}
+            <div className="col-md-3">
+              <Form.Item>
+                {getFieldDecorator("other_name", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Other name"
+                    name="other_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
 
-        {/* Button */}
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={hasErrors(getFieldsError())}
-          >
-            Log in
-          </Button>
-        </Form.Item>
-      </Form>
+            {/* Gender */}
+            <div className="col-md-2">
+              <Form.Item
+                validateStatus={genderError ? "error" : ""}
+                help={genderError || ""}
+              >
+                {getFieldDecorator("gender", {
+                  rules: [
+                    { required: true, message: "Please select your gender!" }
+                  ]
+                })(
+                  <select
+                    className="custom-select custom-select-sm"
+                    name="gender"
+                    onChange={this.onChange}
+                  >
+                    <option value="" className="text-sm-left font-weight-light">
+                      Gender
+                    </option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                  </select>
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          {/* Button */}
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={hasErrors(getFieldsError())}
+            >
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     );
   }
 }
