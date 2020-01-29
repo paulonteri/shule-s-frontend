@@ -168,7 +168,7 @@ export class StudentsForm extends Component {
 
           <br />
 
-          <form>
+          <form onSubmit={this.onSubmit}>
             {/* Student */}
             <div className="form-row">
               <div className="form-group col-md-4">
@@ -499,7 +499,11 @@ export class StudentsForm extends Component {
             </div>
 
             <div className="form-group">
-              <button type="submit" className="btn btn-sm btn-primary">
+              <button
+                type="submit"
+                value="Submit"
+                className="btn btn-sm btn-primary"
+              >
                 Submit
               </button>
             </div>

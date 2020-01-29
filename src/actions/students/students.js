@@ -2,14 +2,13 @@ import axios from "axios";
 import { ADD_STUDENT, GET_STUDENTS, DELETE_STUDENT } from "./types";
 import { createMessage, returnErrors } from "../messages";
 
-// ADD STUDENT
-export const addStudent = student => dispatch => {
+// GET STUDENTS
+export const getStudents = () => dispatch => {
   axios
-    .post("/api/library/", student)
+    .get("api/students/")
     .then(res => {
-      dispatch(createMessage({ addStudent: "Student Added" }));
       dispatch({
-        type: ADD_STUDENT,
+        type: GET_STUDENTS,
         payload: res.data
       });
     })
@@ -18,13 +17,14 @@ export const addStudent = student => dispatch => {
     );
 };
 
-// GET STUDENTS
-export const getStudents = () => dispatch => {
+// ADD STUDENT
+export const addStudent = student => dispatch => {
   axios
-    .get("api/students/")
+    .post("/api/students/", student)
     .then(res => {
+      dispatch(createMessage({ addStudent: "Student Added" }));
       dispatch({
-        type: GET_STUDENTS,
+        type: ADD_STUDENT,
         payload: res.data
       });
     })
