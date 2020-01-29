@@ -489,7 +489,7 @@ export class StudentsForm extends Component {
                 <h6>Health</h6>
               </label>
               <textarea
-                class="form-control"
+                className="form-control"
                 rows="3"
                 placeholder="Any health issue"
                 name="health"
@@ -498,9 +498,11 @@ export class StudentsForm extends Component {
               ></textarea>
             </div>
 
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
+            <div className="form-group">
+              <button type="submit" className="btn btn-sm btn-primary">
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </Fragment>
