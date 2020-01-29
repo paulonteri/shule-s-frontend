@@ -100,36 +100,37 @@ export class StudentsForm extends Component {
     };
 
     // pass the student const to the action
+    console.log(student);
     this.props.addStudent(student);
 
-    // empty the fields
-    this.setState({
-      student_id: "",
-      class_ns: "",
-      dormitory: "",
-      first_name: "",
-      sir_name: "",
-      other_name: "",
-      father_alive: "",
-      mother_alive: "",
-      father_first_name: "",
-      father_sir_name: "",
-      father_email: "",
-      father_phone: "",
-      mother_first_name: "",
-      mother_sir_name: "",
-      mother_email: "",
-      mother_phone: "",
-      date_of_birth: "",
-      gender: "",
-      admission_date: "",
-      is_enrolled: "",
-      home_country: "",
-      home_county: "",
-      home_town: "",
-      religion: "",
-      health: ""
-    });
+    // empty the fields    // Commented out to allow testing
+    // this.setState({
+    //   student_id: "",
+    //   class_ns: "",
+    //   dormitory: "",
+    //   first_name: "",
+    //   sir_name: "",
+    //   other_name: "",
+    //   father_alive: "",
+    //   mother_alive: "",
+    //   father_first_name: "",
+    //   father_sir_name: "",
+    //   father_email: "",
+    //   father_phone: "",
+    //   mother_first_name: "",
+    //   mother_sir_name: "",
+    //   mother_email: "",
+    //   mother_phone: "",
+    //   date_of_birth: "",
+    //   gender: "",
+    //   admission_date: "",
+    //   is_enrolled: "",
+    //   home_country: "",
+    //   home_county: "",
+    //   home_town: "",
+    //   religion: "",
+    //   health: ""
+    // });
   };
 
   render() {
@@ -212,6 +213,22 @@ export class StudentsForm extends Component {
                   value={other_name}
                 />
               </div>
+              {/* Class */}
+              <div className="form-group col-md-2">
+                <label>
+                  <h6>Gender</h6>
+                </label>
+                <select
+                  className="form-control"
+                  name="gender"
+                  onChange={this.onChange}
+                  value={gender}
+                >
+                  <option>...</option>
+                  <option value="m">Male</option>
+                  <option value="f">Female</option>
+                </select>
+              </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-4">
@@ -255,8 +272,10 @@ export class StudentsForm extends Component {
                   name="dormitory"
                   onChange={this.onChange}
                   value={dormitory}
+                  id="Dormitory"
                 >
-                  <option>...</option>
+                  <option value="oy">Oyugi</option>
+                  <option value="kal">Kalonzo</option>
                 </select>
               </div>
 

@@ -4,7 +4,7 @@ import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
 // import { GET_ERRORS } from "../types"; // replaced by the returnErrors function
 import { createMessage, returnErrors } from "../messages";
 
-// GET LEADS action method
+// GET BOOKS action method
 export const getBooks = () => dispatch => {
   axios
     .get("api/library/")
