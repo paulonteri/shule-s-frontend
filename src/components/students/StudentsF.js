@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { addStudent } from "../../actions/students/students";
 
-export class StudentsForm extends Component {
+export class StudentsFor extends Component {
   state = {
     student_id: "",
     class_ns: "",
@@ -533,4 +533,4 @@ export class StudentsForm extends Component {
   }
 }
 
-export default connect(null, { addStudent })(StudentsForm);
+export default connect(null, { addStudent })(StudentsFor);

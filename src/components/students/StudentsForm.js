@@ -183,6 +183,7 @@ export class StudentsForm extends Component {
       isFieldTouched
     } = this.props.form;
 
+    // ERRORS
     // Left blank error
     // Only show error after a field is touched and left blank
     const genderError = isFieldTouched("gender") && getFieldError("gender");
@@ -190,6 +191,9 @@ export class StudentsForm extends Component {
       isFieldTouched("first_name") && getFieldError("first_name");
     const sir_nameError =
       isFieldTouched("sir_name") && getFieldError("sir_name");
+    const student_idError =
+      isFieldTouched("student_id") && getFieldError("student_id");
+    const class_nsError = isFieldTouched("class") && getFieldError("class");
 
     return (
       <div className=" card card-body shadow rounded mt-1 mb-4 container">
@@ -197,7 +201,7 @@ export class StudentsForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           {/* First Name */}
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-3">
               <Form.Item
                 validateStatus={first_nameError ? "error" : ""}
                 help={first_nameError || ""}
@@ -281,7 +285,10 @@ export class StudentsForm extends Component {
               >
                 {getFieldDecorator("gender", {
                   rules: [
-                    { required: true, message: "Please select your gender!" }
+                    {
+                      required: true,
+                      message: "Please select student's gender!"
+                    }
                   ]
                 })(
                   <select
@@ -299,7 +306,182 @@ export class StudentsForm extends Component {
               </Form.Item>
             </div>
           </div>
+          <div className="row">
+            {/* class  */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={student_idError ? "error" : ""}
+                help={student_idError || ""}
+              >
+                {getFieldDecorator("student_id", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the student's identification number!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="Student ID"
+                    name="student_id"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
 
+            {/* Class */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={class_nsError ? "error" : ""}
+                help={class_nsError || ""}
+              >
+                {getFieldDecorator("class_ns", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please select student's class!"
+                    }
+                  ]
+                })(
+                  <select
+                    className="custom-select custom-select-sm"
+                    name="class_ns"
+                    onChange={this.onChange}
+                  >
+                    <option value="" className="text-sm-left font-weight-light">
+                      Select Class
+                    </option>
+                    <option value="n">North</option>
+                    <option value="s">South</option>
+                  </select>
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Dorm  */}
+            <div className="col-md-3">
+              <Form.Item>
+                {getFieldDecorator("dormitory", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <select
+                    className="custom-select custom-select-sm"
+                    name="dormitory"
+                    onChange={this.onChange}
+                  >
+                    <option value="" className="text-sm-left font-weight-light">
+                      Select Dormitory
+                    </option>
+                    <option value="oy">Oyugi</option>
+                    <option value="kal">Kalonzo</option>
+                  </select>
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          {/* Location (Home)  */}
+          <div className="row">
+            {/* Country */}
+
+            <div className="col-md-3">
+              <Form.Item>
+                {getFieldDecorator("home_country", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <Input
+                    type="text"
+                    placeholder="Home Country"
+                    name="home_country"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* County */}
+
+            <div className="col-md-3">
+              <Form.Item>
+                {getFieldDecorator("home_county", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <Input
+                    type="text"
+                    placeholder="County/Province"
+                    name="home_county"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Town*/}
+
+            <div className="col-md-3">
+              <Form.Item>
+                {getFieldDecorator("home_city", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <Input
+                    type="text"
+                    placeholder="Town"
+                    name="home_city"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Religion */}
+
+            <div className="col-md-3">
+              <Form.Item>
+                {getFieldDecorator("religion", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <Input
+                    type="text"
+                    placeholder="Religion"
+                    name="religion"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            <hr />
+          </div>
+
+          {/* /////////////////////////////////////////// END OF FORM /////////////////////////////////////////////////////////// */}
           {/* Button */}
           <Form.Item>
             <Button
