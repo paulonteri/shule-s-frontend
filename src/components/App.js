@@ -17,6 +17,7 @@ import AppSider from "../layout/AppSider";
 import Library from "./library/Library";
 import Students from "./students/Students";
 import Classes from "./classes/Classes";
+import Test from "./Test";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -57,6 +58,7 @@ class App extends Component {
                       <Route exact path="/" component={Students} />
                       <Route path="/library" component={Library} />
                       <Route path="/classes" component={Classes} />
+                      <Route exact path="/test" component={Test} />
                     </Switch>
                   </Content>
                   <AppFooter />
