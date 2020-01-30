@@ -183,7 +183,7 @@ export class StudentsForm extends Component {
       isFieldTouched
     } = this.props.form;
 
-    // ERRORS
+    ////////////////////////////////    ERRORS     //////////////////////////////////////////////////////
     // Left blank error
     // Only show error after a field is touched and left blank
     const genderError = isFieldTouched("gender") && getFieldError("gender");
@@ -194,6 +194,22 @@ export class StudentsForm extends Component {
     const student_idError =
       isFieldTouched("student_id") && getFieldError("student_id");
     const class_nsError = isFieldTouched("class") && getFieldError("class");
+    const father_first_nameError =
+      isFieldTouched("father_first_name") && getFieldError("father_first_name");
+    const father_sir_nameError =
+      isFieldTouched("father_sir_name") && getFieldError("father_sir_name");
+    const mother_first_nameError =
+      isFieldTouched("mother_first_name") && getFieldError("mother_first_name");
+    const mother_sir_nameError =
+      isFieldTouched("mother_sir_name") && getFieldError("mother_sir_name");
+    const father_phoneError =
+      isFieldTouched("father_phone") && getFieldError("father_phone");
+    const father_emailError =
+      isFieldTouched("father_email") && getFieldError("father_email");
+    const mother_phoneError =
+      isFieldTouched("mother_phone") && getFieldError("mother_phone");
+    const mother_emailError =
+      isFieldTouched("mother_email") && getFieldError("mother_email");
 
     return (
       <div className=" card card-body shadow rounded mt-1 mb-4 container">
@@ -307,7 +323,7 @@ export class StudentsForm extends Component {
             </div>
           </div>
           <div className="row">
-            {/* class  */}
+            {/* Student ID  */}
             <div className="col-md-3">
               <Form.Item
                 validateStatus={student_idError ? "error" : ""}
@@ -392,7 +408,7 @@ export class StudentsForm extends Component {
             </div>
           </div>
 
-          {/* Location (Home)  */}
+          {/* ///////////////////// Location (Home) //////////////////////////////////////////////////////////////// */}
           <div className="row">
             {/* Country */}
 
@@ -440,7 +456,7 @@ export class StudentsForm extends Component {
 
             <div className="col-md-3">
               <Form.Item>
-                {getFieldDecorator("home_city", {
+                {getFieldDecorator("home_town", {
                   rules: [
                     {
                       required: false
@@ -450,7 +466,7 @@ export class StudentsForm extends Component {
                   <Input
                     type="text"
                     placeholder="Town"
-                    name="home_city"
+                    name="home_town"
                     onChange={this.onChange}
                   />
                 )}
@@ -477,8 +493,281 @@ export class StudentsForm extends Component {
                 )}
               </Form.Item>
             </div>
+          </div>
 
-            <hr />
+          <div className="row">
+            <div className="col">
+              <p className="text-weight-light">Parents</p>
+            </div>
+          </div>
+
+          {/* ////////////////////// Father /////////////////////////////////////////////////// */}
+          {/* Father First Name */}
+
+          <div className="row">
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={father_first_nameError ? "error" : ""}
+                help={father_first_nameError || ""}
+              >
+                {getFieldDecorator("father_first_name", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the father's/male guardian's first name!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="man" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Male guardian's first name"
+                    name="father_first_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Father Sir Name  */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={father_sir_nameError ? "error" : ""}
+                help={father_sir_nameError || ""}
+              >
+                {getFieldDecorator("father_sir_name", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the father's/male guardian's sir name!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="man" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Male guardian's sir name"
+                    name="father_sir_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          <div className="row">
+            {/* Father Phone  */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={father_phoneError ? "error" : ""}
+                help={father_phoneError || ""}
+              >
+                {getFieldDecorator("father_phone", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the father's/male guardian's phone number!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="phone" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="number"
+                    min="999999999"
+                    step="1"
+                    placeholder=" Male guardian's phone number"
+                    name="father_phone"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Father Email  */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={father_emailError ? "error" : ""}
+                help={father_emailError || ""}
+              >
+                {getFieldDecorator("father_email", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the father's/male guardian's email address!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="email"
+                    placeholder=" Male guardian's email"
+                    name="father_email"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          {/* //////////  Mother ////////////////  */}
+
+          {/* Mother First Name */}
+
+          <div className="row">
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={mother_first_nameError ? "error" : ""}
+                help={mother_first_nameError || ""}
+              >
+                {getFieldDecorator("mother_first_name", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the mother's/female guardian's first name!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="woman" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Female guardian's first name"
+                    name="mother_first_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Mother's Sir Name */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={mother_sir_nameError ? "error" : ""}
+                help={mother_sir_nameError || ""}
+              >
+                {getFieldDecorator("mother_sir_name", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the mother's/female guardian's sir name!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="woman" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    placeholder=" Female guardian's sir name"
+                    name="mother_sir_name"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          <div className="row">
+            {/* Mother Phone  */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={mother_phoneError ? "error" : ""}
+                help={mother_phoneError || ""}
+              >
+                {getFieldDecorator("mother_phone", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the mother's/female guardian's phone number!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="phone" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="number"
+                    min="999999999"
+                    step="1"
+                    placeholder=" Female guardian's phone number"
+                    name="mother_phone"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Mother Email  */}
+            <div className="col-md-3">
+              <Form.Item
+                validateStatus={mother_emailError ? "error" : ""}
+                help={mother_emailError || ""}
+              >
+                {getFieldDecorator("mother_email", {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        "Please input the mother's/female guardian's email address!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="email"
+                    placeholder=" Female guardian's email"
+                    name="mother_email"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          {/* Health  */}
+          <div className="row">
+            <div className="col">
+              <p className="text-weight-light">Health</p>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-lg-9">
+              <Form.Item>
+                {getFieldDecorator("health", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <Input
+                    type="text"
+                    placeholder="Any health issue"
+                    name="health"
+                    onChange={this.onChange}
+                  />
+                )}
+              </Form.Item>
+            </div>
           </div>
 
           {/* /////////////////////////////////////////// END OF FORM /////////////////////////////////////////////////////////// */}
