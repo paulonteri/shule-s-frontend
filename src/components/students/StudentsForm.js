@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Form, Icon, Input, Button, Select, Checkbox } from "antd";
+import { Form, Icon, Input, Button, Checkbox } from "antd";
 
 import { addStudent } from "../../actions/students/students";
 
@@ -46,7 +46,7 @@ export class StudentsForm extends Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
 
   handleCheck = event => {
-    this.setState({ [event.target.name]: event.target.checked });
+    this.setState({ [event.target.name]: event.target.checked }); // handle checkboxes
   };
 
   componentDidMount() {
@@ -562,6 +562,21 @@ export class StudentsForm extends Component {
                 )}
               </Form.Item>
             </div>
+
+            {/* father is alive */}
+
+            <div className="col-xl-2">
+              <Form.Item name="father_alive">
+                {getFieldDecorator("father_alive", {
+                  valuePropName: "checked",
+                  initialValue: true
+                })(
+                  <Checkbox onChange={this.handleCheck} name="father_alive">
+                    Father is alive
+                  </Checkbox>
+                )}
+              </Form.Item>
+            </div>
           </div>
 
           <div className="row">
@@ -683,6 +698,21 @@ export class StudentsForm extends Component {
                 )}
               </Form.Item>
             </div>
+
+            {/* mother is alive checkbox */}
+
+            <div className="col-xl-2">
+              <Form.Item name="mother_alive">
+                {getFieldDecorator("mother_alive", {
+                  valuePropName: "checked",
+                  initialValue: true
+                })(
+                  <Checkbox onChange={this.handleCheck} name="mother_alive">
+                    Mother is alive
+                  </Checkbox>
+                )}
+              </Form.Item>
+            </div>
           </div>
 
           <div className="row">
@@ -768,6 +798,22 @@ export class StudentsForm extends Component {
                     name="health"
                     onChange={this.onChange}
                   />
+                )}
+              </Form.Item>
+            </div>
+          </div>
+
+          <div className="row">
+            {/* student is enrolled */}
+            <div className="col-lg-3">
+              <Form.Item name="is_enrolled">
+                {getFieldDecorator("is_enrolled", {
+                  valuePropName: "checked",
+                  initialValue: true
+                })(
+                  <Checkbox onChange={this.handleCheck} name="is_enrolled">
+                    Student is Enrolled
+                  </Checkbox>
                 )}
               </Form.Item>
             </div>

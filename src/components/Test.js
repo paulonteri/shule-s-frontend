@@ -36,24 +36,3 @@ export class Test extends Component {
 }
 
 export default Test;
-
-///////////////////////////////
-
-// onChange={this.handleCheck}
-//             name="is_alive"
-
-//   {/* father is alive */}
-//   <div className="col-xl-2">
-//   <Form.Item name="father_alive">
-//     {getFieldDecorator("father_alive", {
-//       valuePropName: "checked",
-//       initialValue: true
-//     })(
-//       <Checkbox
-//       onChange={this.handleCheck}
-//       name="father_alive">
-//         Father is alive
-//       </Checkbox>
-//     )}
-//   </Form.Item>
-// </div>
