@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Form, Icon, Input, Button, Select } from "antd";
+import { Form, Icon, Input, Button, Select, Checkbox } from "antd";
 
 import { addStudent } from "../../actions/students/students";
 
@@ -18,8 +18,8 @@ export class StudentsForm extends Component {
     first_name: "",
     sir_name: "",
     other_name: "",
-    father_alive: "",
-    mother_alive: "",
+    father_alive: true,
+    mother_alive: true,
     father_first_name: "",
     father_sir_name: "",
     father_email: "",
@@ -31,7 +31,7 @@ export class StudentsForm extends Component {
     date_of_birth: "",
     gender: "",
     admission_date: "",
-    is_enrolled: "",
+    is_enrolled: true,
     home_country: "",
     home_county: "",
     home_town: "",
@@ -53,7 +53,6 @@ export class StudentsForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, student) => {
       if (!err) {
-        // console.log("Received student of form: ", student);
         const {
           student_id,
           class_ns,
@@ -123,8 +122,8 @@ export class StudentsForm extends Component {
         //   first_name: "",
         //   sir_name: "",
         //   other_name: "",
-        //   father_alive: "",
-        //   mother_alive: "",
+        //   father_alive: true,
+        //   mother_alive: true,
         //   father_first_name: "",
         //   father_sir_name: "",
         //   father_email: "",
@@ -136,7 +135,7 @@ export class StudentsForm extends Component {
         //   date_of_birth: "",
         //   gender: "",
         //   admission_date: "",
-        //   is_enrolled: "",
+        //   is_enrolled: true,
         //   home_country: "",
         //   home_county: "",
         //   home_town: "",
@@ -217,7 +216,7 @@ export class StudentsForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           {/* First Name */}
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={first_nameError ? "error" : ""}
                 help={first_nameError || ""}
@@ -244,7 +243,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Sir Name */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={sir_nameError ? "error" : ""}
                 help={sir_nameError || ""}
@@ -271,7 +270,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Other Name */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item>
                 {getFieldDecorator("other_name", {
                   rules: [
@@ -294,7 +293,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Gender */}
-            <div className="col-md-2">
+            <div className="col-lg-2">
               <Form.Item
                 validateStatus={genderError ? "error" : ""}
                 help={genderError || ""}
@@ -324,7 +323,7 @@ export class StudentsForm extends Component {
           </div>
           <div className="row">
             {/* Student ID  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={student_idError ? "error" : ""}
                 help={student_idError || ""}
@@ -354,7 +353,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Class */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={class_nsError ? "error" : ""}
                 help={class_nsError || ""}
@@ -383,7 +382,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Dorm  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item>
                 {getFieldDecorator("dormitory", {
                   rules: [
@@ -412,7 +411,7 @@ export class StudentsForm extends Component {
           <div className="row">
             {/* Country */}
 
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item>
                 {getFieldDecorator("home_country", {
                   rules: [
@@ -433,7 +432,7 @@ export class StudentsForm extends Component {
 
             {/* County */}
 
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item>
                 {getFieldDecorator("home_county", {
                   rules: [
@@ -454,7 +453,7 @@ export class StudentsForm extends Component {
 
             {/* Town*/}
 
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item>
                 {getFieldDecorator("home_town", {
                   rules: [
@@ -475,7 +474,7 @@ export class StudentsForm extends Component {
 
             {/* Religion */}
 
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item>
                 {getFieldDecorator("religion", {
                   rules: [
@@ -505,7 +504,7 @@ export class StudentsForm extends Component {
           {/* Father First Name */}
 
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={father_first_nameError ? "error" : ""}
                 help={father_first_nameError || ""}
@@ -533,7 +532,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Father Sir Name  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={father_sir_nameError ? "error" : ""}
                 help={father_sir_nameError || ""}
@@ -563,7 +562,7 @@ export class StudentsForm extends Component {
 
           <div className="row">
             {/* Father Phone  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={father_phoneError ? "error" : ""}
                 help={father_phoneError || ""}
@@ -582,7 +581,7 @@ export class StudentsForm extends Component {
                       <Icon type="phone" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="number"
-                    min="999999999"
+                    min="99999999"
                     step="1"
                     placeholder=" Male guardian's phone number"
                     name="father_phone"
@@ -593,7 +592,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Father Email  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={father_emailError ? "error" : ""}
                 help={father_emailError || ""}
@@ -626,7 +625,7 @@ export class StudentsForm extends Component {
           {/* Mother First Name */}
 
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={mother_first_nameError ? "error" : ""}
                 help={mother_first_nameError || ""}
@@ -654,7 +653,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Mother's Sir Name */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={mother_sir_nameError ? "error" : ""}
                 help={mother_sir_nameError || ""}
@@ -684,7 +683,7 @@ export class StudentsForm extends Component {
 
           <div className="row">
             {/* Mother Phone  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={mother_phoneError ? "error" : ""}
                 help={mother_phoneError || ""}
@@ -703,7 +702,7 @@ export class StudentsForm extends Component {
                       <Icon type="phone" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="number"
-                    min="999999999"
+                    min="99999999"
                     step="1"
                     placeholder=" Female guardian's phone number"
                     name="mother_phone"
@@ -714,7 +713,7 @@ export class StudentsForm extends Component {
             </div>
 
             {/* Mother Email  */}
-            <div className="col-md-3">
+            <div className="col-lg-3">
               <Form.Item
                 validateStatus={mother_emailError ? "error" : ""}
                 help={mother_emailError || ""}
@@ -776,7 +775,7 @@ export class StudentsForm extends Component {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
+              //   disabled={hasErrors(getFieldsError())}
             >
               Log in
             </Button>
