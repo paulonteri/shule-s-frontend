@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button, Checkbox, DatePicker } from "antd";
 
 import { addStudent } from "../../actions/students/students";
 
@@ -47,6 +47,10 @@ export class StudentsForm extends Component {
 
   handleCheck = event => {
     this.setState({ [event.target.name]: event.target.checked }); // handle checkboxes
+  };
+
+  handleDate = (dateString, id) => {
+    this.setState({ [id]: dateString }); // handle date-picker
   };
 
   componentDidMount() {
@@ -806,7 +810,7 @@ export class StudentsForm extends Component {
           <div className="row">
             {/* student is enrolled */}
             <div className="col-lg-3">
-              <Form.Item name="is_enrolled">
+              <Form.Item>
                 {getFieldDecorator("is_enrolled", {
                   valuePropName: "checked",
                   initialValue: true
@@ -814,6 +818,25 @@ export class StudentsForm extends Component {
                   <Checkbox onChange={this.handleCheck} name="is_enrolled">
                     Student is Enrolled
                   </Checkbox>
+                )}
+              </Form.Item>
+            </div>
+
+            {/* Date enrolled  */}
+            <div className="col-lg-3">
+              <Form.Item label="Admission Date">
+                {getFieldDecorator("admission_date", {
+                  rules: [
+                    {
+                      required: false
+                    }
+                  ]
+                })(
+                  <DatePicker
+                    onChange={(date, dateString) =>
+                      this.handleDate(dateString, "admission_date")
+                    }
+                  />
                 )}
               </Form.Item>
             </div>
