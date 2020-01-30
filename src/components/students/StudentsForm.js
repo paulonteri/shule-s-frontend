@@ -45,6 +45,10 @@ export class StudentsForm extends Component {
 
   onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
 
+  handleCheck = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
   componentDidMount() {
     this.props.form.validateFields(); // To disable submit button at the beginning.
   }
