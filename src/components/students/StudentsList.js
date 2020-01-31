@@ -31,7 +31,7 @@ export class StudentsList extends Component {
                 <h5>
                   <li key={stud.student_id}>
                     {" "}
-                    {stud.student_id} {stud.first_name} {stud.sir_name}
+                    {stud.student_id} {stud.first_name} {stud.surname}
                   </li>
                 </h5>
               </div>

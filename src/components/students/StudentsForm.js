@@ -31,16 +31,16 @@ export class StudentsForm extends Component {
     class_ns: "",
     dormitory: "",
     first_name: "",
-    sir_name: "",
+    surname: "",
     other_name: "",
     father_alive: true,
     mother_alive: true,
     father_first_name: "",
-    father_sir_name: "",
+    father_surname: "",
     father_email: "",
     father_phone: "",
     mother_first_name: "",
-    mother_sir_name: "",
+    mother_surname: "",
     mother_email: "",
     mother_phone: "",
     date_of_birth: "",
@@ -73,16 +73,16 @@ export class StudentsForm extends Component {
           class_ns,
           dormitory,
           first_name,
-          sir_name,
+          surname,
           other_name,
           father_alive,
           mother_alive,
           father_first_name,
-          father_sir_name,
+          father_surname,
           father_email,
           father_phone,
           mother_first_name,
-          mother_sir_name,
+          mother_surname,
           mother_email,
           mother_phone,
           date_of_birth,
@@ -102,16 +102,16 @@ export class StudentsForm extends Component {
           class_ns: class_ns,
           dormitory: dormitory,
           first_name,
-          sir_name,
+          surname,
           other_name,
           father_alive,
           mother_alive,
           father_first_name,
-          father_sir_name,
+          father_surname,
           father_email,
           father_phone,
           mother_first_name,
-          mother_sir_name,
+          mother_surname,
           mother_email,
           mother_phone,
           date_of_birth,
@@ -135,16 +135,16 @@ export class StudentsForm extends Component {
         //   class_ns: "",
         //   dormitory: "",
         //   first_name: "",
-        //   sir_name: "",
+        //   surname: "",
         //   other_name: "",
         //   father_alive: true,
         //   mother_alive: true,
         //   father_first_name: "",
-        //   father_sir_name: "",
+        //   father_surname: "",
         //   father_email: "",
         //   father_phone: "",
         //   mother_first_name: "",
-        //   mother_sir_name: "",
+        //   mother_surname: "",
         //   mother_email: "",
         //   mother_phone: "",
         //   date_of_birth: "",
@@ -167,16 +167,16 @@ export class StudentsForm extends Component {
       class_ns,
       dormitory,
       first_name,
-      sir_name,
+      surname,
       other_name,
       father_alive,
       mother_alive,
       father_first_name,
-      father_sir_name,
+      father_surname,
       father_email,
       father_phone,
       mother_first_name,
-      mother_sir_name,
+      mother_surname,
       mother_email,
       mother_phone,
       date_of_birth,
@@ -203,19 +203,18 @@ export class StudentsForm extends Component {
     const genderError = isFieldTouched("gender") && getFieldError("gender");
     const first_nameError =
       isFieldTouched("first_name") && getFieldError("first_name");
-    const sir_nameError =
-      isFieldTouched("sir_name") && getFieldError("sir_name");
+    const surnameError = isFieldTouched("surname") && getFieldError("surname");
     const student_idError =
       isFieldTouched("student_id") && getFieldError("student_id");
     const class_nsError = isFieldTouched("class") && getFieldError("class");
     const father_first_nameError =
       isFieldTouched("father_first_name") && getFieldError("father_first_name");
-    const father_sir_nameError =
-      isFieldTouched("father_sir_name") && getFieldError("father_sir_name");
+    const father_surnameError =
+      isFieldTouched("father_surname") && getFieldError("father_surname");
     const mother_first_nameError =
       isFieldTouched("mother_first_name") && getFieldError("mother_first_name");
-    const mother_sir_nameError =
-      isFieldTouched("mother_sir_name") && getFieldError("mother_sir_name");
+    const mother_surnameError =
+      isFieldTouched("mother_surname") && getFieldError("mother_surname");
     const father_phoneError =
       isFieldTouched("father_phone") && getFieldError("father_phone");
     const father_emailError =
@@ -260,14 +259,14 @@ export class StudentsForm extends Component {
             {/* Sir Name */}
             <div className="col-lg-3">
               <Form.Item
-                validateStatus={sir_nameError ? "error" : ""}
-                help={sir_nameError || ""}
+                validateStatus={surnameError ? "error" : ""}
+                help={surnameError || ""}
               >
-                {getFieldDecorator("sir_name", {
+                {getFieldDecorator("surname", {
                   rules: [
                     {
                       required: true,
-                      message: "Please input the student's sir name!"
+                      message: "Please input the student's family name!"
                     }
                   ]
                 })(
@@ -276,8 +275,8 @@ export class StudentsForm extends Component {
                       <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="text"
-                    placeholder=" Sir name"
-                    name="sir_name"
+                    placeholder=" Family name"
+                    name="surname"
                     onChange={this.onChange}
                   />
                 )}
@@ -382,8 +381,11 @@ export class StudentsForm extends Component {
                       Select Class
                     </option>
                     {/* get classes  */}
-               { this.props.classes.map(my_class =>(
-               <option key={my_class.id} value={my_class.id}>{my_class.class_numeral} {my_class.stream}</option>))}
+                    {this.props.classes.map(my_class => (
+                      <option key={my_class.id} value={my_class.id}>
+                        {my_class.class_numeral} {my_class.stream}
+                      </option>
+                    ))}
                   </select>
                 )}
               </Form.Item>
@@ -570,15 +572,15 @@ export class StudentsForm extends Component {
             {/* Father Sir Name  */}
             <div className="col-lg-3">
               <Form.Item
-                validateStatus={father_sir_nameError ? "error" : ""}
-                help={father_sir_nameError || ""}
+                validateStatus={father_surnameError ? "error" : ""}
+                help={father_surnameError || ""}
               >
-                {getFieldDecorator("father_sir_name", {
+                {getFieldDecorator("father_surname", {
                   rules: [
                     {
                       required: true,
                       message:
-                        "Please input the father's/male guardian's sir name!"
+                        "Please input the father's/male guardian's family name!"
                     }
                   ]
                 })(
@@ -587,8 +589,8 @@ export class StudentsForm extends Component {
                       <Icon type="man" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="text"
-                    placeholder=" Male guardian's sir name"
-                    name="father_sir_name"
+                    placeholder=" Male guardian's family name"
+                    name="father_surname"
                     onChange={this.onChange}
                   />
                 )}
@@ -706,15 +708,15 @@ export class StudentsForm extends Component {
             {/* Mother's Sir Name */}
             <div className="col-lg-3">
               <Form.Item
-                validateStatus={mother_sir_nameError ? "error" : ""}
-                help={mother_sir_nameError || ""}
+                validateStatus={mother_surnameError ? "error" : ""}
+                help={mother_surnameError || ""}
               >
-                {getFieldDecorator("mother_sir_name", {
+                {getFieldDecorator("mother_surname", {
                   rules: [
                     {
                       required: true,
                       message:
-                        "Please input the mother's/female guardian's sir name!"
+                        "Please input the mother's/female guardian's family name!"
                     }
                   ]
                 })(
@@ -723,8 +725,8 @@ export class StudentsForm extends Component {
                       <Icon type="woman" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="text"
-                    placeholder=" Female guardian's sir name"
-                    name="mother_sir_name"
+                    placeholder=" Female guardian's family name"
+                    name="mother_surname"
                     onChange={this.onChange}
                   />
                 )}
