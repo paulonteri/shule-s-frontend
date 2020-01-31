@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 
 import { getClasses } from "../../actions/classes/classes";
 
-export class classesList extends Component {
+export class ClassesList extends Component {
   static propTypes = {
-    getClasses: PropTypes.func.isRequired
+    getClasses: PropTypes.func.isRequired,
+    classes: PropTypes.array.isRequired
   };
 
   componentDidMount() {
@@ -16,11 +17,13 @@ export class classesList extends Component {
   render() {
     return (
       <Fragment>
-        {this.props.getClasses.map(my_class => (
-          <li key={my_class.id}>
-            {my_class.class_numeral} {my_class.stream}
-          </li>
-        ))}
+        <div>
+          {this.props.classes.map(my_class => (
+            <li key={my_class.id}>
+              {my_class.class_numeral} {my_class.stream}
+            </li>
+          ))}
+        </div>
       </Fragment>
     );
   }
@@ -30,4 +33,4 @@ const mapStateToProps = state => ({
   classes: state.classesReducer.classes
 });
 
-export default connect(mapStateToProps, { getClasses })(classesList);
+export default connect(mapStateToProps, { getClasses })(ClassesList);
