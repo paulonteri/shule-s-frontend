@@ -8,8 +8,6 @@ import {
   Redirect
 } from "react-router-dom";
 
-import { browserHistory } from "react-router";
-
 import Alerts from "../layout/Alerts";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
@@ -17,6 +15,7 @@ import AppSider from "../layout/AppSider";
 import Library from "./library/Library";
 import Students from "./students/Students";
 import Classes from "./classes/Classes";
+import Dormitories from "./dormitories/Dormitories";
 import Test from "./Test";
 
 import { Provider } from "react-redux";
@@ -49,8 +48,6 @@ class App extends Component {
                     style={{
                       margin: "15px ",
                       marginTop: "1px ",
-                      //   padding: 20,
-                      //   background: "#fff",
                       minHeight: 280
                     }}
                   >
@@ -58,6 +55,7 @@ class App extends Component {
                       <Route exact path="/" component={Students} />
                       <Route path="/library" component={Library} />
                       <Route path="/classes" component={Classes} />
+                      <Route path="/dorms" component={Dormitories} />
                       <Route exact path="/test" component={Test} />
                     </Switch>
                   </Content>
