@@ -130,7 +130,6 @@ export class StudentsForm extends Component {
         };
 
         // pass the student const to the action
-        console.log(student);
         this.props.addStudent(student);
 
         // empty the fields    // Commented out to allow testing
@@ -886,7 +885,7 @@ export class StudentsForm extends Component {
             <Button
               type="primary"
               htmlType="submit"
-              //   disabled={hasErrors(getFieldsError())}
+              disabled={hasErrors(getFieldsError())}
             >
               Log in
             </Button>
