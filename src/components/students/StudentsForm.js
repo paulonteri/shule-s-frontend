@@ -5,12 +5,27 @@ import PropTypes from "prop-types";
 import { Form, Icon, Input, Button, Checkbox, DatePicker } from "antd";
 
 import { addStudent } from "../../actions/students/students";
+import { getClasses } from "../../actions/classes/classes";
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
+////// COMPONENT START ///////////
 export class StudentsForm extends Component {
+  static propTypes = {
+    addStudent: PropTypes.func.isRequired,
+    getClasses: PropTypes.func.isRequired,
+    classes: PropTypes.array.isRequired
+  };
+
+  componentDidMount() {}
+
+  componentDidMount() {
+    this.props.form.validateFields(); // To disable submit button at the beginning.
+    this.props.getClasses();
+  }
+
   state = {
     student_id: "",
     class_ns: "",
@@ -39,10 +54,6 @@ export class StudentsForm extends Component {
     health: ""
   };
 
-  static propTypes = {
-    addStudent: PropTypes.func.isRequired
-  };
-
   onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
 
   handleCheck = event => {
@@ -52,10 +63,6 @@ export class StudentsForm extends Component {
   handleDate = (dateString, id) => {
     this.setState({ [id]: dateString }); // handle date-picker
   };
-
-  componentDidMount() {
-    this.props.form.validateFields(); // To disable submit button at the beginning.
-  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -374,8 +381,9 @@ export class StudentsForm extends Component {
                     <option value="" className="text-sm-left font-weight-light">
                       Select Class
                     </option>
-                    <option value="n">North</option>
-                    <option value="s">South</option>
+                    {/* get classes  */}
+               { this.props.classes.map(my_class =>(
+               <option key={my_class.id} value={my_class.id}>{my_class.class_numeral} {my_class.stream}</option>))}
                   </select>
                 )}
               </Form.Item>
@@ -880,5 +888,11 @@ export class StudentsForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  classes: state.classesReducer.classes
+});
+
 StudentsForm = Form.create({ name: "add_student" })(StudentsForm);
-export default connect(null, { addStudent })(StudentsForm);
+export default connect(mapStateToProps, { addStudent, getClasses })(
+  StudentsForm
+);
