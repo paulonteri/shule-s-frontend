@@ -6,6 +6,7 @@ import { Form, Icon, Input, Button, Checkbox, DatePicker } from "antd";
 
 import { addStudent } from "../../actions/students/students";
 import { getClasses } from "../../actions/classes/classes";
+import { getDorms } from "../../actions/dormitories/dormitories";
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -16,7 +17,9 @@ export class StudentsForm extends Component {
   static propTypes = {
     addStudent: PropTypes.func.isRequired,
     getClasses: PropTypes.func.isRequired,
-    classes: PropTypes.array.isRequired
+    classes: PropTypes.array.isRequired,
+    dorms: PropTypes.array.isRequired,
+    getDorms: PropTypes.func.isRequired
   };
 
   componentDidMount() {}
@@ -24,6 +27,7 @@ export class StudentsForm extends Component {
   componentDidMount() {
     this.props.form.validateFields(); // To disable submit button at the beginning.
     this.props.getClasses();
+    this.props.getDorms();
   }
 
   state = {
@@ -256,7 +260,7 @@ export class StudentsForm extends Component {
               </Form.Item>
             </div>
 
-            {/* Sir Name */}
+            {/* Family Name */}
             <div className="col-lg-3">
               <Form.Item
                 validateStatus={surnameError ? "error" : ""}
@@ -409,8 +413,11 @@ export class StudentsForm extends Component {
                     <option value="" className="text-sm-left font-weight-light">
                       Select Dormitory
                     </option>
-                    <option value="oy">Oyugi</option>
-                    <option value="kal">Kalonzo</option>
+                    {this.props.dorms.map(dorm => (
+                      <option key={dorm.id} value={dorm.id}>
+                        {dorm.dormitory_name}
+                      </option>
+                    ))}
                   </select>
                 )}
               </Form.Item>
@@ -891,10 +898,11 @@ export class StudentsForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  classes: state.classesReducer.classes
+  classes: state.classesReducer.classes,
+  dorms: state.dormitoriesReducer.dormitories
 });
 
 StudentsForm = Form.create({ name: "add_student" })(StudentsForm);
-export default connect(mapStateToProps, { addStudent, getClasses })(
+export default connect(mapStateToProps, { addStudent, getClasses, getDorms })(
   StudentsForm
 );
