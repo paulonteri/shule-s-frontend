@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
     case GET_DORMS:
       return {
         ...state,
-        classes: action.payload
+        dormitories: action.payload
       };
     default:
       return state;
