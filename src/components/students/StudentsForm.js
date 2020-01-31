@@ -300,35 +300,27 @@ export class StudentsForm extends Component {
               </Form.Item>
             </div>
 
-            {/* Gender */}
-            <div className="col-lg-2">
-              <Form.Item
-                validateStatus={genderError ? "error" : ""}
-                help={genderError || ""}
-              >
-                {getFieldDecorator("gender", {
+            {/* date_of_birth  */}
+            <div className="col-lg-3">
+              <Form.Item>
+                {getFieldDecorator("date_of_birth", {
                   rules: [
                     {
-                      required: true,
-                      message: "Please select student's gender!"
+                      required: false
                     }
                   ]
                 })(
-                  <select
-                    className="custom-select custom-select-sm"
-                    name="gender"
-                    onChange={this.onChange}
-                  >
-                    <option value="" className="text-sm-left font-weight-light">
-                      Gender
-                    </option>
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
-                  </select>
+                  <DatePicker
+                    placeholder="Date of Birth"
+                    onChange={(date, dateString) =>
+                      this.handleDate(dateString, "date_of_birth")
+                    }
+                  />
                 )}
               </Form.Item>
             </div>
           </div>
+
           <div className="row">
             {/* Student ID  */}
             <div className="col-lg-3">
@@ -409,6 +401,34 @@ export class StudentsForm extends Component {
                     </option>
                     <option value="oy">Oyugi</option>
                     <option value="kal">Kalonzo</option>
+                  </select>
+                )}
+              </Form.Item>
+            </div>
+            {/* Gender */}
+            <div className="col-lg-3">
+              <Form.Item
+                validateStatus={genderError ? "error" : ""}
+                help={genderError || ""}
+              >
+                {getFieldDecorator("gender", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please select student's gender!"
+                    }
+                  ]
+                })(
+                  <select
+                    className="custom-select custom-select-sm"
+                    name="gender"
+                    onChange={this.onChange}
+                  >
+                    <option value="" className="text-sm-left font-weight-light">
+                      Gender
+                    </option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
                   </select>
                 )}
               </Form.Item>
@@ -824,7 +844,7 @@ export class StudentsForm extends Component {
 
             {/* Date enrolled  */}
             <div className="col-lg-3">
-              <Form.Item label="Admission Date">
+              <Form.Item>
                 {getFieldDecorator("admission_date", {
                   rules: [
                     {
@@ -833,6 +853,7 @@ export class StudentsForm extends Component {
                   ]
                 })(
                   <DatePicker
+                    placeholder="Date of Admission"
                     onChange={(date, dateString) =>
                       this.handleDate(dateString, "admission_date")
                     }
