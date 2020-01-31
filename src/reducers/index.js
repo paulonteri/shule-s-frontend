@@ -6,6 +6,7 @@ import students from "./students/students";
 import streams from "./classes/streams";
 import classNumerals from "./classes/classNumeral";
 import classes from "./classes/classes";
+import dormitories from "./dormitories/dormitories";
 
 export default combineReducers({
   errorsReducer: errors,
@@ -14,5 +15,6 @@ export default combineReducers({
   studentsReducer: students,
   classesReducer: classes,
   streamsReducer: streams,
-  classNumeralsReducer: classNumerals
+  classNumeralsReducer: classNumerals,
+  dormitoriesReducer: dormitories
 });
