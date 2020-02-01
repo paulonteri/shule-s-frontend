@@ -100,7 +100,7 @@ export class StudentsForm extends Component {
           health
         } = this.state; // get them from the state
 
-        // student from the staate to the student const
+        // student from above to the student const
         const student = {
           student_id: student_id,
           class_ns: class_ns,
@@ -871,7 +871,7 @@ export class StudentsForm extends Component {
                   <DatePicker
                     placeholder="Date of Admission"
                     onChange={(date, dateString) =>
-                      this.handleDate(dateString, "admission_date")
+                      this.handleDate(dateString, "admission_date")                                                                           
                     }
                   />
                 )}
@@ -879,15 +879,13 @@ export class StudentsForm extends Component {
             </div>
           </div>
 
-          {/* /////////////////////////////////////////// END OF FORM /////////////////////////////////////////////////////////// */}
-          {/* Button */}
           <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
+              disabled={hasErrors(getFieldsError())}                                                                                         
             >
-              Log in
+              Add Student
             </Button>
           </Form.Item>
         </Form>
