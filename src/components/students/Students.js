@@ -4,7 +4,7 @@ import { Link, Route, Switch } from "react-router-dom";
 
 import StudentList from "./StudentList";
 import StudentForm from "./StudentForm";
-import StudentsTable from "./StudentsTable";
+import StudentTable from "./StudentTable";
 import StudentsDashboard from "./StudentsDashboard";
 
 export class Students extends Component {
@@ -13,7 +13,7 @@ export class Students extends Component {
       <Fragment>
         <Switch>
           <Route exact path="/students" component={StudentsDashboard} />
-          <Route exact path="/students/table" component={StudentsTable} />
+          <Route exact path="/students/table" component={StudentTable} />
           <Route exact path="/students/add" component={StudentForm} />
           <Route exact path="/students/list" component={StudentList} />
         </Switch>
