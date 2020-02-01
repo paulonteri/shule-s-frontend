@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export class StudentsDashboard extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <p>Student StudentsDashboard</p>
+      </div>
+    );
+  }
 }
 
-export default StudentsDashboard
+export default StudentsDashboard;
