@@ -6,7 +6,7 @@ const { Column } = Table;
 
 import { getStudents, deleteStudent } from "../../actions/students/students";
 
-export class StudentsList extends Component {
+export class StudentList extends Component {
   static propTypes = {
     students: PropTypes.array.isRequired,
     getStudents: PropTypes.func.isRequired,
@@ -56,7 +56,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getStudents, deleteStudent })(
-  StudentsList
+  StudentList
 );
 
 {
