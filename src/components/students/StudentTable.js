@@ -60,7 +60,6 @@ export class StudentTable extends Component {
             dataSource={this.props.student}
             rowKey="student_id"
             bordered
-            // title={() => "Books"}
             footer={() => "List of Students"}
             pagination={{ pageSize: 20 }}
           >

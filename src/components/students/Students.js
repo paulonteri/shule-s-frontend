@@ -14,7 +14,7 @@ export class Students extends Component {
         <Switch>
           <Route exact path="/students" component={StudentsDashboard} />
           <Route exact path="/students/table" component={StudentTable} />
-          <Route exact path="/students/form" component={StudentForm} />
+          <Route exact path="/students/add" component={StudentForm} />
           <Route exact path="/students/list" component={StudentList} />
         </Switch>
       </Fragment>

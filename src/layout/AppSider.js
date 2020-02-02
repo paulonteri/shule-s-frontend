@@ -18,9 +18,6 @@ export class AppSider extends Component {
   render() {
     return (
       <Sider
-        // collapsible
-        // collapsed={this.state.collapsed}
-        // onCollapse={this.onCollapse}
         breakpoint="md"
         collapsedWidth="0"
         onBreakpoint={broken => {
@@ -42,10 +39,14 @@ export class AppSider extends Component {
           >
             <Menu.Item key="1">
               {" "}
-              <Link to="/">Students</Link>
+              <Link to="/students">Students</Link>
             </Menu.Item>
-            <Menu.Item key="2">option2</Menu.Item>
-            <Menu.Item key="3">option3</Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/students/table">Student List</Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to="/students/add">Add Student</Link>
+            </Menu.Item>
             <Menu.Item key="4">option4</Menu.Item>
           </SubMenu>
 
@@ -63,7 +64,7 @@ export class AppSider extends Component {
               <Link to="/library">Library</Link>
             </Menu.Item>
             <Menu.Item key="6">
-              <Link to="/library/bookstable">Books Table</Link>
+              <Link to="/library/bookstable">Book List</Link>
             </Menu.Item>
             <Menu.Item key="7">
               <Link to="/library/addbook">Add Book</Link>
