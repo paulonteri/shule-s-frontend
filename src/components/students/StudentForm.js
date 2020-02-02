@@ -200,7 +200,7 @@ export class StudentsForm extends Component {
       isFieldTouched
     } = this.props.form;
 
-    ////////////////////////////////    ERRORS     //////////////////////////////////////////////////////
+    ////////////////////////////////    ERRORS     ////////////////////////////////////
     // Left blank error
     // Only show error after a field is touched and left blank
     const genderError = isFieldTouched("gender") && getFieldError("gender");
