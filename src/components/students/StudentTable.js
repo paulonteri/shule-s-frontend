@@ -33,7 +33,7 @@ export class StudentTable extends Component {
   displayDorm = dormitory => {
     const dormitories = this.props.dorms;
     const d = dormitories.filter(dm => dm.id == dormitory);
-    return <p>{d.map(drm => drm.dormitory_name)}</p>;
+    return d.map(drm => <p key={drm.id}>{drm.dormitory_name}</p>);
   };
 
   render() {
