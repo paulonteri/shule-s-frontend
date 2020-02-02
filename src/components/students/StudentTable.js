@@ -6,6 +6,7 @@ import { Table, Divider, Tag } from "antd";
 const { Column } = Table;
 
 import { getStudents, deleteStudent } from "../../actions/students/students";
+import { getClasses } from "../../actions/classes/classes";
 import { getDorms } from "../../actions/dormitories/dormitories";
 
 export class StudentTable extends Component {
@@ -13,12 +14,15 @@ export class StudentTable extends Component {
     student: PropTypes.array.isRequired,
     getStudents: PropTypes.func.isRequired,
     deleteStudent: PropTypes.func.isRequired,
+    getClasses: PropTypes.func.isRequired,
+    classes: PropTypes.array.isRequired,
     dorms: PropTypes.array.isRequired,
     getDorms: PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.getStudents();
+    this.props.getClasses();
     this.props.getDorms();
   }
 
@@ -28,6 +32,16 @@ export class StudentTable extends Component {
     } else {
       return <p>Female</p>;
     }
+  };
+
+  displayClass = c => {
+    const classes = this.props.classes;
+    const cl = classes.filter(fc => fc.id == c);
+    return cl.map(sch_class => (
+      <p key={sch_class.id}>
+        {sch_class.class_numeral} {sch_class.stream}
+      </p>
+    ));
   };
 
   displayDorm = dormitory => {
@@ -57,7 +71,12 @@ export class StudentTable extends Component {
               key="first_name"
             />
             <Column title="Family Name" dataIndex="surname" key="surname" />
-            <Column title="Class" dataIndex="class_ns" key="class_ns" />
+            <Column
+              title="Class"
+              dataIndex="class_ns"
+              key="class_ns"
+              render={clas => this.displayClass(clas)}
+            />
             <Column
               title="Dormitory"
               dataIndex="dormitory"
@@ -97,11 +116,13 @@ export class StudentTable extends Component {
 
 const mapStateToProps = state => ({
   student: state.studentsReducer.students,
+  classes: state.classesReducer.classes,
   dorms: state.dormitoriesReducer.dormitories
 });
 
 export default connect(mapStateToProps, {
   getStudents,
   deleteStudent,
+  getClasses,
   getDorms
 })(StudentTable);
