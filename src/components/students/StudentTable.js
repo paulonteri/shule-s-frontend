@@ -18,6 +18,14 @@ export class StudentTable extends Component {
     this.props.getStudents();
   }
 
+  displayGender = gender => {
+    if (gender == "m") {
+      return <p>Male</p>;
+    } else {
+      return <p>Female</p>;
+    }
+  };
+
   render() {
     return (
       <Fragment>
@@ -41,7 +49,12 @@ export class StudentTable extends Component {
             <Column title="Family Name" dataIndex="surname" key="surname" />
             <Column title="Class" dataIndex="class_ns" key="class_ns" />
             <Column title="Dormitory" dataIndex="dormitory" key="dormitory" />
-            <Column title="Gender" dataIndex="gender" key="gender" />
+            <Column
+              title="Gender"
+              dataIndex="gender"
+              key="gender"
+              render={gender => this.displayGender(gender)}
+            />
             {/* ///// DELETE STUDENT ///// */}
             {/* <Column
               title=""
