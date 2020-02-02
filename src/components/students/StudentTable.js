@@ -6,24 +6,34 @@ import { Table, Divider, Tag } from "antd";
 const { Column } = Table;
 
 import { getStudents, deleteStudent } from "../../actions/students/students";
+import { getDorms } from "../../actions/dormitories/dormitories";
 
 export class StudentTable extends Component {
   static propTypes = {
     student: PropTypes.array.isRequired,
     getStudents: PropTypes.func.isRequired,
-    deleteStudent: PropTypes.func.isRequired
+    deleteStudent: PropTypes.func.isRequired,
+    dorms: PropTypes.array.isRequired,
+    getDorms: PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.getStudents();
+    this.props.getDorms();
   }
 
-  displayGender = gender => {
-    if (gender == "m") {
+  displayGender = genders => {
+    if (genders == "m") {
       return <p>Male</p>;
     } else {
       return <p>Female</p>;
     }
+  };
+
+  displayDorm = dormitory => {
+    const dormitories = this.props.dorms;
+    const d = dormitories.filter(dm => dm.id == dormitory);
+    return <p>{d.map(drm => drm.dormitory_name)}</p>;
   };
 
   render() {
@@ -48,12 +58,17 @@ export class StudentTable extends Component {
             />
             <Column title="Family Name" dataIndex="surname" key="surname" />
             <Column title="Class" dataIndex="class_ns" key="class_ns" />
-            <Column title="Dormitory" dataIndex="dormitory" key="dormitory" />
+            <Column
+              title="Dormitory"
+              dataIndex="dormitory"
+              key="dormitory"
+              render={dorm => this.displayDorm(dorm)}
+            />
             <Column
               title="Gender"
               dataIndex="gender"
               key="gender"
-              render={gender => this.displayGender(gender)}
+              render={gend => this.displayGender(gend)}
             />
             {/* ///// DELETE STUDENT ///// */}
             {/* <Column
@@ -81,9 +96,12 @@ export class StudentTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  student: state.studentsReducer.students
+  student: state.studentsReducer.students,
+  dorms: state.dormitoriesReducer.dormitories
 });
 
-export default connect(mapStateToProps, { getStudents, deleteStudent })(
-  StudentTable
-);
+export default connect(mapStateToProps, {
+  getStudents,
+  deleteStudent,
+  getDorms
+})(StudentTable);
