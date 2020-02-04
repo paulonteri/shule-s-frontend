@@ -2,7 +2,7 @@ import { GET_ERRORS } from "../actions/types";
 
 const initialState = {
   msg: {},
-  status: null
+  status: {}
 };
 
 export default function(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
     case GET_ERRORS:
       return {
         msg: action.payload.msg,
-        status: action.payload.msg
+        status: action.payload.status
       };
     default:
       return state;
