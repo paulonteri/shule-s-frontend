@@ -22,8 +22,6 @@ export class StudentsForm extends Component {
     getDorms: PropTypes.func.isRequired
   };
 
-  componentDidMount() {}
-
   componentDidMount() {
     this.props.form.validateFields(); // To disable submit button at the beginning.
     this.props.getClasses();

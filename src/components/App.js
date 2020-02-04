@@ -17,6 +17,8 @@ import Students from "./students/Students";
 import Classes from "./classes/Classes";
 import Dormitories from "./dormitories/Dormitories";
 import Test from "./Test";
+import Register from "./accounts/Register";
+import Login from "./accounts/Login";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -53,6 +55,8 @@ class App extends Component {
                   >
                     <Switch>
                       <Route exact path="/" component={Students} />
+                      <Route exact path="/register" component={Register} />
+                      <Route exact path="/login" component={Login} />
                       <Route path="/students" component={Students} />
                       <Route path="/library" component={Library} />
                       <Route path="/classes" component={Classes} />
