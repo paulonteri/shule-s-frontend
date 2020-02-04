@@ -44,5 +44,7 @@ export const deleteStudent = student_id => dispatch => {
         payload: student_id
       });
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };

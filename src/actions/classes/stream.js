@@ -45,5 +45,7 @@ export const deleteStream = name => dispatch => {
         payload: name
       });
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };

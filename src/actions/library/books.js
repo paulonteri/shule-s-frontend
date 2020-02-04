@@ -30,7 +30,9 @@ export const deleteBook = id => dispatch => {
         payload: id
       });
     })
-    .catch(err => console.log(err));
+   .catch(
+      err => dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 // ADD BOOK
@@ -45,12 +47,9 @@ export const addBook = book => dispatch => {
       });
     })
     .catch(
-      err => dispatch(returnErrors(err.response.data, err.response.status))
-      // {
-      //   const errors = { msg: err.response.data, status: err.response.status };
-      //   dispatch({ type: GET_ERRORS, payload: errors }); // dispach the errors to state
-      // }
-    );
+      err => {dispatch(returnErrors(err.response.data, err.response.status));
+      console.log(err.response.data);
+    });
 };
 
 // // DELETE BOOK action method // (id)

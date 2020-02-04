@@ -10,8 +10,8 @@ export const createMessage = msg => {
 
 // RETURN ERRORS FUNCTION
 export const returnErrors = (msg, status) => {
-    return {
-        type: GET_ERRORS,
-        payload: {msg , status }
-    }
-}
+  return {
+    type: GET_ERRORS,
+    payload: { msg, status }
+  };
+};
