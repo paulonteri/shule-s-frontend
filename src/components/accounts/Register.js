@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import { Form, Icon, Input, Button, Checkbox, DatePicker } from "antd";
+import { Form, Icon, Input, Button} from "antd";
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -69,6 +69,7 @@ export class Register extends Component {
 
     return (
       <div className=" card card-body shadow rounded mt-1 mb-4 container">
+        <h5>Add users</h5>
         <Form onSubmit={this.handleSubmit}>
           {/* Username */}
 
@@ -147,7 +148,7 @@ export class Register extends Component {
             })(
               <Input.Password
                 prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
                 placeholder=" Password"
@@ -177,7 +178,7 @@ export class Register extends Component {
             })(
               <Input.Password
                 prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="key" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 // type="text"
                 placeholder=" Confirm password"
@@ -194,12 +195,9 @@ export class Register extends Component {
               htmlType="submit"
               disabled={hasErrors(getFieldsError())}
             >
-              Register
+              Register User
             </Button>
           </Form.Item>
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
         </Form>
       </div>
     );
