@@ -69,3 +69,13 @@ export const login = (username, password) => dispatch => {
       });
     });
 };
+
+// Setup config with token - helper function
+export const tokenConfig = getState => {
+  const config = { headers: { "Content-Type": "application/json" } };
+  const token = getState().authReducer.token;
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+  return config;
+};
