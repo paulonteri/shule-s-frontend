@@ -7,11 +7,12 @@ import {
 } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
+import { tokenConfig } from "../auth/auth";
 
 // GET CLASS NUMERAL
-export const getClassNumeral = () => dispatch => {
+export const getClassNumeral = () => (dispatch, getState) => {
   axios
-    .get("api/classNumeral/")
+    .get("api/classNumeral/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_CLASSNUMERALS,
@@ -24,9 +25,9 @@ export const getClassNumeral = () => dispatch => {
 };
 
 // ADD CLASS NUMERAL
-export const addClassNumeral = classNumeral => dispatch => {
+export const addClassNumeral = classNumeral => (dispatch, getState) => {
   axios
-    .post("api/classNumeral/", classNumeral)
+    .post("api/classNumeral/", classNumeral, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
       dispatch({
@@ -40,9 +41,9 @@ export const addClassNumeral = classNumeral => dispatch => {
 };
 
 // DELETE CLASS NUMERAL
-export const deleteClassNumeral = name => dispatch => {
+export const deleteClassNumeral = name => (dispatch, getState) => {
   axios
-    .delete(`api/classNumeral/${name}`)
+    .delete(`api/classNumeral/${name}`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteClassNumeral: "Class Numeral Deleted!" }));
       dispatch({

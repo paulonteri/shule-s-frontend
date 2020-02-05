@@ -1,11 +1,13 @@
 import axios from "axios";
 import { ADD_STUDENT, GET_STUDENTS, DELETE_STUDENT } from "./types";
+
 import { createMessage, returnErrors } from "../messages";
+import { tokenConfig } from "../auth/auth";
 
 // GET STUDENTS
-export const getStudents = () => dispatch => {
+export const getStudents = () => (dispatch, getState) => {
   axios
-    .get("api/students/")
+    .get("api/students/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STUDENTS,
@@ -18,9 +20,9 @@ export const getStudents = () => dispatch => {
 };
 
 // ADD STUDENT
-export const addStudent = student => dispatch => {
+export const addStudent = student => (dispatch, getState) => {
   axios
-    .post("/api/students/", student)
+    .post("/api/students/", student, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addStudent: "Student Added" }));
       dispatch({
@@ -34,9 +36,9 @@ export const addStudent = student => dispatch => {
 };
 
 // DELETE STUDENT
-export const deleteStudent = student_id => dispatch => {
+export const deleteStudent = student_id => (dispatch, getState) => {
   axios
-    .delete(`api/students/${student_id}`)
+    .delete(`api/students/${student_id}`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteStudent: "Student Deleted!" }));
       dispatch({

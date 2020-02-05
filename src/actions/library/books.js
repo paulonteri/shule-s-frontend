@@ -1,13 +1,13 @@
 import axios from "axios";
 
 import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
-// import { GET_ERRORS } from "../types"; // replaced by the returnErrors function
 import { createMessage, returnErrors } from "../messages";
+import { tokenConfig } from "../auth/auth";
 
 // GET BOOKS action method
-export const getBooks = () => dispatch => {
+export const getBooks = () => (dispatch, getState) => {
   axios
-    .get("api/library/")
+    .get("api/library/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKS, // in the types file
@@ -20,9 +20,9 @@ export const getBooks = () => dispatch => {
 };
 
 // DELETE BOOKS
-export const deleteBook = id => dispatch => {
+export const deleteBook = id => (dispatch, getState) => {
   axios
-    .delete(`api/library/${id}/`)
+    .delete(`api/library/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteBook: "Book Deleted" }));
       dispatch({
@@ -36,9 +36,9 @@ export const deleteBook = id => dispatch => {
 };
 
 // ADD BOOK
-export const addBook = book => dispatch => {
+export const addBook = book => (dispatch, getState) => {
   axios
-    .post("/api/library/", book)
+    .post("/api/library/", book, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addBook: "Book Added" })); 
       dispatch({
