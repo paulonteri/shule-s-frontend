@@ -2,11 +2,12 @@ import axios from "axios";
 
 import { GET_STREAMS, ADD_STREAM, DELETE_STREAM } from "./types";
 import { createMessage, returnErrors } from "../messages";
+import { tokenConfig } from "../auth/auth";
 
 // GET STREAMS ACTION
-export const getStreams = () => dispatch => {
+export const getStreams = () => (dispatch, getState) => {
   axios
-    .get("api/stream/")
+    .get("api/stream/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STREAMS,
@@ -19,9 +20,9 @@ export const getStreams = () => dispatch => {
 };
 
 // ADD STREAM ACTION
-export const addStream = stream => dispatch => {
+export const addStream = stream => (dispatch, getState) => {
   axios
-    .post("/api/stream/", stream)
+    .post("/api/stream/", stream, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addStream: "Stream Added" }));
       dispatch({
@@ -35,9 +36,9 @@ export const addStream = stream => dispatch => {
 };
 
 // DELETE STREAM ACTION
-export const deleteStream = name => dispatch => {
+export const deleteStream = name => (dispatch, getState) => {
   axios
-    .delete(`/api/stream/${name}`)
+    .delete(`/api/stream/${name}`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteStream: "Stream Deleted" }));
       dispatch({
