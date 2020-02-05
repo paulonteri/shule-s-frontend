@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Form, Icon, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
+import { login } from "../../actions/auth/auth";
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -10,27 +12,39 @@ function hasErrors(fieldsError) {
 
 export class Login extends Component {
   static propTypes = {
-    // prop: PropTypes
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
   };
 
   state = {
     username: "",
-
     password: ""
   };
-
-  state = { confirmDirty: false };
 
   componentDidMount() {
     this.props.form.validateFields();
   }
 
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.login(this.state.username, this.state.password);
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  state = { confirmDirty: false };
+
+  // Blur for passwords
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/"></Redirect>;
+    }
+
     const { username, password } = this.state;
 
     const {
@@ -47,7 +61,7 @@ export class Login extends Component {
 
     return (
       <div className=" card card-body shadow rounded mt-1 mb-4 container">
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.onSubmit}>
           {/* Username */}
 
           <Form.Item
@@ -111,15 +125,16 @@ export class Login extends Component {
               Login
             </Button>
           </Form.Item>
-
         </Form>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isAuthenticated: state.authReducer.isAuthenticated
+});
 
-Login = Form.create({ name: "login" })(Login);
+Login = Form.create({ name: "login user" })(Login);
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, { login })(Login);
