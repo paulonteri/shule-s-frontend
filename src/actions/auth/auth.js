@@ -1,7 +1,13 @@
 import axios from "axios";
 import { returnErrors } from "../messages";
 
-import { USER_LOADED, USER_LOADING, AUTH_ERROR } from "./types";
+import {
+  USER_LOADED,
+  USER_LOADING,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL
+} from "./types";
 
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
@@ -34,6 +40,32 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: AUTH_ERROR
+      });
+    });
+};
+
+///// LOGIN USER /////
+export const login = (username, password) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  // Request Body (change to string)
+  const body = JSON.stringify({ username: username, password: password });
+  axios
+    .post("/api/auth/login", body, config)
+    .then(res => {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: LOGIN_FAIL
       });
     });
 };
