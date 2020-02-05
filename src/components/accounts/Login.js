@@ -108,12 +108,10 @@ export class Login extends Component {
               htmlType="submit"
               disabled={hasErrors(getFieldsError())}
             >
-              Register
+              Login
             </Button>
           </Form.Item>
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
+
         </Form>
       </div>
     );

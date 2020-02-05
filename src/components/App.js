@@ -8,6 +8,7 @@ import {
   Redirect
 } from "react-router-dom";
 
+import PrivateRoute from "./common/PrivateRoute";
 import Alerts from "../layout/Alerts";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
@@ -16,7 +17,7 @@ import Library from "./library/Library";
 import Students from "./students/Students";
 import Classes from "./classes/Classes";
 import Dormitories from "./dormitories/Dormitories";
-import Test from "./Test";
+import Test from "./common/Test";
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 
@@ -54,14 +55,18 @@ class App extends Component {
                     }}
                   >
                     <Switch>
-                      <Route exact path="/" component={Students} />
-                      <Route exact path="/register" component={Register} />
                       <Route exact path="/login" component={Login} />
-                      <Route path="/students" component={Students} />
-                      <Route path="/library" component={Library} />
-                      <Route path="/classes" component={Classes} />
-                      <Route path="/dorms" component={Dormitories} />
-                      <Route exact path="/test" component={Test} />
+                      <PrivateRoute exact path="/" component={Students} />
+                      <PrivateRoute
+                        exact
+                        path="/register"
+                        component={Register}
+                      />
+                      <PrivateRoute path="/students" component={Students} />
+                      <PrivateRoute path="/library" component={Library} />
+                      <PrivateRoute path="/classes" component={Classes} />
+                      <PrivateRoute path="/dorms" component={Dormitories} />
+                      <PrivateRoute exact path="/test" component={Test} />
                     </Switch>
                   </Content>
                   <AppFooter />

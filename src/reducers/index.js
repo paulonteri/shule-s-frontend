@@ -7,8 +7,10 @@ import streams from "./classes/streams";
 import classNumerals from "./classes/classNumeral";
 import classes from "./classes/classes";
 import dormitories from "./dormitories/dormitories";
+import auth from "./authentication/auth";
 
 export default combineReducers({
+  authReducer: auth,
   errorsReducer: errors,
   messagesReducer: messages,
   booksReducer: books,

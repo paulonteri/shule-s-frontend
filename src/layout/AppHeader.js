@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BackBtn from "../components/BackBtn";
+import BackBtn from "../components/common/BackBtn";
 
 export class AppHeader extends Component {
   render() {
