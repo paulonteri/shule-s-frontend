@@ -15,6 +15,8 @@ export class Alerts extends Component {
       if (error.msg.author) alert.error(`Author: ${error.msg.author.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);
+       if (error.msg.non_field_errors)
+        alert.error(`${error.msg.non_field_errors.join()} Status:${error.status} `);
     }
     if (message !== prevProps.message) {
       if (message.deleteBook) alert.error(message.deleteBook);
