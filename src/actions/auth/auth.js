@@ -6,7 +6,8 @@ import {
   USER_LOADING,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT_SUCCESS
 } from "./types";
 
 // CHECK TOKEN & LOAD USER
@@ -67,6 +68,21 @@ export const login = (username, password) => dispatch => {
       dispatch({
         type: LOGIN_FAIL
       });
+    });
+};
+
+// LOGOUT USER
+export const logout = () => (dispatch, getState) => {
+  axios
+    .post("/api/auth/logout/", null, tokenConfig(getState))
+    .then(res => {
+      dispatch({ type: "CLEAR_ALL" });
+      dispatch({
+        type: LOGOUT_SUCCESS
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 
