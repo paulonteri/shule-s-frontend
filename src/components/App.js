@@ -7,6 +7,14 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../store";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+import { Layout } from "antd";
+const { Content } = Layout;
+
+import { loadUser } from "../actions/auth/auth";
 
 import PrivateRoute from "./common/PrivateRoute";
 import Alerts from "../layout/Alerts";
@@ -21,13 +29,6 @@ import Test from "./common/Test";
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 
-import { Provider } from "react-redux";
-import store from "../store";
-import { Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
-import { Layout } from "antd";
-const { Content } = Layout;
-
 // Alerts Options
 const alertOptions = {
   timeout: 3000,
@@ -35,6 +36,10 @@ const alertOptions = {
 };
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
   render() {
     return (
       <Provider store={store}>
