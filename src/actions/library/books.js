@@ -110,7 +110,7 @@ export const deleteBookIssued = id => (dispatch, getState) => {
 };
 
 // GET BOOK INSTANCE
-export const getBooks = () => (dispatch, getState) => {
+export const getBookInstance = () => (dispatch, getState) => {
   axios
     .get("api/bookinstance/", tokenConfig(getState))
     .then(res => {
@@ -125,7 +125,7 @@ export const getBooks = () => (dispatch, getState) => {
 };
 
 // ADD BOOK INSTANCE
-export const addBook = book => (dispatch, getState) => {
+export const addBookInstance = book => (dispatch, getState) => {
   axios
     .post("/api/bookinstance/", book, tokenConfig(getState))
     .then(res => {
@@ -142,7 +142,7 @@ export const addBook = book => (dispatch, getState) => {
 };
 
 // DELETE BOOK INSTANCE
-export const deleteBook = id => (dispatch, getState) => {
+export const deleteBookInstance = id => (dispatch, getState) => {
   axios
     .delete(`api/bookinstance/${id}/`, tokenConfig(getState))
     .then(res => {
