@@ -1,5 +1,5 @@
 import axios from "axios";
-import { returnErrors } from "../messages";
+import { createMessage, returnErrors } from "../messages";
 
 import {
   USER_LOADED,
@@ -67,10 +67,11 @@ export const register = ({ username, email, password }) => dispatch => {
     }
   };
   // Request Body (change to string)
-  const body = JSON.stringify({ username: username, password: password });
+  const body = JSON.stringify({ username, email, password });
   axios
     .post("/api/auth/register", body, config)
     .then(res => {
+      dispatch(createMessage({ registerUser: "User Regisered" }));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data

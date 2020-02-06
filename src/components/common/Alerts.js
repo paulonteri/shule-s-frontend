@@ -25,6 +25,7 @@ export class Alerts extends Component {
       if (error.msg.name) alert.error(error.msg.name.join());
     }
     if (message !== prevProps.message) {
+      if (message.registerUser) alert.info(message.registerUser);
       if (message.deleteBook) alert.error(message.deleteBook);
       if (message.addBook) alert.success(message.addBook);
       if (message.addStream) alert.success(message.addStream);
