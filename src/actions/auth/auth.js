@@ -14,23 +14,8 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
-
-  // Get token from state
-  const token = getState().authReducer.token;
-
-  // Headers
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-  // If token, add to headers config
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
-
   axios
-    .get("/api/auth/user", config)
+    .get("/api/auth/user", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -88,8 +73,11 @@ export const logout = () => (dispatch, getState) => {
 
 // Setup config with token - helper function
 export const tokenConfig = getState => {
+  // Headers
   const config = { headers: { "Content-Type": "application/json" } };
+  // Get token from state
   const token = getState().authReducer.token;
+  // If token, add to headers config
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
