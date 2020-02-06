@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../store";
-import { Provider as AlertProvider } from "react-alert";
+import { transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { Layout } from "antd";
 const { Content } = Layout;
@@ -17,7 +17,7 @@ const { Content } = Layout;
 import { loadUser } from "../actions/auth/auth";
 
 import PrivateRoute from "./common/PrivateRoute";
-import Alerts from "../layout/Alerts";
+import Alerts from "./common/Alerts";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import AppSider from "../layout/AppSider";
@@ -31,7 +31,7 @@ import Login from "./accounts/Login";
 
 // Alerts Options
 const alertOptions = {
-  timeout: 3000,
+  timeout: 3250,
   position: "top center"
 };
 
@@ -62,11 +62,7 @@ class App extends Component {
                     <Switch>
                       <Route exact path="/login" component={Login} />
                       <PrivateRoute exact path="/" component={Students} />
-                      <PrivateRoute
-                        exact
-                        path="/register"
-                        component={Register}
-                      />
+                      <Route exact path="/register" component={Register} />
                       <PrivateRoute path="/students" component={Students} />
                       <PrivateRoute path="/library" component={Library} />
                       <PrivateRoute path="/classes" component={Classes} />

@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Form, Icon, Input, Button } from "antd";
 
-import { Form, Icon, Input, Button} from "antd";
+import { register } from "../../actions/auth/auth";
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
 export class Register extends Component {
+  static propTypes = {
+    register: PropTypes.func.isRequired
+  };
+
   state = {
     username: "",
     email: "",
@@ -18,9 +23,20 @@ export class Register extends Component {
 
   state = { confirmDirty: false };
 
-  static propTypes = {
-    // prop: PropTypes
+  componentDidMount() {
+    this.props.form.validateFields();
+  }
+
+  onSubmit = e => {
+    e.preventDefault();
+    const { email, username, password } = this.state;
+    const newUser = { email, username, password };
+    this.props.register(newUser);
+    console.log(newUser);
+    console.log("register");
   };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
@@ -38,10 +54,6 @@ export class Register extends Component {
     }
     callback();
   };
-
-  componentDidMount() {
-    this.props.form.validateFields();
-  }
 
   handleConfirmBlur = e => {
     const { value } = e.target;
@@ -69,7 +81,7 @@ export class Register extends Component {
     return (
       <div className=" card card-body shadow rounded mt-1 mb-4 container">
         <h5>Add users</h5>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.onSubmit}>
           {/* Username */}
 
           <Form.Item
@@ -117,7 +129,7 @@ export class Register extends Component {
             })(
               <Input
                 prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
                 placeholder=" Email"
@@ -147,7 +159,7 @@ export class Register extends Component {
             })(
               <Input.Password
                 prefix={
-                  <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="key" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
                 placeholder=" Password"
@@ -207,4 +219,4 @@ const mapStateToProps = state => ({});
 
 Register = Form.create({ name: "register" })(Register);
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps, { register })(Register);
