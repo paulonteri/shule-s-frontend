@@ -1,17 +1,26 @@
 import axios from "axios";
-
-import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "./types";
+import {
+  GET_BOOKS,
+  DELETE_BOOK,
+  ADD_BOOK,
+  GET_BOOKISSUED,
+  DELETE_BOOKISSUED,
+  ADD_BOOKISSUED,
+  GET_BOOKINSTANCE,
+  ADD_BOOKINSTANCE,
+  DELETE_BOOKINSTANCE
+} from "./types";
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
 
-// GET BOOKS action method
+// GET BOOKS
 export const getBooks = () => (dispatch, getState) => {
   axios
-    .get("api/library/", tokenConfig(getState))
+    .get("api/books/", tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_BOOKS, // in the types file
-        payload: res.data // response data from the server (books)
+        type: GET_BOOKS,
+        payload: res.data
       });
     })
     .catch(err =>
@@ -19,10 +28,27 @@ export const getBooks = () => (dispatch, getState) => {
     );
 };
 
+// ADD BOOK
+export const addBook = book => (dispatch, getState) => {
+  axios
+    .post("/api/books/", book, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ addBook: "Book Added" }));
+      dispatch({
+        type: ADD_BOOK,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      console.log(err.response.data);
+    });
+};
+
 // DELETE BOOKS
 export const deleteBook = id => (dispatch, getState) => {
   axios
-    .delete(`api/library/${id}/`, tokenConfig(getState))
+    .delete(`api/books/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteBook: "Book Deleted" }));
       dispatch({
@@ -30,44 +56,103 @@ export const deleteBook = id => (dispatch, getState) => {
         payload: id
       });
     })
-   .catch(
-      err => dispatch(returnErrors(err.response.data, err.response.status))
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
 
-// ADD BOOK
-export const addBook = book => (dispatch, getState) => {
+// GET BOOK ISSUED
+export const getBooksIssued = () => (dispatch, getState) => {
   axios
-    .post("/api/library/", book, tokenConfig(getState))
+    .get("api/booksissued/", tokenConfig(getState))
     .then(res => {
-      dispatch(createMessage({ addBook: "Book Added" })); 
       dispatch({
-        type: ADD_BOOK,
+        type: GET_BOOKISSUED,
         payload: res.data
       });
     })
-    .catch(
-      err => {dispatch(returnErrors(err.response.data, err.response.status));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// ADD BOOK ISSUED
+export const addBookIssued = bookIssued => (dispatch, getState) => {
+  axios
+    .post("/api/booksissued/", bookIssued, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ bookIssued: "Book Issued" }));
+      dispatch({
+        type: ADD_BOOKISSUED,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
       console.log(err.response.data);
     });
 };
 
-// // DELETE BOOK action method // (id)
-// export const deleteLead = id => dispatch => {
-//   axios
-//     .delete(`/api/books/${id}/`)
-//     .then(res => {
-//       dispatch(createMessage({ deleteLead: "Lead Deleted" }));
-//       dispatch({
-//         type: DELETE_LEAD,
-//         payload: id
-//       });
-//     })
-//     .catch(err => console.log(err));
-// };
+// DELETE BOOK ISSUED
+export const deleteBookIssued = id => (dispatch, getState) => {
+  axios
+    .delete(`api/booksissued/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ deleteBookIssued: "Deleted Book Issued" }));
+      dispatch({
+        type: DELETE_BOOKISSUED,
+        payload: id
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
 
-// // ADD BOOK
-//     .catch(err =>
-//       dispatch(returnErrors(err.response.data, err.response.status))
-//     );
-// };
+// GET BOOK INSTANCE
+export const getBooks = () => (dispatch, getState) => {
+  axios
+    .get("api/bookinstance/", tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_BOOKINSTANCE,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// ADD BOOK INSTANCE
+export const addBook = book => (dispatch, getState) => {
+  axios
+    .post("/api/bookinstance/", book, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ addBookInstance: "Book Added" }));
+      dispatch({
+        type: ADD_BOOKINSTANCE,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      console.log(err.response.data);
+    });
+};
+
+// DELETE BOOK INSTANCE
+export const deleteBook = id => (dispatch, getState) => {
+  axios
+    .delete(`api/bookinstance/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ deleteBookInstance: "Book Deleted" }));
+      dispatch({
+        type: DELETE_BOOKINSTANCE,
+        payload: id
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
