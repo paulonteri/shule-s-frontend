@@ -16,6 +16,7 @@ export class Alerts extends Component {
       if (error.msg.author) alert.error(`Author: ${error.msg.author.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);
+      if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
       // non_field_errors
       if (error.msg.non_field_errors)
         alert.error(

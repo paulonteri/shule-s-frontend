@@ -12,8 +12,7 @@ function hasErrors(fieldsError) {
 
 export class Login extends Component {
   static propTypes = {
-    login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    login: PropTypes.func.isRequired
   };
 
   state = {
