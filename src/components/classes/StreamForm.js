@@ -10,7 +10,7 @@ export class StreamForm extends Component {
     addStream: PropTypes.func.isRequired
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = e => {
     e.preventDefault();
