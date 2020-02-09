@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Icon, Input } from "antd";
+import { Button, Form, Icon, Input, Select } from "antd";
+const Option = Select.Option;
 
-import { addBookInstance } from "../../actions/library/books";
+import { addBookInstance, getBooks } from "../../actions/library/books";
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -11,7 +12,9 @@ function hasErrors(fieldsError) {
 
 export class BookForm extends Component {
   static propTypes = {
-    addBookInstance: PropTypes.func.isRequired
+    addBookInstance: PropTypes.func.isRequired,
+    getBooks: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired
   };
 
   state = {
@@ -21,9 +24,14 @@ export class BookForm extends Component {
 
   componentDidMount() {
     this.props.form.validateFields();
+    this.props.getBooks();
+    console.log(this.props.books);
   }
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    console.log(e.target.value);
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -100,15 +108,17 @@ export class BookForm extends Component {
                 }
               ]
             })(
-              <Input
-                prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Book"
-                name="book"
+              <Select
+                showSearch
+                placeholder="Select a book"
                 onChange={this.onChange}
-              />
+              >
+                {this.props.books.map(book_sel => (
+                  <Option key={book_sel.id} value={book_sel.id}>
+                    {book_sel.title} by {book_sel.author}
+                  </Option>
+                ))}
+              </Select>
             )}
           </Form.Item>
 
@@ -127,5 +137,11 @@ export class BookForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  books: state.booksReducer.books
+});
+
 BookForm = Form.create({ name: "book form" })(BookForm);
-export default connect(null, { addBookInstance })(BookForm);
+export default connect(mapStateToProps, { addBookInstance, getBooks })(
+  BookForm
+);
