@@ -130,34 +130,8 @@ export class StudentsForm extends Component {
         // pass the student const to the action
         this.props.addStudent(student);
 
-        // empty the fields    // Commented out to allow testing
-        // this.setState({
-        //   student_id: "",
-        //   class_ns: "",
-        //   dormitory: "",
-        //   first_name: "",
-        //   surname: "",
-        //   other_name: "",
-        //   father_alive: true,
-        //   mother_alive: true,
-        //   father_first_name: "",
-        //   father_surname: "",
-        //   father_email: "",
-        //   father_phone: "",
-        //   mother_first_name: "",
-        //   mother_surname: "",
-        //   mother_email: "",
-        //   mother_phone: "",
-        //   date_of_birth: "",
-        //   gender: "",
-        //   admission_date: "",
-        //   is_enrolled: true,
-        //   home_country: "",
-        //   home_county: "",
-        //   home_town: "",
-        //   religion: "",
-        //   health: ""
-        // });
+        this.props.form.resetFields();
+
       }
     });
   };

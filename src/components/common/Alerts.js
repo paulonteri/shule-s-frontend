@@ -12,7 +12,11 @@ export class Alerts extends Component {
   componentDidUpdate(prevProps) {
     const { error, alert, message } = this.props;
     if (error !== prevProps.error) {
+      //General
+      if (error.msg.name) alert.error(error.msg.name.join());
+      if (error.msg.id) alert.error(`ID: ${error.msg.id.join()}`);
       // Books
+      if (error.msg.book) alert.error(`Book: ${error.msg.book.join()}`);
       if (error.msg.author) alert.error(`Author: ${error.msg.author.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);
@@ -26,7 +30,6 @@ export class Alerts extends Component {
       if (error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
       if (error.msg.username)
         alert.error(`Username: ${error.msg.username.join()}`);
-      if (error.msg.name) alert.error(error.msg.name.join());
     }
     if (message !== prevProps.message) {
       // Users

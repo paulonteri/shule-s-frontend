@@ -32,8 +32,7 @@ export class Register extends Component {
     const { email, username, password } = this.state;
     const newUser = { email, username, password };
     this.props.register(newUser);
-    console.log(newUser);
-    console.log("register");
+    this.props.form.resetFields();
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });

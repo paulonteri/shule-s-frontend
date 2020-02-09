@@ -23,23 +23,23 @@ export class BookForm extends Component {
     this.props.form.validateFields();
   }
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = e => {
     e.preventDefault();
+    this.props.form.validateFields((err, bookInst) => {
+      if (!err) {
+        const { id, book } = this.state;
 
-    const { id, book } = this.state;
+        const bookInst = {
+          id: id,
+          book: book
+        };
 
-    const bookInst = {
-      id: id,
-      book: book
-    };
+        this.props.addBookInstance(bookInst);
 
-    this.props.addBookInstance(bookInst);
-
-    this.setState({
-      id: "",
-      book: ""
+        this.props.form.resetFields();
+      }
     });
   };
 

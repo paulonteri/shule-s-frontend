@@ -32,41 +32,34 @@ export class BookForm extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    this.props.form.validateFields((err, book) => {
+      if (!err) {
+        const {
+          title,
+          author,
+          description,
+          summary,
+          ISBN,
+          type,
+          subject
+        } = this.state;
 
-    const {
-      title,
-      author,
-      description,
-      summary,
-      ISBN,
-      type,
-      subject
-    } = this.state;
+        const book = {
+          title: title,
+          author: author,
+          description: description,
+          summary: summary,
+          ISBN: ISBN,
+          type: type,
+          subject: subject
+        };
 
-    const book = {
-      title: title,
-      author: author,
-      description: description,
-      summary: summary,
-      ISBN: ISBN,
-      type: type,
-      subject: subject
-    };
+        this.props.addBook(book);
 
-    this.props.addBook(book);
-
-    this.setState({
-      title: "",
-      author: "",
-      description: "",
-      summary: "",
-      ISBN: "",
-      type: "",
-      subject: ""
+        this.props.form.resetFields();
+      }
     });
   };
-
-
 
   render() {
     const {
@@ -86,16 +79,13 @@ export class BookForm extends Component {
       isFieldTouched
     } = this.props.form;
 
-    const titleError =
-      isFieldTouched("title") && getFieldError("title");
-    const authorError =
-      isFieldTouched("author") && getFieldError("author");
+    const titleError = isFieldTouched("title") && getFieldError("title");
+    const authorError = isFieldTouched("author") && getFieldError("author");
 
     return (
       <div className="card card-body shadow rounded mt-1 mb-4">
         <h4>Add Book Form</h4>
         <Form onSubmit={this.onSubmit}>
-
           {/* Title */}
           <Form.Item
             validateStatus={titleError ? "error" : ""}
@@ -112,7 +102,7 @@ export class BookForm extends Component {
             })(
               <Input
                 prefix={
-                  <Icon type="book" style={{ color: "rgba(0,0,0,.25)" }}/>
+                  <Icon type="book" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
                 placeholder=" Book Title"
@@ -138,7 +128,7 @@ export class BookForm extends Component {
             })(
               <Input
                 prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }}/>
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
                 placeholder=" Book Author"
@@ -158,7 +148,6 @@ export class BookForm extends Component {
               ]
             })(
               <Input
-
                 type="text"
                 placeholder="Book ISBN"
                 name="ISBN"
@@ -178,7 +167,6 @@ export class BookForm extends Component {
                   ]
                 })(
                   <Input
-
                     type="text"
                     placeholder="Book subject"
                     name="subject"
@@ -199,7 +187,6 @@ export class BookForm extends Component {
                   ]
                 })(
                   <Input
-
                     type="text"
                     placeholder="Book type"
                     name="type"
@@ -208,7 +195,6 @@ export class BookForm extends Component {
                 )}
               </Form.Item>
             </div>
-
           </div>
           {/* Description */}
           <Form.Item label="Description">
@@ -220,7 +206,6 @@ export class BookForm extends Component {
               ]
             })(
               <Input
-
                 type="text"
                 placeholder="Book Description"
                 name="description"
@@ -239,7 +224,6 @@ export class BookForm extends Component {
               ]
             })(
               <Input
-
                 type="text"
                 placeholder="Book summary"
                 name="summary"
@@ -247,7 +231,6 @@ export class BookForm extends Component {
               />
             )}
           </Form.Item>
-
 
           <Form.Item>
             <Button
