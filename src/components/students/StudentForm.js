@@ -130,8 +130,8 @@ export class StudentsForm extends Component {
         // pass the student const to the action
         this.props.addStudent(student);
 
+        // clear fields
         this.props.form.resetFields();
-
       }
     });
   };
@@ -352,9 +352,11 @@ export class StudentsForm extends Component {
                     name="class_ns"
                     onChange={this.onChange}
                   >
+                    {/* first option  */}
                     <option value="" className="text-sm-left font-weight-light">
                       Select Class
                     </option>
+                    {/* other options  */}
                     {/* get classes  */}
                     {this.props.classes.map(my_class => (
                       <option key={my_class.id} value={my_class.id}>
@@ -381,9 +383,11 @@ export class StudentsForm extends Component {
                     name="dormitory"
                     onChange={this.onChange}
                   >
+                    {/* first option  */}
                     <option value="" className="text-sm-left font-weight-light">
                       Select Dormitory
                     </option>
+                    {/* other options  */}
                     {this.props.dorms.map(dorm => (
                       <option key={dorm.id} value={dorm.id}>
                         {dorm.dormitory_name}
@@ -843,7 +847,7 @@ export class StudentsForm extends Component {
                   <DatePicker
                     placeholder="Date of Admission"
                     onChange={(date, dateString) =>
-                      this.handleDate(dateString, "admission_date")                                                                           
+                      this.handleDate(dateString, "admission_date")
                     }
                   />
                 )}
@@ -855,7 +859,7 @@ export class StudentsForm extends Component {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={hasErrors(getFieldsError())}                                                                                         
+              disabled={hasErrors(getFieldsError())}
             >
               Add Student
             </Button>

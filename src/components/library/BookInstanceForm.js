@@ -25,7 +25,6 @@ export class BookForm extends Component {
   componentDidMount() {
     this.props.form.validateFields();
     this.props.getBooks();
-    console.log(this.props.books);
   }
 
   onChange = e => {
@@ -72,32 +71,6 @@ export class BookForm extends Component {
       <div className="card card-body shadow rounded mt-1 mb-4">
         <h4>Add Book Form</h4>
         <Form onSubmit={this.onSubmit}>
-          {/* ID */}
-          <Form.Item
-            validateStatus={idError ? "error" : ""}
-            help={idError || ""}
-            label="ID"
-          >
-            {getFieldDecorator("id", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input the book's id!"
-                }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="book" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Book ID"
-                name="id"
-                onChange={this.onChange}
-              />
-            )}
-          </Form.Item>
-
           {/* Book */}
           <Form.Item
             validateStatus={bookError ? "error" : ""}
@@ -123,6 +96,32 @@ export class BookForm extends Component {
                   </Option>
                 ))}
               </Select>
+            )}
+          </Form.Item>
+
+          {/* ID */}
+          <Form.Item
+            validateStatus={idError ? "error" : ""}
+            help={idError || ""}
+            label="ID"
+          >
+            {getFieldDecorator("id", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input the book's id!"
+                }
+              ]
+            })(
+              <Input
+                prefix={
+                  <Icon type="book" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                type="text"
+                placeholder=" Add book's unique identifier"
+                name="id"
+                onChange={this.onChange}
+              />
             )}
           </Form.Item>
 
