@@ -33,6 +33,10 @@ export class BookForm extends Component {
     console.log(e.target.value);
   };
 
+  onChangeAntD = (value, e) => {
+    this.setState({ [e.props.name]: value });
+  };
+
   onSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, bookInst) => {
@@ -111,10 +115,10 @@ export class BookForm extends Component {
               <Select
                 showSearch
                 placeholder="Select a book"
-                onChange={this.onChange}
+                onChange={this.onChangeAntD}
               >
                 {this.props.books.map(book_sel => (
-                  <Option key={book_sel.id} value={book_sel.id}>
+                  <Option key={book_sel.id} value={book_sel.id} name="book">
                     {book_sel.title} by {book_sel.author}
                   </Option>
                 ))}
