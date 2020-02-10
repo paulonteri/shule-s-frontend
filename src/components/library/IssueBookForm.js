@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { Button, Form, Icon, Input, Select } from "antd";
 const Option = Select.Option;
 
-import { addBookIssued, getBookInstance } from "../../actions/library/books";
+import {
+  addBookIssued,
+  getBookInstance,
+  getBooks
+} from "../../actions/library/books";
 import { getStudents } from "../../actions/students/students";
 
 function hasErrors(fieldsError) {
@@ -14,9 +18,11 @@ function hasErrors(fieldsError) {
 export class IssueBookForm extends Component {
   static propTypes = {
     addBookIssued: PropTypes.func.isRequired,
-    getStudents: PropTypes.func.isRequired,
     bookInstance: PropTypes.array.isRequired,
-    students: PropTypes.array.isRequired
+    getStudents: PropTypes.func.isRequired,
+    students: PropTypes.array.isRequired,
+    getBooks: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired
   };
 
   state = {
@@ -28,6 +34,7 @@ export class IssueBookForm extends Component {
     this.props.form.validateFields();
     this.props.getStudents();
     this.props.getBookInstance();
+    this.props.getBooks();
   }
 
   onChangeAntD = (value, e) => {
@@ -51,6 +58,19 @@ export class IssueBookForm extends Component {
         this.props.form.resetFields();
       }
     });
+  };
+
+  displayBookTitle = (bookInstID, bookInstBook) => {
+    const books = this.props.books;
+    const b = books.filter(books => books.id == bookInstBook);
+    console.log(b.map(b => b.title));
+    return b.map(b => (
+      <Option key={bookInstID} value={bookInstID} name="bookInstance">
+        {" "}
+        {/* {b.map(b => b.title)}  */}
+        {b.title} by {b.author}
+      </Option>
+    ));
   };
 
   render() {
@@ -123,15 +143,9 @@ export class IssueBookForm extends Component {
                 placeholder="Select a book instance"
                 onChange={this.onChangeAntD}
               >
-                {this.props.bookInstance.map(book_sel => (
-                  <Option
-                    key={book_sel.id}
-                    value={book_sel.id}
-                    name="bookInstance"
-                  >
-                    {book_sel.id}
-                  </Option>
-                ))}
+                {this.props.bookInstance.map(bookInst =>
+                  this.displayBookTitle(bookInst.id, bookInst.book)
+                )}
               </Select>
             )}
           </Form.Item>
@@ -153,12 +167,14 @@ export class IssueBookForm extends Component {
 
 const mapStateToProps = state => ({
   students: state.studentsReducer.students,
-  bookInstance: state.booksReducer.bookInstances
+  bookInstance: state.booksReducer.bookInstances,
+  books: state.booksReducer.books
 });
 
 IssueBookForm = Form.create({ name: "Issue book form" })(IssueBookForm);
 export default connect(mapStateToProps, {
   getBookInstance,
   getStudents,
-  addBookIssued
+  addBookIssued,
+  getBooks
 })(IssueBookForm);
