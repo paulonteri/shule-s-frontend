@@ -18,6 +18,8 @@ import { loadUser } from "../actions/auth/auth";
 
 import PrivateRoute from "./common/PrivateRoute";
 import Alerts from "./common/Alerts";
+import Test from "./common/Test";
+import Error404 from "./common/Error404";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import AppSider from "../layout/AppSider";
@@ -60,6 +62,7 @@ class App extends Component {
                   >
                     <Switch>
                       <Route exact path="/login" component={Login} />
+
                       <PrivateRoute exact path="/" component={Students} />
                       <Route exact path="/register" component={Register} />
                       <PrivateRoute path="/students" component={Students} />
@@ -67,6 +70,7 @@ class App extends Component {
                       <PrivateRoute path="/classes" component={Classes} />
                       <PrivateRoute path="/dorms" component={Dormitories} />
                       <PrivateRoute exact path="/test" component={Test} />
+                      <PrivateRoute component={Error404} />
                     </Switch>
                   </Content>
                   <AppFooter />

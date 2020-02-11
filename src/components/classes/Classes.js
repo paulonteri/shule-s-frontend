@@ -8,13 +8,14 @@ import Streams from "./Streams";
 import ClassNList from "./ClassNList";
 import ClassNForm from "./ClassNForm";
 import ClassNumerals from "./ClassNumerals";
+import Error404 from "../common/Error404";
 
 export class Classes extends Component {
   render() {
     return (
       <Fragment>
         <Switch>
-          <Route exact path="/classes" component={ClassesDashboard} />
+          <Route exact path="/classes" component={ClassesDashboard}/>
           <Route
             exact
             path="/classes/classnumerallist"
@@ -30,9 +31,10 @@ export class Classes extends Component {
             path="/classes/classnumerals"
             component={ClassNumerals}
           />
-          <Route exact path="/classes/streams" component={Streams} />
-          <Route exact path="/classes/streamlist" component={StreamList} />
-          <Route exact path="/classes/streamform" component={StreamForm} />
+          <Route exact path="/classes/streams" component={Streams}/>
+          <Route exact path="/classes/streamlist" component={StreamList}/>
+          <Route exact path="/classes/streamform" component={StreamForm}/>
+          <Route component={Error404}/>
         </Switch>
       </Fragment>
     );

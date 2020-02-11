@@ -6,6 +6,7 @@ import BookInfoTable from "./BookInfoTable";
 import BookInfoForm from "./BookInfoForm";
 import BookInstanceForm from "./BookInstanceForm";
 import IssueBookForm from "./IssueBookForm";
+import Error404 from "../common/Error404";
 
 export class Library extends Component {
   render() {
@@ -25,6 +26,7 @@ export class Library extends Component {
             path="/library/issuebookform"
             component={IssueBookForm}
           />
+          <Route component={Error404}/>
         </Switch>
       </Fragment>
     );
