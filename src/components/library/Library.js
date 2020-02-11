@@ -2,8 +2,8 @@ import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import LibraryDashboard from "./LibraryDashboard";
-import BooksTable from "./BooksTable";
-import BookForm from "./BookForm";
+import BookInfoTable from "./BookInfoTable";
+import BookInfoForm from "./BookInfoForm";
 import BookInstanceForm from "./BookInstanceForm";
 import IssueBookForm from "./IssueBookForm";
 
@@ -13,8 +13,8 @@ export class Library extends Component {
       <Fragment>
         <Switch>
           <Route exact path="/library" component={LibraryDashboard} />
-          <Route exact path="/library/bookstable" component={BooksTable} />
-          <Route exact path="/library/addbook" component={BookForm} />
+          <Route exact path="/library/bookinfotable" component={BookInfoTable} />
+          <Route exact path="/library/bookinfoform" component={BookInfoForm} />
           <Route
             exact
             path="/library/bookinstanceform"

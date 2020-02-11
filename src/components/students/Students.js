@@ -12,6 +12,7 @@ export class Students extends Component {
     return (
       <Fragment>
         <Switch>
+          <Route exact path="/" component={StudentsDashboard} />
           <Route exact path="/students" component={StudentsDashboard} />
           <Route exact path="/students/table" component={StudentTable} />
           <Route exact path="/students/add" component={StudentForm} />

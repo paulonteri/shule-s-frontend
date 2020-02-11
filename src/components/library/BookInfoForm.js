@@ -9,7 +9,7 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-export class BookForm extends Component {
+export class BookInfoForm extends Component {
   static propTypes = {
     addBook: PropTypes.func.isRequired
   };
@@ -28,7 +28,7 @@ export class BookForm extends Component {
     this.props.form.validateFields();
   }
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = e => {
     e.preventDefault();
@@ -83,7 +83,7 @@ export class BookForm extends Component {
     const authorError = isFieldTouched("author") && getFieldError("author");
 
     return (
-      <div className="card card-body shadow rounded mt-1 mb-4">
+      <div className="card card-body shadow rounded mt-1 mb-1">
         <h4>Add Book Form</h4>
         <Form onSubmit={this.onSubmit}>
           {/* Title */}
@@ -247,5 +247,5 @@ export class BookForm extends Component {
   }
 }
 
-BookForm = Form.create({ name: "book form" })(BookForm);
-export default connect(null, { addBook })(BookForm);
+BookInfoForm = Form.create({ name: "book form" })(BookInfoForm);
+export default connect(null, { addBook })(BookInfoForm);

@@ -10,7 +10,7 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-export class BookForm extends Component {
+export class BookInstanceForm extends Component {
   static propTypes = {
     addBookInstance: PropTypes.func.isRequired,
     getBooks: PropTypes.func.isRequired,
@@ -68,7 +68,7 @@ export class BookForm extends Component {
     const bookError = isFieldTouched("book") && getFieldError("book");
 
     return (
-      <div className="card card-body shadow rounded mt-1 mb-4">
+      <div className="card card-body shadow rounded mt-1 mb-1">
         <h4>Add Book Form</h4>
         <Form onSubmit={this.onSubmit}>
           {/* Book */}
@@ -87,7 +87,7 @@ export class BookForm extends Component {
             })(
               <Select
                 showSearch
-                placeholder="Select a book"
+                placeholder=" Select a book"
                 onChange={this.onChangeAntD}
               >
                 {this.props.books.map(book_sel => (
@@ -115,7 +115,7 @@ export class BookForm extends Component {
             })(
               <Input
                 prefix={
-                  <Icon type="book" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="key" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
                 placeholder=" Add book's unique identifier"
@@ -144,7 +144,7 @@ const mapStateToProps = state => ({
   books: state.booksReducer.books
 });
 
-BookForm = Form.create({ name: "book form" })(BookForm);
+BookInstanceForm = Form.create({ name: "book form" })(BookInstanceForm);
 export default connect(mapStateToProps, { addBookInstance, getBooks })(
-  BookForm
+  BookInstanceForm
 );

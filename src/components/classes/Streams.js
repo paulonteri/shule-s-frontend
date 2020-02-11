@@ -6,7 +6,7 @@ export class Streams extends Component {
   render() {
     return (
       <Fragment>
-        <div className="container card card-body shadow rounded mt-1 mb-4">
+        <div className="container card card-body shadow rounded mt-1 mb-1">
           <div className="row">
             <div className="col-md mb-2">
               <StreamList />

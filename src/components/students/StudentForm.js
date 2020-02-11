@@ -200,7 +200,7 @@ export class StudentsForm extends Component {
       isFieldTouched("mother_email") && getFieldError("mother_email");
 
     return (
-      <div className=" card card-body shadow rounded mt-1 mb-4 container">
+      <div className=" card card-body shadow rounded mt-1 mb-1 container">
         <h5>Fill in a student's details</h5>
         <Form onSubmit={this.handleSubmit}>
           {/* First Name */}
@@ -813,6 +813,12 @@ export class StudentsForm extends Component {
                     placeholder="Any health issue"
                     name="health"
                     onChange={this.onChange}
+                    prefix={
+                      <Icon
+                        type="medicine-box"
+                        style={{ color: "rgba(0,0,0,.25)" }}
+                      />
+                    }
                   />
                 )}
               </Form.Item>

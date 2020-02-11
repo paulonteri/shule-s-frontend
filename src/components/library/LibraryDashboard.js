@@ -1,14 +1,14 @@
 import React, { Fragment, Component } from "react";
 
-import BooksTable from "./BooksTable";
-import BookForm from "./BookForm";
+import BookInfoTable from "./BookInfoTable";
+import BookInfoForm from "./BookInfoForm";
 
 export class LibraryDashboard extends Component {
   render() {
     return (
       <Fragment>
-        <BooksTable />
-        <BookForm />
+        <BookInfoTable />
+        <BookInfoForm />
       </Fragment>
     );
   }

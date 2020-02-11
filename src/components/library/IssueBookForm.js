@@ -39,8 +39,6 @@ export class IssueBookForm extends Component {
 
   onChangeAntD = (value, e) => {
     this.setState({ [e.props.name]: value });
-    console.log(value);
-    console.log(e);
   };
 
   onSubmit = e => {
@@ -63,7 +61,7 @@ export class IssueBookForm extends Component {
   displayBookTitle = (bookInstID, bookInstBook) => {
     const books = this.props.books;
     const b = books.filter(books => books.id == bookInstBook);
-    console.log(b.map(b => b.title));
+
     return b.map(b => (
       <Option key={bookInstID} value={bookInstID} name="bookInstance">
         {" "}
@@ -88,14 +86,14 @@ export class IssueBookForm extends Component {
       isFieldTouched("bookInstance") && getFieldError("bookInstance");
 
     return (
-      <div className="card card-body shadow rounded mt-1 mb-4">
+      <div className="card card-body shadow rounded mt-1 mb-1">
         <h4>Issue Book Form</h4>
         <Form onSubmit={this.onSubmit}>
           {/* student */}
           <Form.Item
             validateStatus={studentError ? "error" : ""}
             help={studentError || ""}
-            label="student"
+            label="Student"
           >
             {getFieldDecorator("student", {
               rules: [
@@ -107,8 +105,11 @@ export class IssueBookForm extends Component {
             })(
               <Select
                 showSearch
-                placeholder="Select a student"
+                placeholder=" Select a student"
                 onChange={this.onChangeAntD}
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
               >
                 {this.props.students.map(student_sel => (
                   <Option
@@ -142,6 +143,9 @@ export class IssueBookForm extends Component {
                 showSearch
                 placeholder="Select a book instance"
                 onChange={this.onChangeAntD}
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
               >
                 {this.props.bookInstance.map(bookInst =>
                   this.displayBookTitle(bookInst.id, bookInst.book)

@@ -7,7 +7,7 @@ const { Column } = Table;
 
 import { getBooks, deleteBook } from "../../actions/library/books";
 
-export class BooksTable extends Component {
+export class BookInfoTable extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
     getBooks: PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ export class BooksTable extends Component {
   render() {
     return (
       <Fragment>
-        <div className="table-responsive card card-body shadow rounded mb-4">
+        <div className="table-responsive card card-body shadow rounded mb-1">
           <h4>Book List</h4>
           <Table
             dataSource={this.props.books}
@@ -64,7 +64,9 @@ const mapStateToProps = state => ({
   books: state.booksReducer.books
 });
 
-export default connect(mapStateToProps, { getBooks, deleteBook })(BooksTable);
+export default connect(mapStateToProps, { getBooks, deleteBook })(
+  BookInfoTable
+);
 
 // LOOP
 {

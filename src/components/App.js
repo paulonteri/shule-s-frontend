@@ -25,7 +25,6 @@ import Library from "./library/Library";
 import Students from "./students/Students";
 import Classes from "./classes/Classes";
 import Dormitories from "./dormitories/Dormitories";
-import Test from "./common/Test";
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 

@@ -54,7 +54,7 @@ export class StudentTable extends Component {
     return (
       <Fragment>
         <p>Student Table</p>
-        <div className="table-responsive card card-body shadow rounded mb-4">
+        <div className="table-responsive card card-body shadow rounded mb-1">
           <h4>Student List</h4>
           <Table
             dataSource={this.props.student}

@@ -32,7 +32,7 @@ export class AppSider extends Component {
             key="sub1"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="idcard" />
                 <span> Students </span>
               </span>
             }
@@ -47,7 +47,6 @@ export class AppSider extends Component {
             <Menu.Item key="3">
               <Link to="/students/add">Add Student</Link>
             </Menu.Item>
-            <Menu.Item key="4">option4</Menu.Item>
           </SubMenu>
 
           {/* Library SubMenu */}
@@ -55,7 +54,7 @@ export class AppSider extends Component {
             key="sub2"
             title={
               <span>
-                <Icon type="laptop" />
+                <Icon type="read" />
                 <span> Library </span>
               </span>
             }
@@ -64,12 +63,17 @@ export class AppSider extends Component {
               <Link to="/library">Library</Link>
             </Menu.Item>
             <Menu.Item key="6">
-              <Link to="/library/bookstable">Book List</Link>
+              <Link to="/library/issuebookform">Issue Book</Link>
             </Menu.Item>
             <Menu.Item key="7">
-              <Link to="/library/addbook">Add Book</Link>
+              <Link to="/library/bookinfoform">Add Book</Link>
             </Menu.Item>
-            <Menu.Item key="8">option8</Menu.Item>
+            <Menu.Item key="8">
+              <Link to="/library/bookinstanceform">Add Book Instance</Link>
+            </Menu.Item>
+            <Menu.Item key="233">
+              <Link to="/library/bookinfotable">Book Table</Link>
+            </Menu.Item>
           </SubMenu>
 
           {/* classes SubMenu */}
@@ -77,7 +81,7 @@ export class AppSider extends Component {
             key="sub3"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="team" />
                 <span> Classes </span>
               </span>
             }
@@ -94,19 +98,8 @@ export class AppSider extends Component {
               {" "}
               <Link to="/classes/classnumerals">Class Numerals</Link>
             </Menu.Item>
-            <Menu.Item key="12">option4</Menu.Item>
+
           </SubMenu>
-
-          {/* Others */}
-          <Menu.Item key="31">
-            <Icon type="user" />
-            <span className="nav-text">nav 1</span>
-          </Menu.Item>
-
-          <Menu.Item key="32">
-            <Icon type="video-camera" />
-            <span className="nav-text">nav 2</span>
-          </Menu.Item>
         </Menu>
       </Sider>
     );
