@@ -15,6 +15,8 @@ export class Alerts extends Component {
       //General
       if (error.msg.name) alert.error(error.msg.name.join());
       if (error.msg.id) alert.error(`ID: ${error.msg.id.join()}`);
+      if (error.msg.detail) alert.error(error.msg.detail);
+
       // Books
       if (error.msg.book) alert.error(`Book: ${error.msg.book.join()}`);
       if (error.msg.author) alert.error(`Author: ${error.msg.author.join()}`);

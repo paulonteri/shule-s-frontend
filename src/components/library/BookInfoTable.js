@@ -7,6 +7,7 @@ const { Column } = Table;
 
 import { getBooks, deleteBook } from "../../actions/library/books";
 
+
 export class BookInfoTable extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
