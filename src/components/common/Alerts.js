@@ -15,19 +15,19 @@ export class Alerts extends Component {
       //General
       if (error.msg.name) alert.error(error.msg.name.join());
       if (error.msg.id) alert.error(`ID: ${error.msg.id.join()}`);
+      // Detail
       if (error.msg.detail) alert.error(error.msg.detail);
-
+      // non_field_errors
+      if (error.msg.non_field_errors)
+        alert.error(
+          `${error.msg.non_field_errors.join()} Status:${error.status} `
+        );
       // Books
       if (error.msg.book) alert.error(`Book: ${error.msg.book.join()}`);
       if (error.msg.author) alert.error(`Author: ${error.msg.author.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);
       if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
-      // non_field_errors
-      if (error.msg.non_field_errors)
-        alert.error(
-          `${error.msg.non_field_errors.join()} Status:${error.status} `
-        );
       // Users
       if (error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
       if (error.msg.username)
@@ -51,6 +51,12 @@ export class Alerts extends Component {
       if (message.addBook) alert.success(message.addBook);
       if (message.deleteBookInstance) alert.error(message.deleteBookInstance);
       if (message.addBookInstance) alert.success(message.addBookInstance);
+      // Permission & Groups
+      if (message.deletePermission) alert.error(message.deletePermission);
+      if (message.addPermission) alert.success(message.addPermission);
+      if (message.deletePermissionGroup)
+        alert.error(message.deletePermissionGroup);
+      if (message.addPermissionGroup) alert.success(message.addPermissionGroup);
     }
   }
 
