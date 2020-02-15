@@ -1,18 +1,11 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 // import * as serviceWorker from "../serviceWorker";
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../store";
-import { transitions, Provider as AlertProvider } from "react-alert";
+import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import { Layout } from "antd";
-const { Content } = Layout;
 
 import { loadUser } from "../actions/auth/auth";
 
@@ -20,15 +13,8 @@ import PrivateRoute from "./common/PrivateRoute";
 import Alerts from "./common/Alerts";
 import Test from "./common/Test";
 import Error404 from "./common/Error404";
-import AppHeader from "../layout/AppHeader";
-import AppFooter from "../layout/AppFooter";
-import AppSider from "../layout/AppSider";
-import Library from "./library/Library";
-import Students from "./students/Students";
-import Classes from "./classes/Classes";
-import Dormitories from "./dormitories/Dormitories";
-import Register from "./accounts/Register";
 import Login from "./accounts/Login";
+import Dashboard from "./Dashboard";
 
 // Alerts Options
 const alertOptions = {
@@ -49,33 +35,12 @@ class App extends Component {
             <Fragment>
               <Alerts />
 
-              <Layout style={{ minHeight: "100vh" }}>
-                <AppSider />
-                <Layout>
-                  <AppHeader />
-                  <Content
-                    style={{
-                      margin: "15px ",
-                      marginTop: "1px ",
-                      minHeight: 280
-                    }}
-                  >
-                    <Switch>
-                      <Route exact path="/login" component={Login} />
-
-                      <PrivateRoute exact path="/" component={Students} />
-                      <Route exact path="/register" component={Register} />
-                      <PrivateRoute path="/students" component={Students} />
-                      <PrivateRoute path="/library" component={Library} />
-                      <PrivateRoute path="/classes" component={Classes} />
-                      <PrivateRoute path="/dorms" component={Dormitories} />
-                      <PrivateRoute exact path="/test" component={Test} />
-                      <PrivateRoute component={Error404} />
-                    </Switch>
-                  </Content>
-                  <AppFooter />
-                </Layout>
-              </Layout>
+              <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/test" component={Test} />
+                <PrivateRoute path="/" component={Dashboard} />
+                <Route component={Error404} />
+              </Switch>
             </Fragment>
           </Router>
         </AlertProvider>

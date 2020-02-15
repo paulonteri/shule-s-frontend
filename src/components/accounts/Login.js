@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Form, Icon, Input } from "antd";
@@ -59,20 +59,23 @@ export class Login extends Component {
       isFieldTouched("password") && getFieldError("password");
 
     return (
-      <div className=" card card-body shadow rounded mt-1 mb-4 container">
+      <div
+        className=" card card-body shadow rounded container mt-5 mx-auto"
+        style={{ width: "550px" }}
+      >
         <Form onSubmit={this.onSubmit}>
           {/* Username */}
 
           <Form.Item
             validateStatus={usernameError ? "error" : ""}
             help={usernameError || ""}
-            label="Username"
+            label="Email"
           >
             {getFieldDecorator("username", {
               rules: [
                 {
                   required: true,
-                  message: "Please input the username!"
+                  message: "Please input your email!"
                 }
               ]
             })(
@@ -81,7 +84,7 @@ export class Login extends Component {
                   <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="text"
-                placeholder=" Username"
+                placeholder=" Email"
                 name="username"
                 onChange={this.onChange}
               />
