@@ -61,9 +61,8 @@ export class Login extends Component {
     return (
       <div
         className=" card card-body shadow rounded container mt-5 mx-auto"
-        style={{ width: "550px" }}
       >
-      <h4>Kindly Login</h4>
+      <h4>Kindly login</h4>
         <Form onSubmit={this.onSubmit}>
           {/* Username */}
 

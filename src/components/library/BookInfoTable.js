@@ -33,7 +33,7 @@ export class BookInfoTable extends Component {
             pagination={{ pageSize: 20 }}
           >
             <Column title="ID" dataIndex="id" key="id" />
-            <Column title="Title" dataIndex="name" key="name" />
+            <Column title="Title" dataIndex="title" key="title" />
             <Column title="Author" dataIndex="author" key="author" />
             <Column
               title="Description"
@@ -41,7 +41,7 @@ export class BookInfoTable extends Component {
               key="description"
             />
             <Column
-              title=""
+              title="Action"
               key="action"
               render={the_parameter => (
                 <span>
@@ -75,7 +75,7 @@ export default connect(mapStateToProps, { getBooks, deleteBook })(
 {this.props.books.map(book => (
   <tr key={book.id}>
     <td>{book.id}</td>
-    <td>{book.name}</td>
+    <td>{book.title}</td>
     <td>{book.email}</td>
     <td>{book.message}</td>
     <td>
