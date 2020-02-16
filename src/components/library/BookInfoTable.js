@@ -37,8 +37,8 @@ export class BookInfoTable extends Component {
             <Column title="Author" dataIndex="author" key="author" />
             <Column
               title="Description"
-              dataIndex="description"
-              key="description"
+              dataIndex="summary"
+              key="summary"
             />
             <Column
               title="Action"
