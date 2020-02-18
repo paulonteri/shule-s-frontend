@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Icon, Input, Select } from "antd";
+import { Button, Form, Icon, Select } from "antd";
 
 import {
   addBookIssued,
@@ -61,7 +61,7 @@ export class IssueBookForm extends Component {
 
   displayBookTitle = (bookInstID, bookInstBook) => {
     const books = this.props.books;
-    const b = books.filter(books => books.id == bookInstBook);
+    const b = books.filter(books => books.id === bookInstBook);
 
     return b.map(b => (
       <Option key={bookInstID} value={bookInstID} name="bookInstance">
@@ -73,8 +73,6 @@ export class IssueBookForm extends Component {
   };
 
   render() {
-    const { student, bookInstance } = this.state;
-
     const {
       getFieldDecorator,
       getFieldsError,

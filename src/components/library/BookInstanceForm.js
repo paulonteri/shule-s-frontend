@@ -55,7 +55,6 @@ export class BookInstanceForm extends Component {
   };
 
   render() {
-    const { id, book } = this.state;
 
     const {
       getFieldDecorator,

@@ -60,7 +60,6 @@ export class Register extends Component {
   };
 
   render() {
-    const { username, email, password, password2 } = this.state;
 
     const {
       getFieldDecorator,

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux"; // In order to use redux
 import PropTypes from "prop-types"; // we are gonna have some properties (prop)
-import { Table, Divider, Tag } from "antd";
+import { Table } from "antd";
 import { getBooks, deleteBook } from "../../actions/library/books"
 const { Column } = Table;
 
@@ -68,24 +68,3 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { getBooks, deleteBook })(
   BookInfoTable
 );
-
-// LOOP
-{
-  /* <tbody>
-{this.props.books.map(book => (
-  <tr key={book.id}>
-    <td>{book.id}</td>
-    <td>{book.title}</td>
-    <td>{book.email}</td>
-    <td>{book.message}</td>
-    <td>
-      <button
-        onClick={this.props.deletebook.bind(this, book.id)} className="btn btn-danger btn-sm">
-        {" "}
-        Delete
-      </button>
-    </td>
-  </tr>
-))}
-</tbody> */
-}

@@ -63,16 +63,6 @@ export class BookInfoForm extends Component {
 
   render() {
     const {
-      title,
-      author,
-      description,
-      summary,
-      ISBN,
-      type,
-      subject
-    } = this.state;
-
-    const {
       getFieldDecorator,
       getFieldsError,
       getFieldError,
