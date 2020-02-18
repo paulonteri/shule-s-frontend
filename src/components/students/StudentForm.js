@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -137,33 +137,6 @@ export class StudentsForm extends Component {
   };
 
   render() {
-    const {
-      student_id,
-      class_ns,
-      dormitory,
-      first_name,
-      surname,
-      other_name,
-      father_alive,
-      mother_alive,
-      father_first_name,
-      father_surname,
-      father_email,
-      father_phone,
-      mother_first_name,
-      mother_surname,
-      mother_email,
-      mother_phone,
-      date_of_birth,
-      gender,
-      admission_date,
-      is_enrolled,
-      home_country,
-      home_county,
-      home_town,
-      religion,
-      health
-    } = this.state; // get them from the state
 
     const {
       getFieldDecorator,

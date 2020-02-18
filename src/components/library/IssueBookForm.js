@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Form, Icon, Input, Select } from "antd";
-const Option = Select.Option;
 
 import {
   addBookIssued,
@@ -10,6 +9,8 @@ import {
   getBooks
 } from "../../actions/library/books";
 import { getStudents } from "../../actions/students/students";
+
+const Option = Select.Option;
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);

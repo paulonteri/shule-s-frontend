@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
-// import * as serviceWorker from "../serviceWorker";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../store";
@@ -22,14 +20,15 @@ const alertOptions = {
   position: "top center"
 };
 
-class App extends Component {
-  componentDidMount() {
+export class App extends Component {
+    componentDidMount() {
     store.dispatch(loadUser());
   }
-
   render() {
     return (
-      <Provider store={store}>
+      <div>
+        <p>Paragra</p>
+        <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Fragment>
@@ -45,10 +44,9 @@ class App extends Component {
           </Router>
         </AlertProvider>
       </Provider>
-    );
+      </div>
+    )
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
-
-// serviceWorker.register();
+export default App

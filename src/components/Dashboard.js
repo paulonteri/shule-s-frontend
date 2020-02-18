@@ -1,13 +1,5 @@
 import React, { Component, Fragment } from "react";
 
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
-import { Layout } from "antd";
-const { Content } = Layout;
-
 import PrivateRoute from "./common/PrivateRoute";
 import Error404 from "./common/Error404";
 import AppHeader from "../layout/AppHeader";
@@ -18,6 +10,14 @@ import Students from "./students/Students";
 import Classes from "./classes/Classes";
 import Dormitories from "./dormitories/Dormitories";
 import Register from "./accounts/Register";
+
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
+import { Layout } from "antd";
+const { Content } = Layout;
 
 export class Dashboard extends Component {
   render() {

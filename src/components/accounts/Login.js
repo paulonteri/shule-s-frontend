@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Form, Icon, Input } from "antd";
@@ -43,8 +43,6 @@ export class Login extends Component {
     if (this.props.isAuthenticated) {
       return <Redirect to="/"></Redirect>;
     }
-
-    const { username, password } = this.state;
 
     const {
       getFieldDecorator,

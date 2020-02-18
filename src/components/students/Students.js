@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import StudentList from "./StudentList";
 import StudentForm from "./StudentForm";

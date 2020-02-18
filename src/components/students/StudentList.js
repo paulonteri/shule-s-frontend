@@ -2,9 +2,9 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Table, Divider, Tag } from "antd";
-const { Column } = Table;
-
 import { getStudents, deleteStudent } from "../../actions/students/students";
+
+const { Column } = Table;
 
 export class StudentList extends Component {
   static propTypes = {

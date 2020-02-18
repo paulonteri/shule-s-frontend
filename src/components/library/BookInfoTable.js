@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux"; // In order to use redux
 import PropTypes from "prop-types"; // we are gonna have some properties (prop)
-
 import { Table, Divider, Tag } from "antd";
+import { getBooks, deleteBook } from "../../actions/library/books"
 const { Column } = Table;
 
-import { getBooks, deleteBook } from "../../actions/library/books";
+;
 
 
 export class BookInfoTable extends Component {

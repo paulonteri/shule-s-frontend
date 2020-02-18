@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
-import { Table, Divider, Tag } from "antd";
-const { Column } = Table;
-
+import { Table, } from "antd";
 import { getStudents, deleteStudent } from "../../actions/students/students";
 import { getClasses } from "../../actions/classes/classes";
 import { getDorms } from "../../actions/dormitories/dormitories";
+
+const { Column } = Table;
 
 export class StudentTable extends Component {
   static propTypes = {
@@ -27,7 +26,7 @@ export class StudentTable extends Component {
   }
 
   displayGender = genders => {
-    if (genders == "m") {
+    if (genders === "m") {
       return <p>Male</p>;
     } else {
       return <p>Female</p>;
@@ -36,7 +35,7 @@ export class StudentTable extends Component {
 
   displayClass = c => {
     const classes = this.props.classes;
-    const cl = classes.filter(fc => fc.id == c);
+    const cl = classes.filter(fc => fc.id = c);
     return cl.map(sch_class => (
       <p key={sch_class.id}>
         {sch_class.class_numeral} {sch_class.stream}
@@ -46,7 +45,7 @@ export class StudentTable extends Component {
 
   displayDorm = dormitory => {
     const dormitories = this.props.dorms;
-    const d = dormitories.filter(dm => dm.id == dormitory);
+    const d = dormitories.filter(dm => dm.id = dormitory);
     return d.map(drm => <p key={drm.id}>{drm.dormitory_name}</p>);
   };
 
