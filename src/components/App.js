@@ -27,7 +27,6 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <p>Paragra</p>
         <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
