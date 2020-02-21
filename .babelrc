@@ -1,5 +1,4 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
     "transform-class-properties",
     "@loadable/babel-plugin",
@@ -7,5 +6,6 @@
       "import",
       { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }
     ]
-  ]
+  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
