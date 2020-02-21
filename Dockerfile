@@ -1,7 +1,13 @@
 FROM node:12.2.0-alpine AS alpine
 
-WORKDIR /app
+WORKDIR /code
 COPY package*.json ./
-RUN npm install
-# Copy the contents of the project to the image
+COPY yarn.lock ./
+RUN yarn
 COPY . .
+# RUN npm build
+RUN yarn global add serve
+# Copy the contents of the project to the image
+# CMD ["npm", "start"]
+COPY . .
+CMD ["serve", "-p", "3000", "-s", "."]
