@@ -1,18 +1,18 @@
- import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "../store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
-import { loadUser } from "./actions/auth/auth";
+import { loadUser } from "../actions/auth/auth";
 
-import PrivateRoute from "./components/common/PrivateRoute";
-import Alerts from "./components/common/Alerts";
-import Test from "./components/common/Test";
-import Error404 from "./components/common/Error404";
-import Login from "./components/accounts/Login";
-import Dashboard from "./components/Dashboard";
+import PrivateRoute from "./common/PrivateRoute";
+import Alerts from "./common/Alerts";
+import Test from "./common/Test";
+import Error404 from "./common/Error404";
+import Login from "./accounts/Login";
+import Dashboard from "./Dashboard";
 
 // Alerts Options
 const alertOptions = {
@@ -21,13 +21,13 @@ const alertOptions = {
 };
 
 export class App extends Component {
-  componentDidMount() {
+    componentDidMount() {
     store.dispatch(loadUser());
   }
-
   render() {
     return (
-      <Provider store={store}>
+      <div>
+        <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Fragment>
@@ -43,8 +43,9 @@ export class App extends Component {
           </Router>
         </AlertProvider>
       </Provider>
-    );
+      </div>
+    )
   }
 }
 
-export default App;
+export default App
