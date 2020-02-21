@@ -1,3 +1,5 @@
+const LoadablePlugin = require('@loadable/webpack-plugin')
+
 module.exports = {
   module: {
     rules: [
@@ -17,5 +19,6 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  }
+  },
+  plugins: [new LoadablePlugin()]
 };
