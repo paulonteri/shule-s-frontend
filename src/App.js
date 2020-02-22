@@ -1,18 +1,16 @@
- import React, { Component, Fragment } from "react";
+import React, { Component, Suspense } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-
-import { loadUser } from "./actions/auth/auth";
-
 import PrivateRoute from "./components/common/PrivateRoute";
-import Alerts from "./components/common/Alerts";
-import Test from "./components/common/Test";
-import Error404 from "./components/common/Error404";
 import Login from "./components/accounts/Login";
-import Dashboard from "./components/Dashboard";
+import { loadUser } from "./actions/auth/auth";
+import Alerts from "./components/common/Alerts";
+const Dashboard = React.lazy(() => import("./components/Dashboard"));
+const Error404 = React.lazy(() => import("./components/common/Error404"));
+const Test = React.lazy(() => import("./components/common/Test"));
 
 // Alerts Options
 const alertOptions = {
@@ -30,16 +28,15 @@ export class App extends Component {
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
-            <Fragment>
-              <Alerts />
-
+            <Alerts />
+            <Suspense fallback={<div>Loading...</div>}>
               <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/test" component={Test} />
                 <PrivateRoute path="/" component={Dashboard} />
                 <Route component={Error404} />
               </Switch>
-            </Fragment>
+            </Suspense>
           </Router>
         </AlertProvider>
       </Provider>
