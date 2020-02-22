@@ -25,7 +25,7 @@ export const loadUser = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
+      console.log(err.response.data, err.response.status);
       dispatch({
         type: AUTH_ERROR
       });
