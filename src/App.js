@@ -1,5 +1,6 @@
 import React, { Component, Suspense } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import Spinner from "./components/common/Spinner";
 import { Provider } from "react-redux";
 import store from "./store";
 import { Provider as AlertProvider } from "react-alert";
@@ -29,7 +30,7 @@ export class App extends Component {
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Alerts />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={Spinner}>
               <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/test" component={Test} />

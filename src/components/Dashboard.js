@@ -6,6 +6,7 @@ import Error404 from "./common/Error404";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import AppSider from "../layout/AppSider";
+import Spinner from "./common/Spinner";
 const Library = React.lazy(() => import("./library/Library"));
 const Students = React.lazy(() => import("./students/Students"));
 const Classes = React.lazy(() => import("./classes/Classes"));
@@ -30,9 +31,10 @@ export class Dashboard extends Component {
                 }}
               >
                 <Switch>
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={Spinner}>
                     <PrivateRoute exact path="/" component={Students} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/spinner" component={Spinner} />
                     <PrivateRoute path="/students" component={Students} />
                     <PrivateRoute path="/library" component={Library} />
                     <PrivateRoute path="/classes" component={Classes} />
