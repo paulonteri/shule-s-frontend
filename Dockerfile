@@ -6,8 +6,8 @@ COPY yarn.lock ./
 RUN yarn
 COPY . .
 # RUN npm build
-RUN yarn global add serve
+# RUN yarn global add serve
 # Copy the contents of the project to the image
-COPY . .
+# COPY . .
 # CMD ["serve", "-p", "3000", "-s", "."]
-CMD ["yarn", "start"]
+# CMD ["yarn", "start"]
