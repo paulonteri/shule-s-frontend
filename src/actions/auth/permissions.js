@@ -14,7 +14,7 @@ import { tokenConfig } from "../auth/auth";
 // GET PERMISSIONS
 export const getPermissions = () => (dispatch, getState) => {
   axios
-    .get("api/auth/permissions/", tokenConfig(getState))
+    .get("http://0.0.0.0:8000/api/auth/permissions/", tokenConfig(getState))
     .then(res => {
       console.log("get Permissions");
       dispatch({
@@ -30,7 +30,11 @@ export const getPermissions = () => (dispatch, getState) => {
 // ADD PERMISSION
 export const addPermission = Permission => (dispatch, getState) => {
   axios
-    .post("api/auth/permissions/", Permission, tokenConfig(getState))
+    .post(
+      "http://0.0.0.0:8000/api/auth/permissions/",
+      Permission,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ addPermission: "Permission Added" }));
       dispatch({
@@ -46,7 +50,10 @@ export const addPermission = Permission => (dispatch, getState) => {
 // DELETE PERMISSION
 export const deletePermission = id => (dispatch, getState) => {
   axios
-    .delete(`api/auth/permissions/${id}`, tokenConfig(getState))
+    .delete(
+      `http://0.0.0.0:8000/api/auth/permissions/${id}`,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deletePermission: "Permission Deleted!" }));
       dispatch({
@@ -62,7 +69,10 @@ export const deletePermission = id => (dispatch, getState) => {
 // GET PERMISSION GROUPS
 export const getPermissionGroups = () => (dispatch, getState) => {
   axios
-    .get("api/auth/permissiongroups/", tokenConfig(getState))
+    .get(
+      "http://0.0.0.0:8000/api/auth/permissiongroups/",
+      tokenConfig(getState)
+    )
     .then(res => {
       console.log("get PermissionGroups");
       dispatch({
@@ -78,7 +88,11 @@ export const getPermissionGroups = () => (dispatch, getState) => {
 // ADD PERMISSION GROUP
 export const addPermissionGroup = PermissionGroup => (dispatch, getState) => {
   axios
-    .post("api/auth/permissiongroups/", PermissionGroup, tokenConfig(getState))
+    .post(
+      "http://0.0.0.0:8000/api/auth/permissiongroups/",
+      PermissionGroup,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ addPermissionGroup: "Permission Group Added" }));
       dispatch({
@@ -94,7 +108,10 @@ export const addPermissionGroup = PermissionGroup => (dispatch, getState) => {
 // DELETE PERMISSION GROUP
 export const deletePermissionGroup = id => (dispatch, getState) => {
   axios
-    .delete(`api/auth/permissiongroups/${id}`, tokenConfig(getState))
+    .delete(
+      `http://0.0.0.0:8000/api/auth/permissiongroups/${id}`,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(
         createMessage({ deletePermissionGroup: "Permission Group Deleted!" })

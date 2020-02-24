@@ -7,7 +7,7 @@ import { tokenConfig } from "../auth/auth";
 // GET STREAMS ACTION
 export const getStreams = () => (dispatch, getState) => {
   axios
-    .get("api/stream/", tokenConfig(getState))
+    .get("http://0.0.0.0:8000/api/stream/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STREAMS,
@@ -22,7 +22,7 @@ export const getStreams = () => (dispatch, getState) => {
 // ADD STREAM ACTION
 export const addStream = stream => (dispatch, getState) => {
   axios
-    .post("/api/stream/", stream, tokenConfig(getState))
+    .post("http://0.0.0.0:8000/api/stream/", stream, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addStream: "Stream Added" }));
       dispatch({
@@ -38,7 +38,7 @@ export const addStream = stream => (dispatch, getState) => {
 // DELETE STREAM ACTION
 export const deleteStream = name => (dispatch, getState) => {
   axios
-    .delete(`/api/stream/${name}`, tokenConfig(getState))
+    .delete(`http://0.0.0.0:8000/api/stream/${name}`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteStream: "Stream Deleted" }));
       dispatch({

@@ -8,7 +8,7 @@ import { tokenConfig } from "../auth/auth";
 // GET DORMS
 export const getDorms = () => (dispatch, getState) => {
   axios
-    .get("api/dormitories/", tokenConfig(getState))
+    .get("http://0.0.0.0:8000/api/dormitories/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_DORMS,
