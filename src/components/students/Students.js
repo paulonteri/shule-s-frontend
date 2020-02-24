@@ -18,7 +18,7 @@ export class Students extends Component {
           <Route exact path="/students/table" component={StudentTable} />
           <Route exact path="/students/add" component={StudentForm} />
           <Route exact path="/students/list" component={StudentList} />
-          <Route component={Error404}/>
+          <Route component={Error404} />
         </Switch>
       </Fragment>
     );

@@ -1,18 +1,23 @@
-import React, { Component, Fragment, Suspense } from "react";
+import React, { Component, Fragment, Suspense, IndexRedirect } from "react";
 import PrivateRoute from "./common/PrivateRoute";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import { Layout } from "antd";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import AppSider from "../layout/AppSider";
 import Spinner from "./common/Spinner";
+import Error404 from "./common/Error404";
 const { Content } = Layout;
 const Library = React.lazy(() => import("./library/Library"));
 const Students = React.lazy(() => import("./students/Students"));
 const Classes = React.lazy(() => import("./classes/Classes"));
 const Dormitories = React.lazy(() => import("./dormitories/Dormitories"));
 const Register = React.lazy(() => import("./accounts/Register"));
-const Error404 = React.lazy(() => import("./common/Error404"));
 
 export class Dashboard extends Component {
   render() {
@@ -39,7 +44,6 @@ export class Dashboard extends Component {
                     <PrivateRoute path="/library" component={Library} />
                     <PrivateRoute path="/classes" component={Classes} />
                     <PrivateRoute path="/dorms" component={Dormitories} />
-                    <PrivateRoute component={Error404} />
                   </Suspense>
                   <Route component={Error404} />
                 </Switch>
