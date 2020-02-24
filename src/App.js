@@ -10,7 +10,6 @@ import Login from "./components/accounts/Login";
 import { loadUser } from "./actions/auth/auth";
 import Alerts from "./components/common/Alerts";
 const Dashboard = React.lazy(() => import("./components/Dashboard"));
-const Error404 = React.lazy(() => import("./components/common/Error404"));
 const Test = React.lazy(() => import("./components/common/Test"));
 
 // Alerts Options
@@ -35,7 +34,6 @@ export class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/test" component={Test} />
                 <PrivateRoute path="/" component={Dashboard} />
-                <Route component={Error404} />
               </Switch>
             </Suspense>
           </Router>
