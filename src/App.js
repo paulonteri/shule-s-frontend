@@ -30,7 +30,7 @@ export class App extends Component {
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Alerts />
-            <Suspense fallback={Spinner}>
+            <Suspense fallback={<Spinner />}>
               <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/test" component={Test} />

@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { Ripple } from "react-awesome-spinners";
+import Loader from "react-loader-spinner";
 
 export const Spinner = () => {
-  const [loading, setLoading] = useState(true);
-
   return (
-    loading && (
-      <div
-        class="mx-auto d-flex align-items-center min-vh-100"
-        style={{ width: "200px", height: "500px" }}
-      >
-        <Ripple />
-      </div>
-    )
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{ height: "100vh" }}
+    >
+      <Loader
+        type="MutatingDots"
+        color="#1890FF"
+        height={100}
+        width={100}
+        timeout={20000}
+      />
+    </div>
   );
 };
 

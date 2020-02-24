@@ -27,11 +27,11 @@ export class Dashboard extends Component {
                 style={{
                   margin: "15px ",
                   marginTop: "1px ",
-                  minHeight: 280
+                  minHeight: "100vh"
                 }}
               >
                 <Switch>
-                  <Suspense fallback={Spinner}>
+                  <Suspense fallback={<Spinner />}>
                     <PrivateRoute exact path="/" component={Students} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/spinner" component={Spinner} />
