@@ -7,7 +7,7 @@ import { tokenConfig } from "../auth/auth";
 // GET STUDENTS
 export const getStudents = () => (dispatch, getState) => {
   axios
-    .get("http://0.0.0.0:8000/api/students/", tokenConfig(getState))
+    .get("http://35.184.199.163:8000/api/students/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STUDENTS,
@@ -22,7 +22,11 @@ export const getStudents = () => (dispatch, getState) => {
 // ADD STUDENT
 export const addStudent = student => (dispatch, getState) => {
   axios
-    .post("http://0.0.0.0:8000/api/students/", student, tokenConfig(getState))
+    .post(
+      "http://35.184.199.163:8000/api/students/",
+      student,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ addStudent: "Student Added" }));
       dispatch({
@@ -39,7 +43,7 @@ export const addStudent = student => (dispatch, getState) => {
 export const deleteStudent = student_id => (dispatch, getState) => {
   axios
     .delete(
-      `http://0.0.0.0:8000/api/students/${student_id}`,
+      `http://35.184.199.163:8000/api/students/${student_id}`,
       tokenConfig(getState)
     )
     .then(res => {

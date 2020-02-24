@@ -12,7 +12,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASS NUMERAL
 export const getClassNumeral = () => (dispatch, getState) => {
   axios
-    .get("http://0.0.0.0:8000/api/classNumeral/", tokenConfig(getState))
+    .get("http://35.184.199.163:8000/api/classNumeral/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_CLASSNUMERALS,
@@ -28,7 +28,7 @@ export const getClassNumeral = () => (dispatch, getState) => {
 export const addClassNumeral = classNumeral => (dispatch, getState) => {
   axios
     .post(
-      "http://0.0.0.0:8000/api/classNumeral/",
+      "http://35.184.199.163:8000/api/classNumeral/",
       classNumeral,
       tokenConfig(getState)
     )
@@ -48,7 +48,7 @@ export const addClassNumeral = classNumeral => (dispatch, getState) => {
 export const deleteClassNumeral = name => (dispatch, getState) => {
   axios
     .delete(
-      `http://0.0.0.0:8000/api/classNumeral/${name}`,
+      `http://35.184.199.163:8000/api/classNumeral/${name}`,
       tokenConfig(getState)
     )
     .then(res => {

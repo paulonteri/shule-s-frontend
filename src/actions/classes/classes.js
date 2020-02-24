@@ -8,7 +8,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASSES
 export const getClasses = () => (dispatch, getState) => {
   axios
-    .get("http://0.0.0.0:8000/api/classes/", tokenConfig(getState))
+    .get("http://35.184.199.163:8000/api/classes/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_CLASSES,

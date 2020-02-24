@@ -14,7 +14,10 @@ import { tokenConfig } from "../auth/auth";
 // GET PERMISSIONS
 export const getPermissions = () => (dispatch, getState) => {
   axios
-    .get("http://0.0.0.0:8000/api/auth/permissions/", tokenConfig(getState))
+    .get(
+      "http://35.184.199.163:8000/api/auth/permissions/",
+      tokenConfig(getState)
+    )
     .then(res => {
       console.log("get Permissions");
       dispatch({
@@ -31,7 +34,7 @@ export const getPermissions = () => (dispatch, getState) => {
 export const addPermission = Permission => (dispatch, getState) => {
   axios
     .post(
-      "http://0.0.0.0:8000/api/auth/permissions/",
+      "http://35.184.199.163:8000/api/auth/permissions/",
       Permission,
       tokenConfig(getState)
     )
@@ -51,7 +54,7 @@ export const addPermission = Permission => (dispatch, getState) => {
 export const deletePermission = id => (dispatch, getState) => {
   axios
     .delete(
-      `http://0.0.0.0:8000/api/auth/permissions/${id}`,
+      `http://35.184.199.163:8000/api/auth/permissions/${id}`,
       tokenConfig(getState)
     )
     .then(res => {
@@ -70,7 +73,7 @@ export const deletePermission = id => (dispatch, getState) => {
 export const getPermissionGroups = () => (dispatch, getState) => {
   axios
     .get(
-      "http://0.0.0.0:8000/api/auth/permissiongroups/",
+      "http://35.184.199.163:8000/api/auth/permissiongroups/",
       tokenConfig(getState)
     )
     .then(res => {
@@ -89,7 +92,7 @@ export const getPermissionGroups = () => (dispatch, getState) => {
 export const addPermissionGroup = PermissionGroup => (dispatch, getState) => {
   axios
     .post(
-      "http://0.0.0.0:8000/api/auth/permissiongroups/",
+      "http://35.184.199.163:8000/api/auth/permissiongroups/",
       PermissionGroup,
       tokenConfig(getState)
     )
@@ -109,7 +112,7 @@ export const addPermissionGroup = PermissionGroup => (dispatch, getState) => {
 export const deletePermissionGroup = id => (dispatch, getState) => {
   axios
     .delete(
-      `http://0.0.0.0:8000/api/auth/permissiongroups/${id}`,
+      `http://35.184.199.163:8000/api/auth/permissiongroups/${id}`,
       tokenConfig(getState)
     )
     .then(res => {
