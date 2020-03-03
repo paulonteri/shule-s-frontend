@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from "../url";
 import {
   GET_BOOKS,
   DELETE_BOOK,
@@ -16,7 +17,7 @@ import { tokenConfig } from "../auth/auth";
 // GET BOOKS
 export const getBooks = () => (dispatch, getState) => {
   axios
-    .get("http://35.184.199.163:8000/api/books/", tokenConfig(getState))
+    .get(URL.concat("/api/books/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKS,
@@ -31,7 +32,7 @@ export const getBooks = () => (dispatch, getState) => {
 // ADD BOOK
 export const addBook = book => (dispatch, getState) => {
   axios
-    .post("http://35.184.199.163:8000/api/books/", book, tokenConfig(getState))
+    .post(URL.concat("/api/books/"), book, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addBook: "Book Added" }));
       dispatch({
@@ -67,7 +68,7 @@ export const deleteBook = id => (dispatch, getState) => {
 // GET BOOK ISSUED
 export const getBooksIssued = () => (dispatch, getState) => {
   axios
-    .get("http://35.184.199.163:8000/api/booksissued/", tokenConfig(getState))
+    .get(URL.concat("/api/booksissued/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKISSUED,
@@ -82,11 +83,7 @@ export const getBooksIssued = () => (dispatch, getState) => {
 // ADD BOOK ISSUED
 export const addBookIssued = bookIssued => (dispatch, getState) => {
   axios
-    .post(
-      "http://35.184.199.163:8000/api/booksissued/",
-      bookIssued,
-      tokenConfig(getState)
-    )
+    .post(URL.concat("/api/booksissued/"), bookIssued, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ bookIssued: "Book Issued" }));
       dispatch({
@@ -122,7 +119,7 @@ export const deleteBookIssued = id => (dispatch, getState) => {
 // GET BOOK INSTANCE
 export const getBookInstance = () => (dispatch, getState) => {
   axios
-    .get("http://35.184.199.163:8000/api/bookinstance/", tokenConfig(getState))
+    .get(URL.concat("/api/bookinstance/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKINSTANCE,
@@ -137,11 +134,7 @@ export const getBookInstance = () => (dispatch, getState) => {
 // ADD BOOK INSTANCE
 export const addBookInstance = book => (dispatch, getState) => {
   axios
-    .post(
-      "http://35.184.199.163:8000/api/bookinstance/",
-      book,
-      tokenConfig(getState)
-    )
+    .post(URL.concat("/api/bookinstance/"), book, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addBookInstance: "Book Added" }));
       dispatch({

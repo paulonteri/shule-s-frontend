@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from "../url";
 
 import {
   GET_CLASSNUMERALS,
@@ -12,7 +13,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASS NUMERAL
 export const getClassNumeral = () => (dispatch, getState) => {
   axios
-    .get("http://35.184.199.163:8000/api/classNumeral/", tokenConfig(getState))
+    .get(URL.concat("/api/classNumeral/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_CLASSNUMERALS,
@@ -27,11 +28,7 @@ export const getClassNumeral = () => (dispatch, getState) => {
 // ADD CLASS NUMERAL
 export const addClassNumeral = classNumeral => (dispatch, getState) => {
   axios
-    .post(
-      "http://35.184.199.163:8000/api/classNumeral/",
-      classNumeral,
-      tokenConfig(getState)
-    )
+    .post(URL.concat("/api/classNumeral/"), classNumeral, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
       dispatch({

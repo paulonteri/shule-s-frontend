@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from "../url";
 import { ADD_STUDENT, GET_STUDENTS, DELETE_STUDENT } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
@@ -7,7 +8,7 @@ import { tokenConfig } from "../auth/auth";
 // GET STUDENTS
 export const getStudents = () => (dispatch, getState) => {
   axios
-    .get("http://35.184.199.163:8000/api/students/", tokenConfig(getState))
+    .get(URL.concat("/api/students/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STUDENTS,
@@ -22,11 +23,7 @@ export const getStudents = () => (dispatch, getState) => {
 // ADD STUDENT
 export const addStudent = student => (dispatch, getState) => {
   axios
-    .post(
-      "http://35.184.199.163:8000/api/students/",
-      student,
-      tokenConfig(getState)
-    )
+    .post(URL.concat("/api/students/"), student, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addStudent: "Student Added" }));
       dispatch({

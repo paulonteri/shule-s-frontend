@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from "../url";
 import {
   ADD_PERMISSION,
   GET_PERMISSIONS,
@@ -14,10 +15,7 @@ import { tokenConfig } from "../auth/auth";
 // GET PERMISSIONS
 export const getPermissions = () => (dispatch, getState) => {
   axios
-    .get(
-      "http://35.184.199.163:8000/api/auth/permissions/",
-      tokenConfig(getState)
-    )
+    .get(URL.concat("/api/auth/permissions/"), tokenConfig(getState))
     .then(res => {
       console.log("get Permissions");
       dispatch({
@@ -34,7 +32,7 @@ export const getPermissions = () => (dispatch, getState) => {
 export const addPermission = Permission => (dispatch, getState) => {
   axios
     .post(
-      "http://35.184.199.163:8000/api/auth/permissions/",
+      URL.concat("/api/auth/permissions/"),
       Permission,
       tokenConfig(getState)
     )
@@ -72,10 +70,7 @@ export const deletePermission = id => (dispatch, getState) => {
 // GET PERMISSION GROUPS
 export const getPermissionGroups = () => (dispatch, getState) => {
   axios
-    .get(
-      "http://35.184.199.163:8000/api/auth/permissiongroups/",
-      tokenConfig(getState)
-    )
+    .get(URL.concat("/api/auth/permissiongroups/"), tokenConfig(getState))
     .then(res => {
       console.log("get PermissionGroups");
       dispatch({
@@ -92,7 +87,7 @@ export const getPermissionGroups = () => (dispatch, getState) => {
 export const addPermissionGroup = PermissionGroup => (dispatch, getState) => {
   axios
     .post(
-      "http://35.184.199.163:8000/api/auth/permissiongroups/",
+      URL.concat("/api/auth/permissiongroups/"),
       PermissionGroup,
       tokenConfig(getState)
     )
