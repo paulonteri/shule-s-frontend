@@ -1,14 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { Icon } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const BackBtn = ({ history }) => (
-  <Icon
-    type="arrow-left"
-    style={{ fontSize: "20px" }}
-    onClick={history.goBack}
-
-  />
+  <ArrowLeftOutlined style={{ fontSize: "20px" }} onClick={history.goBack} />
 );
 
 export default withRouter(BackBtn);

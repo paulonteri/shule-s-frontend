@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
 import { register } from "../../actions/auth/auth";
 
@@ -22,10 +23,6 @@ export class Register extends Component {
   };
 
   state = { confirmDirty: false };
-
-  componentDidMount() {
-    this.props.form.validateFields();
-  }
 
   onSubmit = e => {
     e.preventDefault();
@@ -60,150 +57,102 @@ export class Register extends Component {
   };
 
   render() {
-
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
-    } = this.props.form;
-
-    const emailError = isFieldTouched("email") && getFieldError("email");
-    const usernameError =
-      isFieldTouched("username") && getFieldError("username");
-    const passwordError =
-      isFieldTouched("password") && getFieldError("password");
-    const password2Error =
-      isFieldTouched("password2") && getFieldError("password2");
-
     return (
       <div className=" card card-body shadow rounded mt-1 mb-4 container">
         <h5>Add users</h5>
-        <Form onSubmit={this.onSubmit}>
+        <Form onFinish={this.onSubmit} layout="vertical">
           {/* Username */}
 
           <Form.Item
-            validateStatus={usernameError ? "error" : ""}
-            help={usernameError || ""}
             label="Username"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!"
+              }
+            ]}
           >
-            {getFieldDecorator("username", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input the username!"
-                }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Username"
-                name="username"
-                onChange={this.onChange}
-              />
-            )}
+            <Input
+              prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="text"
+              placeholder=" Username"
+              name="username"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           {/* Email */}
 
           <Form.Item
-            validateStatus={emailError ? "error" : ""}
-            help={emailError || ""}
             label="Email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!"
+              }
+            ]}
           >
-            {getFieldDecorator("email", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input email!"
-                },
-                {
-                  validator: this.validateToNextPassword
-                }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Email"
-                name="email"
-                onChange={this.onChange}
-              />
-            )}
+            <Input
+              prefix={<MailOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="text"
+              placeholder=" Email"
+              name="email"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           {/* Password */}
 
           <Form.Item
-            validateStatus={passwordError ? "error" : ""}
-            help={passwordError || ""}
             label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input password!"
+              },
+              {
+                validator: this.validateToNextPassword
+              }
+            ]}
           >
-            {getFieldDecorator("password", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input password!"
-                },
-                {
-                  validator: this.validateToNextPassword
-                }
-              ]
-            })(
-              <Input.Password
-                prefix={
-                  <Icon type="key" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Password"
-                name="password"
-                onChange={this.onChange}
-              />
-            )}
+            <Input.Password
+              prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="text"
+              placeholder=" Password"
+              name="password"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           {/* Password 2 */}
 
           <Form.Item
-            validateStatus={password2Error ? "error" : ""}
-            help={password2Error || ""}
             label="Confirm Password"
+            name="password2"
+            rules={[
+              {
+                required: true,
+                message: "Please input password!"
+              },
+              {
+                validator: this.validateToNextPassword
+              }
+            ]}
           >
-            {getFieldDecorator("password2", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input confirm password!"
-                },
-                {
-                  validator: this.compareToFirstPassword
-                }
-              ]
-            })(
-              <Input.Password
-                prefix={
-                  <Icon type="key" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                // type="text"
-                placeholder=" Confirm password"
-                name="password2"
-                onBlur={this.handleConfirmBlur}
-                onChange={this.onChange}
-              />
-            )}
+            <Input.Password
+              prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              // type="text"
+              placeholder=" Confirm password"
+              name="password2"
+              onBlur={this.handleConfirmBlur}
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
-            >
+            <Button type="primary" htmlType="submit">
               Register User
             </Button>
           </Form.Item>
@@ -214,7 +163,5 @@ export class Register extends Component {
 }
 
 const mapStateToProps = state => ({});
-
-Register = Form.create({ name: "register" })(Register);
 
 export default connect(mapStateToProps, { register })(Register);

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu } from "antd";
+import { IdcardOutlined, ReadOutlined, TeamOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
-
-
 
 export class AppSider extends Component {
   state = {
@@ -33,7 +32,7 @@ export class AppSider extends Component {
             key="sub1"
             title={
               <span>
-                <Icon type="idcard" />
+                <IdcardOutlined />
                 <span> Students </span>
               </span>
             }
@@ -55,7 +54,7 @@ export class AppSider extends Component {
             key="sub2"
             title={
               <span>
-                <Icon type="read" />
+                <ReadOutlined />
                 <span> Library </span>
               </span>
             }
@@ -82,7 +81,7 @@ export class AppSider extends Component {
             key="sub3"
             title={
               <span>
-                <Icon type="team" />
+                <TeamOutlined />
                 <span> Classes </span>
               </span>
             }
@@ -99,7 +98,6 @@ export class AppSider extends Component {
               {" "}
               <Link to="/classes/classnumerals">Class Numerals</Link>
             </Menu.Item>
-
           </SubMenu>
         </Menu>
       </Sider>

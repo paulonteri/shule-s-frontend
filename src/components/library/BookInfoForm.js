@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Icon, Input } from "antd";
+import { Button, Form, Input } from "antd";
+import { BookOutlined, UserOutlined } from "@ant-design/icons";
 
 import { addBook } from "../../actions/library/books";
 
@@ -23,10 +24,6 @@ export class BookInfoForm extends Component {
     type: "",
     subject: ""
   };
-
-  componentDidMount() {
-    this.props.form.validateFields();
-  }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
@@ -62,172 +59,146 @@ export class BookInfoForm extends Component {
   };
 
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
-    } = this.props.form;
-
-    const titleError = isFieldTouched("title") && getFieldError("title");
-    const authorError = isFieldTouched("author") && getFieldError("author");
-
     return (
       <div className="card card-body shadow rounded mt-1 mb-1">
         <h4>Add Book Form</h4>
-        <Form onSubmit={this.onSubmit}>
+        <Form
+          onFinish={this.onSubmit}
+          initialValues={{
+            remember: true
+          }}
+        >
           {/* Title */}
           <Form.Item
-            validateStatus={titleError ? "error" : ""}
-            help={titleError || ""}
             label="Title"
+            name="title"
+            rules={[
+              {
+                required: true,
+                message: "Please input the book's title!"
+              }
+            ]}
           >
-            {getFieldDecorator("title", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input the book's title!"
-                }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="book" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Book Title"
-                name="title"
-                onChange={this.onChange}
-              />
-            )}
+            <Input
+              prefix={<BookOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="text"
+              placeholder=" Book Title"
+              name="title"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           {/* Author */}
           <Form.Item
-            validateStatus={authorError ? "error" : ""}
-            help={authorError || ""}
-            label="Author"
+            label="Title"
+            rules={[
+              {
+                required: true,
+                message: "Please input the book's Author!"
+              }
+            ]}
           >
-            {getFieldDecorator("author", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input the book's author!"
-                }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Book Author"
-                name="author"
-                onChange={this.onChange}
-              />
-            )}
+            <Input
+              prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="text"
+              placeholder=" Book Author"
+              name="author"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           {/* ISBN */}
-          <Form.Item label="ISBN">
-            {getFieldDecorator("ISBN", {
-              rules: [
-                {
-                  required: false
-                }
-              ]
-            })(
-              <Input
-                type="text"
-                placeholder="Book ISBN"
-                name="ISBN"
-                onChange={this.onChange}
-              />
-            )}
+          <Form.Item
+            label="ISBN"
+            label="Title"
+            rules={[
+              {
+                required: false
+              }
+            ]}
+          >
+            <Input
+              type="text"
+              placeholder="Book ISBN"
+              name="ISBN"
+              onChange={this.onChange}
+            />
           </Form.Item>
           <div className="row">
             {/* subject */}
             <div className="col-md-6">
-              <Form.Item label="Subject">
-                {getFieldDecorator("subject", {
-                  rules: [
-                    {
-                      required: false
-                    }
-                  ]
-                })(
-                  <Input
-                    type="text"
-                    placeholder="Book subject"
-                    name="subject"
-                    onChange={this.onChange}
-                  />
-                )}
+              <Form.Item
+                label="Subject"
+                rules={[
+                  {
+                    required: false
+                  }
+                ]}
+              >
+                <Input
+                  type="text"
+                  placeholder="Book subject"
+                  name="subject"
+                  onChange={this.onChange}
+                />
               </Form.Item>
             </div>
 
             <div className="col-md-6">
               {/* type */}
-              <Form.Item label="Type">
-                {getFieldDecorator("type", {
-                  rules: [
-                    {
-                      required: false
-                    }
-                  ]
-                })(
-                  <Input
-                    type="text"
-                    placeholder="Book type"
-                    name="type"
-                    onChange={this.onChange}
-                  />
-                )}
+              <Form.Item
+                label="Type"
+                rules={[
+                  {
+                    required: false
+                  }
+                ]}
+              >
+                <Input
+                  type="text"
+                  placeholder="Book type"
+                  name="type"
+                  onChange={this.onChange}
+                />
               </Form.Item>
             </div>
           </div>
           {/* Description */}
-          <Form.Item label="Description">
-            {getFieldDecorator("description", {
-              rules: [
-                {
-                  required: false
-                }
-              ]
-            })(
-              <Input
-                type="text"
-                placeholder="Book Description"
-                name="description"
-                onChange={this.onChange}
-              />
-            )}
+          <Form.Item
+            label="Description"
+            rules={[
+              {
+                required: false
+              }
+            ]}
+          >
+            <Input
+              type="text"
+              placeholder="Book Description"
+              name="description"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           {/* summary */}
-          <Form.Item label="Summary">
-            {getFieldDecorator("summary", {
-              rules: [
-                {
-                  required: false
-                }
-              ]
-            })(
-              <Input
-                type="text"
-                placeholder="Book summary"
-                name="summary"
-                onChange={this.onChange}
-              />
-            )}
+          <Form.Item
+            label="Summary"
+            rules={[
+              {
+                required: false
+              }
+            ]}
+          >
+            <Input
+              type="text"
+              placeholder="Book summary"
+              name="summary"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
-            >
+            <Button type="primary" htmlType="submit">
               Add Book
             </Button>
           </Form.Item>
@@ -237,5 +208,4 @@ export class BookInfoForm extends Component {
   }
 }
 
-BookInfoForm = Form.create({ name: "book form" })(BookInfoForm);
 export default connect(null, { addBook })(BookInfoForm);

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Icon, Input, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
+import { KeyOutlined } from "@ant-design/icons";
 import { addBookInstance, getBooks } from "../../actions/library/books";
 
 const Option = Select.Option;
@@ -23,7 +24,6 @@ export class BookInstanceForm extends Component {
   };
 
   componentDidMount() {
-    this.props.form.validateFields();
     this.props.getBooks();
   }
 
@@ -38,98 +38,66 @@ export class BookInstanceForm extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, bookInst) => {
-      if (!err) {
-        const { id, book } = this.state;
 
-        const bookInst = {
-          id: id,
-          book: book
-        };
+    const { id, book } = this.state;
 
-        this.props.addBookInstance(bookInst);
+    const bookInst = {
+      id: id,
+      book: book
+    };
 
-        this.props.form.resetFields();
-      }
-    });
+    this.props.addBookInstance(bookInst);
+
+    this.props.form.resetFields();
   };
 
   render() {
-
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
-    } = this.props.form;
-
-    const idError = isFieldTouched("id") && getFieldError("id");
-    const bookError = isFieldTouched("book") && getFieldError("book");
-
     return (
       <div className="card card-body shadow rounded mt-1 mb-1">
         <h4>Add Book Form</h4>
-        <Form onSubmit={this.onSubmit}>
+        <Form onFinish={this.onSubmit}>
           {/* Book */}
           <Form.Item
-            validateStatus={bookError ? "error" : ""}
-            help={bookError || ""}
-            label="Book"
+            rules={[
+              {
+                required: true,
+                message: "Please select a book!"
+              }
+            ]}
           >
-            {getFieldDecorator("book", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please select the book!"
-                }
-              ]
-            })(
-              <Select
-                showSearch
-                placeholder=" Select a book"
-                onChange={this.onChangeAntD}
-              >
-                {this.props.books.map(book_sel => (
-                  <Option key={book_sel.id} value={book_sel.id} name="book">
-                    {book_sel.title} by {book_sel.author}
-                  </Option>
-                ))}
-              </Select>
-            )}
+            <Select
+              showSearch
+              placeholder=" Select a book"
+              onChange={this.onChangeAntD}
+            >
+              {this.props.books.map(book_sel => (
+                <Option key={book_sel.id} value={book_sel.id} name="book">
+                  {book_sel.title} by {book_sel.author}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
 
           {/* ID */}
           <Form.Item
-            validateStatus={idError ? "error" : ""}
-            help={idError || ""}
-            label="ID"
+            rules={[
+              {
+                required: true,
+                message: "Please input the book's id!"
+              }
+            ]}
           >
-            {getFieldDecorator("id", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input the book's id!"
-                }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="key" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="text"
-                placeholder=" Add book's unique identifier"
-                name="id"
-                onChange={this.onChange}
-              />
-            )}
+            <Input
+              prefix={<KeyOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="text"
+              placeholder=" Add book's unique identifier"
+              name="id"
+              onChange={this.onChange}
+            />
           </Form.Item>
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
-            >
+            <Button type="primary" htmlType="submit">
               Add Book
             </Button>
           </Form.Item>
@@ -143,7 +111,6 @@ const mapStateToProps = state => ({
   books: state.booksReducer.books
 });
 
-BookInstanceForm = Form.create({ name: "book form" })(BookInstanceForm);
 export default connect(mapStateToProps, { addBookInstance, getBooks })(
   BookInstanceForm
 );

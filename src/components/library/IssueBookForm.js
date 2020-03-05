@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Icon, Select } from "antd";
+import { Button, Form, Select } from "antd";
+import { BookOutlined, UserOutlined } from "@ant-design/icons";
 
 import {
   addBookIssued,
@@ -11,10 +12,6 @@ import {
 import { getStudents } from "../../actions/students/students";
 
 const Option = Select.Option;
-
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
 
 export class IssueBookForm extends Component {
   static propTypes = {
@@ -32,7 +29,6 @@ export class IssueBookForm extends Component {
   };
 
   componentDidMount() {
-    this.props.form.validateFields();
     this.props.getStudents();
     this.props.getBookInstance();
     this.props.getBooks();
@@ -64,101 +60,76 @@ export class IssueBookForm extends Component {
     const b = books.filter(books => books.id === bookInstBook);
 
     return b.map(b => (
-      <Option key={bookInstID} value={bookInstID} name="bookInstance">
+      <Option
+        key={bookInstID}
+        value={bookInstID}
+        name="bookInstance"
+        id={b.title}
+      >
         {" "}
         {/* {b.map(b => b.title)}  */}
-        {b.title} by {b.author}
+        {bookInstID}: {b.title} by {b.author}
       </Option>
     ));
   };
 
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
-    } = this.props.form;
-
-    const studentError = isFieldTouched("student") && getFieldError("student");
-    const bookInstanceError =
-      isFieldTouched("bookInstance") && getFieldError("bookInstance");
-
     return (
       <div className="card card-body shadow rounded mt-1 mb-1">
         <h4>Issue Book Form</h4>
-        <Form onSubmit={this.onSubmit}>
+        <Form onFinish={this.onSubmit}>
           {/* student */}
           <Form.Item
-            validateStatus={studentError ? "error" : ""}
-            help={studentError || ""}
-            label="Student"
+            rules={[
+              {
+                required: true,
+                message: "Please select the student!"
+              }
+            ]}
           >
-            {getFieldDecorator("student", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please select the student!"
-                }
-              ]
-            })(
-              <Select
-                showSearch
-                placeholder=" Select a student"
-                onChange={this.onChangeAntD}
-                prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-              >
-                {this.props.students.map(student_sel => (
-                  <Option
-                    key={student_sel.student_id}
-                    value={student_sel.student_id}
-                    name="student"
-                  >
-                    {student_sel.student_id}: {student_sel.surname}{" "}
-                    {student_sel.first_name}
-                  </Option>
-                ))}
-              </Select>
-            )}
+            <Select
+              showSearch
+              placeholder=" Select a student"
+              onChange={this.onChangeAntD}
+              prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+            >
+              {this.props.students.map(student_sel => (
+                <Option
+                  key={student_sel.student_id}
+                  value={student_sel.student_id}
+                  name="student"
+                >
+                  {student_sel.student_id}: {student_sel.surname}{" "}
+                  {student_sel.first_name}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
 
           {/* Book Instance */}
           <Form.Item
-            validateStatus={bookInstanceError ? "error" : ""}
-            help={bookInstanceError || ""}
-            label="Book"
+            rules={[
+              {
+                required: true,
+                message: "Please select a book!"
+              }
+            ]}
           >
-            {getFieldDecorator("bookInstance", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please select the book instance!"
-                }
-              ]
-            })(
-              <Select
-                showSearch
-                placeholder="Select a book instance"
-                onChange={this.onChangeAntD}
-                prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-              >
-                {this.props.bookInstance.map(bookInst =>
-                  this.displayBookTitle(bookInst.id, bookInst.book)
-                )}
-              </Select>
-            )}
+            <Select
+              showSearch
+              placeholder="Select a book instance"
+              onChange={this.onChangeAntD}
+              optionFilterProp="value"
+              prefix={<BookOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+            >
+              {this.props.bookInstance.map(bookInst =>
+                this.displayBookTitle(bookInst.id, bookInst.book)
+              )}
+            </Select>
           </Form.Item>
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
-            >
+            <Button type="primary" htmlType="submit">
               Issue Book
             </Button>
           </Form.Item>
@@ -174,7 +145,6 @@ const mapStateToProps = state => ({
   books: state.booksReducer.books
 });
 
-IssueBookForm = Form.create({ name: "Issue book form" })(IssueBookForm);
 export default connect(mapStateToProps, {
   getBookInstance,
   getStudents,
