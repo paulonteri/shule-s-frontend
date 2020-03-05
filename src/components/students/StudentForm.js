@@ -26,6 +26,8 @@ export class StudentsForm extends Component {
     getDorms: PropTypes.func.isRequired
   };
 
+  formRef = React.createRef();
+
   componentDidMount() {
     this.props.getClasses();
     this.props.getDorms();
@@ -70,80 +72,84 @@ export class StudentsForm extends Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, student) => {
-      if (!err) {
-        const {
-          student_id,
-          class_ns,
-          dormitory,
-          first_name,
-          surname,
-          other_name,
-          father_alive,
-          mother_alive,
-          father_first_name,
-          father_surname,
-          father_email,
-          father_phone,
-          mother_first_name,
-          mother_surname,
-          mother_email,
-          mother_phone,
-          date_of_birth,
-          gender,
-          admission_date,
-          is_enrolled,
-          home_country,
-          home_county,
-          home_town,
-          religion,
-          health
-        } = this.state; // get them from the state
+    const {
+      student_id,
+      class_ns,
+      dormitory,
+      first_name,
+      surname,
+      other_name,
+      father_alive,
+      mother_alive,
+      father_first_name,
+      father_surname,
+      father_email,
+      father_phone,
+      mother_first_name,
+      mother_surname,
+      mother_email,
+      mother_phone,
+      date_of_birth,
+      gender,
+      admission_date,
+      is_enrolled,
+      home_country,
+      home_county,
+      home_town,
+      religion,
+      health
+    } = this.state; // get them from the state
 
-        // student from above to the student const
-        const student = {
-          student_id: student_id,
-          class_ns: class_ns,
-          dormitory: dormitory,
-          first_name,
-          surname,
-          other_name,
-          father_alive,
-          mother_alive,
-          father_first_name,
-          father_surname,
-          father_email,
-          father_phone,
-          mother_first_name,
-          mother_surname,
-          mother_email,
-          mother_phone,
-          date_of_birth,
-          gender,
-          admission_date,
-          is_enrolled,
-          home_country,
-          home_county,
-          home_town,
-          religion,
-          health
-        };
+    // student from above to the student const
+    const student = {
+      student_id: student_id,
+      class_ns: class_ns,
+      dormitory: dormitory,
+      first_name,
+      surname,
+      other_name,
+      father_alive,
+      mother_alive,
+      father_first_name,
+      father_surname,
+      father_email,
+      father_phone,
+      mother_first_name,
+      mother_surname,
+      mother_email,
+      mother_phone,
+      date_of_birth,
+      gender,
+      admission_date,
+      is_enrolled,
+      home_country,
+      home_county,
+      home_town,
+      religion,
+      health
+    };
 
-        // pass the student const to the action
-        this.props.addStudent(student);
+    // pass the student const to the action
+    this.props.addStudent(student);
+    console.log(student);
 
-        // clear fields
-        this.props.form.resetFields();
-      }
-    });
+    // clear fields
+    this.formRef.current.resetFields();
   };
 
   render() {
     return (
       <div className=" card card-body shadow rounded mt-1 mb-1 container">
         <h5>Fill in a student's details</h5>
-        <Form onFinish={this.handleSubmit}>
+        <Form
+          onFinish={this.handleSubmit}
+          ref={this.formRef}
+          initialValues={{
+            mother_alive: true,
+            father_alive: true,
+            is_enrolled: true
+          }}
+        >
           {/* First Name */}
           <div className="row">
             <div className="col-lg-3">
@@ -189,7 +195,7 @@ export class StudentsForm extends Component {
 
             {/* Other Name */}
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="other_name">
                 <Input
                   prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   type="text"
@@ -202,7 +208,7 @@ export class StudentsForm extends Component {
 
             {/* date_of_birth  */}
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="date_of_birth">
                 <DatePicker
                   placeholder="Date of Birth"
                   onChange={(date, dateString) =>
@@ -270,7 +276,7 @@ export class StudentsForm extends Component {
 
             {/* Dorm  */}
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="dormitory">
                 <select
                   className="custom-select custom-select-sm"
                   name="dormitory"
@@ -320,7 +326,7 @@ export class StudentsForm extends Component {
             {/* Country */}
 
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="home_country">
                 <Input
                   type="text"
                   placeholder="Home Country"
@@ -333,7 +339,7 @@ export class StudentsForm extends Component {
             {/* County */}
 
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="home_county">
                 <Input
                   type="text"
                   placeholder="County/Province"
@@ -346,7 +352,7 @@ export class StudentsForm extends Component {
             {/* Town*/}
 
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="home_town">
                 <Input
                   type="text"
                   placeholder="Town"
@@ -359,7 +365,7 @@ export class StudentsForm extends Component {
             {/* Religion */}
 
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="religion">
                 <Input
                   type="text"
                   placeholder="Religion"
@@ -409,28 +415,24 @@ export class StudentsForm extends Component {
                   {
                     required: true,
                     message:
-                      "Please input the father's/male guardian's surname!!"
+                      "Please input the father's/male guardian's family name!"
                   }
                 ]}
               >
                 <Input
                   prefix={<ManOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   type="text"
-                  placeholder=" Male guardian's family name"
+                  placeholder=" Male guardian's surname"
                   name="father_surname"
                   onChange={this.onChange}
-                />{" "}
+                />
               </Form.Item>
             </div>
 
             {/* father is alive */}
 
             <div className="col-xl-2">
-              <Form.Item
-                name="father_alive"
-                valuePropName="checked"
-                initialValue="true"
-              >
+              <Form.Item name="father_alive" valuePropName="checked">
                 <Checkbox onChange={this.handleCheck} name="father_alive">
                   Father is alive
                 </Checkbox>
@@ -542,11 +544,7 @@ export class StudentsForm extends Component {
             {/* mother is alive checkbox */}
 
             <div className="col-xl-2">
-              <Form.Item
-                name="mother_alive"
-                valuePropName="checked"
-                initialValue="true"
-              >
+              <Form.Item name="mother_alive" valuePropName="checked">
                 <Checkbox onChange={this.handleCheck} name="mother_alive">
                   Mother is alive
                 </Checkbox>
@@ -612,7 +610,7 @@ export class StudentsForm extends Component {
 
           <div className="row">
             <div className="col-lg-9">
-              <Form.Item>
+              <Form.Item name="health">
                 <Input
                   type="text"
                   placeholder="Any health issue"
@@ -642,7 +640,7 @@ export class StudentsForm extends Component {
 
             {/* Date enrolled  */}
             <div className="col-lg-3">
-              <Form.Item>
+              <Form.Item name="admission_date">
                 <DatePicker
                   placeholder="Date of Admission"
                   onChange={(date, dateString) =>
