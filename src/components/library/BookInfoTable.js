@@ -27,7 +27,7 @@ export class BookInfoTable extends Component {
             bordered
             // title={() => "Books"}
             footer={() => "List of Books"}
-            pagination={{ pageSize: 20 }}
+            pagination={{ pageSize: 10 }}
           >
             <Column title="ID" dataIndex="id" key="id" />
             <Column title="Title" dataIndex="title" key="title" />
