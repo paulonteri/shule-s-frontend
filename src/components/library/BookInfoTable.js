@@ -2,11 +2,8 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux"; // In order to use redux
 import PropTypes from "prop-types"; // we are gonna have some properties (prop)
 import { Table } from "antd";
-import { getBooks, deleteBook } from "../../actions/library/books"
+import { getBooks, deleteBook } from "../../actions/library/books";
 const { Column } = Table;
-
-;
-
 
 export class BookInfoTable extends Component {
   static propTypes = {
@@ -35,11 +32,7 @@ export class BookInfoTable extends Component {
             <Column title="ID" dataIndex="id" key="id" />
             <Column title="Title" dataIndex="title" key="title" />
             <Column title="Author" dataIndex="author" key="author" />
-            <Column
-              title="Description"
-              dataIndex="summary"
-              key="summary"
-            />
+            <Column title="Summary" dataIndex="summary" key="summary" />
             <Column
               title="Action"
               key="action"

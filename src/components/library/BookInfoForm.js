@@ -1,211 +1,187 @@
-import React, { Component } from "react";
+import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Form, Input } from "antd";
 import { BookOutlined, UserOutlined } from "@ant-design/icons";
-
 import { addBook } from "../../actions/library/books";
 
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+function BookInfoForm(props) {
+  const [form] = Form.useForm();
 
-export class BookInfoForm extends Component {
-  static propTypes = {
-    addBook: PropTypes.func.isRequired
+  // State
+  const [state, setState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      title: "",
+      author: "",
+      summary: "",
+      ISBN: "",
+      type: "",
+      subject: ""
+    }
+  );
+
+  const onChange = e => setState({ [e.target.name]: e.target.value });
+
+  const onSubmit = e => {
+    const { title, author, summary, ISBN, type, subject } = state;
+
+    const book = {
+      title: title,
+      author: author,
+      summary: summary,
+      ISBN: ISBN,
+      type: type,
+      subject: subject
+    };
+
+    props.addBook(book);
+    console.log(book);
+
+    form.resetFields();
   };
 
-  state = {
-    title: "",
-    author: "",
-    description: "",
-    summary: "",
-    ISBN: "",
-    type: "",
-    subject: ""
-  };
-
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  onSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, book) => {
-      if (!err) {
-        const {
-          title,
-          author,
-          description,
-          summary,
-          ISBN,
-          type,
-          subject
-        } = this.state;
-
-        const book = {
-          title: title,
-          author: author,
-          description: description,
-          summary: summary,
-          ISBN: ISBN,
-          type: type,
-          subject: subject
-        };
-
-        this.props.addBook(book);
-
-        this.props.form.resetFields();
-      }
-    });
-  };
-
-  render() {
-    return (
-      <div className="card card-body shadow rounded mt-1 mb-1">
-        <h4>Add Book Form</h4>
-        <Form
-          onFinish={this.onSubmit}
-          initialValues={{
-            remember: true
-          }}
+  return (
+    <div className="card card-body shadow rounded mt-1 mb-1">
+      <h4>Add Book Form</h4>
+      <Form
+        onFinish={onSubmit}
+        initialValues={{
+          remember: true
+        }}
+        form={form}
+        layout="vertical"
+      >
+        {/* Title */}
+        <Form.Item
+          label="Title"
+          name="title"
+          rules={[
+            {
+              required: true,
+              message: "Please input the book's title!"
+            }
+          ]}
         >
-          {/* Title */}
-          <Form.Item
-            label="Title"
+          <Input
+            prefix={<BookOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+            type="text"
+            placeholder=" Book Title"
             name="title"
-            rules={[
-              {
-                required: true,
-                message: "Please input the book's title!"
-              }
-            ]}
-          >
-            <Input
-              prefix={<BookOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="text"
-              placeholder=" Book Title"
-              name="title"
-              onChange={this.onChange}
-            />
-          </Form.Item>
+            onChange={onChange}
+          />
+        </Form.Item>
 
-          {/* Author */}
-          <Form.Item
-            label="Title"
-            rules={[
-              {
-                required: true,
-                message: "Please input the book's Author!"
-              }
-            ]}
-          >
-            <Input
-              prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="text"
-              placeholder=" Book Author"
-              name="author"
-              onChange={this.onChange}
-            />
-          </Form.Item>
+        {/* Author */}
+        <Form.Item
+          label="Author"
+          name="author"
+          rules={[
+            {
+              required: true,
+              message: "Please input the book's Author!"
+            }
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+            type="text"
+            placeholder=" Book Author"
+            name="author"
+            onChange={onChange}
+          />
+        </Form.Item>
 
-          {/* ISBN */}
-          <Form.Item
-            label="ISBN"
-            label="Title"
-            rules={[
-              {
-                required: false
-              }
-            ]}
-          >
-            <Input
-              type="text"
-              placeholder="Book ISBN"
-              name="ISBN"
-              onChange={this.onChange}
-            />
-          </Form.Item>
-          <div className="row">
-            {/* subject */}
-            <div className="col-md-6">
-              <Form.Item
-                label="Subject"
-                rules={[
-                  {
-                    required: false
-                  }
-                ]}
-              >
-                <Input
-                  type="text"
-                  placeholder="Book subject"
-                  name="subject"
-                  onChange={this.onChange}
-                />
-              </Form.Item>
-            </div>
+        {/* ISBN */}
+        <Form.Item
+          label="ISBN"
+          name="ISBN"
+          rules={[
+            {
+              required: false
+            }
+          ]}
+        >
+          <Input
+            type="text"
+            placeholder="Book ISBN"
+            name="ISBN"
+            onChange={onChange}
+          />
+        </Form.Item>
 
-            <div className="col-md-6">
-              {/* type */}
-              <Form.Item
-                label="Type"
-                rules={[
-                  {
-                    required: false
-                  }
-                ]}
-              >
-                <Input
-                  type="text"
-                  placeholder="Book type"
-                  name="type"
-                  onChange={this.onChange}
-                />
-              </Form.Item>
-            </div>
+        <div className="row">
+          {/* subject */}
+          <div className="col-md-6">
+            <Form.Item
+              label="Subject"
+              name="subject"
+              rules={[
+                {
+                  required: false
+                }
+              ]}
+            >
+              <Input
+                type="text"
+                placeholder="Book subject"
+                name="subject"
+                onChange={onChange}
+              />
+            </Form.Item>
           </div>
-          {/* Description */}
-          <Form.Item
-            label="Description"
-            rules={[
-              {
-                required: false
-              }
-            ]}
-          >
-            <Input
-              type="text"
-              placeholder="Book Description"
-              name="description"
-              onChange={this.onChange}
-            />
-          </Form.Item>
 
-          {/* summary */}
-          <Form.Item
-            label="Summary"
-            rules={[
-              {
-                required: false
-              }
-            ]}
-          >
-            <Input
-              type="text"
-              placeholder="Book summary"
-              name="summary"
-              onChange={this.onChange}
-            />
-          </Form.Item>
+          <div className="col-md-6">
+            {/* type */}
+            <Form.Item
+              label="Type"
+              name="type"
+              rules={[
+                {
+                  required: false
+                }
+              ]}
+            >
+              <Input
+                type="text"
+                placeholder="Book type"
+                name="type"
+                onChange={onChange}
+              />
+            </Form.Item>
+          </div>
+        </div>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Add Book
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    );
-  }
+        {/* summary */}
+        <Form.Item
+          label="Summary"
+          name="summary"
+          rules={[
+            {
+              required: false
+            }
+          ]}
+        >
+          <Input
+            type="text"
+            placeholder="Book summary"
+            name="summary"
+            onChange={onChange}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Add Book
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
 }
+
+BookInfoForm.propTypes = {
+  addBook: PropTypes.func.isRequired
+};
 
 export default connect(null, { addBook })(BookInfoForm);
