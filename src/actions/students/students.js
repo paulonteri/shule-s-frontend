@@ -39,10 +39,7 @@ export const addStudent = student => (dispatch, getState) => {
 // DELETE STUDENT
 export const deleteStudent = student_id => (dispatch, getState) => {
   axios
-    .delete(
-      `http://35.184.199.163:8000/api/students/${student_id}`,
-      tokenConfig(getState)
-    )
+    .delete(URL.concat(`/api/students/${student_id}`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteStudent: "Student Deleted!" }));
       dispatch({

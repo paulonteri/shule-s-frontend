@@ -49,10 +49,7 @@ export const addBook = book => (dispatch, getState) => {
 // DELETE BOOKS
 export const deleteBook = id => (dispatch, getState) => {
   axios
-    .delete(
-      `http://35.184.199.163:8000/api/books/${id}/`,
-      tokenConfig(getState)
-    )
+    .delete(URL.concat(`/api/books/${id}/`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteBook: "Book Deleted" }));
       dispatch({
@@ -100,10 +97,7 @@ export const addBookIssued = bookIssued => (dispatch, getState) => {
 // DELETE BOOK ISSUED
 export const deleteBookIssued = id => (dispatch, getState) => {
   axios
-    .delete(
-      `http://35.184.199.163:8000/api/booksissued/${id}/`,
-      tokenConfig(getState)
-    )
+    .delete(URL.concat(`/api/booksissued/${id}/`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteBookIssued: "Deleted Book Issued" }));
       dispatch({
@@ -151,10 +145,7 @@ export const addBookInstance = book => (dispatch, getState) => {
 // DELETE BOOK INSTANCE
 export const deleteBookInstance = id => (dispatch, getState) => {
   axios
-    .delete(
-      `http://35.184.199.163:8000/api/bookinstance/${id}/`,
-      tokenConfig(getState)
-    )
+    .delete(URL.concat(`/api/bookinstance/${id}/`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteBookInstance: "Book Deleted" }));
       dispatch({

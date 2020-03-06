@@ -1,0 +1,3 @@
+export const GET_SUBJECTS = "GET_SUBJECTS";
+export const ADD_SUBJECT = "ADD_SUBJECT";
+export const DELETE_SUBJECT = "DELETE_SUBJECT";

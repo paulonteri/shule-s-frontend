@@ -51,10 +51,7 @@ export const addPermission = Permission => (dispatch, getState) => {
 // DELETE PERMISSION
 export const deletePermission = id => (dispatch, getState) => {
   axios
-    .delete(
-      `http://35.184.199.163:8000/api/auth/permissions/${id}`,
-      tokenConfig(getState)
-    )
+    .delete(URL.concat(`/api/auth/permissions/${id}`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deletePermission: "Permission Deleted!" }));
       dispatch({
@@ -107,7 +104,7 @@ export const addPermissionGroup = PermissionGroup => (dispatch, getState) => {
 export const deletePermissionGroup = id => (dispatch, getState) => {
   axios
     .delete(
-      `http://35.184.199.163:8000/api/auth/permissiongroups/${id}`,
+      URL.concat(`/api/auth/permissiongroups/${id}`),
       tokenConfig(getState)
     )
     .then(res => {

@@ -49,7 +49,7 @@ export const addClassNumeral = classNumeral => (dispatch, getState) => {
 export const deleteClassNumeral = name => (dispatch, getState) => {
   axios
     .delete(
-      `http://35.184.199.163:8000/api/academics/classNumeral/${name}`,
+      URL.concat(`/api/academics/classNumeral/${name}`),
       tokenConfig(getState)
     )
     .then(res => {

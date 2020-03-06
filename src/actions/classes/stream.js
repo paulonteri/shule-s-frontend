@@ -39,10 +39,7 @@ export const addStream = stream => (dispatch, getState) => {
 // DELETE STREAM ACTION
 export const deleteStream = name => (dispatch, getState) => {
   axios
-    .delete(
-      `http://35.184.199.163:8000/api/academics/stream/${name}`,
-      tokenConfig(getState)
-    )
+    .delete(URL.concat(`/api/academics/stream/${name}`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteStream: "Stream Deleted" }));
       dispatch({
