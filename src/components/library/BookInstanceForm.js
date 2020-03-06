@@ -69,9 +69,15 @@ export class BookInstanceForm extends Component {
               showSearch
               placeholder=" Select a book"
               onChange={this.onChangeAntD}
+              optionFilterProp="search"
             >
               {this.props.books.map(book_sel => (
-                <Option key={book_sel.id} value={book_sel.id} name="book">
+                <Option
+                  key={book_sel.id}
+                  value={book_sel.id}
+                  search={book_sel.title.concat(" ").concat(book_sel.author)}
+                  name="book"
+                >
                   {book_sel.title} by {book_sel.author}
                 </Option>
               ))}
