@@ -8,6 +8,7 @@ import classNumerals from "./classes/classNumeral";
 import classes from "./classes/classes";
 import dormitories from "./dormitories/dormitories";
 import auth from "./authentication/auth";
+import subjects from "./subjects/subject";
 
 export default combineReducers({
   authReducer: auth,
@@ -15,6 +16,7 @@ export default combineReducers({
   messagesReducer: messages,
   booksReducer: books,
   studentsReducer: students,
+  subjectsReducer: subjects,
   classesReducer: classes,
   streamsReducer: streams,
   classNumeralsReducer: classNumerals,
