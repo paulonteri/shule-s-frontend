@@ -32,12 +32,14 @@ export class Alerts extends Component {
       if (error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
       if (error.msg.username)
         alert.error(`Username: ${error.msg.username.join()}`);
-         // Students
-      if (error.msg.religion) alert.error(`Religion: ${error.msg.religion.join()}`);
+      // Students
+      if (error.msg.religion)
+        alert.error(`Religion: ${error.msg.religion.join()}`);
     }
     if (message !== prevProps.message) {
       // Users
       if (message.registerUser) alert.info(message.registerUser);
+      if (message.loginFail) alert.error(message.loginFail);
       // Classes
       if (message.addStream) alert.success(message.addStream);
       if (message.deleteStream) alert.error(message.deleteStream);

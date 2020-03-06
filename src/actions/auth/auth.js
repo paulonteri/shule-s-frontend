@@ -26,7 +26,7 @@ export const loadUser = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-      console.log(err.response.data, err.response.status);
+      console.log("loadUser fail");
       dispatch({
         type: AUTH_ERROR
       });
@@ -52,7 +52,7 @@ export const login = (username, password) => dispatch => {
       });
     })
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ loginFail: "Login Failed" }));
       dispatch({
         type: LOGIN_FAIL
       });
