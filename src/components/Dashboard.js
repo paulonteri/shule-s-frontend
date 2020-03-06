@@ -7,12 +7,12 @@ import {
   Redirect
 } from "react-router-dom";
 import { Layout } from "antd";
-import AppHeader from "../layout/AppHeader";
-import AppFooter from "../layout/AppFooter";
-import AppSider from "../layout/AppSider";
 import Spinner from "./common/Spinner";
 import Error404 from "./common/Error404";
 const { Content } = Layout;
+const AppHeader = React.lazy(() => import("../layout/AppHeader"));
+const AppFooter = React.lazy(() => import("../layout/AppFooter"));
+const AppSider = React.lazy(() => import("../layout/AppSider"));
 const Library = React.lazy(() => import("./library/Library"));
 const Students = React.lazy(() => import("./students/Students"));
 const Classes = React.lazy(() => import("./classes/Classes"));
@@ -25,9 +25,13 @@ export class Dashboard extends Component {
       <Router>
         <Fragment>
           <Layout style={{ minHeight: "100vh" }}>
-            <AppSider />
+            <Suspense fallback={<Spinner />}>
+              <AppSider />
+            </Suspense>
             <Layout>
-              <AppHeader />
+              <Suspense fallback={<Spinner />}>
+                <AppHeader />
+              </Suspense>
               <Content
                 style={{
                   margin: "15px ",
@@ -48,7 +52,9 @@ export class Dashboard extends Component {
                   <Route component={Error404} />
                 </Switch>
               </Content>
-              <AppFooter />
+              <Suspense fallback={<Spinner />}>
+                <AppFooter />
+              </Suspense>
             </Layout>
           </Layout>
         </Fragment>

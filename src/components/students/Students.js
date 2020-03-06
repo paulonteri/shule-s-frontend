@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from "react";
-
+import React, { Component, Fragment, Suspense } from "react";
+import Spinner from "../common/Spinner";
 import { Route, Switch } from "react-router-dom";
 
-import StudentList from "./StudentList";
-import StudentForm from "./StudentForm";
-import StudentTable from "./StudentTable";
-import StudentsDashboard from "./StudentsDashboard";
-import Error404 from "../common/Error404";
+const Error404 = React.lazy(() => import("../common/Error404"));
+const StudentsDashboard = React.lazy(() => import("./StudentsDashboard"));
+const StudentTable = React.lazy(() => import("./StudentTable"));
+const StudentForm = React.lazy(() => import("./StudentForm"));
+const StudentList = React.lazy(() => import("./StudentList"));
 
 export class Students extends Component {
   render() {
