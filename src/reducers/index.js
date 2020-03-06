@@ -9,12 +9,14 @@ import classes from "./classes/classes";
 import dormitories from "./dormitories/dormitories";
 import auth from "./authentication/auth";
 import subjects from "./subjects/subject";
+import analytics from "./library/analytics";
 
 export default combineReducers({
   authReducer: auth,
   errorsReducer: errors,
   messagesReducer: messages,
   booksReducer: books,
+  libraryAnalyticsReducer: analytics,
   studentsReducer: students,
   subjectsReducer: subjects,
   classesReducer: classes,

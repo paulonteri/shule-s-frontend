@@ -17,7 +17,7 @@ import { tokenConfig } from "../auth/auth";
 // GET BOOKS
 export const getBooks = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/books/"), tokenConfig(getState))
+    .get(URL.concat("/api/library/books/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKS,
@@ -32,7 +32,7 @@ export const getBooks = () => (dispatch, getState) => {
 // ADD BOOK
 export const addBook = book => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/books/"), book, tokenConfig(getState))
+    .post(URL.concat("/api/library/books/"), book, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addBook: "Book Added" }));
       dispatch({
@@ -49,7 +49,7 @@ export const addBook = book => (dispatch, getState) => {
 // DELETE BOOKS
 export const deleteBook = id => (dispatch, getState) => {
   axios
-    .delete(URL.concat(`/api/books/${id}/`), tokenConfig(getState))
+    .delete(URL.concat(`/api/library/books/${id}/`), tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteBook: "Book Deleted" }));
       dispatch({
@@ -65,7 +65,7 @@ export const deleteBook = id => (dispatch, getState) => {
 // GET BOOK ISSUED
 export const getBooksIssued = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/booksissued/"), tokenConfig(getState))
+    .get(URL.concat("/api/library/booksissued/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKISSUED,
@@ -80,7 +80,11 @@ export const getBooksIssued = () => (dispatch, getState) => {
 // ADD BOOK ISSUED
 export const addBookIssued = bookIssued => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/booksissued/"), bookIssued, tokenConfig(getState))
+    .post(
+      URL.concat("/api/library/booksissued/"),
+      bookIssued,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ bookIssued: "Book Issued" }));
       dispatch({
@@ -97,7 +101,10 @@ export const addBookIssued = bookIssued => (dispatch, getState) => {
 // DELETE BOOK ISSUED
 export const deleteBookIssued = id => (dispatch, getState) => {
   axios
-    .delete(URL.concat(`/api/booksissued/${id}/`), tokenConfig(getState))
+    .delete(
+      URL.concat(`/api/library/booksissued/${id}/`),
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deleteBookIssued: "Deleted Book Issued" }));
       dispatch({
@@ -113,7 +120,7 @@ export const deleteBookIssued = id => (dispatch, getState) => {
 // GET BOOK INSTANCE
 export const getBookInstance = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/bookinstance/"), tokenConfig(getState))
+    .get(URL.concat("/api/library/bookinstance/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKINSTANCE,
@@ -128,7 +135,7 @@ export const getBookInstance = () => (dispatch, getState) => {
 // ADD BOOK INSTANCE
 export const addBookInstance = book => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/bookinstance/"), book, tokenConfig(getState))
+    .post(URL.concat("/api/library/bookinstance/"), book, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addBookInstance: "Book Added" }));
       dispatch({
@@ -145,7 +152,10 @@ export const addBookInstance = book => (dispatch, getState) => {
 // DELETE BOOK INSTANCE
 export const deleteBookInstance = id => (dispatch, getState) => {
   axios
-    .delete(URL.concat(`/api/bookinstance/${id}/`), tokenConfig(getState))
+    .delete(
+      URL.concat(`/api/library/bookinstance/${id}/`),
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deleteBookInstance: "Book Deleted" }));
       dispatch({
