@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button, Form, Input, Select } from "antd";
 import { KeyOutlined } from "@ant-design/icons";
 import { addBookInstance, getBooks } from "../../actions/library/books";
+import { getBooksNum } from "../../actions/library/analytics";
 
 const Option = Select.Option;
 
@@ -11,6 +12,7 @@ function BookInstanceForm(props) {
   // OnMount
   useEffect(() => {
     props.getBooks();
+    props.getBooksNum();
   }, []);
 
   const [form] = Form.useForm();
@@ -26,7 +28,6 @@ function BookInstanceForm(props) {
 
   const onChange = e => {
     setState({ [e.target.name]: e.target.value });
-    console.log(e.target.value);
   };
 
   const onChangeAntD = (value, e) => {
@@ -124,6 +125,8 @@ const mapStateToProps = state => ({
   books: state.booksReducer.books
 });
 
-export default connect(mapStateToProps, { addBookInstance, getBooks })(
-  BookInstanceForm
-);
+export default connect(mapStateToProps, {
+  addBookInstance,
+  getBooks,
+  getBooksNum
+})(BookInstanceForm);
