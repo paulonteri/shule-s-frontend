@@ -1,11 +1,18 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { BookOutlined, UserOutlined } from "@ant-design/icons";
 import { addBook } from "../../actions/library/books";
+import { getSubjects } from "../../actions/subjects/subjects";
+const { Option } = Select;
 
 function BookInfoForm(props) {
+  // OnMount
+  useEffect(() => {
+    props.getSubjects();
+  }, []);
+
   const [form] = Form.useForm();
 
   // State
@@ -23,6 +30,10 @@ function BookInfoForm(props) {
 
   const onChange = e => setState({ [e.target.name]: e.target.value });
 
+  const onChangeAntD = (value, e) => {
+    setState({ [e.props.name]: value });
+  };
+
   const onSubmit = e => {
     const { title, author, summary, ISBN, type, subject } = state;
 
@@ -36,7 +47,6 @@ function BookInfoForm(props) {
     };
 
     props.addBook(book);
-    console.log(book);
 
     form.resetFields();
   };
@@ -122,12 +132,19 @@ function BookInfoForm(props) {
                 }
               ]}
             >
-              <Input
-                type="text"
+              <Select
+                showSearch
                 placeholder="Book subject"
-                name="subject"
-                onChange={onChange}
-              />
+                optionFilterProp="value"
+                onChange={onChangeAntD}
+              >
+                {props.subjects.map(subject => (
+                  <Option name="subject" value={subject.id} key={subject.id}>
+                    {" "}
+                    {subject.name}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
           </div>
 
@@ -181,7 +198,12 @@ function BookInfoForm(props) {
 }
 
 BookInfoForm.propTypes = {
-  addBook: PropTypes.func.isRequired
+  addBook: PropTypes.func.isRequired,
+  getSubjects: PropTypes.func.isRequired
 };
 
-export default connect(null, { addBook })(BookInfoForm);
+const mapStateToProps = state => ({
+  subjects: state.subjectsReducer.subjects
+});
+
+export default connect(mapStateToProps, { addBook, getSubjects })(BookInfoForm);
