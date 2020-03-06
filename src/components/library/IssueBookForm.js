@@ -80,6 +80,7 @@ export class IssueBookForm extends Component {
         <Form onFinish={this.onSubmit}>
           {/* student */}
           <Form.Item
+            name="student"
             rules={[
               {
                 required: true,
@@ -92,12 +93,14 @@ export class IssueBookForm extends Component {
               placeholder=" Select a student"
               onChange={this.onChangeAntD}
               prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+              optionFilterProp="search"
             >
               {this.props.students.map(student_sel => (
                 <Option
                   key={student_sel.student_id}
                   value={student_sel.student_id}
                   name="student"
+                  search={`${student_sel.student_id} ${student_sel.surname} ${student_sel.first_name}`}
                 >
                   {student_sel.student_id}: {student_sel.surname}{" "}
                   {student_sel.first_name}
@@ -108,6 +111,7 @@ export class IssueBookForm extends Component {
 
           {/* Book Instance */}
           <Form.Item
+            name="bookInstance"
             rules={[
               {
                 required: true,
@@ -117,7 +121,7 @@ export class IssueBookForm extends Component {
           >
             <Select
               showSearch
-              placeholder="Select a book instance"
+              placeholder="Select a book using its ID"
               onChange={this.onChangeAntD}
               optionFilterProp="value"
               prefix={<BookOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
