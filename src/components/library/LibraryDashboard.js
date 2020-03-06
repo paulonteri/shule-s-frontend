@@ -10,20 +10,20 @@ export class LibraryDashboard extends Component {
   render() {
     return (
       <Fragment>
-        <div>
-          <div className="col">
+        <div class="container">
+          <div className="row mb-2">
             <Suspense fallback={<Spinner />}>
               <BookTotalsCards />
             </Suspense>
           </div>
           <div className="row">
-            <div className="col">
+            <div className="col-sm-6">
               <Suspense fallback={<Spinner />}>
                 <BookInfoTable />
               </Suspense>
             </div>
 
-            <div className="col">
+            <div className="col-sm-6">
               <Suspense fallback={<Spinner />}>
                 <BookInstanceForm />
               </Suspense>

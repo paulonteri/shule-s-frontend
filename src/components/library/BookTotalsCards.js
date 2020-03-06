@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { Fragment, useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBooksNum } from "../../actions/library/analytics";
@@ -10,28 +10,51 @@ function BookTotalsCards(props) {
     props.getBooksNum();
   }, []);
   return (
-    <div className="mb-1 row">
-      <div className="card col ml-1">
+    <Fragment>
+      <div className="col-sm-3 mb-1 ">
         <Card
-          bordered={false}
+          hoverable
           size="small"
           title="Total Book Titles"
-          style={{ width: 300 }}
+          className="shadow-sm rounded"
         >
           <p>{props.books_num.total_books}</p>
         </Card>
       </div>
-      <div className="card col mr-1">
+      <div className="col-sm-3 mb-1">
         <Card
+          hoverable
           bordered={false}
           size="small"
           title="Total Books"
-          style={{ width: 300 }}
+          className="shadow-sm rounded"
         >
           <p>{props.books_num.total_book_instances}</p>
         </Card>
       </div>
-    </div>
+      <div className="col-sm-3 mb-1">
+        <Card
+          hoverable
+          bordered={false}
+          size="small"
+          title="Books Issued"
+          className="shadow-sm rounded"
+        >
+          <p>{props.books_num.books_issued}</p>
+        </Card>
+      </div>
+      <div className="col-sm-3 mb-1">
+        <Card
+          hoverable
+          bordered={false}
+          size="small"
+          title="Books Available"
+          className="shadow-sm rounded"
+        >
+          <p>{props.books_num.books_available}</p>
+        </Card>
+      </div>
+    </Fragment>
   );
 }
 

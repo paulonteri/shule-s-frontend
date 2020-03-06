@@ -19,7 +19,7 @@ export class BookInfoTable extends Component {
   render() {
     return (
       <Fragment>
-        <div className="table-responsive card card-body shadow rounded mb-1">
+        <div className="table-responsive card card-body shadow  mb-1">
           <h4>Book List</h4>
           <Table
             dataSource={this.props.books}

@@ -52,7 +52,7 @@ function BookInfoForm(props) {
   };
 
   return (
-    <div className="card card-body shadow rounded mt-1 mb-1">
+    <div className="card card-body shadow  mt-1 mb-1">
       <h4>Add Book Title Form</h4>
       <Form
         onFinish={onSubmit}
