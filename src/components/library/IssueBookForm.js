@@ -35,20 +35,15 @@ function IssueBookForm(props) {
   };
 
   const onSubmit = e => {
-    e.preventDefault();
-    props.form.validateFields((err, bookIssued) => {
-      if (!err) {
-        const { student, bookInstance } = state;
+    const { student, bookInstance } = state;
 
-        const bookIssued = {
-          student: student,
-          book: bookInstance
-        };
+    const bookIssued = {
+      student: student,
+      book: bookInstance
+    };
 
-        props.addBookIssued(bookIssued);
-        props.form.resetFields();
-      }
-    });
+    props.addBookIssued(bookIssued);
+    form.resetFields();
   };
 
   const displayBookTitle = (bookInstID, bookInstBook) => {
