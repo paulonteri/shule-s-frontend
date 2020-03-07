@@ -3,10 +3,11 @@ import { Route, Switch } from "react-router-dom";
 import Spinner from "../common/Spinner";
 
 const LibraryDashboard = React.lazy(() => import("./LibraryDashboard"));
-const BookInfoForm = React.lazy(() => import("./BookInfoForm"));
-const BookInfoTable = React.lazy(() => import("./BookInfoTable"));
 const BookInstanceForm = React.lazy(() => import("./BookInstanceForm"));
+const BookInfoDetail = React.lazy(() => import("./BookInfoDetail"));
+const BookInfoTable = React.lazy(() => import("./BookInfoTable"));
 const IssueBookForm = React.lazy(() => import("./IssueBookForm"));
+const BookInfoForm = React.lazy(() => import("./BookInfoForm"));
 
 export class Library extends Component {
   render() {
@@ -24,6 +25,11 @@ export class Library extends Component {
               exact
               path="/library/bookinfoform"
               component={BookInfoForm}
+            />
+            <Route
+              exact
+              path="/library/bookinfodetail/:book_id"
+              component={BookInfoDetail}
             />
             <Route
               exact

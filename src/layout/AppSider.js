@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Layout, Menu } from "antd";
 import { IdcardOutlined, ReadOutlined, TeamOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 

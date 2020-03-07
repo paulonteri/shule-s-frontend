@@ -3,6 +3,7 @@ import { connect } from "react-redux"; // In order to use redux
 import PropTypes from "prop-types"; // we are gonna have some properties (prop)
 import { Table } from "antd";
 import { getBooks, deleteBook } from "../../actions/library/books";
+import { Link } from "react-router-dom";
 const { Column } = Table;
 
 export class BookInfoTable extends Component {
@@ -29,8 +30,15 @@ export class BookInfoTable extends Component {
             footer={() => "List of Books"}
             pagination={{ pageSize: 10 }}
           >
-            <Column title="ID" dataIndex="id" key="id" />
-            <Column title="Title" dataIndex="title" key="title" />
+            <Column
+              title="Title"
+              key="title"
+              render={parameter => (
+                <Link to={"/library/bookinfodetail/" + parameter.id}>
+                  {parameter.title}
+                </Link>
+              )}
+            />
             <Column title="Author" dataIndex="author" key="author" />
             <Column title="Summary" dataIndex="summary" key="summary" />
             <Column
