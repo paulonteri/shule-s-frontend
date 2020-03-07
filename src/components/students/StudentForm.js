@@ -139,7 +139,7 @@ export class StudentsForm extends Component {
 
   render() {
     return (
-      <div className=" card card-body shadow rounded mt-1 mb-1 container">
+      <div className=" card card-body shadow rounded my-1 mx-2 container-fluid">
         <h5>Fill in a student's details</h5>
         <Form
           onFinish={this.handleSubmit}

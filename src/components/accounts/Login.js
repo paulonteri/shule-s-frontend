@@ -38,7 +38,7 @@ export class Login extends Component {
     }
 
     return (
-      <div className=" card card-body shadow rounded container mt-5 mx-auto">
+      <div className=" card card-body shadow rounded container-fluid mt-5 mx-auto">
         <h4>Kindly login</h4>
         <Form layout="vertical" onFinish={this.onSubmit}>
           <div className="col">

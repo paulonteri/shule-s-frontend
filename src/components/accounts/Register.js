@@ -58,7 +58,7 @@ export class Register extends Component {
 
   render() {
     return (
-      <div className=" card card-body shadow rounded mt-1 mb-4 container">
+      <div className=" card card-body shadow rounded mt-1 mb-4 container-fluid">
         <h5>Add users</h5>
         <Form onFinish={this.onSubmit} layout="vertical">
           {/* Username */}

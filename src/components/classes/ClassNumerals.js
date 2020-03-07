@@ -6,7 +6,7 @@ export class ClassNumerals extends Component {
   render() {
     return (
       <Fragment>
-        <div className="container card card-body shadow rounded mt-1 mb-1">
+        <div className="container-fluid ">
           <div className="row">
             <div className="col-md mb-2">
               <ClassNList />

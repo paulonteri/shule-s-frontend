@@ -11,7 +11,7 @@ function BookTotalsCards(props) {
   }, []);
   return (
     <Fragment>
-      <div className="col-sm-3 mb-1 ">
+      <div className="col-6 col-md-3 mb-1 ">
         <Card
           hoverable
           size="small"
@@ -21,7 +21,7 @@ function BookTotalsCards(props) {
           <p>{props.books_num.total_books}</p>
         </Card>
       </div>
-      <div className="col-sm-3 mb-1">
+      <div className="col-6 col-md-3 mb-1">
         <Card
           hoverable
           bordered={false}
@@ -32,7 +32,7 @@ function BookTotalsCards(props) {
           <p>{props.books_num.total_book_instances}</p>
         </Card>
       </div>
-      <div className="col-sm-3 mb-1">
+      <div className="col-6 col-md-3 mb-1">
         <Card
           hoverable
           bordered={false}
@@ -43,7 +43,7 @@ function BookTotalsCards(props) {
           <p>{props.books_num.books_issued}</p>
         </Card>
       </div>
-      <div className="col-sm-3 mb-1">
+      <div className="col-6 col-md-3 mb-1">
         <Card
           hoverable
           bordered={false}

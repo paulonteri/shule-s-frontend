@@ -10,7 +10,7 @@ export class LibraryDashboard extends Component {
   render() {
     return (
       <Fragment>
-        <div class="container">
+        <div class="container-fluid ">
           <div className="row mb-2">
             <Suspense fallback={<Spinner />}>
               <BookTotalsCards />

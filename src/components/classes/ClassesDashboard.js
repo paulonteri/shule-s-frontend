@@ -9,7 +9,7 @@ export class ClassesDashboard extends Component {
   render() {
     return (
       <Fragment>
-        <div className="container card card-body shadow rounded mt-1 mb-1">
+        <div className="container-fluid">
           <p class="text-danger">Caution! Developer at work.</p>
           <p class="text-danger">
             Handle with care. This web app is still under construction.
