@@ -29,13 +29,24 @@ const Register = React.lazy(() => import("./accounts/Register"));
 
 export class Dashboard extends Component {
   state = {
-    collapsed: false
+    collapsed: false,
+    broken: false
   };
 
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
     });
+  };
+
+  onClick = () => {
+    switch (this.state.broken) {
+      case true:
+        this.setState({ collapsed: true });
+        break;
+      default:
+        return {};
+    }
   };
 
   render() {
@@ -49,8 +60,13 @@ export class Dashboard extends Component {
             breakpoint="md"
             collapsedWidth="0"
             onBreakpoint={broken => {
-              if (broken) {
-                this.setState({ collapsed: true });
+              switch (broken) {
+                case true:
+                  this.setState({ collapsed: true, broken: true });
+                  break;
+                case false:
+                  this.setState({ collapsed: false, broken: false });
+                  break;
               }
             }}
           >
@@ -68,13 +84,19 @@ export class Dashboard extends Component {
               >
                 <Menu.Item key="1">
                   {" "}
-                  <Link to="/students">Students</Link>
+                  <Link onClick={this.onClick} to="/students">
+                    Students
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  <Link to="/students/table">Student List</Link>
+                  <Link onClick={this.onClick} to="/students/table">
+                    Student List
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Link to="/students/add">Add Student</Link>
+                  <Link onClick={this.onClick} to="/students/add">
+                    Add Student
+                  </Link>
                 </Menu.Item>
               </SubMenu>
 
@@ -89,19 +111,29 @@ export class Dashboard extends Component {
                 }
               >
                 <Menu.Item key="5">
-                  <Link to="/library">Library</Link>
+                  <Link onClick={this.onClick} to="/library">
+                    Library
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="6">
-                  <Link to="/library/issuebookform">Issue Book</Link>
+                  <Link onClick={this.onClick} to="/library/issuebookform">
+                    Issue Book
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="7">
-                  <Link to="/library/bookinfoform">Add Book</Link>
+                  <Link onClick={this.onClick} to="/library/bookinfoform">
+                    Add Book
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="8">
-                  <Link to="/library/bookinstanceform">Add Book Instance</Link>
+                  <Link onClick={this.onClick} to="/library/bookinstanceform">
+                    Add Book Instance
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="233">
-                  <Link to="/library/bookinfotable">Book Table</Link>
+                  <Link onClick={this.onClick} to="/library/bookinfotable">
+                    Book Table
+                  </Link>
                 </Menu.Item>
               </SubMenu>
 
@@ -117,15 +149,21 @@ export class Dashboard extends Component {
               >
                 <Menu.Item key="9">
                   {" "}
-                  <Link to="/classes">Classes</Link>
+                  <Link onClick={this.onClick} to="/classes">
+                    Classes
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="10">
                   {" "}
-                  <Link to="/classes/streams">Streams</Link>
+                  <Link onClick={this.onClick} to="/classes/streams">
+                    Streams
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="11">
                   {" "}
-                  <Link to="/classes/classnumerals">Class Numerals</Link>
+                  <Link onClick={this.onClick} to="/classes/classnumerals">
+                    Class Numerals
+                  </Link>
                 </Menu.Item>
               </SubMenu>
             </Menu>
