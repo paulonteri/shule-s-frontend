@@ -24,7 +24,6 @@ function BookTotalsCards(props) {
       <div className="col-6 col-md-3 mb-1">
         <Card
           hoverable
-          bordered={false}
           size="small"
           title="Total Books"
           className="shadow-sm rounded"
@@ -35,7 +34,6 @@ function BookTotalsCards(props) {
       <div className="col-6 col-md-3 mb-1">
         <Card
           hoverable
-          bordered={false}
           size="small"
           title="Books Issued"
           className="shadow-sm rounded"
@@ -46,7 +44,6 @@ function BookTotalsCards(props) {
       <div className="col-6 col-md-3 mb-1">
         <Card
           hoverable
-          bordered={false}
           size="small"
           title="Books Available"
           className="shadow-sm rounded"

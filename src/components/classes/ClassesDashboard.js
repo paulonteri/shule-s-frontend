@@ -10,9 +10,9 @@ export class ClassesDashboard extends Component {
     return (
       <Fragment>
         <div className="container-fluid">
-          <p class="text-danger">Caution! Developer at work.</p>
           <p class="text-danger">
-            Handle with care. This web app is still under construction.
+            Developer at work. This web app is still under construction. Handle
+            with care.
           </p>
 
           <div className="row">
