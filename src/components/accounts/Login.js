@@ -6,6 +6,14 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../actions/auth/auth";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
+const layout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 16 }
+};
+const tailLayout = {
+  wrapperCol: { offset: 4, span: 16 }
+};
+
 export class Login extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired
@@ -38,62 +46,63 @@ export class Login extends Component {
     }
 
     return (
-      <div className=" card card-body shadow rounded container-fluid mt-5 mx-auto">
-        <h4>Kindly login</h4>
-        <Form layout="vertical" onFinish={this.onSubmit}>
-          <div className="col">
-            <div className="row">
-              {/* Username */}
+      <div className=" card card-body shadow rounded container mt-5 ">
+        <h4 className="align-self-center">Kindly login</h4>
+        <div>
+          <Form
+            {...layout}
+            onFinish={this.onSubmit}
+            className="align-self-center"
+          >
+            {/* Username */}
 
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your  email!"
-                  }
-                ]}
-              >
-                <Input
-                  prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-                  type="text"
-                  placeholder=" Email"
-                  name="username"
-                  onChange={this.onChange}
-                />
-              </Form.Item>
-            </div>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your  email!"
+                }
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                type="text"
+                placeholder=" Email"
+                name="username"
+                onChange={this.onChange}
+              />
+            </Form.Item>
 
             {/* Password */}
-            <div className="row">
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input password!"
-                  }
-                ]}
-              >
-                <Input.Password
-                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-                  type="text"
-                  placeholder=" Password"
-                  name="password"
-                  onChange={this.onChange}
-                />
-              </Form.Item>
-            </div>
 
-            <Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input password!"
+                }
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                type="text"
+                placeholder=" Password"
+                name="password"
+                onChange={this.onChange}
+              />
+            </Form.Item>
+
+            <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit">
                 Login
               </Button>
             </Form.Item>
-          </div>
-        </Form>
+          </Form>
+        </div>
       </div>
     );
   }
