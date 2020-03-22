@@ -8,7 +8,7 @@ import { tokenConfig } from "../auth/auth";
 // GET STREAMS ACTION
 export const getStreams = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/academics/stream/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/academics/stream/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STREAMS,
@@ -23,7 +23,11 @@ export const getStreams = () => (dispatch, getState) => {
 // ADD STREAM ACTION
 export const addStream = stream => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/academics/stream/"), stream, tokenConfig(getState))
+    .post(
+      URL.concat("/api/v2.0/academics/stream/"),
+      stream,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ addStream: "Stream Added" }));
       dispatch({
@@ -39,7 +43,10 @@ export const addStream = stream => (dispatch, getState) => {
 // DELETE STREAM ACTION
 export const deleteStream = name => (dispatch, getState) => {
   axios
-    .delete(URL.concat(`/api/academics/stream/${name}`), tokenConfig(getState))
+    .delete(
+      URL.concat(`/api/v2.0/academics/stream/${name}`),
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deleteStream: "Stream Deleted" }));
       dispatch({

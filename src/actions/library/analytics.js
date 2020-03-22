@@ -7,7 +7,7 @@ import { tokenConfig } from "../auth/auth";
 // GET BOOKS
 export const getBooksNum = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/library/booksnum/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/library/booksnum/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_BOOKS_NUM,

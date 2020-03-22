@@ -8,7 +8,7 @@ import { tokenConfig } from "../auth/auth";
 // GET STUDENTS
 export const getStudents = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/students/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/students/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_STUDENTS,
@@ -23,7 +23,7 @@ export const getStudents = () => (dispatch, getState) => {
 // ADD STUDENT
 export const addStudent = student => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/students/"), student, tokenConfig(getState))
+    .post(URL.concat("/api/v2.0/students/"), student, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addStudent: "Student Added" }));
       dispatch({
@@ -39,7 +39,10 @@ export const addStudent = student => (dispatch, getState) => {
 // DELETE STUDENT
 export const deleteStudent = student_id => (dispatch, getState) => {
   axios
-    .delete(URL.concat(`/api/students/${student_id}`), tokenConfig(getState))
+    .delete(
+      URL.concat(`/api/v2.0/students/${student_id}`),
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deleteStudent: "Student Deleted!" }));
       dispatch({

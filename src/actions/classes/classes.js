@@ -9,7 +9,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASSES
 export const getClasses = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/academics/classes/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/academics/classes/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_CLASSES,

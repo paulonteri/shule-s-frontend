@@ -13,7 +13,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASS NUMERAL
 export const getClassNumeral = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/academics/classNumeral/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/academics/classNumeral/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_CLASSNUMERALS,
@@ -29,7 +29,7 @@ export const getClassNumeral = () => (dispatch, getState) => {
 export const addClassNumeral = classNumeral => (dispatch, getState) => {
   axios
     .post(
-      URL.concat("/api/academics/classNumeral/"),
+      URL.concat("/api/v2.0/academics/classNumeral/"),
       classNumeral,
       tokenConfig(getState)
     )
@@ -49,7 +49,7 @@ export const addClassNumeral = classNumeral => (dispatch, getState) => {
 export const deleteClassNumeral = name => (dispatch, getState) => {
   axios
     .delete(
-      URL.concat(`/api/academics/classNumeral/${name}`),
+      URL.concat(`/api/v2.0/academics/classNumeral/${name}`),
       tokenConfig(getState)
     )
     .then(res => {

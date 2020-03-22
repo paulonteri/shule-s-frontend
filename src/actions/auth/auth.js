@@ -18,7 +18,7 @@ export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
   axios
-    .get(URL.concat("/api/auth/user"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/auth/user"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -44,7 +44,7 @@ export const login = (username, password) => dispatch => {
   // Request Body (change to string)
   const body = JSON.stringify({ username: username, password: password });
   axios
-    .post(URL.concat("/api/auth/login"), body, config)
+    .post(URL.concat("/api/v2.0/auth/login"), body, config)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -70,7 +70,7 @@ export const register = ({ username, email, password }) => dispatch => {
   // Request Body (change to string)
   const body = JSON.stringify({ username, email, password });
   axios
-    .post(URL.concat("/api/auth/register"), body, config)
+    .post(URL.concat("/api/v2.0/auth/register"), body, config)
     .then(res => {
       dispatch(createMessage({ registerUser: "User Regisered" }));
       dispatch({
@@ -89,7 +89,7 @@ export const register = ({ username, email, password }) => dispatch => {
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/auth/logout/"), null, tokenConfig(getState))
+    .post(URL.concat("/api/v2.0/auth/logout/"), null, tokenConfig(getState))
     .then(res => {
       dispatch({ type: "CLEAR_ALL" });
       dispatch({

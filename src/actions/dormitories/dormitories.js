@@ -9,7 +9,7 @@ import { tokenConfig } from "../auth/auth";
 // GET DORMS
 export const getDorms = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/dormitories/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/dormitories/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_DORMS,

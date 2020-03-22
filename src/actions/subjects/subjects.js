@@ -8,7 +8,7 @@ import { tokenConfig } from "../auth/auth";
 // GET SUBJECTS ACTION
 export const getSubjects = () => (dispatch, getState) => {
   axios
-    .get(URL.concat("/api/academics/subject/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/academics/subject/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_SUBJECTS,
@@ -23,7 +23,11 @@ export const getSubjects = () => (dispatch, getState) => {
 // ADD SUBJECT ACTION
 export const addSubject = subject => (dispatch, getState) => {
   axios
-    .post(URL.concat("/api/academics/subject/"), subject, tokenConfig(getState))
+    .post(
+      URL.concat("/api/v2.0/academics/subject/"),
+      subject,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ addSubject: "Subject Added" }));
       dispatch({
@@ -39,7 +43,10 @@ export const addSubject = subject => (dispatch, getState) => {
 // DELETE SUBJECT ACTION
 export const deleteSubject = name => (dispatch, getState) => {
   axios
-    .delete(URL.concat(`/api/academics/subject/${name}`), tokenConfig(getState))
+    .delete(
+      URL.concat(`/api/v2.0/academics/subject/${name}`),
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deleteSubject: "Subject Deleted" }));
       dispatch({
