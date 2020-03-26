@@ -10,6 +10,7 @@ import dormitories from "./dormitories/dormitories";
 import auth from "./authentication/auth";
 import subjects from "./subjects/subject";
 import analytics from "./library/analytics";
+import examinations from "./examinations/examinations";
 
 export default combineReducers({
   authReducer: auth,
@@ -22,5 +23,6 @@ export default combineReducers({
   classesReducer: classes,
   streamsReducer: streams,
   classNumeralsReducer: classNumerals,
-  dormitoriesReducer: dormitories
+  dormitoriesReducer: dormitories,
+  examinationsReducer: examinations
 });
