@@ -1,4 +1,7 @@
 import {
+  GET_EXAMS_SUCCESS,
+  GET_EXAMS_LOADING,
+  GET_EXAMS_FAILED,
   GET_EXAMRESULTS_ALL_SUCCESS,
   GET_EXAMRESULTS_ALL_LOADING,
   GET_EXAMRESULTS_ALL_FAILED,
@@ -8,9 +11,12 @@ import {
   ADD_EXAMRESULTS_PER_STUDENT_LOADING,
   ADD_EXAMRESULTS_PER_STUDENT_SUCCESS,
   ADD_EXAMRESULTS_PER_STUDENT_FAILED
-} from "./types";
+} from "../../actions/examinations/types";
 
 const initialState = {
+  exams: [],
+  examsLoading: false,
+  examsFailed: false,
   examResultsAll: [],
   examResultsAllLoading: false,
   examResultsAllFailed: false,
@@ -24,6 +30,26 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case GET_EXAMS_SUCCESS:
+      return {
+        ...state,
+        exams: action.payload,
+        examsLoading: false,
+        examsFailed: false
+      };
+    case GET_EXAMS_FAILED:
+      return {
+        ...state,
+        examsLoading: false,
+        examsFailed: true
+      };
+    case GET_EXAMS_LOADING:
+      return {
+        ...state,
+        examsLoading: true,
+        examsFailed: false
+      };
+    //
     case GET_EXAMRESULTS_ALL_SUCCESS:
       return {
         ...state,

@@ -1,6 +1,9 @@
 import axios from "axios";
 import { URL } from "../url";
 import {
+  GET_EXAMS_SUCCESS,
+  GET_EXAMS_LOADING,
+  GET_EXAMS_FAILED,
   GET_EXAMRESULTS_ALL_SUCCESS,
   GET_EXAMRESULTS_ALL_LOADING,
   GET_EXAMRESULTS_ALL_FAILED,
@@ -13,6 +16,23 @@ import {
 } from "./types";
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
+
+export const getExams = () => (dispatch, getState) => {
+  // GET ALL EXAMS
+  dispatch({ type: GET_EXAMS_LOADING });
+  axios
+    .get(URL.concat("/api/v2.0/exams/results/get/all/"), tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_EXAMS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: GET_EXAMS_FAILED });
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
 
 export const getExamResultsAll = () => (dispatch, getState) => {
   // GET ALL EXAM RESULTS
