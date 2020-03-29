@@ -21,7 +21,7 @@ export const getExams = () => (dispatch, getState) => {
   // GET ALL EXAMS
   dispatch({ type: GET_EXAMS_LOADING });
   axios
-    .get(URL.concat("/api/v2.0/exams/results/get/all/"), tokenConfig(getState))
+    .get(URL.concat("/api/v2.0/exams/exams/"), tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_EXAMS_SUCCESS,
