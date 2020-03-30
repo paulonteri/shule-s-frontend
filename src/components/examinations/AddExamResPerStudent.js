@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Divider, Form, InputNumber, Button, Select } from "antd";
+import { Divider, Form, InputNumber, Button, Select, Skeleton } from "antd";
 
 import { getSubjects } from "../../actions/subjects/subjects";
 import { getStudents } from "../../actions/students/students";
@@ -15,24 +15,15 @@ const { Option } = Select;
 function AddExamResPerStudent(props) {
   // State
   const [student, setStudent] = useState(null);
-  const [exam, setExam] = useState(1);
-  // OnMount
-  useEffect(() => {
-    console.log(props);
-    props.getExams();
-    props.getStudents();
-    props.getSubjects();
-    props.getExamResultsAll();
-  }, []);
+  const [exam, setExam] = useState(null);
 
-  const onSubjectMarksChange = x => console.log(x);
   // OnMount
   useEffect(() => {
+    console.log(CheckStudentExam());
     console.log(props);
     props.getExams();
     props.getStudents();
     props.getSubjects();
-    props.getExamResultsAll();
   }, []);
 
   // OnSubmit
@@ -47,7 +38,52 @@ function AddExamResPerStudent(props) {
     const q = { exam: exam, student: student, subject_marks: subject_marks };
     props.addExamResultsPerStudent(q);
   };
+
   const onFinishFailed = () => {};
+
+  // Show Subject Inputs
+  function ShowSubjectInputs() {
+    return (
+      <Form
+        name="studentresults"
+        initialValues={{
+          remember: true
+        }}
+        layout="vertical"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        className="container-sm"
+      >
+        {props.subjects.map(subject => {
+          return (
+            <div key={subject.id} className="row-sm">
+              <Form.Item
+                key={subject.id}
+                label={subject.name}
+                name={subject.id}
+                disabled={DisableInputs}
+              >
+                <InputNumber disabled={DisableInputs()} max={100} min={1} />
+              </Form.Item>
+            </div>
+          );
+        })}
+        <div className="row-sm">
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={CheckStudentExam()}
+              loading={props.uploadingExamResultsPerStudent}
+            >
+              Submit Results
+            </Button>
+          </Form.Item>
+        </div>
+      </Form>
+    );
+  }
+
   return (
     <div className="card px-sm-5 shadow container">
       <Form
@@ -100,55 +136,62 @@ function AddExamResPerStudent(props) {
       <div className="row">
         <div className="col">
           <Divider orientation="left">Record Marks</Divider>
-
-          <Form
-            name="studentresults"
-            initialValues={{
-              remember: true
-            }}
-            layout="vertical"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            className="container-sm"
-          >
-            {props.subjects.map(subject => {
-              return (
-                <div key={subject.id} className="row-sm">
-                  <Form.Item
-                    key={subject.id}
-                    label={subject.name}
-                    name={subject.id}
-                  >
-                    <InputNumber max={100} min={1} />
-                  </Form.Item>
-                </div>
-              );
-            })}
-            <div className="row-sm">
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Submit Results
-                </Button>
-              </Form.Item>
-            </div>
-          </Form>
         </div>
+
+        {ShowSubjects()}
       </div>
     </div>
   );
+
+  // ShowSubjects
+  function ShowSubjects() {
+    if (props.getSubjectsLoading) {
+      return (
+        <Fragment>
+          <Skeleton active />
+          <Skeleton active />
+        </Fragment>
+      );
+    } else {
+      return ShowSubjectInputs();
+    }
+  }
+
+  // Check if student and exam have been selected
+  function CheckStudentExam() {
+    if (student == null || exam == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Disable Inputs
+  function DisableInputs() {
+    if (props.uploadingExamResultsPerStudent || CheckStudentExam()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 AddExamResPerStudent.propTypes = {
   getExams: PropTypes.func.isRequired,
   exams: PropTypes.array.isRequired,
   subjects: PropTypes.array.isRequired,
-  subjects: PropTypes.array.isRequired
+  subjects: PropTypes.array.isRequired,
+  getSubjectsLoading: PropTypes.bool.isRequired,
+  uploadingExamResultsPerStudent: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
+  getSubjectsLoading: state.subjectsReducer.getSubjectsLoading,
   subjects: state.subjectsReducer.subjects,
   exams: state.examinationsReducer.exams,
-  students: state.studentsReducer.students
+  students: state.studentsReducer.students,
+  uploadingExamResultsPerStudent:
+    state.examinationsReducer.uploadingExamResultsPerStudent
 });
 
 export default connect(mapStateToProps, {
