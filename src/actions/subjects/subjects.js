@@ -1,23 +1,31 @@
 import axios from "axios";
 import { URL } from "../url";
 
-import { GET_SUBJECTS, ADD_SUBJECT, DELETE_SUBJECT } from "./types";
+import {
+  GET_SUBJECTS_SUCCESS,
+  GET_SUBJECTS_FAILED,
+  GET_SUBJECTS_LOADING,
+  ADD_SUBJECT,
+  DELETE_SUBJECT
+} from "./types";
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
 
 // GET SUBJECTS ACTION
 export const getSubjects = () => (dispatch, getState) => {
+  dispatch({ type: GET_SUBJECTS_LOADING });
   axios
     .get(URL.concat("/api/v2.0/academics/subject/"), tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_SUBJECTS,
+        type: GET_SUBJECTS_SUCCESS,
         payload: res.data
       });
     })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch({ type: GET_SUBJECTS_FAILED });
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // ADD SUBJECT ACTION
