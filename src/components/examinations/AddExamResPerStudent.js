@@ -12,12 +12,13 @@ import {
 } from "../../actions/examinations/examinations";
 const { Option } = Select;
 
-export const AddExamResPerStudent = props => {
+function AddExamResPerStudent(props) {
   // State
   const [student, setStudent] = useState(null);
   const [exam, setExam] = useState(1);
   // OnMount
   useEffect(() => {
+    console.log(props);
     props.getExams();
     props.getStudents();
     props.getSubjects();
@@ -25,6 +26,14 @@ export const AddExamResPerStudent = props => {
   }, []);
 
   const onSubjectMarksChange = x => console.log(x);
+  // OnMount
+  useEffect(() => {
+    console.log(props);
+    props.getExams();
+    props.getStudents();
+    props.getSubjects();
+    props.getExamResultsAll();
+  }, []);
 
   // OnSubmit
   const onFinish = results => {
@@ -39,9 +48,8 @@ export const AddExamResPerStudent = props => {
     props.addExamResultsPerStudent(q);
   };
   const onFinishFailed = () => {};
-
   return (
-    <div className="container">
+    <div className="card px-sm-5 shadow container">
       <Form
         name="student&exam"
         initialValues={{
@@ -128,10 +136,13 @@ export const AddExamResPerStudent = props => {
       </div>
     </div>
   );
-};
+}
 
 AddExamResPerStudent.propTypes = {
-  getExams: PropTypes.func.isRequired
+  getExams: PropTypes.func.isRequired,
+  exams: PropTypes.array.isRequired,
+  subjects: PropTypes.array.isRequired,
+  subjects: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

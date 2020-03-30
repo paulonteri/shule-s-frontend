@@ -25,6 +25,7 @@ const Library = React.lazy(() => import("./library/Library"));
 const Students = React.lazy(() => import("./students/Students"));
 const Classes = React.lazy(() => import("./classes/Classes"));
 const Dormitories = React.lazy(() => import("./dormitories/Dormitories"));
+const Examinations = React.lazy(() => import("./examinations/Examinations"));
 const Register = React.lazy(() => import("./accounts/Register"));
 
 export class Dashboard extends Component {
@@ -166,6 +167,23 @@ export class Dashboard extends Component {
                   </Link>
                 </Menu.Item>
               </SubMenu>
+              {/* examinations SubMenu */}
+              <SubMenu
+                key="sub4"
+                title={
+                  <span>
+                    <TeamOutlined />
+                    <span> Examinations </span>
+                  </span>
+                }
+              >
+                <Menu.Item key="12">
+                  {" "}
+                  <Link onClick={this.onClick} to="/examinations/results/add">
+                    Add Results
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
             </Menu>
           </Sider>
           <Layout className="site-layout">
@@ -211,6 +229,7 @@ export class Dashboard extends Component {
                   <PrivateRoute path="/library" component={Library} />
                   <PrivateRoute path="/classes" component={Classes} />
                   <PrivateRoute path="/dorms" component={Dormitories} />
+                  <PrivateRoute path="/examinations" component={Examinations} />
                 </Suspense>
                 <Route component={Error404} />
               </Switch>
