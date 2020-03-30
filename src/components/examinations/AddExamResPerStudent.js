@@ -13,14 +13,14 @@ import {
 const { Option } = Select;
 
 function AddExamResPerStudent(props) {
+  const [form] = Form.useForm();
+  const [form2] = Form.useForm();
   // State
   const [student, setStudent] = useState(null);
   const [exam, setExam] = useState(null);
 
   // OnMount
   useEffect(() => {
-    console.log(CheckStudentExam());
-    console.log(props);
     props.getExams();
     props.getStudents();
     props.getSubjects();
@@ -37,6 +37,8 @@ function AddExamResPerStudent(props) {
 
     const q = { exam: exam, student: student, subject_marks: subject_marks };
     props.addExamResultsPerStudent(q);
+    form2.resetFields();
+    form.resetFields();
   };
 
   const onFinishFailed = () => {};
@@ -45,6 +47,7 @@ function AddExamResPerStudent(props) {
   function ShowSubjectInputs() {
     return (
       <Form
+        form={form}
         name="studentresults"
         initialValues={{
           remember: true
@@ -56,7 +59,7 @@ function AddExamResPerStudent(props) {
       >
         {props.subjects.map(subject => {
           return (
-            <div key={subject.id} className="row-sm">
+            <div key={subject.id} className="row-sm pl-1">
               <Form.Item
                 key={subject.id}
                 label={subject.name}
@@ -87,6 +90,7 @@ function AddExamResPerStudent(props) {
   return (
     <div className="card px-sm-5 shadow container">
       <Form
+        form={form2}
         name="student&exam"
         initialValues={{
           remember: true
@@ -148,8 +152,8 @@ function AddExamResPerStudent(props) {
     if (props.getSubjectsLoading) {
       return (
         <Fragment>
-          <Skeleton active />
-          <Skeleton active />
+          <Skeleton className="pl-1" active />
+          <Skeleton className="pl-1" active />
         </Fragment>
       );
     } else {
@@ -182,7 +186,8 @@ AddExamResPerStudent.propTypes = {
   subjects: PropTypes.array.isRequired,
   subjects: PropTypes.array.isRequired,
   getSubjectsLoading: PropTypes.bool.isRequired,
-  uploadingExamResultsPerStudent: PropTypes.bool.isRequired
+  uploadingExamResultsPerStudent: PropTypes.bool.isRequired,
+  uploadedExamResultsPerStudent: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -191,7 +196,9 @@ const mapStateToProps = state => ({
   exams: state.examinationsReducer.exams,
   students: state.studentsReducer.students,
   uploadingExamResultsPerStudent:
-    state.examinationsReducer.uploadingExamResultsPerStudent
+    state.examinationsReducer.uploadingExamResultsPerStudent,
+  uploadedExamResultsPerStudent:
+    state.examinationsReducer.uploadedExamResultsPerStudent
 });
 
 export default connect(mapStateToProps, {
