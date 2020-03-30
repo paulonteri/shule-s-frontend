@@ -1,23 +1,31 @@
 import axios from "axios";
 import { URL } from "../url";
-import { ADD_STUDENT, GET_STUDENTS, DELETE_STUDENT } from "./types";
+import {
+  ADD_STUDENT,
+  GET_STUDENTS_SUCCESS,
+  DELETE_STUDENT,
+  GET_STUDENTS_LOADING,
+  GET_STUDENTS_FAILED
+} from "./types";
 
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
 
 // GET STUDENTS
 export const getStudents = () => (dispatch, getState) => {
+  dispatch({ type: GET_STUDENTS_LOADING });
   axios
     .get(URL.concat("/api/v2.0/students/"), tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_STUDENTS,
+        type: GET_STUDENTS_SUCCESS,
         payload: res.data
       });
     })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch({ type: GET_STUDENTS_FAILED });
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // ADD STUDENT
