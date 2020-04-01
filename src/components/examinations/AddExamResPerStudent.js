@@ -1,14 +1,24 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Divider, Form, InputNumber, Button, Select, Skeleton } from "antd";
+import {
+  Divider,
+  Form,
+  InputNumber,
+  Button,
+  Select,
+  Skeleton,
+  Descriptions,
+  Empty
+} from "antd";
 
 import { getSubjects } from "../../actions/subjects/subjects";
 import { getStudents } from "../../actions/students/students";
 import {
   getExams,
   addExamResultsPerStudent,
-  getExamResultsAll
+  getExamResultsAll,
+  getExamResultsPerStudent
 } from "../../actions/examinations/examinations";
 const { Option } = Select;
 
@@ -24,6 +34,7 @@ function AddExamResPerStudent(props) {
     props.getExams();
     props.getStudents();
     props.getSubjects();
+    getExamResults(student);
   }, []);
 
   // OnSubmit
@@ -37,8 +48,15 @@ function AddExamResPerStudent(props) {
 
     const q = { exam: exam, student: student, subject_marks: subject_marks };
     props.addExamResultsPerStudent(q);
+    form2.setFields({ examm: null });
     form2.resetFields();
     form.resetFields();
+    form2.submit();
+  };
+
+  // OnSubmit
+  const onFinish2 = results => {
+    form2.resetFields();
   };
 
   const onFinishFailed = () => {};
@@ -66,7 +84,12 @@ function AddExamResPerStudent(props) {
                 name={subject.id}
                 disabled={DisableInputs}
               >
-                <InputNumber disabled={DisableInputs()} max={100} min={1} />
+                <InputNumber
+                  name={subject.id}
+                  disabled={DisableInputs()}
+                  max={100}
+                  min={1}
+                />
               </Form.Item>
             </div>
           );
@@ -91,61 +114,83 @@ function AddExamResPerStudent(props) {
     <div className="card px-sm-5 shadow container">
       <Form
         form={form2}
+        id="form22"
         name="student&exam"
+        className="container my-2"
+        onFinish={onFinish2}
         initialValues={{
           remember: true
         }}
-        className="container my-2"
       >
-        <div className="row-sm">
-          <Select
-            showSearch
-            placeholder=" Select exam"
-            onChange={setExam}
-            optionFilterProp="search"
-            className="mr-2 my-1"
-          >
-            {props.exams.map(exam_sel => (
-              <Option
-                key={exam_sel.id}
-                value={exam_sel.id}
-                name="exam"
-                search={`${exam_sel.name}`}
-              >
-                {exam_sel.name}
-              </Option>
-            ))}
-          </Select>
-          <Select
-            showSearch
-            placeholder=" Select student"
-            onChange={setStudent}
-            optionFilterProp="search"
-            className="my-1"
-          >
-            {props.students.map(student_sel => (
-              <Option
-                key={student_sel.student_id}
-                value={student_sel.student_id}
-                name="student"
-                search={`${student_sel.student_id} ${student_sel.surname} ${student_sel.first_name}`}
-              >
-                {student_sel.student_id}: {student_sel.surname}{" "}
-                {student_sel.first_name}
-              </Option>
-            ))}
-          </Select>
+        <div className=" text-center mt-1 row-sm">
+          <Form.Item>
+            <Select
+              size="large"
+              showSearch
+              placeholder=" Select exam"
+              onChange={setExam}
+              optionFilterProp="search"
+              name="examm"
+              className="mr-2 my-1"
+              allowClear
+            >
+              {props.exams.map(exam_sel => (
+                <Option
+                  key={exam_sel.id}
+                  value={exam_sel.id}
+                  name="exam"
+                  search={`${exam_sel.name}`}
+                >
+                  {exam_sel.name}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item>
+            <Select
+              size="large"
+              showSearch
+              placeholder=" Select student"
+              onChange={setStud}
+              optionFilterProp="search"
+              className="my-1"
+              name="student"
+            >
+              {props.students.map(student_sel => (
+                <Option
+                  key={student_sel.student_id}
+                  value={student_sel.student_id}
+                  name="student"
+                  search={`${student_sel.student_id} ${student_sel.surname} ${student_sel.first_name}`}
+                >
+                  {student_sel.student_id}: {student_sel.surname}{" "}
+                  {student_sel.first_name}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
         </div>
       </Form>
       <div className="row">
         <div className="col">
-          <Divider orientation="left">Record Marks</Divider>
-        </div>
+          <Divider orientation="center">Record Marks</Divider>
 
-        {ShowSubjects()}
+          {ShowSubjects()}
+        </div>
+        <div className="col align-content-center text-center">
+          <Divider orientation="center">Recorded Marks</Divider>
+
+          {showResults()}
+        </div>
       </div>
     </div>
   );
+
+  //
+  function setStud(i) {
+    setStudent(i);
+    props.getExamResultsPerStudent(i);
+  }
 
   // ShowSubjects
   function ShowSubjects() {
@@ -178,6 +223,64 @@ function AddExamResPerStudent(props) {
       return false;
     }
   }
+
+  // get ExamResults
+  function getExamResults(student) {
+    if (student !== null) {
+      props.getExamResultsPerStudent(student);
+    } else {
+      return [];
+    }
+  }
+
+  // getSubjectName
+  function getSubjectName(i) {
+    const sub = props.subjects.filter(subj => subj.id === i)[0];
+    return sub.name;
+  }
+
+  //
+  function showResults() {
+    if (props.examResultsPerStudent != null) {
+      const resultss = props.examResultsPerStudent.filter(
+        res => res.exam === exam
+      );
+
+      const results = resultss[0];
+
+      if (results != null) {
+        const mks = results["subject_marks"];
+        return (
+          <Fragment>
+            <Descriptions size="small" title="User Info" bordered>
+              {mks.map(marks => {
+                console.log(getSubjectName(marks.subject_id));
+                console.log(marks.marks);
+                console.log(getSubjectName(marks.subject_id), marks.marks);
+                return (
+                  <Descriptions.Item
+                    span={3}
+                    label={getSubjectName(marks.subject_id)}
+                  >
+                    {marks.marks}
+                  </Descriptions.Item>
+                );
+              })}
+            </Descriptions>
+          </Fragment>
+        );
+      } else {
+        return (
+          <Fragment>
+            <Empty
+              className="pt-2"
+              description={<span>No marks recorded yet.</span>}
+            />
+          </Fragment>
+        );
+      }
+    }
+  }
 }
 
 AddExamResPerStudent.propTypes = {
@@ -187,7 +290,8 @@ AddExamResPerStudent.propTypes = {
   subjects: PropTypes.array.isRequired,
   getSubjectsLoading: PropTypes.bool.isRequired,
   uploadingExamResultsPerStudent: PropTypes.bool.isRequired,
-  uploadedExamResultsPerStudent: PropTypes.bool.isRequired
+  uploadedExamResultsPerStudent: PropTypes.bool.isRequired,
+  getExamResultsPerStudent: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -198,7 +302,10 @@ const mapStateToProps = state => ({
   uploadingExamResultsPerStudent:
     state.examinationsReducer.uploadingExamResultsPerStudent,
   uploadedExamResultsPerStudent:
-    state.examinationsReducer.uploadedExamResultsPerStudent
+    state.examinationsReducer.uploadedExamResultsPerStudent,
+  examResultsPerStudent: state.examinationsReducer.examResultsPerStudent,
+  examResultsPerStudentLoading:
+    state.examinationsReducer.examResultsPerStudentLoading
 });
 
 export default connect(mapStateToProps, {
@@ -206,5 +313,6 @@ export default connect(mapStateToProps, {
   getStudents,
   getExams,
   addExamResultsPerStudent,
-  getExamResultsAll
+  getExamResultsAll,
+  getExamResultsPerStudent
 })(AddExamResPerStudent);
