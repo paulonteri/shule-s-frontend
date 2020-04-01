@@ -48,15 +48,11 @@ function AddExamResPerStudent(props) {
 
     const q = { exam: exam, student: student, subject_marks: subject_marks };
     props.addExamResultsPerStudent(q);
-    form2.setFields({ examm: null });
+
     form2.resetFields();
     form.resetFields();
-    form2.submit();
-  };
-
-  // OnSubmit
-  const onFinish2 = results => {
-    form2.resetFields();
+    setExam(null);
+    setStudent(null);
   };
 
   const onFinishFailed = () => {};
@@ -114,23 +110,20 @@ function AddExamResPerStudent(props) {
     <div className="card px-sm-5 shadow container">
       <Form
         form={form2}
-        id="form22"
         name="student&exam"
-        className="container my-2"
-        onFinish={onFinish2}
+        className="container mt-2"
         initialValues={{
           remember: true
         }}
       >
         <div className=" text-center mt-1 row-sm">
-          <Form.Item>
+          <Form.Item name="name">
             <Select
               size="large"
               showSearch
               placeholder=" Select exam"
               onChange={setExam}
               optionFilterProp="search"
-              name="examm"
               className="mr-2 my-1"
               allowClear
             >
@@ -146,21 +139,19 @@ function AddExamResPerStudent(props) {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item>
+          <Form.Item name="student">
             <Select
               size="large"
               showSearch
-              placeholder=" Select student"
+              placeholder="Select student"
               onChange={setStud}
               optionFilterProp="search"
               className="my-1"
-              name="student"
             >
               {props.students.map(student_sel => (
                 <Option
                   key={student_sel.student_id}
                   value={student_sel.student_id}
-                  name="student"
                   search={`${student_sel.student_id} ${student_sel.surname} ${student_sel.first_name}`}
                 >
                   {student_sel.student_id}: {student_sel.surname}{" "}
@@ -248,11 +239,11 @@ function AddExamResPerStudent(props) {
 
       const results = resultss[0];
 
-      if (results != null) {
+      if (results != null && student != null) {
         const mks = results["subject_marks"];
         return (
           <Fragment>
-            <Descriptions size="small" title="User Info" bordered>
+            <Descriptions size="small" className="mb-2" bordered>
               {mks.map(marks => {
                 console.log(getSubjectName(marks.subject_id));
                 console.log(marks.marks);
@@ -274,7 +265,7 @@ function AddExamResPerStudent(props) {
           <Fragment>
             <Empty
               className="pt-2"
-              description={<span>No marks recorded yet.</span>}
+              description={<span>No marks recorded yet</span>}
             />
           </Fragment>
         );

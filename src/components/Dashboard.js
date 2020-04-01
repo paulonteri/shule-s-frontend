@@ -180,7 +180,7 @@ export class Dashboard extends Component {
                 <Menu.Item key="12">
                   {" "}
                   <Link onClick={this.onClick} to="/examinations/results/add">
-                    Add Results
+                    Add Student Results
                   </Link>
                 </Menu.Item>
               </SubMenu>
