@@ -5,6 +5,9 @@ import {
   GET_EXAMRESULTS_ALL_SUCCESS,
   GET_EXAMRESULTS_ALL_LOADING,
   GET_EXAMRESULTS_ALL_FAILED,
+  GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
+  GET_EXAMRESULTS_PERSTUDENT_LOADING,
+  GET_EXAMRESULTS_PERSTUDENT_FAILED,
   ADD_EXAMRESULTS_PER_CLASS_LOADING,
   ADD_EXAMRESULTS_PER_CLASS_SUCCESS,
   ADD_EXAMRESULTS_PER_CLASS_FAILED,
@@ -17,6 +20,9 @@ const initialState = {
   exams: [],
   examsLoading: false,
   examsFailed: false,
+  examResultsPerStudent: [],
+  examResultsPerStudentLoading: false,
+  examResultsPerStudentFailed: false,
   examResultsAll: [],
   examResultsAllLoading: false,
   examResultsAllFailed: false,
@@ -112,6 +118,27 @@ export default function(state = initialState, action) {
         uploadingExamResultsPerClassFailed: true,
         uploadingExamResultsPerClass: false,
         uploadedExamResultsPerClass: false
+      };
+    //
+    case GET_EXAMRESULTS_PERSTUDENT_SUCCESS:
+      return {
+        ...state,
+        examResultsPerStudent: action.payload,
+        examResultsPerStudentLoading: false,
+        examResultsPerStudentFailed: false
+      };
+    case GET_EXAMRESULTS_PERSTUDENT_FAILED:
+      return {
+        ...state,
+        examResultsPerStudent: [],
+        examResultsPerStudentLoading: false,
+        examResultsPerStudentFailed: true
+      };
+    case GET_EXAMRESULTS_PERSTUDENT_LOADING:
+      return {
+        ...state,
+        examResultsPerStudentLoading: true,
+        examResultsPerStudentFailed: false
       };
     default:
       return state;

@@ -7,6 +7,9 @@ import {
   GET_EXAMRESULTS_ALL_SUCCESS,
   GET_EXAMRESULTS_ALL_LOADING,
   GET_EXAMRESULTS_ALL_FAILED,
+  GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
+  GET_EXAMRESULTS_PERSTUDENT_LOADING,
+  GET_EXAMRESULTS_PERSTUDENT_FAILED,
   ADD_EXAMRESULTS_PER_CLASS_LOADING,
   ADD_EXAMRESULTS_PER_CLASS_SUCCESS,
   ADD_EXAMRESULTS_PER_CLASS_FAILED,
@@ -94,5 +97,25 @@ export const addExamResultsPerStudent = results => (dispatch, getState) => {
       dispatch({ type: ADD_EXAMRESULTS_PER_STUDENT_FAILED });
       dispatch(returnErrors(err.response.data, err.response.status));
       console.log(err.response.data);
+    });
+};
+
+export const getExamResultsPerStudent = student => (dispatch, getState) => {
+  // GET PER STU EXAM RESULTS
+  dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_LOADING });
+  axios
+    .get(
+      `${URL}/api/v2.0/exams/results/get/student/${student}/`,
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch({
+        type: GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_FAILED });
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
