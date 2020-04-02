@@ -18,15 +18,35 @@ import {
   getExams,
   addExamResultsPerClass,
   getExamResultsAll,
-  getExamResultsPerStudent //
+  getExamResultsPerClassPerExam
 } from "../../actions/examinations/examinations";
 const { Option } = Select;
+
+//
+
+const layout = {
+  labelCol: {
+    span: 4.5
+  },
+  wrapperCol: {
+    span: 16
+  }
+};
+const tailLayout = {
+  wrapperCol: {
+    offset: 4.5,
+    span: 16
+  }
+};
+
+//
 
 export const AddExamResPerClass = props => {
   // State
   const [subject, setSubject] = useState(null);
   const [exam, setExam] = useState(null);
   const [classs, setClass] = useState(null);
+  const [fetchresults, setFetchResults] = useState(false);
 
   // OnMount
   useEffect(() => {
@@ -40,6 +60,8 @@ export const AddExamResPerClass = props => {
   const [form] = Form.useForm();
   const [form2] = Form.useForm();
 
+  const studz = props.students;
+
   // OnSubmit
   const onFinish = results => {
     const student_marks = [];
@@ -51,63 +73,87 @@ export const AddExamResPerClass = props => {
     const q = { exam: exam, subject: subject, student_marks: student_marks };
 
     console.log(q);
+    props.addExamResultsPerClass(q);
+
     form2.resetFields();
     form.resetFields();
     setExam(null);
     setSubject(null);
     setClass(null);
+    setFetchResults(false);
   };
 
   // show subject inputs
   function ShowStudentInputs() {
-    if (subject == null || classs == null || exam == null) {
+    if (Loading() == false) {
+      if (subject == null || classs == null || exam == null) {
+        return (
+          <Empty
+            className="pt-2"
+            description={<span>Select Exam, Class & Subject </span>}
+          />
+        );
+      }
       return (
-        <Empty
-          className="pt-2"
-          description={<span>Select Exam, Class & Subject </span>}
-        />
+        <div className="row">
+          <div className="col">
+            <Divider orientation="left">Record Marks</Divider>
+            <Form
+              form={form}
+              name="student&marks"
+              className="container mt-2"
+              initialValues={{
+                remember: true
+              }}
+              layout="vertical"
+              onFinish={onFinish}
+            >
+              {props.students
+                .filter(x => (x.classns = classs))
+                .map(stud => {
+                  return (
+                    <Form.Item
+                      name={stud.student_id}
+                      key={stud.student_id}
+                      label={`${stud.student_id}: ${stud.surname} ${stud.first_name}`}
+                    >
+                      <InputNumber
+                        disabled={Loading()}
+                        name={stud.student_id}
+                        max={100}
+                        min={1}
+                        size="small"
+                        disabled={props.uploadingExamResultsPerClass}
+                      />
+                    </Form.Item>
+                  );
+                })}
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={props.uploadingExamResultsPerclass}
+                >
+                  Submit Results
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+          <div className="col">
+            {FetchResults()}
+            <Divider orientation="center">Recorded Marks</Divider>
+            {ShowResults()}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <Fragment>
+          <Skeleton className="pl-1" active />
+          <Skeleton className="pl-1" active />
+        </Fragment>
       );
     }
-    return (
-      <Form
-        form={form}
-        name="student&marks"
-        className="container mt-2"
-        initialValues={{
-          remember: true
-        }}
-        layout="inline"
-        onFinish={onFinish}
-      >
-        {props.students
-          .filter(x => (x.classns = classs))
-          .map(stud => {
-            return (
-              <Form.Item
-                name={stud.student_id}
-                key={stud.student_id}
-                label={`${stud.student_id} ${stud.surname} ${stud.first_name}`}
-              >
-                <InputNumber
-                  name={stud.student_id}
-                  max={100}
-                  min={1}
-                  size="small"
-                />
-              </Form.Item>
-            );
-          })}
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={props.uploadingExamResultsPerclass}
-          >
-            Submit Results
-          </Button>
-        </Form.Item>
-      </Form>
-    );
   }
 
   const onFinishFailed = () => {};
@@ -136,6 +182,7 @@ export const AddExamResPerClass = props => {
           <div className="col-sm">
             <Form.Item name="exam">
               <Select
+                disabled={Loading()}
                 showSearch
                 placeholder="Select exam"
                 onChange={setExam}
@@ -159,6 +206,7 @@ export const AddExamResPerClass = props => {
           <div className="col">
             <Form.Item name="class">
               <Select
+                disabled={Loading()}
                 showSearch
                 placeholder="Select class"
                 onChange={setClass}
@@ -182,6 +230,7 @@ export const AddExamResPerClass = props => {
           <div className="col">
             <Form.Item name="subject">
               <Select
+                disabled={Loading()}
                 showSearch
                 placeholder="Select subject"
                 onChange={setSubject}
@@ -206,17 +255,76 @@ export const AddExamResPerClass = props => {
       </Form>
     );
   }
+
+  // Fetch exam results
+  function FetchResults() {
+    if (fetchresults == false) {
+      props.getExamResultsPerClassPerExam(classs, exam);
+      setFetchResults(true);
+    }
+  }
+
+  // results
+  function ShowResults() {
+    if (
+      props.examResultsPerClassPerSubjectLoading === false &&
+      SelectedDropDowns() === true &&
+      props.examResultsPerClassPerSubject != null &&
+      props.examResultsPerClassPerSubject.length != 0
+    ) {
+      return (
+        <Descriptions size="small" className="mb-2" bordered>
+          {props.examResultsPerClassPerSubject
+            .filter(x => (x.exam = exam))[0]
+            ["exam_results"].map(res => {
+              return (
+                <Descriptions.Item label={StudentName(res.student_id)} span={3}>
+                  {res.marks}
+                </Descriptions.Item>
+              );
+            })}
+        </Descriptions>
+      );
+    }
+  }
+
+  // Loading
+  function Loading() {
+    if (
+      props.getSudentsLoading == true ||
+      props.uploadingExamResultsPerClass == true ||
+      props.examsLoading == true
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Selected
+  function SelectedDropDowns() {
+    if (exam == null && subject == null && classs == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // Student Name
+  function StudentName(s) {
+    const pupil = studz.filter(y => y.student_id === s)[0];
+    return `${pupil.student_id}: ${pupil.surname} ${pupil.first_name}`;
+  }
 };
 
 AddExamResPerClass.propTypes = {
   getExams: PropTypes.func.isRequired,
   exams: PropTypes.array.isRequired,
   subjects: PropTypes.array.isRequired,
-  subjects: PropTypes.array.isRequired,
   getSubjectsLoading: PropTypes.bool.isRequired,
   uploadingExamResultsPerclass: PropTypes.bool.isRequired,
   uploadedExamResultsPerClass: PropTypes.bool.isRequired,
-  getExamResultsPerStudent: PropTypes.func.isRequired
+  getExamResultsPerClassPerExam: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -224,11 +332,17 @@ const mapStateToProps = state => ({
   subjects: state.subjectsReducer.subjects,
   exams: state.examinationsReducer.exams,
   students: state.studentsReducer.students,
-  uploadingExamResultsPerclass:
-    state.examinationsReducer.uploadingExamResultsPerclass,
+  getSudentsLoading: state.studentsReducer.getSudentsLoading,
+  uploadingExamResultsPerClass:
+    state.examinationsReducer.uploadingExamResultsPerClass,
   uploadedExamResultsPerClass:
     state.examinationsReducer.uploadedExamResultsPerClass,
-  classes: state.classesReducer.classes
+  classes: state.classesReducer.classes,
+  examsLoading: state.examinationsReducer.examsLoading,
+  examResultsPerClassPerSubjectLoading:
+    state.examinationsReducer.examResultsPerClassPerSubjectLoading,
+  examResultsPerClassPerSubject:
+    state.examinationsReducer.examResultsPerClassPerSubject
 });
 
 export default connect(mapStateToProps, {
@@ -238,5 +352,5 @@ export default connect(mapStateToProps, {
   getClasses,
   addExamResultsPerClass,
   getExamResultsAll,
-  getExamResultsPerStudent //
+  getExamResultsPerClassPerExam //
 })(AddExamResPerClass);
