@@ -11,7 +11,6 @@ import {
   Descriptions,
   Empty
 } from "antd";
-
 import { getSubjects } from "../../actions/subjects/subjects";
 import { getStudents } from "../../actions/students/students";
 import {
@@ -22,9 +21,15 @@ import {
 } from "../../actions/examinations/examinations";
 const { Option } = Select;
 
+//
+
+//
+
 function AddExamResPerStudent(props) {
+  // forms
   const [form] = Form.useForm();
   const [form2] = Form.useForm();
+
   // State
   const [student, setStudent] = useState(null);
   const [exam, setExam] = useState(null);
@@ -41,7 +46,7 @@ function AddExamResPerStudent(props) {
   const onFinish = results => {
     const subject_marks = [];
     for (let [key, value] of Object.entries(results)) {
-      if (value !== undefined) {
+      if (value !== undefined && value != null) {
         subject_marks.push({ subject_id: Number(key), marks: Number(value) });
       }
     }
@@ -59,52 +64,67 @@ function AddExamResPerStudent(props) {
 
   // Show Subject Inputs
   function ShowSubjectInputs() {
-    return (
-      <Form
-        form={form}
-        name="studentresults"
-        initialValues={{
-          remember: true
-        }}
-        layout="vertical"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        className="container-sm"
-      >
-        {props.subjects.map(subject => {
-          return (
-            <div key={subject.id} className="row-sm pl-1">
-              <Form.Item
-                key={subject.id}
-                label={subject.name}
-                name={subject.id}
-                disabled={DisableInputs}
-              >
-                <InputNumber
+    if (student == null || exam == null) {
+      return (
+        <Empty
+          className="pt-2"
+          description={<span>Select Exam & Student</span>}
+        />
+      );
+    } else {
+      return (
+        <Form
+          form={form}
+          name="studentresults"
+          initialValues={{
+            remember: true
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          className="container-sm"
+        >
+          {props.subjects.map(subject => {
+            return (
+              <div key={subject.id} className="row-sm pl-1">
+                <Form.Item
+                  key={subject.id}
+                  label={subject.name}
                   name={subject.id}
-                  disabled={DisableInputs()}
-                  max={100}
-                  min={1}
-                />
-              </Form.Item>
-            </div>
-          );
-        })}
-        <div className="row-sm">
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={CheckStudentExam()}
-              loading={props.uploadingExamResultsPerStudent}
-            >
-              Submit Results
-            </Button>
-          </Form.Item>
-        </div>
-      </Form>
-    );
+                  disabled={DisableInputs}
+                >
+                  <InputNumber
+                    name={subject.id}
+                    disabled={DisableInputs()}
+                    max={100}
+                    min={1}
+                    size="small"
+                  />
+                </Form.Item>
+              </div>
+            );
+          })}
+          <div className="row-sm">
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                disabled={CheckStudentExam()}
+                loading={props.uploadingExamResultsPerStudent}
+              >
+                Submit Results
+              </Button>
+            </Form.Item>
+          </div>
+        </Form>
+      );
+    }
   }
+
+  //
+
+  //
+
+  //
 
   return (
     <div className="card px-sm-5 shadow container">
@@ -117,9 +137,8 @@ function AddExamResPerStudent(props) {
         }}
       >
         <div className=" text-center mt-1 row-sm">
-          <Form.Item name="name">
+          <Form.Item name="exam">
             <Select
-              size="large"
               showSearch
               placeholder=" Select exam"
               onChange={setExam}
@@ -141,7 +160,6 @@ function AddExamResPerStudent(props) {
           </Form.Item>
           <Form.Item name="student">
             <Select
-              size="large"
               showSearch
               placeholder="Select student"
               onChange={setStud}
@@ -245,9 +263,6 @@ function AddExamResPerStudent(props) {
           <Fragment>
             <Descriptions size="small" className="mb-2" bordered>
               {mks.map(marks => {
-                console.log(getSubjectName(marks.subject_id));
-                console.log(marks.marks);
-                console.log(getSubjectName(marks.subject_id), marks.marks);
                 return (
                   <Descriptions.Item
                     span={3}
