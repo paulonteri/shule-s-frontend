@@ -179,8 +179,20 @@ export class Dashboard extends Component {
               >
                 <Menu.Item key="12">
                   {" "}
-                  <Link onClick={this.onClick} to="/examinations/results/add">
+                  <Link
+                    onClick={this.onClick}
+                    to="/examinations/results/add/student"
+                  >
                     Add Student Results
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="13">
+                  {" "}
+                  <Link
+                    onClick={this.onClick}
+                    to="/examinations/results/add/class"
+                  >
+                    Add Class Results
                   </Link>
                 </Menu.Item>
               </SubMenu>

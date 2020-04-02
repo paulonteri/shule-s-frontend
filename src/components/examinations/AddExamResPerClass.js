@@ -89,7 +89,7 @@ export const AddExamResPerClass = props => {
       if (subject == null || classs == null || exam == null) {
         return (
           <Empty
-            className="pt-2"
+            className="py-2 my-2 mb-4"
             description={<span>Select Exam, Class & Subject </span>}
           />
         );
@@ -160,7 +160,7 @@ export const AddExamResPerClass = props => {
 
   return (
     <div className="card px-sm-5 shadow container">
-      <SelectExamClassSubject />
+      <SelectExamClassSubject mt-1 />
       <ShowStudentInputs />
     </div>
   );
