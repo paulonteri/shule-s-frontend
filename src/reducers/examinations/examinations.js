@@ -13,13 +13,19 @@ import {
   ADD_EXAMRESULTS_PER_CLASS_FAILED,
   ADD_EXAMRESULTS_PER_STUDENT_LOADING,
   ADD_EXAMRESULTS_PER_STUDENT_SUCCESS,
-  ADD_EXAMRESULTS_PER_STUDENT_FAILED
+  ADD_EXAMRESULTS_PER_STUDENT_FAILED,
+  GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS,
+  GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING,
+  GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED,
 } from "../../actions/examinations/types";
 
 const initialState = {
   exams: [],
   examsLoading: false,
   examsFailed: false,
+  examResultsPerClassPerSubject: [],
+  examResultsPerClassPerSubjectLoading: false,
+  examResultsPerClassPerSubjectFailed: false,
   examResultsPerStudent: [],
   examResultsPerStudentLoading: false,
   examResultsPerStudentFailed: false,
@@ -139,6 +145,27 @@ export default function(state = initialState, action) {
         ...state,
         examResultsPerStudentLoading: true,
         examResultsPerStudentFailed: false
+      };
+      //
+    case GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS:
+      return {
+        ...state,
+        examResultsPerClassPerSubject: action.payload,
+        examResultsPerClassPerSubjectLoading: false,
+        examResultsPerClassPerSubjectFailed: false
+      };
+    case GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED:
+      return {
+        ...state,
+        examResultsPerClassPerSubject: [],
+        examResultsPerClassPerSubjectLoading: false,
+        examResultsPerClassPerSubjectFailed: true
+      };
+    case GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING:
+      return {
+        ...state,
+        examResultsPerClassPerSubjectLoading: true,
+        examResultsPerClassPerSubjectFailed: false
       };
     default:
       return state;

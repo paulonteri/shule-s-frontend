@@ -7,15 +7,18 @@ import {
   GET_EXAMRESULTS_ALL_SUCCESS,
   GET_EXAMRESULTS_ALL_LOADING,
   GET_EXAMRESULTS_ALL_FAILED,
-  GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
-  GET_EXAMRESULTS_PERSTUDENT_LOADING,
-  GET_EXAMRESULTS_PERSTUDENT_FAILED,
+  GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS,
+  GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING,
+  GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED,
   ADD_EXAMRESULTS_PER_CLASS_LOADING,
   ADD_EXAMRESULTS_PER_CLASS_SUCCESS,
   ADD_EXAMRESULTS_PER_CLASS_FAILED,
   ADD_EXAMRESULTS_PER_STUDENT_LOADING,
   ADD_EXAMRESULTS_PER_STUDENT_SUCCESS,
-  ADD_EXAMRESULTS_PER_STUDENT_FAILED
+  ADD_EXAMRESULTS_PER_STUDENT_FAILED,
+  GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
+  GET_EXAMRESULTS_PERSTUDENT_LOADING,
+  GET_EXAMRESULTS_PERSTUDENT_FAILED,
 } from "./types";
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
@@ -101,7 +104,7 @@ export const addExamResultsPerStudent = results => (dispatch, getState) => {
 };
 
 export const getExamResultsPerStudent = student => (dispatch, getState) => {
-  // GET PER STU EXAM RESULTS
+  // GET PER STUDent EXAM RESULTS
   dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_LOADING });
   axios
     .get(
@@ -118,4 +121,24 @@ export const getExamResultsPerStudent = student => (dispatch, getState) => {
       dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_FAILED });
       dispatch(returnErrors(err.response.data, err.response.status));
     });
+};
+
+export const getExamResultsPerClassPerExam = (classs, subject) => (dispatch, getState) => {
+  // GET PER CLASS PER EXAM
+  dispatch({ type: GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING });
+  axios
+      .get(
+          `${URL}/api/v2.0//exams/results/get/class/${classs}/subject/${subject}/`,
+          tokenConfig(getState)
+      )
+      .then(res => {
+        dispatch({
+          type: GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS,
+          payload: res.data
+        });
+      })
+      .catch(err => {
+        dispatch({ type: GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED });
+        dispatch(returnErrors(err.response.data, err.response.status));
+      });
 };
