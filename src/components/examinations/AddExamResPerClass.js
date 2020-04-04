@@ -159,7 +159,7 @@ export const AddExamResPerClass = props => {
   const onFinishFailed = () => {};
 
   return (
-    <div className="card px-sm-5 shadow container">
+    <div className="card px-sm-5 shadow container" style={{ minHeight: "65vh" }}>
       <SelectExamClassSubject mt-1 />
       <ShowStudentInputs />
     </div>

@@ -127,7 +127,7 @@ function AddExamResPerStudent(props) {
   //
 
   return (
-    <div className="card px-sm-5 shadow container">
+    <div className="card px-sm-5 shadow container" style={{ minHeight: "65vh" }}>
       <Form
         form={form2}
         name="student&exam"
@@ -292,7 +292,6 @@ function AddExamResPerStudent(props) {
 AddExamResPerStudent.propTypes = {
   getExams: PropTypes.func.isRequired,
   exams: PropTypes.array.isRequired,
-  subjects: PropTypes.array.isRequired,
   subjects: PropTypes.array.isRequired,
   getSubjectsLoading: PropTypes.bool.isRequired,
   uploadingExamResultsPerStudent: PropTypes.bool.isRequired,

@@ -15,7 +15,8 @@ import {
   MenuFoldOutlined,
   IdcardOutlined,
   ReadOutlined,
-  TeamOutlined
+  TeamOutlined,
+  FileProtectOutlined
 } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
@@ -172,7 +173,7 @@ export class Dashboard extends Component {
                 key="sub4"
                 title={
                   <span>
-                    <TeamOutlined />
+                    <FileProtectOutlined />
                     <span> Examinations </span>
                   </span>
                 }
@@ -227,9 +228,9 @@ export class Dashboard extends Component {
             <Content
               className="mt-3 px-4"
               style={{
-                margin: "2px ",
+                margin: "1px ",
 
-                minHeight: "100vh"
+                minHeight: "70vh"
               }}
             >
               <Switch>

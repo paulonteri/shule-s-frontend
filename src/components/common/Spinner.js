@@ -5,7 +5,7 @@ export const Spinner = () => {
   return (
     <div
       className="d-flex align-items-center justify-content-center"
-      style={{ height: "100vh" }}
+      style={{ height: "80vh" }}
     >
       <Loader
         type="MutatingDots"
