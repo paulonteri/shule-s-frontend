@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
   Redirect,
-  Link
+  Link,
 } from "react-router-dom";
 import Spinner from "./common/Spinner";
 import Error404 from "./common/Error404";
@@ -16,7 +16,7 @@ import {
   IdcardOutlined,
   ReadOutlined,
   TeamOutlined,
-  FileProtectOutlined
+  FileProtectOutlined,
 } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
@@ -32,12 +32,12 @@ const Register = React.lazy(() => import("./accounts/Register"));
 export class Dashboard extends Component {
   state = {
     collapsed: false,
-    broken: false
+    broken: false,
   };
 
   toggle = () => {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
     });
   };
 
@@ -61,7 +61,7 @@ export class Dashboard extends Component {
             collapsed={this.state.collapsed}
             breakpoint="md"
             collapsedWidth="0"
-            onBreakpoint={broken => {
+            onBreakpoint={(broken) => {
               switch (broken) {
                 case true:
                   this.setState({ collapsed: true, broken: true });
@@ -205,7 +205,7 @@ export class Dashboard extends Component {
               style={{
                 margin: 0,
                 padding: 0,
-                backgroundColor: "white"
+                backgroundColor: "white",
               }}
             >
               <div className="pt-0 pl-2">
@@ -228,9 +228,8 @@ export class Dashboard extends Component {
             <Content
               className="mt-3 px-4"
               style={{
-                margin: "1px ",
-
-                minHeight: "70vh"
+                margin: "1px",
+                minHeight: "70vh",
               }}
             >
               <Switch>

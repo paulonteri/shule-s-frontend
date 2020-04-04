@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import Spinner from "./components/common/Spinner";
+import SpinnerFull from "./components/common/SpinnerFull";
 import { Provider } from "react-redux";
 import store from "./store";
 import { Provider as AlertProvider } from "react-alert";
@@ -15,7 +15,7 @@ const Test = React.lazy(() => import("./components/common/Test"));
 // Alerts Options
 const alertOptions = {
   timeout: 3250,
-  position: "top center"
+  position: "top center",
 };
 
 export class App extends Component {
@@ -29,7 +29,8 @@ export class App extends Component {
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Alerts />
-            <Suspense fallback={<Spinner />}>
+
+            <Suspense fallback={<SpinnerFull />}>
               <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/test" component={Test} />
