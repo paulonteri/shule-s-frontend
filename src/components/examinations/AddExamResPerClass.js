@@ -46,7 +46,6 @@ export const AddExamResPerClass = props => {
   const [subject, setSubject] = useState(null);
   const [exam, setExam] = useState(null);
   const [classs, setClass] = useState(null);
-  const [fetchresults, setFetchResults] = useState(false);
 
   // OnMount
   useEffect(() => {
@@ -55,6 +54,11 @@ export const AddExamResPerClass = props => {
     props.getSubjects();
     props.getStudents();
   }, []);
+
+  // On Change
+  useEffect(() => {
+    FetchResults();
+  }, [classs, subject, props.uploadedExamResultsPerClass]);
 
   // forms
   const [form] = Form.useForm();
@@ -72,15 +76,9 @@ export const AddExamResPerClass = props => {
     }
     const q = { exam: exam, subject: subject, student_marks: student_marks };
 
-    console.log(q);
     props.addExamResultsPerClass(q);
 
-    form2.resetFields();
     form.resetFields();
-    setExam(null);
-    setSubject(null);
-    setClass(null);
-    setFetchResults(false);
   };
 
   // show subject inputs
@@ -140,7 +138,6 @@ export const AddExamResPerClass = props => {
             </Form>
           </div>
           <div className="col">
-            {FetchResults()}
             <Divider orientation="center">Recorded Marks</Divider>
             {ShowResults()}
           </div>
@@ -159,7 +156,10 @@ export const AddExamResPerClass = props => {
   const onFinishFailed = () => {};
 
   return (
-    <div className="card px-sm-5 shadow container" style={{ minHeight: "65vh" }}>
+    <div
+      className="card px-sm-5 shadow container"
+      style={{ minHeight: "65vh" }}
+    >
       <SelectExamClassSubject mt-1 />
       <ShowStudentInputs />
     </div>
@@ -258,9 +258,8 @@ export const AddExamResPerClass = props => {
 
   // Fetch exam results
   function FetchResults() {
-    if (fetchresults == false) {
-      props.getExamResultsPerClassPerExam(classs, exam);
-      setFetchResults(true);
+    if (classs != null && subject != null) {
+      props.getExamResultsPerClassPerExam(classs, subject);
     }
   }
 
