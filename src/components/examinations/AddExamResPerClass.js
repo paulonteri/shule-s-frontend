@@ -166,7 +166,7 @@ export const AddExamResPerClass = (props) => {
 
   return (
     <div
-      className="card px-sm-5 shadow container"
+      className="card px-sm-5 shadow container-fluid"
       style={{ minHeight: "65vh" }}
     >
       <SelectExamClassSubject mt-1 />

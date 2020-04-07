@@ -136,7 +136,7 @@ function AddExamResPerStudent(props) {
 
   return (
     <div
-      className="card px-sm-5 shadow container"
+      className="card px-sm-5 shadow container-fluid"
       style={{ minHeight: "65vh" }}
     >
       <Form
