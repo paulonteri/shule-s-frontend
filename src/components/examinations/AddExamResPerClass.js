@@ -93,7 +93,7 @@ export const AddExamResPerClass = props => {
 
   // show subject inputs
   function ShowStudentInputs() {
-    if (Loading() == false) {
+    if (Loading() === false) {
       if (subject == null || classs == null || exam == null) {
         return (
           <Empty
