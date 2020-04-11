@@ -1,11 +1,11 @@
 import axios from "axios";
 import { URL } from "../url";
 import {
-  ADD_STUDENT,
-  GET_STUDENTS_SUCCESS,
-  DELETE_STUDENT,
-  GET_STUDENTS_LOADING,
-  GET_STUDENTS_FAILED
+    ADD_STUDENT,
+    GET_STUDENTS_SUCCESS,
+    DELETE_STUDENT,
+    GET_STUDENTS_LOADING,
+    GET_STUDENTS_FAILED
 } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
@@ -13,52 +13,52 @@ import { tokenConfig } from "../auth/auth";
 
 // GET STUDENTS
 export const getStudents = () => (dispatch, getState) => {
-  dispatch({ type: GET_STUDENTS_LOADING });
-  axios
-    .get(URL.concat("/api/v2.0/students/"), tokenConfig(getState))
-    .then(res => {
-      dispatch({
-        type: GET_STUDENTS_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({ type: GET_STUDENTS_FAILED });
-      dispatch(returnErrors(err.response.data, err.response.status));
-    });
+    dispatch({ type: GET_STUDENTS_LOADING });
+    axios
+        .get(URL.concat("/api/v2.0/students/"), tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: GET_STUDENTS_SUCCESS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch({ type: GET_STUDENTS_FAILED });
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
 };
 
 // ADD STUDENT
 export const addStudent = student => (dispatch, getState) => {
-  axios
-    .post(URL.concat("/api/v2.0/students/"), student, tokenConfig(getState))
-    .then(res => {
-      dispatch(createMessage({ addStudent: "Student Added" }));
-      dispatch({
-        type: ADD_STUDENT,
-        payload: res.data
-      });
-    })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    axios
+        .post(URL.concat("/api/v2.0/students/"), student, tokenConfig(getState))
+        .then(res => {
+            dispatch(createMessage({ addStudent: "Student Added" }));
+            dispatch({
+                type: ADD_STUDENT,
+                payload: res.data
+            });
+        })
+        .catch(err =>
+            dispatch(returnErrors(err.response.data, err.response.status))
+        );
 };
 
 // DELETE STUDENT
 export const deleteStudent = student_id => (dispatch, getState) => {
-  axios
-    .delete(
-      URL.concat(`/api/v2.0/students/${student_id}`),
-      tokenConfig(getState)
-    )
-    .then(res => {
-      dispatch(createMessage({ deleteStudent: "Student Deleted!" }));
-      dispatch({
-        type: DELETE_STUDENT,
-        payload: student_id
-      });
-    })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    axios
+        .delete(
+            URL.concat(`/api/v2.0/students/${student_id}`),
+            tokenConfig(getState)
+        )
+        .then(res => {
+            dispatch(createMessage({ deleteStudent: "Student Deleted!" }));
+            dispatch({
+                type: DELETE_STUDENT,
+                payload: student_id
+            });
+        })
+        .catch(err =>
+            dispatch(returnErrors(err.response.data, err.response.status))
+        );
 };

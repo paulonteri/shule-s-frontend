@@ -14,34 +14,34 @@ const Test = React.lazy(() => import("./components/common/Test"));
 
 // Alerts Options
 const alertOptions = {
-  timeout: 3250,
-  position: "top center",
+    timeout: 3250,
+    position: "top center"
 };
 
 export class App extends Component {
-  componentDidMount() {
-    store.dispatch(loadUser());
-  }
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
 
-  render() {
-    return (
-      <Provider store={store}>
-        <AlertProvider template={AlertTemplate} {...alertOptions}>
-          <Router>
-            <Alerts />
+    render() {
+        return (
+            <Provider store={store}>
+                <AlertProvider template={AlertTemplate} {...alertOptions}>
+                    <Router>
+                        <Alerts />
 
-            <Suspense fallback={<SpinnerFull />}>
-              <Switch>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/test" component={Test} />
-                <PrivateRoute path="/" component={Dashboard} />
-              </Switch>
-            </Suspense>
-          </Router>
-        </AlertProvider>
-      </Provider>
-    );
-  }
+                        <Suspense fallback={<SpinnerFull />}>
+                            <Switch>
+                                <Route exact path="/login" component={Login} />
+                                <Route exact path="/test" component={Test} />
+                                <PrivateRoute path="/" component={Dashboard} />
+                            </Switch>
+                        </Suspense>
+                    </Router>
+                </AlertProvider>
+            </Provider>
+        );
+    }
 }
 
 export default App;

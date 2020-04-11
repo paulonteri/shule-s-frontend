@@ -10,42 +10,46 @@ const IssueBookForm = React.lazy(() => import("./IssueBookForm"));
 const BookInfoForm = React.lazy(() => import("./BookInfoForm"));
 
 export class Library extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Switch>
-          <Suspense fallback={<Spinner />}>
-            <Route exact path="/library" component={LibraryDashboard} />
-            <Route
-              exact
-              path="/library/bookinfotable"
-              component={BookInfoTable}
-            />
-            <Route
-              exact
-              path="/library/bookinfoform"
-              component={BookInfoForm}
-            />
-            <Route
-              exact
-              path="/library/bookinfodetail/:book_id"
-              component={BookInfoDetail}
-            />
-            <Route
-              exact
-              path="/library/bookinstanceform"
-              component={BookInstanceForm}
-            />
-            <Route
-              exact
-              path="/library/issuebookform"
-              component={IssueBookForm}
-            />
-          </Suspense>
-        </Switch>
-      </Fragment>
-    );
-  }
+    render() {
+        return (
+            <Fragment>
+                <Switch>
+                    <Suspense fallback={<Spinner />}>
+                        <Route
+                            exact
+                            path="/library"
+                            component={LibraryDashboard}
+                        />
+                        <Route
+                            exact
+                            path="/library/bookinfotable"
+                            component={BookInfoTable}
+                        />
+                        <Route
+                            exact
+                            path="/library/bookinfoform"
+                            component={BookInfoForm}
+                        />
+                        <Route
+                            exact
+                            path="/library/bookinfodetail/:book_id"
+                            component={BookInfoDetail}
+                        />
+                        <Route
+                            exact
+                            path="/library/bookinstanceform"
+                            component={BookInstanceForm}
+                        />
+                        <Route
+                            exact
+                            path="/library/issuebookform"
+                            component={IssueBookForm}
+                        />
+                    </Suspense>
+                </Switch>
+            </Fragment>
+        );
+    }
 }
 
 export default Library;

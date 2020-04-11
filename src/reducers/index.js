@@ -15,18 +15,18 @@ import assignments from "./assignments/assignments";
 import assignment_files from "./assignments/assignment_files";
 
 export default combineReducers({
-  authReducer: auth,
-  errorsReducer: errors,
-  messagesReducer: messages,
-  booksReducer: books,
-  libraryAnalyticsReducer: analytics,
-  studentsReducer: students,
-  subjectsReducer: subjects,
-  classesReducer: classes,
-  streamsReducer: streams,
-  classNumeralsReducer: classNumerals,
-  dormitoriesReducer: dormitories,
-  examinationsReducer: examinations,
-  assignmentsReducer: assignments,
-  assignmentFilesReducer: assignment_files
+    authReducer: auth,
+    errorsReducer: errors,
+    messagesReducer: messages,
+    booksReducer: books,
+    libraryAnalyticsReducer: analytics,
+    studentsReducer: students,
+    subjectsReducer: subjects,
+    classesReducer: classes,
+    streamsReducer: streams,
+    classNumeralsReducer: classNumerals,
+    dormitoriesReducer: dormitories,
+    examinationsReducer: examinations,
+    assignmentsReducer: assignments,
+    assignmentFilesReducer: assignment_files
 });

@@ -8,15 +8,15 @@ import { tokenConfig } from "../auth/auth";
 
 // GET CLASSES
 export const getClasses = () => (dispatch, getState) => {
-  axios
-    .get(URL.concat("/api/v2.0/academics/classes/"), tokenConfig(getState))
-    .then(res => {
-      dispatch({
-        type: GET_CLASSES,
-        payload: res.data
-      });
-    })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    axios
+        .get(URL.concat("/api/v2.0/academics/classes/"), tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: GET_CLASSES,
+                payload: res.data
+            });
+        })
+        .catch(err =>
+            dispatch(returnErrors(err.response.data, err.response.status))
+        );
 };
