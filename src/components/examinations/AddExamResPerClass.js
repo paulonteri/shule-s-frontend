@@ -116,7 +116,7 @@ export const AddExamResPerClass = (props) => {
               onFinish={onFinish}
             >
               {props.students
-                .filter((x) => (x.classns = classs))
+                .filter((x) => (x.class_ns === classs))
                 .map((stud) => {
                   return (
                     <Form.Item
