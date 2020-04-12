@@ -77,66 +77,6 @@ function AddExamResPerStudent(props) {
 
     const onFinishFailed = () => {};
 
-    // Show Subject Inputs
-    function ShowSubjectInputs() {
-        if (student == null || exam == null) {
-            return (
-                <Empty
-                    className="pt-2"
-                    description={<span>Select Exam & Student</span>}
-                />
-            );
-        } else {
-            return (
-                <Form
-                    form={form}
-                    name="studentresults"
-                    initialValues={{
-                        remember: true
-                    }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    className="container-sm"
-                >
-                    {props.subjects.map(subject => {
-                        return (
-                            <div key={subject.id} className="row-sm pl-1">
-                                <Form.Item
-                                    key={subject.id}
-                                    label={subject.name}
-                                    name={subject.id}
-                                    disabled={DisableInputs}
-                                >
-                                    <InputNumber
-                                        name={subject.id}
-                                        disabled={DisableInputs()}
-                                        max={100}
-                                        min={1}
-                                        size="small"
-                                    />
-                                </Form.Item>
-                            </div>
-                        );
-                    })}
-                    <div className="row-sm">
-                        <Form.Item>
-                            <Button
-                                type="primary"
-                                htmlType="submit"
-                                disabled={CheckStudentExam()}
-                                loading={props.uploadingExamResultsPerStudent}
-                            >
-                                Submit Results
-                            </Button>
-                        </Form.Item>
-                    </div>
-                </Form>
-            );
-        }
-    }
-
-    //
-
     //
 
     //
@@ -213,6 +153,66 @@ function AddExamResPerStudent(props) {
             </div>
         </div>
     );
+
+    // Show Subject Inputs
+    function ShowSubjectInputs() {
+        if (student == null || exam == null) {
+            return (
+                <Empty
+                    className="pt-2"
+                    description={<span>Select Exam & Student</span>}
+                />
+            );
+        } else {
+            return (
+                <Form
+                    form={form}
+                    name="studentresults"
+                    initialValues={{
+                        remember: true
+                    }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    className="container-sm"
+                >
+                    {props.subjects.map(subject => {
+                        return (
+                            <div key={subject.id} className="row-sm pl-1">
+                                <Form.Item
+                                    key={subject.id}
+                                    label={subject.name}
+                                    name={subject.id}
+                                    disabled={DisableInputs}
+                                >
+                                    <InputNumber
+                                        name={subject.id}
+                                        disabled={DisableInputs()}
+                                        max={100}
+                                        min={1}
+                                        size="small"
+                                    />
+                                </Form.Item>
+                            </div>
+                        );
+                    })}
+                    <div className="row-sm">
+                        <Form.Item>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                disabled={CheckStudentExam()}
+                                loading={props.uploadingExamResultsPerStudent}
+                            >
+                                Submit Results
+                            </Button>
+                        </Form.Item>
+                    </div>
+                </Form>
+            );
+        }
+    }
+
+    //
 
     //
     function setStud(i) {

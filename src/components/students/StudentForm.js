@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+// TODO: add date constraints
+
+// Disabled Time(DOB)
+// current > moment().subtract(5,'years');
+
+// Disabled Time(DOA)
+// current > moment().
+
 import { Form, Input, Button, Checkbox, DatePicker } from "antd";
 import {
     UserOutlined,
@@ -15,6 +23,7 @@ import {
 import { addStudent } from "../../actions/students/students";
 import { getClasses } from "../../actions/classes/classes";
 import { getDorms } from "../../actions/dormitories/dormitories";
+const { TextArea } = Input;
 
 ////// COMPONENT START ///////////
 export class StudentsForm extends Component {
@@ -686,8 +695,8 @@ export class StudentsForm extends Component {
                     <div className="row">
                         <div className="col-lg-9">
                             <Form.Item name="health">
-                                <Input
-                                    type="text"
+                                <TextArea
+                                    rows={3}
                                     placeholder="Any health issue"
                                     name="health"
                                     onChange={this.onChange}
@@ -723,6 +732,7 @@ export class StudentsForm extends Component {
                             <Form.Item name="admission_date">
                                 <DatePicker
                                     placeholder="Date of Admission"
+                                    showToday
                                     onChange={(date, dateString) =>
                                         this.handleDate(
                                             dateString,
