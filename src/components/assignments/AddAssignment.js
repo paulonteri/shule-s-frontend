@@ -5,7 +5,6 @@ import moment from "moment";
 import { Form, Button, DatePicker, Input, Upload, Divider } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { addAssignment } from "../../actions/assignments/assignments";
-import { addAssignmentFile } from "../../actions/assignments/assignment_files";
 
 const { TextArea } = Input;
 
@@ -265,6 +264,6 @@ const mapStateToProps = state => ({
     uploadedAssignments: state.assignmentsReducer.uploadedAssignments
 });
 
-export default connect(mapStateToProps, { addAssignment, addAssignmentFile })(
+export default connect(mapStateToProps, { addAssignment })(
     AddAssignment
 );

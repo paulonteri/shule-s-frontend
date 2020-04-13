@@ -12,7 +12,7 @@ import subjects from "./subjects/subject";
 import analytics from "./library/analytics";
 import examinations from "./examinations/examinations";
 import assignments from "./assignments/assignments";
-import assignment_files from "./assignments/assignment_files";
+
 
 export default combineReducers({
     authReducer: auth,
@@ -28,5 +28,4 @@ export default combineReducers({
     dormitoriesReducer: dormitories,
     examinationsReducer: examinations,
     assignmentsReducer: assignments,
-    assignmentFilesReducer: assignment_files
 });
