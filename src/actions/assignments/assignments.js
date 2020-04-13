@@ -38,7 +38,7 @@ export const addAssignment = assignment => (dispatch, getState) => {
             tokenConfig(getState)
         )
         .then(res => {
-            dispatch(createMessage({ addBook: "Class Results Saved" }));
+            dispatch(createMessage({ addBook: "Assignment Saved" }));
             dispatch({
                 type: ADD_ASSIGNMENT_SUCCESS,
                 payload: res.data

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import moment from "moment";
+import moment, { isMoment } from "moment";
 import { Form, Button, DatePicker, Input, Upload, Divider } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { addAssignment } from "../../actions/assignments/assignments";
@@ -35,32 +35,40 @@ function AddAssignment(props) {
 
     // OnSubmit
     const onFinishDetails = assignment => {
-        console.log(assignment);
-        console.log(assignment.name);
-        console.log(file1);
-        console.log(file2);
-        console.log(file3);
-        console.log("Files");
+        // create formData
+        const data = new FormData();
+        for (let i of Object.entries(assignment)) {
+            if (i[1] == null) {
+            } else {
+                if (isMoment(i[1])) {
+                    data.append(i[0], i[1].toISOString());
+                } else {
+                    data.append(i[0], i[1]);
+                }
+            }
+        }
+        if (file1 !== null) {
+            data.append("file1", file1);
+        }
+        if (file2 !== null) {
+            data.append("file2", file2);
+        }
+        if (file3 !== null) {
+            data.append("file3", file3);
+        }
+
+        // save Data
+        props.addAssignment(data);
+
+        form.resetFields();
+        form2.resetFields();
     };
 
     const onFinishFailedDetails = () => {};
 
-    // OnSubmit
-    const onFinishFiles = assignment => {
-        console.log(file1);
-        console.log(file2);
-        console.log(file3);
-        console.log("Files");
-    };
-
-    const onFinishFailedFiles = () => {};
-
     return (
-        <div>
-            <p>Form</p>
-            <div className=" container card pt-3 ">
-                <AddAssignmentDetails />
-            </div>
+        <div className=" container card pt-3 ">
+            <AddAssignmentDetails />
         </div>
     );
 
@@ -77,22 +85,28 @@ function AddAssignment(props) {
                 onFinishFailed={onFinishFailedDetails}
             >
                 <Form.Item label="Name" name="name">
-                    <Input size="small" disabled={props.uploadingAssignments} />
+                    <Input
+                        size="small"
+                        placeholder="A relatable name for the task"
+                        disabled={props.uploadingAssignments}
+                    />
                 </Form.Item>
                 <Form.Item label="Description" name="description">
                     <TextArea
                         size="small"
                         rows={4}
                         disabled={props.uploadingAssignments}
+                        placeholder="Issue instructions and guidelines on what is and how to do the task"
                     />
                 </Form.Item>
-                <Form.Item label="Time Issued" name="time_issued">
+                <Form.Item label="Time Start" name="time_starts">
                     <DatePicker
                         size="small"
-                        placeholder="Time Issued"
+                        placeholder="The time the students will start"
                         showTime
                         disabled={props.uploadingAssignments}
                         disabledDate={disabledDate}
+                        format="YYYY-MM-DD HH:mm:ss"
                     />
                 </Form.Item>
                 <Form.Item label="Time Required" name="time_required">
@@ -121,8 +135,6 @@ function AddAssignment(props) {
                         initialValues={{
                             remember: true
                         }}
-                        onFinish={onFinishFiles}
-                        onFinishFailed={onFinishFailedFiles}
                     >
                         <div className="row ">
                             <div className="col-xs-4 m-auto">
@@ -264,6 +276,4 @@ const mapStateToProps = state => ({
     uploadedAssignments: state.assignmentsReducer.uploadedAssignments
 });
 
-export default connect(mapStateToProps, { addAssignment })(
-    AddAssignment
-);
+export default connect(mapStateToProps, { addAssignment })(AddAssignment);
