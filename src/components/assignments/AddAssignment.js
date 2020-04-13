@@ -2,8 +2,10 @@ import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
-import { Form, Button, DatePicker, Input, Upload } from "antd";
+import { Form, Button, DatePicker, Input, Upload, Divider } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
+import { addAssignment } from "../../actions/assignments/assignments";
+import { addAssignmentFile } from "../../actions/assignments/assignment_files";
 
 const { TextArea } = Input;
 
@@ -35,14 +37,20 @@ function AddAssignment(props) {
     // OnSubmit
     const onFinishDetails = assignment => {
         console.log(assignment);
+        console.log(assignment.name);
+        console.log(file1);
+        console.log(file2);
+        console.log(file3);
+        console.log("Files");
     };
 
     const onFinishFailedDetails = () => {};
 
     // OnSubmit
     const onFinishFiles = assignment => {
-        console.log(assignment);
         console.log(file1);
+        console.log(file2);
+        console.log(file3);
         console.log("Files");
     };
 
@@ -51,9 +59,8 @@ function AddAssignment(props) {
     return (
         <div>
             <p>Form</p>
-            <div className=" container ">
+            <div className=" container card pt-3 ">
                 <AddAssignmentDetails />
-                <AssignmentFiles />
             </div>
         </div>
     );
@@ -71,32 +78,120 @@ function AddAssignment(props) {
                 onFinishFailed={onFinishFailedDetails}
             >
                 <Form.Item label="Name" name="name">
-                    <Input />
+                    <Input size="small" disabled={props.uploadingAssignments} />
                 </Form.Item>
                 <Form.Item label="Description" name="description">
-                    <TextArea rows={4} />
+                    <TextArea
+                        size="small"
+                        rows={4}
+                        disabled={props.uploadingAssignments}
+                    />
                 </Form.Item>
                 <Form.Item label="Time Issued" name="time_issued">
                     <DatePicker
+                        size="small"
                         placeholder="Time Issued"
                         showTime
+                        disabled={props.uploadingAssignments}
                         disabledDate={disabledDate}
                     />
                 </Form.Item>
                 <Form.Item label="Time Required" name="time_required">
                     <DatePicker
-                        placeholder="Time Required"
+                        size="small"
+                        placeholder="Submission Deadline"
+                        disabled={props.uploadingAssignments}
                         showTime
                         defaultPickerValue={moment().endOf("minute")}
                         renderExtraFooter={() =>
                             "Select deadline for collection"
                         }
                         disabledDate={disabledDate}
-                        disabledTime={disabledDateTime}
                     />
                 </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
+
+                <div>
+                    <Divider>Add Files</Divider>
+                </div>
+
+                <div className="container text-center">
+                    <Form
+                        form={form2}
+                        alignment="inline"
+                        name="assignment_files"
+                        initialValues={{
+                            remember: true
+                        }}
+                        onFinish={onFinishFiles}
+                        onFinishFailed={onFinishFailedFiles}
+                    >
+                        <div className="row ">
+                            <div className="col-xs-4 m-auto">
+                                <Form.Item name="file1">
+                                    <Upload
+                                        listType="picture-card"
+                                        disabled={props.uploadingAssignments}
+                                        className="avatar-uploader"
+                                        showUploadList={false}
+                                        beforeUpload={e =>
+                                            beforeUpload(e, "file1")
+                                        }
+                                    >
+                                        {false ? (
+                                            <p>Upload</p>
+                                        ) : (
+                                            <UploadButton />
+                                        )}
+                                    </Upload>
+                                </Form.Item>
+                            </div>
+                            <div className="col-xs-4 m-auto">
+                                <Form.Item name="file2">
+                                    <Upload
+                                        listType="picture-card"
+                                        disabled={props.uploadingAssignments}
+                                        className="avatar-uploader"
+                                        showUploadList={false}
+                                        beforeUpload={e =>
+                                            beforeUpload(e, "file2")
+                                        }
+                                    >
+                                        {false ? (
+                                            <p>Upload</p>
+                                        ) : (
+                                            <UploadButton />
+                                        )}
+                                    </Upload>
+                                </Form.Item>
+                            </div>
+                            <div className="col-xs-4 m-auto">
+                                <Form.Item name="file3">
+                                    <Upload
+                                        listType="picture-card"
+                                        disabled={props.uploadingAssignments}
+                                        className="avatar-uploader"
+                                        showUploadList={false}
+                                        beforeUpload={e =>
+                                            beforeUpload(e, "file3")
+                                        }
+                                    >
+                                        {false ? (
+                                            <p>Upload</p>
+                                        ) : (
+                                            <UploadButton />
+                                        )}
+                                    </Upload>
+                                </Form.Item>
+                            </div>
+                        </div>
+                    </Form>
+                </div>
+                <Form.Item {...tailLayout}>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={props.uploadingAssignments}
+                    >
                         Save
                     </Button>
                 </Form.Item>
@@ -116,19 +211,6 @@ function AddAssignment(props) {
             result.push(i);
         }
         return result;
-    }
-
-    // disabledTime
-    function disabledDateTime(current) {
-        const curr_time = moment()
-            .endOf("minute")
-            .add(10, "m");
-        const startHour = curr_time.hours();
-        const startMinute = curr_time.minute();
-        return {
-            disabledHours: () => range(0, startHour),
-            disabledMinutes: () => range(0, startMinute)
-        };
     }
 
     //
@@ -156,57 +238,6 @@ function AddAssignment(props) {
         return false;
     }
 
-    function AssignmentFiles() {
-        return (
-            <Form
-                form={form2}
-                {...layout}
-                name="assignment_files"
-                initialValues={{
-                    remember: true
-                }}
-                onFinish={onFinishFiles}
-                onFinishFailed={onFinishFailedFiles}
-            >
-                <Form.Item  name="file1">
-                    <Upload
-                        listType="picture-card"
-                        className="avatar-uploader"
-                        showUploadList={false}
-                        beforeUpload={e => beforeUpload(e, "file1")}
-                    >
-                        {false ? <p>Upload</p> : <UploadButton />}
-                    </Upload>
-                </Form.Item>
-                <Form.Item  name="file2">
-                    <Upload
-                        listType="picture-card"
-                        className="avatar-uploader"
-                        showUploadList={false}
-                        beforeUpload={e => beforeUpload(e, "file2")}
-                    >
-                        {false ? <p>Upload</p> : <UploadButton />}
-                    </Upload>
-                </Form.Item><Form.Item  name="file3">
-                <Upload
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    beforeUpload={e => beforeUpload(e, "file3")}
-                >
-                    {false ? <p>Upload</p> : <UploadButton />}
-                </Upload>
-            </Form.Item>
-
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Save
-                    </Button>
-                </Form.Item>
-            </Form>
-        );
-    }
-
     function UploadButton() {
         return (
             <Fragment>
@@ -229,6 +260,11 @@ AddAssignment.propTypes = {
     prop: PropTypes
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    uploadingAssignments: state.assignmentsReducer.uploadingAssignments,
+    uploadedAssignments: state.assignmentsReducer.uploadedAssignments
+});
 
-export default connect(mapStateToProps)(AddAssignment);
+export default connect(mapStateToProps, { addAssignment, addAssignmentFile })(
+    AddAssignment
+);
