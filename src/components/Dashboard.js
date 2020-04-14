@@ -16,7 +16,8 @@ import {
     IdcardOutlined,
     ReadOutlined,
     TeamOutlined,
-    FileProtectOutlined
+    FileProtectOutlined,
+    FormOutlined
 } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
@@ -28,6 +29,7 @@ const Classes = React.lazy(() => import("./classes/Classes"));
 const Dormitories = React.lazy(() => import("./dormitories/Dormitories"));
 const Examinations = React.lazy(() => import("./examinations/Examinations"));
 const Register = React.lazy(() => import("./accounts/Register"));
+const Assignments = React.lazy(() => import("./assignments/Assignments"));
 
 export class Dashboard extends Component {
     state = {
@@ -231,6 +233,27 @@ export class Dashboard extends Component {
                                     </Link>
                                 </Menu.Item>
                             </SubMenu>
+                                                        {/* examinations SubMenu */}
+                            <SubMenu
+                                key="sub5"
+                                title={
+                                    <span>
+                                       <FormOutlined />
+                                        <span> Assignments </span>
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="51">
+
+                                    <Link
+                                        onClick={this.onClick}
+                                        to="/assignments/add"
+                                    >
+                                        Issue Assignment
+                                    </Link>
+                                </Menu.Item>
+
+                            </SubMenu>
                         </Menu>
                     </Sider>
                     <Layout className="site-layout">
@@ -271,7 +294,7 @@ export class Dashboard extends Component {
                             className="mt-3 px-4"
                             style={{
                                 margin: "1px",
-                                minHeight: "70vh"
+
                             }}
                         >
                             <Switch>
@@ -310,6 +333,10 @@ export class Dashboard extends Component {
                                     <PrivateRoute
                                         path="/examinations"
                                         component={Examinations}
+                                    />
+                                    <PrivateRoute
+                                        path="/assignments"
+                                        component={Assignments}
                                     />
                                 </Suspense>
                                 <Route component={Error404} />
