@@ -7,18 +7,17 @@ const Error404 = React.lazy(() => import("../common/Error404"));
 
 const Assignments = () => {
     return (
-        <Fragment>
+        <Suspense fallback={<Spinner />}>
             <Switch>
-                <Suspense fallback={<Spinner />}>
-                    <Route
-                        exact
-                        path="/assignments/add"
-                        component={AddAssignment}
-                    />
-                    <Route component={Error404} />
-                </Suspense>
+                <Route exact path="/assignments" component={AddAssignment} />
+                <Route
+                    exact
+                    path="/assignments/add"
+                    component={AddAssignment}
+                />
+                <Route component={Error404} />
             </Switch>
-        </Fragment>
+        </Suspense>
     );
 };
 
