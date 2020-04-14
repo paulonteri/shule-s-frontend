@@ -1,8 +1,16 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment, { isMoment } from "moment";
-import { Form, Button, DatePicker, Input, Upload, Divider } from "antd";
+import {
+    Form,
+    Button,
+    DatePicker,
+    Input,
+    Upload,
+    Divider,
+    message
+} from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { addAssignment } from "../../actions/assignments/assignments";
 
@@ -13,13 +21,14 @@ const layout = {
         span: 5
     },
     wrapperCol: {
-        span: 15
+        span: 13
     }
 };
+
 const tailLayout = {
     wrapperCol: {
         offset: 5,
-        span: 15
+        span: 13
     }
 };
 
@@ -62,6 +71,9 @@ function AddAssignment(props) {
 
         form.resetFields();
         form2.resetFields();
+        setFile1(null);
+        setFile2(null);
+        setFile3(null);
     };
 
     const onFinishFailedDetails = () => {};
@@ -84,14 +96,35 @@ function AddAssignment(props) {
                 onFinish={onFinishDetails}
                 onFinishFailed={onFinishFailedDetails}
             >
-                <Form.Item label="Name" name="name">
+                <Form.Item
+                    label="Name"
+                    hasFeedback
+                    name="name"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please give the task a name!"
+                        }
+                    ]}
+                >
                     <Input
                         size="small"
                         placeholder="A relatable name for the task"
                         disabled={props.uploadingAssignments}
                     />
                 </Form.Item>
-                <Form.Item label="Description" name="description">
+                <Form.Item
+                    label="Description"
+                    name="description"
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message:
+                                "Please give the a small description on what the task involves!"
+                        }
+                    ]}
+                >
                     <TextArea
                         size="small"
                         rows={4}
@@ -99,7 +132,18 @@ function AddAssignment(props) {
                         placeholder="Issue instructions and guidelines on what is and how to do the task"
                     />
                 </Form.Item>
-                <Form.Item label="Time Start" name="time_starts">
+                <Form.Item
+                    label="Time to Start"
+                    name="time_starts"
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message:
+                                "Please select the time when the task starts!"
+                        }
+                    ]}
+                >
                     <DatePicker
                         size="small"
                         placeholder="The time the students will start"
@@ -109,7 +153,32 @@ function AddAssignment(props) {
                         format="YYYY-MM-DD HH:mm:ss"
                     />
                 </Form.Item>
-                <Form.Item label="Time Required" name="time_required">
+                <Form.Item
+                    label="Time Required"
+                    name="time_required"
+                    dependencies={["time_starts"]}
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message:
+                                "Please select the deadline for completion!"
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                                if (
+                                    !value ||
+                                    getFieldValue("time_starts").isBefore(value)
+                                ) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(
+                                    "The time the task is required should be before it starts!"
+                                );
+                            }
+                        })
+                    ]}
+                >
                     <DatePicker
                         size="small"
                         placeholder="Submission Deadline"
@@ -140,6 +209,7 @@ function AddAssignment(props) {
                             <div className="col-xs-4 m-auto">
                                 <Form.Item name="file1">
                                     <Upload
+                                        accept="image/*,text/*,video/*,audio/*"
                                         listType="picture-card"
                                         disabled={props.uploadingAssignments}
                                         className="avatar-uploader"
@@ -148,10 +218,10 @@ function AddAssignment(props) {
                                             beforeUpload(e, "file1")
                                         }
                                     >
-                                        {false ? (
-                                            <p>Upload</p>
+                                        {file1 == null ? (
+                                            <UploadButton pops={file1} />
                                         ) : (
-                                            <UploadButton />
+                                            <p>{file1.name}</p>
                                         )}
                                     </Upload>
                                 </Form.Item>
@@ -159,6 +229,7 @@ function AddAssignment(props) {
                             <div className="col-xs-4 m-auto">
                                 <Form.Item name="file2">
                                     <Upload
+                                        accept="image/*,text/*,video/*,audio/*"
                                         listType="picture-card"
                                         disabled={props.uploadingAssignments}
                                         className="avatar-uploader"
@@ -167,10 +238,10 @@ function AddAssignment(props) {
                                             beforeUpload(e, "file2")
                                         }
                                     >
-                                        {false ? (
-                                            <p>Upload</p>
-                                        ) : (
+                                        {file2 == null ? (
                                             <UploadButton />
+                                        ) : (
+                                            <p>{file2.name}</p>
                                         )}
                                     </Upload>
                                 </Form.Item>
@@ -178,6 +249,7 @@ function AddAssignment(props) {
                             <div className="col-xs-4 m-auto">
                                 <Form.Item name="file3">
                                     <Upload
+                                        accept="image/*,text/*,video/*,audio/*"
                                         listType="picture-card"
                                         disabled={props.uploadingAssignments}
                                         className="avatar-uploader"
@@ -186,10 +258,10 @@ function AddAssignment(props) {
                                             beforeUpload(e, "file3")
                                         }
                                     >
-                                        {false ? (
-                                            <p>Upload</p>
-                                        ) : (
+                                        {file3 == null ? (
                                             <UploadButton />
+                                        ) : (
+                                            <p>{file3.name}</p>
                                         )}
                                     </Upload>
                                 </Form.Item>
@@ -197,7 +269,7 @@ function AddAssignment(props) {
                         </div>
                     </Form>
                 </div>
-                <Form.Item {...tailLayout}>
+                <Form.Item {...tailLayout} className="text-center">
                     <Button
                         type="primary"
                         htmlType="submit"
@@ -232,27 +304,54 @@ function AddAssignment(props) {
 
     // BEFORE UPLOAD
     function beforeUpload(docFile, name) {
-        switch (name) {
-            case "file1":
-                setFile1(docFile);
-                console.log("FIle 1");
-                break;
-            case "file2":
-                setFile2(docFile);
-                break;
-            case "file3":
-                setFile3(docFile);
-                break;
-            default:
-                console.log("Def");
+        function errorF() {
+            switch (name) {
+                case "file1":
+                    setFile1(null);
+                    break;
+                case "file2":
+                    setFile2(null);
+                    break;
+                case "file3":
+                    setFile3(null);
+                    break;
+            }
         }
-        return false;
+        // Name length
+        if (docFile.name.length > 99) {
+            message.error(
+                "Ensure the filename is no longer than 100 characters!"
+            );
+            errorF();
+            return false;
+        } else {
+            // File Size
+            let size = docFile.size / 1024 / 1024;
+            if (size > 50) {
+                message.error(`File size (${Math.floor(size)} mb) too large!`);
+                errorF();
+                return false;
+            } else {
+                switch (name) {
+                    case "file1":
+                        setFile1(docFile);
+                        break;
+                    case "file2":
+                        setFile2(docFile);
+                        break;
+                    case "file3":
+                        setFile3(docFile);
+                        break;
+                }
+                return false;
+            }
+        }
     }
 
-    function UploadButton() {
+    function UploadButton(pops) {
         return (
             <Fragment>
-                {false ? (
+                {props.uploadingAssignments ? (
                     <LoadingOutlined style={{ fontSize: "25px" }} />
                 ) : (
                     <Fragment>
@@ -268,7 +367,9 @@ function AddAssignment(props) {
 }
 
 AddAssignment.propTypes = {
-    prop: PropTypes
+    uploadedAssignments: PropTypes.bool.isRequired,
+    uploadingAssignments: PropTypes.bool.isRequired,
+    addAssignment: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
