@@ -20,7 +20,6 @@ import {
     getExamResultsAll,
     getExamResultsPerClassPerExam
 } from "../../actions/examinations/examinations";
-import { MehOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
 //
