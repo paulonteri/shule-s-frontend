@@ -233,18 +233,17 @@ export class Dashboard extends Component {
                                     </Link>
                                 </Menu.Item>
                             </SubMenu>
-                                                        {/* examinations SubMenu */}
+                            {/* assignments SubMenu */}
                             <SubMenu
                                 key="sub5"
                                 title={
                                     <span>
-                                       <FormOutlined />
+                                        <FormOutlined />
                                         <span> Assignments </span>
                                     </span>
                                 }
                             >
                                 <Menu.Item key="51">
-
                                     <Link
                                         onClick={this.onClick}
                                         to="/assignments/add"
@@ -252,7 +251,14 @@ export class Dashboard extends Component {
                                         Issue Assignment
                                     </Link>
                                 </Menu.Item>
-
+                                <Menu.Item key="52">
+                                    <Link
+                                        onClick={this.onClick}
+                                        to="/assignments/all"
+                                    >
+                                        All Assignments
+                                    </Link>
+                                </Menu.Item>
                             </SubMenu>
                         </Menu>
                     </Sider>
@@ -293,8 +299,7 @@ export class Dashboard extends Component {
                         <Content
                             className="mt-3 px-4"
                             style={{
-                                margin: "1px",
-
+                                margin: "1px"
                             }}
                         >
                             <Switch>

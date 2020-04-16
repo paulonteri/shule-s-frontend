@@ -64,19 +64,23 @@ export const AssignmentsTable = props => {
                     dataSource={props.assignments}
                     bordered
                     title={() => "Assignments Table"}
-                    footer={() => "Assignments"}
                     size="small"
-                    pagination={{ pageSize: 11 }}
+                    pagination={{ pageSize: 9 }}
+                    scroll={{ x: 900 }}
                 >
                     <Column
                         title="Title"
                         dataIndex="name"
                         key="name"
+                        fixed="left"
+                        width={150}
+                        sorter={(a, b) => a.name.localeCompare(b.name)}
                         {...searchFunction("name")}
                     />
                     <Column
                         title="Time Added"
                         key="time_added"
+                        ellipsis="true"
                         defaultSortOrder="descend"
                         sorter={(a, b) =>
                             new Date(a.time_added) - new Date(b.time_added)
@@ -99,6 +103,7 @@ export const AssignmentsTable = props => {
                     <Column
                         title="Starting Time"
                         key="time_starts"
+                        ellipsis="true"
                         sorter={(a, b) =>
                             new Date(a.time_starts) - new Date(b.time_starts)
                         }
@@ -124,7 +129,6 @@ export const AssignmentsTable = props => {
                                     }
                                 >
                                     <a>
-                                        {" "}
                                         <Text type="danger">Delete</Text>
                                     </a>
                                 </Popconfirm>
