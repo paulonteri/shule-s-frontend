@@ -1,7 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Table, Popconfirm, Typography, Input, Button } from "antd";
+import {
+    Table,
+    Popconfirm,
+    Typography,
+    Input,
+    Button,
+    Skeleton,
+    Empty
+} from "antd";
 import moment from "moment";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
@@ -25,7 +33,32 @@ export const AssignmentsTable = props => {
     let searchInput;
 
     return (
-        <div style={{ minHeight: "100vh" }}>
+        <Fragment>
+            {props.assignmentsLoading ? <Loading /> : <Content />}
+        </Fragment>
+    );
+
+    function Content() {
+        return (
+            <Fragment>
+                {props.assignments.length > 1 ? (
+                    <DetailTable />
+                ) : (
+                    <div
+                        className="card mt-3 pt-5 px-sm-5 shadow container-fluid"
+                        style={{ minHeight: "65vh" }}
+                    >
+                        <Empty
+                            description={<span>Add assignments first</span>}
+                        />
+                    </div>
+                )}
+            </Fragment>
+        );
+    }
+
+    function DetailTable() {
+        return (
             <div className="table-responsive card card-body shadow rounded mb-1">
                 <Table
                     dataSource={props.assignments}
@@ -100,8 +133,21 @@ export const AssignmentsTable = props => {
                     />
                 </Table>
             </div>
-        </div>
-    );
+        );
+    }
+
+    function Loading() {
+        return (
+            <div
+                className="card mt-3 px-sm-5 shadow container-fluid"
+                style={{ minHeight: "65vh" }}
+            >
+                <Skeleton active />
+                <Skeleton active />
+                <Skeleton active />
+            </div>
+        );
+    }
 
     function searchFunction(dataIndex) {
         const getColumnSearchProps = dataIndex => ({
@@ -206,7 +252,8 @@ AssignmentsTable.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    assignments: state.assignmentsReducer.assignments
+    assignments: state.assignmentsReducer.assignments,
+    assignmentsLoading: state.assignmentsReducer.assignmentsLoading
 });
 
 export default connect(mapStateToProps, {
