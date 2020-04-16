@@ -79,7 +79,7 @@ function AddAssignment(props) {
     const onFinishFailedDetails = () => {};
 
     return (
-        <div className=" container card pt-3 ">
+        <div className="container card shadow rounded pt-3 ">
             <AddAssignmentDetails />
         </div>
     );
