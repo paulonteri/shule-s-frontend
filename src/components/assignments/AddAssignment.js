@@ -97,7 +97,7 @@ function AddAssignment(props) {
                 onFinishFailed={onFinishFailedDetails}
             >
                 <Form.Item
-                    label="Name"
+                    label="Title"
                     hasFeedback
                     name="name"
                     rules={[
@@ -133,7 +133,7 @@ function AddAssignment(props) {
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Time to Start"
+                    label="Starting Time"
                     name="time_starts"
                     hasFeedback
                     rules={[
