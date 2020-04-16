@@ -1,23 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Table, Popconfirm, Typography } from "antd";
+import { Table, Popconfirm, Typography, Input, Button } from "antd";
 import moment from "moment";
-
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
 import {
     getAssignments,
     patchAssignment,
     deleteAssignment
 } from "../../actions/assignments/assignments";
-
-const { Column, ColumnGroup } = Table;
-const { Text, Paragraph } = Typography;
+const { Column } = Table;
+const { Text } = Typography;
 
 export const AssignmentsTable = props => {
+    const [searchText, setSearchText] = useState("");
+    const [searchedColumn, setSearchedColumn] = useState("");
+
     // onMount
     useEffect(() => {
         props.getAssignments();
     }, []);
+
+    let searchInput;
 
     return (
         <div style={{ minHeight: "100vh" }}>
@@ -30,7 +35,12 @@ export const AssignmentsTable = props => {
                     size="small"
                     pagination={{ pageSize: 11 }}
                 >
-                    <Column title="Title" dataIndex="name" key="name" />
+                    <Column
+                        title="Title"
+                        dataIndex="name"
+                        key="name"
+                        {...searchFunction("name")}
+                    />
                     <Column
                         title="Time Added"
                         key="time_added"
@@ -51,6 +61,7 @@ export const AssignmentsTable = props => {
                         key="description"
                         ellipsis="true"
                         dataIndex="description"
+                        {...searchFunction("description")}
                     />
                     <Column
                         title="Starting Time"
@@ -91,6 +102,100 @@ export const AssignmentsTable = props => {
             </div>
         </div>
     );
+
+    function searchFunction(dataIndex) {
+        const getColumnSearchProps = dataIndex => ({
+            filterDropdown: ({
+                setSelectedKeys,
+                selectedKeys,
+                confirm,
+                clearFilters
+            }) => (
+                <div style={{ padding: 8 }}>
+                    <Input
+                        ref={node => {
+                            searchInput = node;
+                        }}
+                        placeholder={`Search ${dataIndex}`}
+                        value={selectedKeys[0]}
+                        onChange={e =>
+                            setSelectedKeys(
+                                e.target.value ? [e.target.value] : []
+                            )
+                        }
+                        onPressEnter={() =>
+                            handleSearch(selectedKeys, confirm, dataIndex)
+                        }
+                        style={{
+                            width: 188,
+                            marginBottom: 8,
+                            display: "block"
+                        }}
+                    />
+                    <Button
+                        type="primary"
+                        onClick={() =>
+                            handleSearch(selectedKeys, confirm, dataIndex)
+                        }
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{ width: 90, marginRight: 8 }}
+                    >
+                        Search
+                    </Button>
+                    <Button
+                        onClick={() => handleReset(clearFilters)}
+                        size="small"
+                        style={{ width: 90 }}
+                    >
+                        Reset
+                    </Button>
+                </div>
+            ),
+            filterIcon: filtered => (
+                <SearchOutlined
+                    style={{ color: filtered ? "#1890ff" : undefined }}
+                />
+            ),
+            onFilter: (value, record) =>
+                record[dataIndex]
+                    .toString()
+                    .toLowerCase()
+                    .includes(value.toLowerCase()),
+            onFilterDropdownVisibleChange: visible => {
+                if (visible) {
+                    setTimeout(() => searchInput.select());
+                }
+            },
+            render: text =>
+                searchedColumn === dataIndex ? (
+                    <Highlighter
+                        highlightStyle={{
+                            backgroundColor: "#ffc069",
+                            padding: 0
+                        }}
+                        searchWords={[searchText]}
+                        autoEscape
+                        textToHighlight={text.toString()}
+                    />
+                ) : (
+                    text
+                )
+        });
+
+        const handleSearch = (selectedKeys, confirm, dataIndex) => {
+            confirm();
+            setSearchText(selectedKeys[0]);
+            setSearchedColumn(dataIndex);
+        };
+
+        const handleReset = clearFilters => {
+            clearFilters();
+            setSearchText("");
+        };
+
+        return getColumnSearchProps(dataIndex);
+    }
 };
 
 AssignmentsTable.propTypes = {
