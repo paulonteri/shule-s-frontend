@@ -65,15 +65,14 @@ export const AssignmentsTable = props => {
                     bordered
                     title={() => "Assignments Table"}
                     size="small"
+                    rowKey="id"
                     pagination={{ pageSize: 9 }}
-                    scroll={{ x: 900 }}
                 >
                     <Column
                         title="Title"
                         dataIndex="name"
                         key="name"
-                        fixed="left"
-                        width={150}
+                        width={90}
                         sorter={(a, b) => a.name.localeCompare(b.name)}
                         {...searchFunction("name")}
                     />
@@ -81,6 +80,7 @@ export const AssignmentsTable = props => {
                         title="Time Added"
                         key="time_added"
                         ellipsis="true"
+                        width={80}
                         defaultSortOrder="descend"
                         sorter={(a, b) =>
                             new Date(a.time_added) - new Date(b.time_added)
@@ -97,6 +97,7 @@ export const AssignmentsTable = props => {
                         title="Description"
                         key="description"
                         ellipsis="true"
+                        width={100}
                         dataIndex="description"
                         {...searchFunction("description")}
                     />
@@ -104,6 +105,7 @@ export const AssignmentsTable = props => {
                         title="Starting Time"
                         key="time_starts"
                         ellipsis="true"
+                        width={80}
                         sorter={(a, b) =>
                             new Date(a.time_starts) - new Date(b.time_starts)
                         }
