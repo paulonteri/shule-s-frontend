@@ -1,14 +1,7 @@
 import React, { Component, Suspense, IndexRedirect } from "react";
 import PrivateRoute from "./common/PrivateRoute";
-import {
-    HashRouter as Router,
-    Route,
-    Switch,
-    Redirect,
-    Link
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Spinner from "./common/Spinner";
-import Error404 from "./common/Error404";
 import { Layout, Menu } from "antd";
 import {
     MenuUnfoldOutlined,
@@ -23,6 +16,7 @@ import {
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 const AppFooter = React.lazy(() => import("../layout/AppFooter"));
+const Error404 = React.lazy(() => import("./common/Error404"));
 const Library = React.lazy(() => import("./library/Library"));
 const Students = React.lazy(() => import("./students/Students"));
 const Classes = React.lazy(() => import("./classes/Classes"));
@@ -296,14 +290,9 @@ export class Dashboard extends Component {
                             </div>
                         </Header>
 
-                        <Content
-                            className="mt-3 px-4"
-                            style={{
-                                margin: "1px"
-                            }}
-                        >
-                            <Switch>
-                                <Suspense fallback={<Spinner />}>
+                        <Content className="mt-md-3 mt-2 px-md-3 px-2">
+                            <Suspense fallback={<Spinner />}>
+                                <Switch>
                                     <PrivateRoute
                                         exact
                                         path="/"
@@ -343,9 +332,9 @@ export class Dashboard extends Component {
                                         path="/assignments"
                                         component={Assignments}
                                     />
-                                </Suspense>
-                                <Route component={Error404} />
-                            </Switch>
+                                    <Route component={Error404} />
+                                </Switch>
+                            </Suspense>
                         </Content>
                         <Suspense fallback={<Spinner />}>
                             <AppFooter />
