@@ -2,9 +2,15 @@ import axios from "axios";
 import { URL } from "../url";
 
 import {
-    GET_CLASSNUMERALS,
-    ADD_CLASSNUMERAL,
-    DELETE_CLASSNUMERAL
+    GET_CLASS_NUMERALS_SUCCESS,
+    ADD_CLASS_NUMERAL_SUCCESS,
+    DELETE_CLASS_NUMERAL_SUCCESS,
+    ADD_CLASS_NUMERAL_LOADING,
+    ADD_CLASS_NUMERAL_FAIL,
+    GET_CLASS_NUMERALS_LOADING,
+    GET_CLASS_NUMERALS_FAIL,
+    DELETE_CLASS_NUMERAL_FAIL,
+    DELETE_CLASS_NUMERAL_LOADING
 } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
@@ -12,6 +18,7 @@ import { tokenConfig } from "../auth/auth";
 
 // GET CLASS NUMERAL
 export const getClassNumeral = () => (dispatch, getState) => {
+    dispatch({ type: GET_CLASS_NUMERALS_LOADING });
     axios
         .get(
             URL.concat("/api/v2.0/academics/classNumeral/"),
@@ -19,17 +26,19 @@ export const getClassNumeral = () => (dispatch, getState) => {
         )
         .then(res => {
             dispatch({
-                type: GET_CLASSNUMERALS,
+                type: GET_CLASS_NUMERALS_SUCCESS,
                 payload: res.data
             });
         })
-        .catch(err =>
-            dispatch(returnErrors(err.response.data, err.response.status))
-        );
+        .catch(err => {
+            dispatch({ type: GET_CLASS_NUMERALS_FAIL });
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
 };
 
 // ADD CLASS NUMERAL
 export const addClassNumeral = classNumeral => (dispatch, getState) => {
+    dispatch({ type: ADD_CLASS_NUMERAL_LOADING });
     axios
         .post(
             URL.concat("/api/v2.0/academics/classNumeral/"),
@@ -39,17 +48,19 @@ export const addClassNumeral = classNumeral => (dispatch, getState) => {
         .then(res => {
             dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
             dispatch({
-                type: ADD_CLASSNUMERAL,
+                type: ADD_CLASS_NUMERAL_SUCCESS,
                 payload: res.data
             });
         })
-        .catch(err =>
-            dispatch(returnErrors(err.response.data, err.response.status))
-        );
+        .catch(err => {
+            dispatch({ type: ADD_CLASS_NUMERAL_FAIL });
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
 };
 
 // DELETE CLASS NUMERAL
 export const deleteClassNumeral = name => (dispatch, getState) => {
+    dispatch({ type: DELETE_CLASS_NUMERAL_LOADING });
     axios
         .delete(
             URL.concat(`/api/v2.0/academics/classNumeral/${name}`),
@@ -60,11 +71,12 @@ export const deleteClassNumeral = name => (dispatch, getState) => {
                 createMessage({ deleteClassNumeral: "Class Numeral Deleted!" })
             );
             dispatch({
-                type: DELETE_CLASSNUMERAL,
+                type: DELETE_CLASS_NUMERAL_SUCCESS,
                 payload: res.data
             });
         })
-        .catch(err =>
-            dispatch(returnErrors(err.response.data, err.response.status))
-        );
+        .catch(err => {
+            dispatch({ type: DELETE_CLASS_NUMERAL_FAIL });
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
 };
