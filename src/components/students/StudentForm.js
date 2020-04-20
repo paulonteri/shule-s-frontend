@@ -148,7 +148,7 @@ export class StudentsForm extends Component {
 
     render() {
         return (
-            <div className=" card card-body shadow rounded my-1 mx-2 container-fluid">
+            <div className="card card-body shadow rounded container">
                 <h5>Fill in a student's details</h5>
                 <Form
                     onFinish={this.handleSubmit}
@@ -161,7 +161,7 @@ export class StudentsForm extends Component {
                 >
                     {/* First Name */}
                     <div className="row">
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="first_name"
                                 rules={[
@@ -187,7 +187,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Family Name */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="surname"
                                 rules={[
@@ -213,7 +213,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Other Name */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="other_name">
                                 <Input
                                     prefix={
@@ -230,7 +230,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* date_of_birth  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="date_of_birth">
                                 <DatePicker
                                     placeholder="Date of Birth"
@@ -247,7 +247,7 @@ export class StudentsForm extends Component {
 
                     <div className="row">
                         {/* Student ID  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="student_id"
                                 rules={[
@@ -275,7 +275,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Class */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="class_ns"
                                 rules={[
@@ -314,7 +314,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Dorm  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="dormitory">
                                 <select
                                     className="custom-select custom-select-sm"
@@ -338,7 +338,7 @@ export class StudentsForm extends Component {
                             </Form.Item>
                         </div>
                         {/* Gender */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="gender"
                                 rules={[
@@ -371,7 +371,7 @@ export class StudentsForm extends Component {
                     <div className="row">
                         {/* Country */}
 
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="home_country">
                                 <Input
                                     type="text"
@@ -384,7 +384,7 @@ export class StudentsForm extends Component {
 
                         {/* County */}
 
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="home_county">
                                 <Input
                                     type="text"
@@ -397,7 +397,7 @@ export class StudentsForm extends Component {
 
                         {/* Town*/}
 
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="home_town">
                                 <Input
                                     type="text"
@@ -410,7 +410,7 @@ export class StudentsForm extends Component {
 
                         {/* Religion */}
 
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="religion">
                                 <Input
                                     type="text"
@@ -432,7 +432,7 @@ export class StudentsForm extends Component {
                     {/* Father First Name */}
 
                     <div className="row">
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="father_first_name"
                                 rules={[
@@ -458,7 +458,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Father Sir Name  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="father_surname"
                                 rules={[
@@ -502,7 +502,7 @@ export class StudentsForm extends Component {
 
                     <div className="row">
                         {/* Father Phone  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="father_phone"
                                 rules={[
@@ -530,7 +530,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Father Email  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="father_email"
                                 rules={[
@@ -561,7 +561,7 @@ export class StudentsForm extends Component {
                     {/* Mother First Name */}
 
                     <div className="row">
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="mother_first_name"
                                 rules={[
@@ -587,7 +587,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Mother's Sir Name */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="mother_surname"
                                 rules={[
@@ -631,7 +631,7 @@ export class StudentsForm extends Component {
 
                     <div className="row">
                         {/* Mother Phone  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="mother_phone"
                                 rules={[
@@ -659,7 +659,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Mother Email  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="mother_email"
                                 rules={[
@@ -712,7 +712,7 @@ export class StudentsForm extends Component {
 
                     <div className="row">
                         {/* student is enrolled */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item
                                 name="is_enrolled"
                                 valuePropName="checked"
@@ -728,7 +728,7 @@ export class StudentsForm extends Component {
                         </div>
 
                         {/* Date enrolled  */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 col-sm-6">
                             <Form.Item name="admission_date">
                                 <DatePicker
                                     placeholder="Date of Admission"

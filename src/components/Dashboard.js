@@ -290,7 +290,7 @@ export class Dashboard extends Component {
                             </div>
                         </Header>
 
-                        <Content className="mt-md-3 mt-2 px-md-3 px-2">
+                        <Content className="mt-lg-3 mt-md-2 mt-1 px-xl-3 px-lg-2 px-1">
                             <Suspense fallback={<Spinner />}>
                                 <Switch>
                                     <PrivateRoute

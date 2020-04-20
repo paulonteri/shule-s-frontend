@@ -1,5 +1,6 @@
 import React, { Component, Fragment, Suspense } from "react";
 import Spinner from "../common/Spinner";
+// TODO: Check on Lazy Loading
 import { Route, Switch } from "react-router-dom";
 
 const Error404 = React.lazy(() => import("../common/Error404"));

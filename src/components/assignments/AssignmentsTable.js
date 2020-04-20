@@ -67,12 +67,12 @@ export const AssignmentsTable = props => {
                     size="small"
                     rowKey="id"
                     pagination={{ pageSize: 9 }}
+                    style={{ minWidth: "650px" }}
                 >
                     <Column
                         title="Title"
                         dataIndex="name"
                         key="name"
-                        width={90}
                         sorter={(a, b) => a.name.localeCompare(b.name)}
                         {...searchFunction("name")}
                     />
@@ -80,7 +80,6 @@ export const AssignmentsTable = props => {
                         title="Time Added"
                         key="time_added"
                         ellipsis="true"
-                        width={80}
                         defaultSortOrder="descend"
                         sorter={(a, b) =>
                             new Date(a.time_added) - new Date(b.time_added)
@@ -97,7 +96,6 @@ export const AssignmentsTable = props => {
                         title="Description"
                         key="description"
                         ellipsis="true"
-                        width={100}
                         dataIndex="description"
                         {...searchFunction("description")}
                     />
@@ -105,7 +103,6 @@ export const AssignmentsTable = props => {
                         title="Starting Time"
                         key="time_starts"
                         ellipsis="true"
-                        width={80}
                         sorter={(a, b) =>
                             new Date(a.time_starts) - new Date(b.time_starts)
                         }
@@ -121,7 +118,6 @@ export const AssignmentsTable = props => {
                     <Column
                         title="Action"
                         key="action"
-                        width={65}
                         render={(text, record) => (
                             <span>
                                 <Popconfirm
