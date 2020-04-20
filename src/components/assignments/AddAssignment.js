@@ -1,18 +1,21 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment, { isMoment } from "moment";
 import {
-    Form,
     Button,
     DatePicker,
-    Input,
-    Upload,
     Divider,
-    message
+    Form,
+    Input,
+    message,
+    Upload
 } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { addAssignment } from "../../actions/assignments/assignments";
+import { getClasses } from "../../actions/classes/classes";
+import { getStreams } from "../../actions/classes/stream";
+import { getClassNumeral } from "../../actions/classes/classNumeral";
 
 const { TextArea } = Input;
 
@@ -33,6 +36,13 @@ const tailLayout = {
 };
 
 function AddAssignment(props) {
+    // On Change
+    useEffect(() => {
+        props.getClasses();
+        props.getClassNumeral();
+        props.getStreams();
+    }, []);
+
     // state
     const [file1, setFile1] = useState(null);
     const [file2, setFile2] = useState(null);
@@ -317,6 +327,7 @@ function AddAssignment(props) {
                     break;
             }
         }
+
         // Name length
         if (docFile.name.length > 99) {
             message.error(
@@ -369,12 +380,29 @@ function AddAssignment(props) {
 AddAssignment.propTypes = {
     uploadedAssignments: PropTypes.bool.isRequired,
     uploadingAssignments: PropTypes.bool.isRequired,
-    addAssignment: PropTypes.func.isRequired
+    addAssignment: PropTypes.func.isRequired,
+    getClasses: PropTypes.func.isRequired,
+    getStreams: PropTypes.func.isRequired,
+    getClassNumeral: PropTypes.func.isRequired,
+    getClassesLoading: PropTypes.bool.isRequired,
+    getClassNumeralsLoading: PropTypes.bool.isRequired,
+    getStreamsLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
     uploadingAssignments: state.assignmentsReducer.uploadingAssignments,
-    uploadedAssignments: state.assignmentsReducer.uploadedAssignments
+    uploadedAssignments: state.assignmentsReducer.uploadedAssignments,
+    classes: state.classesReducer.classes,
+    classNumerals: state.classNumeralsReducer.classNumerals,
+    streams: state.streamsReducer.streams,
+    getClassesLoading: state.classesReducer.getClassesLoading,
+    getClassNumeralsLoading: state.classNumeralsReducer.getClassNumeralsLoading,
+    getStreamsLoading: state.streamsReducer.getStreamsLoading
 });
 
-export default connect(mapStateToProps, { addAssignment })(AddAssignment);
+export default connect(mapStateToProps, {
+    getClasses,
+    getStreams,
+    getClassNumeral,
+    addAssignment
+})(AddAssignment);
