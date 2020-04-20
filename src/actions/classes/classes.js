@@ -3,8 +3,8 @@ import { URL } from "../url";
 
 import {
     GET_CLASSES_SUCCESS,
-    ADD_CLASS_SUCCESS,
-    DELETE_CLASS_SUCCESS,
+    // ADD_CLASS_SUCCESS,
+    // DELETE_CLASS_SUCCESS,
     GET_CLASSES_FAIL,
     GET_CLASSES_LOADING
 } from "./types";
@@ -16,7 +16,7 @@ import { tokenConfig } from "../auth/auth";
 export const getClasses = () => (dispatch, getState) => {
     dispatch({ type: GET_CLASSES_LOADING });
     axios
-        .get(`${URL}/api/v2.0/academics/classes/"), tokenConfig(getState)`)
+        .get(`${URL}/api/v2.0/academics/classes/`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_CLASSES_SUCCESS,
