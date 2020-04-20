@@ -9,8 +9,10 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/accounts/Login";
 import { loadUser } from "./actions/auth/auth";
 import Alerts from "./components/common/Alerts";
+import './App.css';
 const Dashboard = React.lazy(() => import("./components/Dashboard"));
 const Test = React.lazy(() => import("./components/common/Test"));
+
 
 // Alerts Options
 const alertOptions = {
