@@ -63,7 +63,11 @@ function AddAssignment(props) {
             } else {
                 if (isMoment(i[1])) {
                     data.append(i[0], i[1].toISOString());
+                } else if (Array.isArray(i[1])) {
+                    console.log(i[1]);
+                    data.append(i[0], JSON.stringify(i[1]));
                 } else {
+                    console.log(i[1]);
                     data.append(i[0], i[1]);
                 }
             }
