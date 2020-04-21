@@ -9,7 +9,8 @@ import {
     Form,
     Input,
     message,
-    Upload
+    Upload,
+    Select
 } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { addAssignment } from "../../actions/assignments/assignments";
@@ -18,6 +19,7 @@ import { getStreams } from "../../actions/classes/stream";
 import { getClassNumeral } from "../../actions/classes/classNumeral";
 
 const { TextArea } = Input;
+const { Option } = Select;
 
 const layout = {
     labelCol: {
@@ -113,7 +115,7 @@ function AddAssignment(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please give the task a name!"
+                            message: "Please give the task a name"
                         }
                     ]}
                 >
@@ -131,7 +133,7 @@ function AddAssignment(props) {
                         {
                             required: true,
                             message:
-                                "Please give the a small description on what the task involves!"
+                                "Please give the a small description on what the task involves"
                         }
                     ]}
                 >
@@ -142,6 +144,54 @@ function AddAssignment(props) {
                         placeholder="Issue instructions and guidelines on what is and how to do the task"
                     />
                 </Form.Item>
+                {/*TODO: Find a way to also automatically select classes on select of class_n*/}
+                {/*<Form.Item*/}
+                {/*    hasFeedback*/}
+                {/*    name="select_class_numerals"*/}
+                {/*    // rules={[*/}
+                {/*    //     {*/}
+                {/*    //         required: true,*/}
+                {/*    //         message:*/}
+                {/*    //             "Please give the a small description on what the task involves"*/}
+                {/*    //     }*/}
+                {/*    // ]}*/}
+                {/*>*/}
+                {/*    <Select*/}
+                {/*        mode="multiple"*/}
+                {/*        placeholder="Select classes numerals involved"*/}
+                {/*        onChange={handleSelectClassNumeralsChange}*/}
+                {/*    >*/}
+                {/*        {props.classNumerals.map(cl => (*/}
+                {/*            <Option key={cl.name * 5} value={cl.name}>*/}
+                {/*                {cl.name}*/}
+                {/*            </Option>*/}
+                {/*        ))}*/}
+                {/*    </Select>*/}
+                {/*</Form.Item>*/}
+                <Form.Item
+                    label="Select Classes"
+                    hasFeedback
+                    name="classes_involved"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please select the classes involved"
+                        }
+                    ]}
+                >
+                    <Select
+                        mode="multiple"
+                        placeholder="Select classes involved"
+                    >
+                        {props.classes.map(cl => (
+                            <Option value={cl.id}>
+                                {cl.class_numeral}
+                                {cl.stream}
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+
                 <Form.Item
                     label="Starting Time"
                     name="time_starts"
@@ -150,7 +200,7 @@ function AddAssignment(props) {
                         {
                             required: true,
                             message:
-                                "Please select the time when the task starts!"
+                                "Please select the time when the task starts"
                         }
                     ]}
                 >
@@ -171,8 +221,7 @@ function AddAssignment(props) {
                     rules={[
                         {
                             required: true,
-                            message:
-                                "Please select the deadline for completion!"
+                            message: "Please select the deadline for completion"
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
@@ -183,7 +232,7 @@ function AddAssignment(props) {
                                     return Promise.resolve();
                                 }
                                 return Promise.reject(
-                                    "The time the task is required should be before it starts!"
+                                    "The time the task is required should be before it starts"
                                 );
                             }
                         })
