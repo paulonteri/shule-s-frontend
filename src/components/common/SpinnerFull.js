@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Loader from "react-loader-spinner";
 
-export const SpinnerFull = () => {
+export const SpinnerFull = props => {
     return (
-        <div
-            className="d-flex align-items-center justify-content-center"
-            style={{ height: "100vh" }}
-        >
-            <Loader
-                type="Bars"
-                color="#1890FF"
-                height={65}
-                width={65}
-                timeout={20000}
-            />
-        </div>
+        <Fragment>
+            <p>{props.info}</p>
+            <div
+                className="d-flex align-items-center justify-content-center"
+                style={{ height: "100vh" }}
+            >
+                <Loader
+                    type="Bars"
+                    color="#1890FF"
+                    height={60}
+                    width={55}
+                    timeout={50000}
+                />
+            </div>
+        </Fragment>
     );
 };
 

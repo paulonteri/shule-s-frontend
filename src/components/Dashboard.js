@@ -1,6 +1,12 @@
 import React, { Component, Suspense, IndexRedirect } from "react";
 import PrivateRoute from "./common/PrivateRoute";
-import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
+import {
+    HashRouter as Router,
+    Route,
+    Switch,
+    Link,
+    Redirect
+} from "react-router-dom";
 import Spinner from "./common/Spinner";
 import { Layout, Menu } from "antd";
 import {
@@ -332,6 +338,9 @@ export class Dashboard extends Component {
                                         path="/assignments"
                                         component={Assignments}
                                     />
+                                    <Route path="/login" Redirect>
+                                        <Redirect to="/" />
+                                    </Route>
                                     <Route component={Error404} />
                                 </Switch>
                             </Suspense>

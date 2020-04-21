@@ -1,19 +1,23 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Spinner from "./Spinner";
+import SpinnerFull from "./SpinnerFull";
 
-const PrivateRoute = ({ component: Component, auth, ...rest }) => {
+const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     return (
         <Route
             {...rest}
             render={props => {
-                if (auth.isLoading) {
-                    return <Spinner />;
-                } else if (auth.isAuthenticated) {
+                if (isAuthenticated) {
                     return <Component {...props} />;
-                } else {
+                } else if (isAuthenticated === false) {
                     return <Redirect to="/login" />;
+                } else {
+                    return (
+                        <div>
+                            <SpinnerFull info="Establishing a secure connection..." />
+                        </div>
+                    );
                 }
             }}
         />
@@ -21,7 +25,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
 };
 
 const mapStateToProps = state => ({
-    auth: state.authReducer
+    isAuthenticated: state.authReducer.isAuthenticated
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

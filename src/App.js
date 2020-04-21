@@ -6,13 +6,12 @@ import store from "./store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import PrivateRoute from "./components/common/PrivateRoute";
-import Login from "./components/accounts/Login";
 import { loadUser } from "./actions/auth/auth";
 import Alerts from "./components/common/Alerts";
-import './App.css';
+import "./App.css";
 const Dashboard = React.lazy(() => import("./components/Dashboard"));
 const Test = React.lazy(() => import("./components/common/Test"));
-
+const Login = React.lazy(() => import("./components/accounts/Login"));
 
 // Alerts Options
 const alertOptions = {
@@ -32,7 +31,9 @@ export class App extends Component {
                     <Router>
                         <Alerts />
 
-                        <Suspense fallback={<SpinnerFull />}>
+                        <Suspense
+                            fallback={<SpinnerFull info="Authenticating..." />}
+                        >
                             <Switch>
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/test" component={Test} />

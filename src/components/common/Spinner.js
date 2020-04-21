@@ -12,7 +12,7 @@ export const Spinner = () => {
                 color="#1890FF"
                 height={32}
                 width={32}
-                timeout={20000}
+                timeout={35000}
             />
         </div>
     );
