@@ -1,4 +1,4 @@
-import React, { Component, Fragment, Suspense } from "react";
+import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Spinner from "../common/Spinner";
 

@@ -10,14 +10,14 @@ import {
     getExamResultsAll,
     getExamResultsPerClassPerExam
 } from "../../actions/examinations/examinations";
-import InputNumber from "antd/es/input-number"
-import Skeleton from "antd/es/skeleton"
-import Descriptions, from "antd/es/descriptions"
-import Empty from "antd/es/empty"
-import Select from "antd/es/select"
-import Form from "antd/es/form"
-import Divider from "antd/es/divider"
-import Button from "antd/es/button"
+import InputNumber from "antd/es/input-number";
+import Skeleton from "antd/es/skeleton";
+import Descriptions from "antd/es/descriptions";
+import Empty from "antd/es/empty";
+import Select from "antd/es/select";
+import Form from "antd/es/form";
+import Divider from "antd/es/divider";
+import Button from "antd/es/button";
 
 const { Option } = Select;
 
