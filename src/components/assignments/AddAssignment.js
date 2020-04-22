@@ -2,22 +2,19 @@ import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment, { isMoment } from "moment";
-import {
-    Button,
-    DatePicker,
-    Divider,
-    Form,
-    Input,
-    message,
-    Upload,
-    Select
-} from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { addAssignment } from "../../actions/assignments/assignments";
 import { getClasses } from "../../actions/classes/classes";
 import { getStreams } from "../../actions/classes/stream";
 import { getClassNumeral } from "../../actions/classes/classNumeral";
-
+import Select from "antd/es/select"
+import Upload from "antd/es/upload"
+import message from 'antd/es/message';
+import Form from "antd/es/form"
+import Input from "antd/es/input"
+import Divider from "antd/es/divider"
+import DatePicker from "antd/es/date-picker"
+import Button from "antd/es/button"
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -350,21 +347,6 @@ function AddAssignment(props) {
         return current < moment().startOf("day");
     }
 
-    // get a range of numbers
-    function range(start, end) {
-        const result = [];
-        for (let i = start; i < end; i++) {
-            result.push(i);
-        }
-        return result;
-    }
-
-    //
-
-    // // // //
-
-    //
-
     // BEFORE UPLOAD
     function beforeUpload(docFile, name) {
         function errorF() {
@@ -412,7 +394,7 @@ function AddAssignment(props) {
         }
     }
 
-    function UploadButton(pops) {
+    function UploadButton() {
         return (
             <Fragment>
                 {props.uploadingAssignments ? (

@@ -1,16 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-    Divider,
-    Form,
-    InputNumber,
-    Button,
-    Select,
-    Skeleton,
-    Descriptions,
-    Empty
-} from "antd";
 import { getSubjects } from "../../actions/subjects/subjects";
 import { getStudents } from "../../actions/students/students";
 import { getClasses } from "../../actions/classes/classes";
@@ -20,24 +10,16 @@ import {
     getExamResultsAll,
     getExamResultsPerClassPerExam
 } from "../../actions/examinations/examinations";
+import InputNumber from "antd/es/input-number"
+import Skeleton from "antd/es/skeleton"
+import Descriptions, from "antd/es/descriptions"
+import Empty from "antd/es/empty"
+import Select from "antd/es/select"
+import Form from "antd/es/form"
+import Divider from "antd/es/divider"
+import Button from "antd/es/button"
+
 const { Option } = Select;
-
-//
-
-const layout = {
-    labelCol: {
-        span: 4.5
-    },
-    wrapperCol: {
-        span: 16
-    }
-};
-const tailLayout = {
-    wrapperCol: {
-        offset: 4.5,
-        span: 16
-    }
-};
 
 //
 
@@ -121,6 +103,7 @@ export const AddExamResPerClass = props => {
                             }}
                             layout="vertical"
                             onFinish={onFinish}
+                            onFinishFailed={onFinishFailed}
                         >
                             {props.students
                                 .filter(x => x.class_ns === classs)
@@ -331,20 +314,12 @@ export const AddExamResPerClass = props => {
 
     // Loading
     function Loading() {
-        if (props.getSudentsLoading === true || props.examsLoading === true) {
-            return true;
-        } else {
-            return false;
-        }
+        return props.getSudentsLoading === true || props.examsLoading === true;
     }
 
     // Selected
     function SelectedDropDowns() {
-        if (exam == null && subject == null && classs == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(exam == null && subject == null && classs == null);
     }
 
     // Student Name
