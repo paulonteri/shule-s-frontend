@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Form, Input } from "antd";
 import { Redirect } from "react-router-dom";
 import { login } from "../../actions/auth/auth";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-
-const layout = {
-    labelCol: { span: 3 },
-    wrapperCol: { span: 4 }
-};
-const tailLayout = {
-    wrapperCol: { offset: 3, span: 4 }
-};
+import SpinnerFull from "../common/SpinnerFull";
+import Input from "antd/es/input";
+import Form from "antd/es/form";
+import Button from "antd/es/button";
 
 export class Login extends Component {
     static propTypes = {
@@ -42,7 +37,9 @@ export class Login extends Component {
 
     render() {
         if (this.props.isAuthenticated) {
-            return <Redirect to="/"></Redirect>;
+            return <Redirect to="/" />;
+        } else if (this.props.isLoading) {
+            return <SpinnerFull info="Authenticating Credentials" />;
         }
 
         return (
@@ -118,7 +115,8 @@ export class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authReducer.isAuthenticated
+    isAuthenticated: state.authReducer.isAuthenticated,
+    isLoading: state.authReducer.isLoading
 });
 
 export default connect(mapStateToProps, { login })(Login);

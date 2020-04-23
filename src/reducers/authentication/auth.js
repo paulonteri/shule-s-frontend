@@ -3,6 +3,7 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_FAIL,
+    LOGIN_LOADING,
     LOGIN_SUCCESS,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
@@ -19,6 +20,7 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case USER_LOADING:
+        case LOGIN_LOADING:
             return {
                 ...state,
                 isLoading: true
