@@ -1,46 +1,13 @@
-module.exports = {
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
-      minRemainingSize: 0,
-      maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 6,
-      maxInitialRequests: 4,
-      automaticNameDelimiter: '~',
-      automaticNameMaxLength: 30,
-      cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
+  module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
         }
       }
-    }
-  },
-
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader"
-          }
-        },
-        {
-          test: /\.less$/,
-          use: [{ loader: "less-loader", options: { javascriptEnabled: true } }]
-        },
-        {
-          test: /\.css$/i,
-          use: ["style-loader", "css-loader"]
-        }
-      ]
-    }
-  };
+    ]
+  }
+}
