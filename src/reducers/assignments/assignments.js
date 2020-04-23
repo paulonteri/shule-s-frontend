@@ -61,6 +61,7 @@ export default function(state = initialState, action) {
         case ADD_ASSIGNMENT_SUCCESS:
             return {
                 ...state,
+                assignments: [...state.assignments, action.payload],
                 uploadingAssignments: false,
                 uploadingAssignmentsFailed: false,
                 uploadedAssignments: true
