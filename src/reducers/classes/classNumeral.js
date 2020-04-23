@@ -3,11 +3,11 @@ import {
     ADD_CLASS_NUMERAL_SUCCESS,
     DELETE_CLASS_NUMERAL_SUCCESS,
     GET_CLASS_NUMERALS_LOADING,
-    GET_CLASS_NUMERALS_FAIL,
+    GET_CLASS_NUMERALS_FAILED,
     ADD_CLASS_NUMERAL_LOADING,
     DELETE_CLASS_NUMERAL_LOADING,
-    DELETE_CLASS_NUMERAL_FAIL,
-    ADD_CLASS_NUMERAL_FAIL
+    DELETE_CLASS_NUMERAL_FAILED,
+    ADD_CLASS_NUMERAL_FAILED
 } from "../../actions/classes/types";
 
 const initialState = {
@@ -35,7 +35,7 @@ export default function(state = initialState, action) {
                 getClassNumeralsLoading: true,
                 getClassNumeralFail: false
             };
-        case GET_CLASS_NUMERALS_FAIL:
+        case GET_CLASS_NUMERALS_FAILED:
             return {
                 ...state,
                 getClassNumeralsLoading: false,
@@ -54,7 +54,7 @@ export default function(state = initialState, action) {
                 addClassNumeralLoading: true,
                 addClassNumeralFail: false
             };
-        case ADD_CLASS_NUMERAL_FAIL:
+        case ADD_CLASS_NUMERAL_FAILED:
             return {
                 ...state,
                 addClassNumeralLoading: false,
@@ -75,7 +75,7 @@ export default function(state = initialState, action) {
                 deleteClassNumeralLoading: true,
                 deleteClassNumeralFail: false
             };
-        case DELETE_CLASS_NUMERAL_FAIL:
+        case DELETE_CLASS_NUMERAL_FAILED:
             return {
                 ...state,
                 deleteClassNumeralLoading: false,

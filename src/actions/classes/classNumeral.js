@@ -6,10 +6,10 @@ import {
     ADD_CLASS_NUMERAL_SUCCESS,
     DELETE_CLASS_NUMERAL_SUCCESS,
     ADD_CLASS_NUMERAL_LOADING,
-    ADD_CLASS_NUMERAL_FAIL,
+    ADD_CLASS_NUMERAL_FAILED,
     GET_CLASS_NUMERALS_LOADING,
-    GET_CLASS_NUMERALS_FAIL,
-    DELETE_CLASS_NUMERAL_FAIL,
+    GET_CLASS_NUMERALS_FAILED,
+    DELETE_CLASS_NUMERAL_FAILED,
     DELETE_CLASS_NUMERAL_LOADING
 } from "./types";
 
@@ -31,7 +31,7 @@ export const getClassNumeral = () => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            dispatch({ type: GET_CLASS_NUMERALS_FAIL });
+            dispatch({ type: GET_CLASS_NUMERALS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
@@ -53,7 +53,7 @@ export const addClassNumeral = classNumeral => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            dispatch({ type: ADD_CLASS_NUMERAL_FAIL });
+            dispatch({ type: ADD_CLASS_NUMERAL_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
@@ -76,7 +76,7 @@ export const deleteClassNumeral = name => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            dispatch({ type: DELETE_CLASS_NUMERAL_FAIL });
+            dispatch({ type: DELETE_CLASS_NUMERAL_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };

@@ -4,10 +4,10 @@ import {
     DELETE_STREAM_SUCCESS,
     DELETE_STREAM_LOADING,
     ADD_STREAM_LOADING,
-    GET_STREAMS_FAIL,
+    GET_STREAMS_FAILED,
     GET_STREAMS_LOADING,
-    ADD_STREAM_FAIL,
-    DELETE_STREAM_FAIL
+    ADD_STREAM_FAILED,
+    DELETE_STREAM_FAILED
 } from "../../actions/classes/types";
 
 const initialState = {
@@ -35,7 +35,7 @@ export default function(state = initialState, action) {
                 getStreamsLoading: true,
                 getStreamsFail: false
             };
-        case GET_STREAMS_FAIL:
+        case GET_STREAMS_FAILED:
             return {
                 ...state,
                 getStreamsLoading: false,
@@ -54,7 +54,7 @@ export default function(state = initialState, action) {
                 addStreamLoading: true,
                 addStreamFail: false
             };
-        case ADD_STREAM_FAIL:
+        case ADD_STREAM_FAILED:
             return {
                 ...state,
                 addStreamLoading: false,
@@ -75,7 +75,7 @@ export default function(state = initialState, action) {
                 deleteStreamLoading: true,
                 deleteStreamFail: false
             };
-        case DELETE_STREAM_FAIL:
+        case DELETE_STREAM_FAILED:
             return {
                 ...state,
                 deleteStreamLoading: false,

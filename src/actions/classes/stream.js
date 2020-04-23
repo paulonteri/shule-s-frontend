@@ -2,13 +2,13 @@ import axios from "axios";
 import { URL } from "../url";
 
 import {
-    ADD_STREAM_FAIL,
+    ADD_STREAM_FAILED,
     ADD_STREAM_LOADING,
     ADD_STREAM_SUCCESS,
-    DELETE_STREAM_FAIL,
+    DELETE_STREAM_FAILED,
     DELETE_STREAM_LOADING,
     DELETE_STREAM_SUCCESS,
-    GET_STREAMS_FAIL,
+    GET_STREAMS_FAILED,
     GET_STREAMS_LOADING,
     GET_STREAMS_SUCCESS
 } from "./types";
@@ -27,7 +27,7 @@ export const getStreams = () => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            dispatch({ type: GET_STREAMS_FAIL });
+            dispatch({ type: GET_STREAMS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
@@ -49,7 +49,7 @@ export const addStream = stream => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            dispatch({ type: ADD_STREAM_FAIL });
+            dispatch({ type: ADD_STREAM_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
@@ -70,7 +70,7 @@ export const deleteStream = name => (dispatch, getState) => {
             });
         })
         .catch(err => {
-            dispatch({ type: DELETE_STREAM_FAIL });
+            dispatch({ type: DELETE_STREAM_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
