@@ -45,7 +45,7 @@ export class Login extends Component {
         return (
             <div
                 className="d-flex align-items-center justify-content-center container"
-                style={{ minHeight: "100vh   " }}
+                style={{ height: "100%" }}
             >
                 <div className=" card card-body shadow rounded    ">
                     <h4>Kindly login</h4>

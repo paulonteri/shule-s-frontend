@@ -1,75 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <style>
-    body {background-color: #F0F2F5;}
-      .svgLoader {
-        animation: spin 0.5s linear infinite;
-        margin: auto;
-      }
-      .divLoader {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="School Web App"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <head>
+        <style>
+            body {
+                background-color: #f0f2f5;
+                height: 100%;
+            }
+            .svgLoader {
+                animation: spin 0.5s linear infinite;
+                margin: auto;
+            }
+            .divLoader {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="School Web App" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
 
-    <title>School</title>
-  </head>
-  <body >
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+        <title>School</title>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <div id="root" style=" background-color: #F0F2F5">
-      <div class="divLoader">
-        <svg class="svgLoader" viewBox="0 0 100 100" width="10em" height="10em">
-          <path
-            ng-attr-d="{{config.pathCmd}}"
-            ng-attr-fill="{{config.color}}"
-            stroke="none"
-            d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50"
-            fill="#1890FF"
-            transform="rotate(179.719 50 51)"
-          >
-            <animateTransform
-              attributeName="transform"
-              type="rotate"
-              calcMode="linear"
-              values="0 50 51;360 50 51"
-              keyTimes="0;1"
-              dur="1s"
-              begin="0s"
-              repeatCount="indefinite"
-            ></animateTransform>
-          </path>
-        </svg>
-      </div>
-    </div>
+        <div id="root" style="height: 100%; background-color: #F0F2F5">
+            <div class="divLoader">
+                <svg
+                    class="svgLoader"
+                    viewBox="0 0 100 100"
+                    width="10em"
+                    height="10em"
+                >
+                    <path
+                        ng-attr-d="{{config.pathCmd}}"
+                        ng-attr-fill="{{config.color}}"
+                        stroke="none"
+                        d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50"
+                        fill="#1890FF"
+                        transform="rotate(179.719 50 51)"
+                    >
+                        <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            calcMode="linear"
+                            values="0 50 51;360 50 51"
+                            keyTimes="0;1"
+                            dur="1s"
+                            begin="0s"
+                            repeatCount="indefinite"
+                        ></animateTransform>
+                    </path>
+                </svg>
+            </div>
+        </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>

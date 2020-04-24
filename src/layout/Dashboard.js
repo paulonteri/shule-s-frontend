@@ -28,7 +28,7 @@ function Dashboard() {
     };
 
     return (
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout style={{ height: "100%" }}>
             <Sider
                 trigger={null}
                 collapsible
