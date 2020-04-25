@@ -26,11 +26,7 @@ export class StudentTable extends Component {
     }
 
     displayGender = genders => {
-        if (genders === "m") {
-            return <p>Male</p>;
-        } else {
-            return <p>Female</p>;
-        }
+        return <p style={{ textTransform: "capitalize" }}>{genders}</p>;
     };
 
     displayClass = c => {
@@ -59,7 +55,8 @@ export class StudentTable extends Component {
                         dataSource={this.props.student}
                         rowKey="student_id"
                         bordered
-                        footer={() => "List of Students"}
+                        size="small"
+                        footer={() => `${this.props.student.length} Students`}
                         pagination={{ pageSize: 20 }}
                     >
                         <Column
