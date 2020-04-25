@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -21,28 +21,111 @@ import {
 const { Column } = Table;
 const { Text } = Typography;
 
-export const AssignmentsTable = props => {
-    const [searchText, setSearchText] = useState("");
-    const [searchedColumn, setSearchedColumn] = useState("");
+export class AssignmentsTable extends Component {
+    componentDidMount() {
+        this.props.getAssignments();
+    }
 
-    // onMount
-    useEffect(() => {
-        props.getAssignments();
-    }, []);
+    static propTypes = {
+        assignments: PropTypes.array.isRequired,
+        getAssignments: PropTypes.func.isRequired,
+        deleteAssignment: PropTypes.func.isRequired,
+        patchAssignment: PropTypes.func.isRequired
+    };
 
-    let searchInput;
+    state = {
+        searchText: "",
+        searchedColumn: ""
+    };
 
-    return (
-        <Fragment>
-            {props.assignmentsLoading ? <Loading /> : <Content />}
-        </Fragment>
-    );
+    getColumnSearchProps = dataIndex => ({
+        filterDropdown: ({
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters
+        }) => (
+            <div style={{ padding: 8 }}>
+                <Input
+                    ref={node => {
+                        this.searchInput = node;
+                    }}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={e =>
+                        setSelectedKeys(e.target.value ? [e.target.value] : [])
+                    }
+                    onPressEnter={() =>
+                        this.handleSearch(selectedKeys, confirm, dataIndex)
+                    }
+                    style={{ width: 188, marginBottom: 8, display: "block" }}
+                />
+                <Button
+                    type="primary"
+                    onClick={() =>
+                        this.handleSearch(selectedKeys, confirm, dataIndex)
+                    }
+                    icon={<SearchOutlined />}
+                    size="small"
+                    style={{ width: 90, marginRight: 8 }}
+                >
+                    Search
+                </Button>
+                <Button
+                    onClick={() => this.handleReset(clearFilters)}
+                    size="small"
+                    style={{ width: 90 }}
+                >
+                    Reset
+                </Button>
+            </div>
+        ),
+        filterIcon: filtered => (
+            <SearchOutlined
+                style={{ color: filtered ? "#1890ff" : undefined }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex]
+                .toString()
+                .toLowerCase()
+                .includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+                setTimeout(() => this.searchInput.select());
+            }
+        },
+        render: text =>
+            this.state.searchedColumn === dataIndex ? (
+                <Highlighter
+                    highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+                    searchWords={[this.state.searchText]}
+                    autoEscape
+                    textToHighlight={text.toString()}
+                />
+            ) : (
+                text
+            )
+    });
 
-    function Content() {
+    handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        this.setState({
+            searchText: selectedKeys[0],
+            searchedColumn: dataIndex
+        });
+    };
+
+    handleReset = clearFilters => {
+        clearFilters();
+        this.setState({ searchText: "" });
+    };
+
+    Content() {
         return (
             <Fragment>
-                {props.assignments.length > 1 ? (
-                    <DetailTable />
+                {this.props.assignments.length > 1 ? (
+                    this.DetailTable()
                 ) : (
                     <div
                         className="card mt-3 pt-5 px-sm-5 shadow container-fluid"
@@ -57,24 +140,26 @@ export const AssignmentsTable = props => {
         );
     }
 
-    function DetailTable() {
+    DetailTable() {
         return (
             <div className="table-responsive card card-body shadow rounded mb-1">
                 <Table
-                    dataSource={props.assignments}
+                    dataSource={this.props.assignments}
                     bordered
                     title={() => "Assignments Table"}
                     size="small"
                     rowKey="id"
-                    pagination={{ pageSize: 9 }}
                     style={{ minWidth: "650px" }}
+                    footer={() =>
+                        `${this.props.assignments.length} Assignments Issued`
+                    }
                 >
                     <Column
                         title="Title"
                         dataIndex="name"
                         key="name"
                         sorter={(a, b) => a.name.localeCompare(b.name)}
-                        {...searchFunction("name")}
+                        {...this.getColumnSearchProps("name")}
                     />
                     <Column
                         title="Time Added"
@@ -97,7 +182,7 @@ export const AssignmentsTable = props => {
                         key="description"
                         ellipsis="true"
                         dataIndex="description"
-                        {...searchFunction("description")}
+                        {...this.getColumnSearchProps("description")}
                     />
                     <Column
                         title="Starting Time"
@@ -123,7 +208,7 @@ export const AssignmentsTable = props => {
                                 <Popconfirm
                                     title="Sure to delete?"
                                     onConfirm={() =>
-                                        props.deleteAssignment(record.id)
+                                        this.props.deleteAssignment(record.id)
                                     }
                                 >
                                     <a>
@@ -138,7 +223,7 @@ export const AssignmentsTable = props => {
         );
     }
 
-    function Loading() {
+    Loading = () => {
         return (
             <div
                 className="card mt-3 px-sm-5 shadow container-fluid"
@@ -149,109 +234,18 @@ export const AssignmentsTable = props => {
                 <Skeleton active />
             </div>
         );
+    };
+
+    render() {
+        return (
+            <Fragment>
+                {this.props.assignmentsLoading
+                    ? this.Loading()
+                    : this.Content()}
+            </Fragment>
+        );
     }
-
-    function searchFunction(dataIndex) {
-        const getColumnSearchProps = dataIndex => ({
-            filterDropdown: ({
-                setSelectedKeys,
-                selectedKeys,
-                confirm,
-                clearFilters
-            }) => (
-                <div style={{ padding: 8 }}>
-                    <Input
-                        ref={node => {
-                            searchInput = node;
-                        }}
-                        placeholder={`Search ${dataIndex}`}
-                        value={selectedKeys[0]}
-                        onChange={e =>
-                            setSelectedKeys(
-                                e.target.value ? [e.target.value] : []
-                            )
-                        }
-                        onPressEnter={() =>
-                            handleSearch(selectedKeys, confirm, dataIndex)
-                        }
-                        style={{
-                            width: 188,
-                            marginBottom: 8,
-                            display: "block"
-                        }}
-                    />
-                    <Button
-                        type="primary"
-                        onClick={() =>
-                            handleSearch(selectedKeys, confirm, dataIndex)
-                        }
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{ width: 90, marginRight: 8 }}
-                    >
-                        Search
-                    </Button>
-                    <Button
-                        onClick={() => handleReset(clearFilters)}
-                        size="small"
-                        style={{ width: 90 }}
-                    >
-                        Reset
-                    </Button>
-                </div>
-            ),
-            filterIcon: filtered => (
-                <SearchOutlined
-                    style={{ color: filtered ? "#1890ff" : undefined }}
-                />
-            ),
-            onFilter: (value, record) =>
-                record[dataIndex]
-                    .toString()
-                    .toLowerCase()
-                    .includes(value.toLowerCase()),
-            onFilterDropdownVisibleChange: visible => {
-                if (visible) {
-                    setTimeout(() => searchInput.select());
-                }
-            },
-            render: text =>
-                searchedColumn === dataIndex ? (
-                    <Highlighter
-                        highlightStyle={{
-                            backgroundColor: "#ffc069",
-                            padding: 0
-                        }}
-                        searchWords={[searchText]}
-                        autoEscape
-                        textToHighlight={text.toString()}
-                    />
-                ) : (
-                    text
-                )
-        });
-
-        const handleSearch = (selectedKeys, confirm, dataIndex) => {
-            confirm();
-            setSearchText(selectedKeys[0]);
-            setSearchedColumn(dataIndex);
-        };
-
-        const handleReset = clearFilters => {
-            clearFilters();
-            setSearchText("");
-        };
-
-        return getColumnSearchProps(dataIndex);
-    }
-};
-
-AssignmentsTable.propTypes = {
-    assignments: PropTypes.array.isRequired,
-    getAssignments: PropTypes.func.isRequired,
-    deleteAssignment: PropTypes.func.isRequired,
-    patchAssignment: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = state => ({
     assignments: state.assignmentsReducer.assignments,
