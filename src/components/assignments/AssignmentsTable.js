@@ -82,7 +82,7 @@ export class AssignmentsTable extends Component {
         ),
         filterIcon: filtered => (
             <SearchOutlined
-                style={{ color: filtered ? "#1890ff" : undefined }}
+                style={{ color: filtered ? "var(--light-theme)" : undefined }}
             />
         ),
         onFilter: (value, record) =>
@@ -98,7 +98,10 @@ export class AssignmentsTable extends Component {
         render: text =>
             this.state.searchedColumn === dataIndex ? (
                 <Highlighter
-                    highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+                    highlightStyle={{
+                        backgroundColor: "var(--light-theme)",
+                        padding: 0
+                    }}
                     searchWords={[this.state.searchText]}
                     autoEscape
                     textToHighlight={text.toString()}
