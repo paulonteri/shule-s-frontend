@@ -1,13 +1,13 @@
 import axios from "axios";
-import { URL } from "../url";
+import { URL } from "../../url";
 import {
     GET_STUDENT_ANALYTICS_SUCCESS,
     GET_STUDENT_ANALYTICS_LOADING,
     GET_STUDENT_ANALYTICS_FAILED
 } from "./types";
 
-import { returnErrors } from "../messages";
-import { tokenConfig } from "../auth/auth";
+import { returnErrors } from "../../messages";
+import { tokenConfig } from "../../auth/auth";
 
 // GET STUDENTS
 export const getStudentAnalytics = () => (dispatch, getState) => {

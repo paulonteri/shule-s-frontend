@@ -5,7 +5,7 @@ import {
 } from "../../../actions/students/analytics/types";
 
 const initialState = {
-    studentsAnalytics: [],
+    studentAnalytics: [],
     getStudentAnalyticsLoading: false,
     getStudentAnalyticsFailed: false
 };
@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
         case GET_STUDENT_ANALYTICS_SUCCESS:
             return {
                 ...state,
-                studentsAnalytics: action.payload,
+                studentAnalytics: action.payload,
                 getStudentAnalyticsLoading: false,
                 getStudentAnalyticsFailed: false
             };
