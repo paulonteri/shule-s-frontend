@@ -2,7 +2,7 @@ import {
     GET_STUDENT_ANALYTICS_SUCCESS,
     GET_STUDENT_ANALYTICS_FAILED,
     GET_STUDENT_ANALYTICS_LOADING
-} from "../../actions/students/types";
+} from "../../../actions/students/analytics/types";
 
 const initialState = {
     studentsAnalytics: [],
