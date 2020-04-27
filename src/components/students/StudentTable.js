@@ -35,7 +35,11 @@ export class StudentTable extends Component {
     }
 
     displayGender = genders => {
-        return <p style={{ textTransform: "capitalize" }}>{genders}</p>;
+        if (genders === "m") {
+            return <p>Male</p>;
+        } else if (genders === "f") {
+            return <p>Female</p>;
+        }
     };
 
     displayClass = c => {
