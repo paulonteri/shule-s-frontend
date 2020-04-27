@@ -151,7 +151,7 @@ export class StudentsForm extends Component {
 
     render() {
         return (
-            <div className="card card-body shadow rounded container">
+            <div className="card card-body shadow rounded container-fluid">
                 <h5>Fill in a student's details</h5>
                 <Form
                     onFinish={this.handleSubmit}
