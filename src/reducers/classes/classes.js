@@ -12,7 +12,7 @@ import {
     GET_CLASSES_FAILED,
     GET_CLASSES_LOADING
 } from "../../actions/classes/types";
-import { findAndReplace, deleteObject } from "../algorithms";
+import { findAndReplace, deleteObject } from "../common/algorithms";
 
 const initialState = {
     classes: [],

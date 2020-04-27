@@ -12,7 +12,7 @@ import {
     PATCH_ASSIGNMENT_LOADING,
     PATCH_ASSIGNMENT_SUCCESS
 } from "../../actions/assignments/types";
-import { findAndReplace, deleteObject } from "../algorithms";
+import { findAndReplace, deleteObject } from "../common/algorithms";
 
 const initialState = {
     assignments: [],

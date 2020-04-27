@@ -7,7 +7,7 @@ export class StudentsDashboard extends Component {
     render() {
         return (
             <div className="container-fluid-fluid ">
-                <p class="text-danger">
+                <p className="text-danger">
                     Developer at work. This web app is still under construction.
                     Handle with care.
                 </p>
