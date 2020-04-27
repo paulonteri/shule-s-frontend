@@ -5,7 +5,7 @@ import {
 } from "../../../actions/students/analytics/types";
 
 const initialState = {
-    studentAnalytics: [],
+    studentAnalytics: {},
     getStudentAnalyticsLoading: false,
     getStudentAnalyticsFailed: false
 };
