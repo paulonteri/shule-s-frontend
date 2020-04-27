@@ -144,64 +144,67 @@ export class StudentTable extends Component {
         this.setState({ searchText: "" });
     };
 
+    footerText = () => {
+        if (this.state.searchText) {
+            return "Search Results";
+        }
+        return `${this.props.student.length} Students`;
+    };
+
     render() {
         return (
-            <Fragment>
-                <p>Student Table</p>
-                <div className="table-responsive card card-body shadow rounded mb-1">
-                    <h4>Student List</h4>
-                    <Table
-                        dataSource={this.props.student}
-                        rowKey="student_id"
-                        bordered
-                        size="small"
-                        footer={() => `${this.props.student.length} Students`}
-                        style={{ minWidth: "700px" }}
-                    >
-                        <Column
-                            title="ID"
-                            dataIndex="student_id"
-                            key="student_id"
-                            sorter={(a, b) => a.student_id - b.student_id}
-                        />
-                        <Column
-                            title="First Name"
-                            dataIndex="first_name"
-                            key="first_name"
-                            sorter={(a, b) =>
-                                a.first_name.localeCompare(b.first_name)
-                            }
-                            {...this.getColumnSearchProps("first_name")}
-                        />
-                        <Column
-                            title="Family Name"
-                            dataIndex="surname"
-                            key="surname"
-                            sorter={(a, b) =>
-                                a.surname.localeCompare(b.surname)
-                            }
-                            {...this.getColumnSearchProps("surname")}
-                        />
-                        <Column
-                            title="Class"
-                            dataIndex="class_ns"
-                            key="class_ns"
-                            render={clas => this.displayClass(clas)}
-                        />
-                        <Column
-                            title="Dormitory"
-                            dataIndex="dormitory"
-                            key="dormitory"
-                            render={dorm => this.displayDorm(dorm)}
-                        />
-                        <Column
-                            title="Gender"
-                            dataIndex="gender"
-                            key="gender"
-                            render={gend => this.displayGender(gend)}
-                        />
-                        {/* ///// DELETE STUDENT ///// */}
-                        {/* <Column
+            <div className="table-responsive card card-body shadow rounded mb-1">
+                <Table
+                    dataSource={this.props.student}
+                    rowKey="student_id"
+                    bordered
+                    size="small"
+                    title={() => "Students"}
+                    footer={() => this.footerText()}
+                    style={{ minWidth: "700px" }}
+                >
+                    <Column
+                        title="ID"
+                        dataIndex="student_id"
+                        key="student_id"
+                        sorter={(a, b) => a.student_id - b.student_id}
+                    />
+                    <Column
+                        title="First Name"
+                        dataIndex="first_name"
+                        key="first_name"
+                        sorter={(a, b) =>
+                            a.first_name.localeCompare(b.first_name)
+                        }
+                        {...this.getColumnSearchProps("first_name")}
+                    />
+                    <Column
+                        title="Family Name"
+                        dataIndex="surname"
+                        key="surname"
+                        sorter={(a, b) => a.surname.localeCompare(b.surname)}
+                        {...this.getColumnSearchProps("surname")}
+                    />
+                    <Column
+                        title="Class"
+                        dataIndex="class_ns"
+                        key="class_ns"
+                        render={clas => this.displayClass(clas)}
+                    />
+                    <Column
+                        title="Dormitory"
+                        dataIndex="dormitory"
+                        key="dormitory"
+                        render={dorm => this.displayDorm(dorm)}
+                    />
+                    <Column
+                        title="Gender"
+                        dataIndex="gender"
+                        key="gender"
+                        render={gend => this.displayGender(gend)}
+                    />
+                    {/* ///// DELETE STUDENT ///// */}
+                    {/* <Column
               title=""
               key="action"
               render={the_parameter => (
@@ -218,9 +221,8 @@ export class StudentTable extends Component {
                 </span>
               )}
             /> */}
-                    </Table>
-                </div>
-            </Fragment>
+                </Table>
+            </div>
         );
     }
 }
