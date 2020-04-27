@@ -6,6 +6,8 @@ import {
     DELETE_STUDENT,
     GET_STUDENTS_LOADING,
     GET_STUDENTS_FAILED
+    // TODO:
+    // PATCH_STUDENT
 } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
@@ -15,7 +17,7 @@ import { tokenConfig } from "../auth/auth";
 export const getStudents = () => (dispatch, getState) => {
     dispatch({ type: GET_STUDENTS_LOADING });
     axios
-        .get(URL.concat("/api/v2.0/students/"), tokenConfig(getState))
+        .get(`${URL}/api/v2.0/students/students/`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_STUDENTS_SUCCESS,
@@ -31,7 +33,11 @@ export const getStudents = () => (dispatch, getState) => {
 // ADD STUDENT
 export const addStudent = student => (dispatch, getState) => {
     axios
-        .post(URL.concat("/api/v2.0/students/"), student, tokenConfig(getState))
+        .post(
+            `${URL}/api/v2.0/students/students/`,
+            student,
+            tokenConfig(getState)
+        )
         .then(res => {
             dispatch(createMessage({ addStudent: "Student Added" }));
             dispatch({
@@ -48,7 +54,7 @@ export const addStudent = student => (dispatch, getState) => {
 export const deleteStudent = student_id => (dispatch, getState) => {
     axios
         .delete(
-            URL.concat(`/api/v2.0/students/${student_id}`),
+            `${URL}/api/v2.0/students/students/${student_id}`,
             tokenConfig(getState)
         )
         .then(res => {
