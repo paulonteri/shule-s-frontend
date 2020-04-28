@@ -2,24 +2,21 @@ import React from "react";
 import Genders from "../components/students/analytics/Genders";
 import NumberPerClass from "../components/students/analytics/NumberPerClass";
 import EventsCalender from "../components/events/EventsCalender";
-import TotalStudents from "../components/students/analytics/TotalStudents";
+import NumberPerDormitory from "../components/students/analytics/NumberPerDormitory";
 
 function Homepage() {
     return (
         <div className=" container">
-            <div className="d-flex mb-2 row">
-                <div
-                    className="col"
-                    style={{ flexGrow: 0.7, alignItems: "stretch" }}
-                >
-                    <TotalStudents />
-                </div>
-                <div className="col">
+            <div className="mb-2 row">
+                <div className="col-sm-4 mb-2">
                     <Genders />
                 </div>
 
-                <div className="col">
+                <div className="col-sm-4 mb-2">
                     <NumberPerClass />
+                </div>
+                <div className="col-sm-4 mb-2">
+                    <NumberPerDormitory />
                 </div>
             </div>
             <div className="row">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Doughnut } from "react-chartjs-2";
+import { Polar } from "react-chartjs-2";
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
 import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
 
@@ -34,7 +34,7 @@ export const NumberPerClass = props => {
     };
 
     const legendOpts = {
-        display: true,
+        display: false,
         position: "bottom",
         fullWidth: false,
         reverse: true
@@ -42,7 +42,8 @@ export const NumberPerClass = props => {
 
     return (
         <div className="container card shadow rounded py-1 mx-o">
-            <Doughnut width={100} height={50} data={data} legend={legendOpts} />
+            <Polar width={100} height={50} data={data} legend={legendOpts} />
+            <p>Students per class</p>
         </div>
     );
 };
