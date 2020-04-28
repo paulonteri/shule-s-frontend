@@ -6,12 +6,11 @@ import NumberPerDormitory from "../components/students/analytics/NumberPerDormit
 
 function Homepage() {
     return (
-        <div className=" container">
-            <div className="mb-2 row">
+        <div className=" container-fluid">
+            <div className="row">
                 <div className="col-sm-4 mb-2">
                     <Genders />
                 </div>
-
                 <div className="col-sm-4 mb-2">
                     <NumberPerClass />
                 </div>

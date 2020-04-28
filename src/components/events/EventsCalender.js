@@ -4,7 +4,7 @@ import Typography from "antd/es/typography";
 
 function EventsCalender() {
     return (
-        <div className="container card shadow rounded">
+        <div className="container-fluid card shadow rounded">
             <Typography.Title level={3} className="mt-2 ml-2">
                 School Events
             </Typography.Title>

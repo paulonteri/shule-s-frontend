@@ -23,7 +23,7 @@ export const Gender = props => {
     };
 
     const legendOpts = {
-        display: true,
+        display: false,
         position: "bottom",
         fullWidth: false,
         reverse: true
