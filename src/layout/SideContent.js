@@ -14,9 +14,16 @@ const { SubMenu } = Menu;
 export const SideContent = props => {
     return (
         <Fragment>
-            <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-                <div className="mt-3 mb-3"></div>
+            <div className="logo mt-2 ml-3 pl-1 pt-2 ">
+                <Link onClick={props.onClickFunc} to="/">
+                    <h3 style={{ color: "grey" }}>School</h3>
+                </Link>
+            </div>
+            <Menu
+                theme="dark"
+                mode="inline"
+                // defaultSelectedKeys={["1"]}
+            >
                 <SubMenu
                     key="sub1"
                     title={
