@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getStudentAnalytics } from "../../actions/students/analytics/students";
 import { Doughnut } from "react-chartjs-2";
-
+import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
+import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
 export const Gender = props => {
-    useEffect(() => {
-        props.getStudentAnalytics();
-    }, []);
+    useStudentAnalyticsGeneral();
 
     const data = {
         labels: ["Female", "Male"],
@@ -17,23 +15,28 @@ export const Gender = props => {
                     props.studentAnalytics.female,
                     props.studentAnalytics.male
                 ],
-                backgroundColor: ["#FF6384", "#36A2EB"],
-                hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+                backgroundColor: backgroundColor,
+                hoverBackgroundColor: hoverBackgroundColor
             }
         ]
+    };
+
+    const legendOpts = {
+        display: true,
+        position: "bottom",
+        fullWidth: false,
+        reverse: true
     };
 
     console.log(props.studentAnalytics);
     return (
         <div>
-            {props.studentAnalytics.female}
-            <Doughnut width={100} height={50} data={data} />
+            <Doughnut width={100} height={50} data={data} legend={legendOpts} />
         </div>
     );
 };
 
 Gender.propTypes = {
-    getStudentAnalytics: PropTypes.func.isRequired,
     studentAnalytics: PropTypes.object.isRequired
 };
 
@@ -41,4 +44,4 @@ const mapStateToProps = state => ({
     studentAnalytics: state.studentAnalyticsReducer.studentAnalytics
 });
 
-export default connect(mapStateToProps, { getStudentAnalytics })(Gender);
+export default connect(mapStateToProps)(Gender);
