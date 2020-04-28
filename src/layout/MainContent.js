@@ -5,6 +5,7 @@ import Switch from "react-router-dom/es/Switch";
 import Redirect from "react-router-dom/es/Redirect";
 import HashRouter from "react-router-dom/es/HashRouter";
 import Spinner from "../components/common/Spinner";
+import Homepage from "./Homepage";
 const Error404 = React.lazy(() => import("../components/common/Error404"));
 const Library = React.lazy(() => import("../components/library/Library"));
 const Students = React.lazy(() => import("../components/students/Students"));
@@ -25,7 +26,7 @@ export const MainContent = () => {
         <HashRouter>
             <Suspense fallback={<Spinner />}>
                 <Switch>
-                    <PrivateRoute exact path="/" component={Students} />
+                    <PrivateRoute exact path="/" component={Homepage} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/spinner" component={Spinner} />
                     <PrivateRoute path="/students" component={Students} />

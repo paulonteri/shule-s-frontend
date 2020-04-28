@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
 import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
+// import Statistic from "antd/es/statistic";
 export const Gender = props => {
     useStudentAnalyticsGeneral();
 
@@ -30,7 +31,9 @@ export const Gender = props => {
 
     console.log(props.studentAnalytics);
     return (
-        <div>
+        <div className="container card shadow rounded py-1 mx-o">
+            {/* <Statistic title="Total Students enrolled" /> */}
+            {/* <h5>Genders</h5> */}
             <Doughnut width={100} height={50} data={data} legend={legendOpts} />
         </div>
     );
