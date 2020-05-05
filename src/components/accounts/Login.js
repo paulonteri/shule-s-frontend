@@ -10,12 +10,21 @@ import Form from "antd/es/form";
 import Button from "antd/es/button";
 
 export const Login = props => {
+    const [form] = Form.useForm();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const onSubmit = e => {
         props.login(username, password);
     };
+
+    useEffect(() => {
+        form.setFieldsValue({
+            email: "johndoe@gmail.com",
+            password: "johndoe"
+        });
+    }, []);
 
     const onChange = e => {
         if (e.target.name === "username") {
@@ -39,7 +48,7 @@ export const Login = props => {
                 <div className=" card card-body shadow rounded    ">
                     <h4>Kindly login</h4>
                     <div>
-                        <Form layout="vertical" onFinish={onSubmit}>
+                        <Form layout="vertical" form={form} onFinish={onSubmit}>
                             {/* Username */}
 
                             <Form.Item
