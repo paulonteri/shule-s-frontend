@@ -1,6 +1,6 @@
 {
-    "short_name": "School",
-    "name": "School Web Application",
+    "short_name": "School App",
+    "name": "School Application",
     "icons": [
         {
             "src": "favicon.ico",
