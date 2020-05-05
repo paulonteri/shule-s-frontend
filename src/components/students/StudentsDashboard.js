@@ -1,24 +1,26 @@
 import React, { Component } from "react";
 
-import StudentForm from "./StudentForm";
-import StudentTable from "./StudentTable";
+// import StudentForm from "./StudentForm";
+// import StudentTable from "./StudentTable";
+import Homepage from "../../layout/Homepage";
 
 export class StudentsDashboard extends Component {
     render() {
         return (
-            <div className="container-fluid-fluid ">
-                <p className="text-danger">
-                    Developer at work. This web app is still under construction.
-                    Handle with care.
-                </p>
+            <Homepage />
+            // <div className="container-fluid-fluid ">
+            //     <p className="text-danger">
+            //         Developer at work. This web app is still under construction.
+            //         Handle with care.
+            //     </p>
 
-                <div className="row">
-                    <StudentForm />
-                </div>
-                <div className="row">
-                    <StudentTable />
-                </div>
-            </div>
+            //     <div className="row">
+            //         <StudentForm />
+            //     </div>
+            //     <div className="row">
+            //         <StudentTable />
+            //     </div>
+            // </div>
         );
     }
 }
