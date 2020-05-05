@@ -11,7 +11,6 @@ function useStudentAnalyticsGeneral() {
 
         if (!(today.getMinutes() - time < 1)) {
             dispatch(getStudentAnalytics());
-            console.log("awesome");
             setTime(today.getMinutes());
         } else {
             console.log("pass");

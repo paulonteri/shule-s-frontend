@@ -76,7 +76,6 @@ export const AddExamResPerClass = props => {
         };
 
         props.addExamResultsPerClass(q);
-        console.log(q);
     };
 
     // show subject inputs
@@ -275,7 +274,7 @@ export const AddExamResPerClass = props => {
             const the_results = props.examResultsPerClassPerSubject.find(
                 x => x.exam === exam
             );
-            console.log("r", the_results);
+
             if (the_results == null) {
                 return (
                     <Empty

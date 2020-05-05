@@ -8,7 +8,6 @@ function BookInfoDetail(props) {
     // OnMount
     useEffect(() => {
         props.getBooks();
-        console.log(props.books);
     }, []);
 
     return (

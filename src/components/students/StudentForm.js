@@ -143,7 +143,6 @@ export class StudentsForm extends Component {
 
         // pass the student const to the action
         this.props.addStudent(student);
-        console.log(student);
 
         // clear fields
         this.formRef.current.resetFields();

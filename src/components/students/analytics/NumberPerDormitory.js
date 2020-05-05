@@ -20,7 +20,6 @@ export const NumberPerDormitory = props => {
             setTotals(props.studentsPerDormitory.map(dm => dm.Total));
         }
     }, [props.studentsPerDormitory]);
-    console.log(dormitories, totals);
 
     const data = {
         labels: dormitories,

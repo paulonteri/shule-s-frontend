@@ -29,7 +29,6 @@ export const Gender = props => {
         reverse: true
     };
 
-    console.log(props.studentAnalytics);
     return (
         <div className="container card shadow rounded py-1 mx-o">
             <Doughnut width={100} height={50} data={data} legend={legendOpts} />
