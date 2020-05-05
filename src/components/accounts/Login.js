@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -9,39 +9,28 @@ import Input from "antd/es/input";
 import Form from "antd/es/form";
 import Button from "antd/es/button";
 
-export class Login extends Component {
-    static propTypes = {
-        login: PropTypes.func.isRequired
+export const Login = props => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onSubmit = e => {
+        props.login(username, password);
     };
 
-    state = {
-        username: "",
-        password: ""
-    };
-
-    componentDidMount() {}
-
-    onSubmit = e => {
-        this.props.login(this.state.username, this.state.password);
-    };
-
-    onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-    state = { confirmDirty: false };
-
-    // Blur for passwords
-    handleConfirmBlur = e => {
-        const { value } = e.target;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    };
-
-    render() {
-        if (this.props.isAuthenticated) {
-            return <Redirect to="/" />;
-        } else if (this.props.isLoading) {
-            return <SpinnerFull info=" Authenticating Credentials..." />;
+    const onChange = e => {
+        if (e.target.name === "username") {
+            setUsername(e.target.value);
         }
+        if (e.target.name === "password") {
+            setPassword(e.target.value);
+        }
+    };
 
+    if (props.isAuthenticated) {
+        return <Redirect to="/" />;
+    } else if (props.isLoading) {
+        return <SpinnerFull info=" Authenticating Credentials..." />;
+    } else
         return (
             <div
                 className="d-flex align-items-center justify-content-center container"
@@ -50,7 +39,7 @@ export class Login extends Component {
                 <div className=" card card-body shadow rounded    ">
                     <h4>Kindly login</h4>
                     <div>
-                        <Form layout="vertical" onFinish={this.onSubmit}>
+                        <Form layout="vertical" onFinish={onSubmit}>
                             {/* Username */}
 
                             <Form.Item
@@ -72,7 +61,7 @@ export class Login extends Component {
                                     type="text"
                                     placeholder=" Email"
                                     name="username"
-                                    onChange={this.onChange}
+                                    onChange={onChange}
                                 />
                             </Form.Item>
 
@@ -97,7 +86,7 @@ export class Login extends Component {
                                     type="text"
                                     placeholder=" Password"
                                     name="password"
-                                    onChange={this.onChange}
+                                    onChange={onChange}
                                 />
                             </Form.Item>
 
@@ -111,8 +100,13 @@ export class Login extends Component {
                 </div>
             </div>
         );
-    }
-}
+};
+
+Login.propTypes = {
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = state => ({
     isAuthenticated: state.authReducer.isAuthenticated,
