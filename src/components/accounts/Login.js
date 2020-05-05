@@ -21,8 +21,8 @@ export const Login = props => {
 
     useEffect(() => {
         form.setFieldsValue({
-            email: "johndoe@gmail.com",
-            password: "johndoe"
+            email: "janedoe@gmail.com",
+            password: "janedoe"
         });
     }, []);
 
