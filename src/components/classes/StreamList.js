@@ -1,14 +1,15 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { getStreams, deleteStream } from "../../actions/classes/stream";
+import { getStreams } from "../../actions/classes/stream";
+
+import List from "antd/es/list";
 
 export class StreamList extends Component {
     static propTypes = {
         streams: PropTypes.array.isRequired,
-        getStreams: PropTypes.func.isRequired,
-        deleteStream: PropTypes.func.isRequired
+        getStreams: PropTypes.func.isRequired
     };
 
     componentDidMount() {
@@ -17,35 +18,19 @@ export class StreamList extends Component {
 
     render() {
         return (
-            <Fragment>
-                <div className="card px-4 py-2 shadow h-100">
-                    <div className="row">
-                        <div className="col">
-                            <h4>Streams Available:</h4>
-                        </div>
-                    </div>
-                    {this.props.streams.map(str => (
-                        <div className="row my-1">
-                            <div className="col">
-                                <h5>
-                                    <li key={str.name}> {str.name}</li>
-                                </h5>
-                            </div>
-                            <div className="col ">
-                                <button
-                                    onClick={this.props.deleteStream.bind(
-                                        this,
-                                        str.name
-                                    )}
-                                    className="btn btn-danger btn-sm float-right"
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </Fragment>
+            <div
+                style={{ height: "100%", maxHeight: "39vh" }}
+                className="table-responsive card card-body shadow rounded mb-1"
+            >
+                <List
+                    size="small"
+                    header={<div>Streams</div>}
+                    dataSource={this.props.streams}
+                    renderItem={str => (
+                        <List.Item key={str.name}> {str.name}</List.Item>
+                    )}
+                />
+            </div>
         );
     }
 }
@@ -54,6 +39,4 @@ const mapStateToProps = state => ({
     streams: state.streamsReducer.streams
 });
 
-export default connect(mapStateToProps, { getStreams, deleteStream })(
-    StreamList
-);
+export default connect(mapStateToProps, { getStreams })(StreamList);
