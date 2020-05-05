@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 export const SpinnerFull = props => {
     return (
         <Fragment>
-            <p> {props.info}</p>
+            <p className="pl-1">{props.info}</p>
             <div
                 className="d-flex align-items-center justify-content-center"
                 style={{ height: "100vh" }}

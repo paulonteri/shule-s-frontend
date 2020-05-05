@@ -10,11 +10,6 @@ const ClassesList = React.lazy(() => import("./ClassesList"));
 const ClassesDashboard = () => {
     return (
         <div className="container-fluid">
-            <p class="text-danger">
-                Developer at work. This web app is still under construction.
-                Handle with care.
-            </p>
-
             <div className="row">
                 <div className="col-md mb-2">
                     <Suspense fallback={<Spinner />}>

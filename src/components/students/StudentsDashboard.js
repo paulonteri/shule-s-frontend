@@ -9,10 +9,6 @@ export class StudentsDashboard extends Component {
         return (
             <Homepage />
             // <div className="container-fluid-fluid ">
-            //     <p className="text-danger">
-            //         Developer at work. This web app is still under construction.
-            //         Handle with care.
-            //     </p>
 
             //     <div className="row">
             //         <StudentForm />

@@ -1,24 +1,24 @@
 .ant-input::placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-input::-webkit-input-placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-input:-ms-input-placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-input::-ms-input-placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-picker-input > input::-webkit-input-placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-picker-input > input:-ms-input-placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-picker-input > input::-ms-input-placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }
 .ant-picker-input > input::placeholder {
-  color: #8c8c8c;
+    color: #8c8c8c;
 }

@@ -39,7 +39,7 @@ export class Login extends Component {
         if (this.props.isAuthenticated) {
             return <Redirect to="/" />;
         } else if (this.props.isLoading) {
-            return <SpinnerFull info="Authenticating Credentials" />;
+            return <SpinnerFull info=" Authenticating Credentials..." />;
         }
 
         return (
