@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: yarn
-      - name: Unset CI
-        run: unset CI 
       - name: Build
+        env:
+          CI: false
         run: yarn build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
