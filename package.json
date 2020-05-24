@@ -10,6 +10,7 @@
         "antd": "^4.1.2",
         "axios": "^0.19.1",
         "chart.js": "^2.9.3",
+        "firebase": "^7.14.5",
         "install": "^0.13.0",
         "moment": "^2.24.0",
         "prop-types": "^15.7.2",
