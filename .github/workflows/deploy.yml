@@ -17,6 +17,8 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: yarn
+      - name: Unset CI
+        run: unset CI 
       - name: Build
         run: yarn build
       - name: Deploy to Firebase
