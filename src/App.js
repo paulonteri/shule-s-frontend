@@ -14,6 +14,7 @@ import "./App.css";
 const Dashboard = React.lazy(() => import("./layout/Dashboard"));
 const Test = React.lazy(() => import("./components/common/Test"));
 const Login = React.lazy(() => import("./components/accounts/Login"));
+import { URL } from "./actions/url";
 
 // Alerts Options
 const alertOptions = {
@@ -24,6 +25,10 @@ function App() {
     // OnMount
     useEffect(() => {
         store.dispatch(loadUser());
+        const Http = new XMLHttpRequest();
+        const url = `${URL}/api/ping/`;
+        Http.open("GET", url);
+        Http.send();
     }, []);
 
     return (
