@@ -11,10 +11,11 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import { loadUser } from "./actions/auth/auth";
 import Alerts from "./components/common/Alerts";
 import "./App.css";
+import { URL } from "./actions/url";
 const Dashboard = React.lazy(() => import("./layout/Dashboard"));
 const Test = React.lazy(() => import("./components/common/Test"));
 const Login = React.lazy(() => import("./components/accounts/Login"));
-import { URL } from "./actions/url";
+
 
 // Alerts Options
 const alertOptions = {
