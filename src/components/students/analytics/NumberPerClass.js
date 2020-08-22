@@ -11,7 +11,7 @@ export const NumberPerClass = props => {
     const [totals, setTotals] = useState(null);
 
     useEffect(() => {
-        if (props.studentsPerClass != undefined) {
+        if (props.studentsPerClass !== undefined) {
             setClasses(
                 props.studentsPerClass.map(
                     cl => `${cl.class_ns__class_numeral} ${cl.class_ns__stream}`

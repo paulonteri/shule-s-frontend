@@ -11,7 +11,7 @@ export const NumberPerDormitory = props => {
     const [totals, setTotals] = useState(null);
 
     useEffect(() => {
-        if (props.studentsPerDormitory != undefined) {
+        if (props.studentsPerDormitory !== undefined) {
             setDormitories(
                 props.studentsPerDormitory.map(
                     dm => `${dm.dormitory__dormitory_name}`

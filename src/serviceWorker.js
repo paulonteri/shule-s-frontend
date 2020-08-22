@@ -12,7 +12,7 @@
 
 const isLocalhost = Boolean(
     window.location.hostname === "localhost" ||
-    window.location.hostname === "35.184.199.163" ||
+        window.location.hostname === "35.184.199.163" ||
         // [::1] is the IPv6 localhost address.
         window.location.hostname === "[::1]" ||
         // 127.0.0.0/8 are considered localhost for IPv4.
@@ -109,7 +109,7 @@ function checkValidServiceWorker(swUrl, config) {
             const contentType = response.headers.get("content-type");
             if (
                 response.status === 404 ||
-                (contentType != null &&
+                (contentType !== null &&
                     contentType.indexOf("javascript") === -1)
             ) {
                 // No service worker found. Probably a different app. Reload the page.

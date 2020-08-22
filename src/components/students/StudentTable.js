@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Table } from "antd";
+
 import { getStudents, deleteStudent } from "../../actions/students/students";
 import { getClasses } from "../../actions/classes/classes";
 import { getDorms } from "../../actions/dormitories/dormitories";
-import Input from "antd/es/input";
-import Button from "antd/es/button";
+
+import { Table, Input, Button } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
 import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
-import Statistic from "antd/es/statistic";
+
 export const Gender = props => {
     useStudentAnalyticsGeneral();
 

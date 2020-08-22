@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { getClassNumeral } from "../../actions/classes/classNumeral";
 
-import List from "antd/es/list";
+import { List } from "antd";
 
 export class ClassNList extends Component {
     static propTypes = {

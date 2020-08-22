@@ -1,5 +1,5 @@
-import React, { Component, Fragment, Suspense } from "react";
-import Spinner from "../common/Spinner";
+import React, { Component, Fragment } from "react";
+// import Spinner from "../common/Spinner";
 // TODO: Check on Lazy Loading
 import { Route, Switch } from "react-router-dom";
 

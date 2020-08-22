@@ -1,6 +1,6 @@
 import React from "react";
-import Calendar from "antd/es/calendar";
-import Typography from "antd/es/typography";
+
+import { Typography, Calendar } from "antd";
 
 function EventsCalender() {
     return (

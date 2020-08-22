@@ -9,11 +9,8 @@ import PropTypes from "prop-types";
 
 // Disabled Time(DOA)
 // current > moment().
-import Form from "antd/es/form";
-import Input from "antd/es/input";
-import DatePicker from "antd/es/date-picker";
-import Button from "antd/es/button";
-import Checkbox from "antd/es/checkbox";
+
+import { Checkbox, Input, Form, Button, DatePicker } from "antd";
 import {
     UserOutlined,
     ManOutlined,

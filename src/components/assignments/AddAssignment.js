@@ -7,14 +7,18 @@ import { addAssignment } from "../../actions/assignments/assignments";
 import { getClasses } from "../../actions/classes/classes";
 import { getStreams } from "../../actions/classes/stream";
 import { getClassNumeral } from "../../actions/classes/classNumeral";
-import Select from "antd/es/select";
-import Upload from "antd/es/upload";
-import message from "antd/es/message";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
-import Divider from "antd/es/divider";
-import DatePicker from "antd/es/date-picker";
-import Button from "antd/es/button";
+
+import {
+    Input,
+    Form,
+    Button,
+    DatePicker,
+    Divider,
+    message,
+    Upload,
+    Select
+} from "antd";
+
 const { TextArea } = Input;
 const { Option } = Select;
 

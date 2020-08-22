@@ -59,7 +59,7 @@ function AddExamResPerStudent(props) {
     const onFinish = results => {
         const subject_marks = [];
         for (let [key, value] of Object.entries(results)) {
-            if (value !== undefined && value != null) {
+            if (value !== undefined && value !== null) {
                 subject_marks.push({
                     subject_id: Number(key),
                     marks: Number(value)
@@ -269,14 +269,14 @@ function AddExamResPerStudent(props) {
 
     //
     function showResults() {
-        if (props.examResultsPerStudent != null) {
+        if (props.examResultsPerStudent !== null) {
             const resultss = props.examResultsPerStudent.filter(
                 res => res.exam === exam
             );
 
             const results = resultss[0];
 
-            if (results != null && student != null) {
+            if (results !== null && student !== null) {
                 const mks = results["subject_marks"];
                 return (
                     <Fragment>

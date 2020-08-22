@@ -10,14 +10,17 @@ import {
     getExamResultsAll,
     getExamResultsPerClassPerExam
 } from "../../actions/examinations/examinations";
-import InputNumber from "antd/es/input-number";
-import Skeleton from "antd/es/skeleton";
-import Descriptions from "antd/es/descriptions";
-import Empty from "antd/es/empty";
-import Select from "antd/es/select";
-import Form from "antd/es/form";
-import Divider from "antd/es/divider";
-import Button from "antd/es/button";
+
+import {
+    Empty,
+    Skeleton,
+    InputNumber,
+    Descriptions,
+    Form,
+    Button,
+    Divider,
+    Select
+} from "antd";
 
 const { Option } = Select;
 
@@ -39,7 +42,7 @@ export const AddExamResPerClass = props => {
 
     // On Change
     useEffect(() => {
-        if (classs != null && subject != null) {
+        if (classs !== null && subject !== null) {
             FetchResults();
         }
     }, [classs, subject]);
@@ -62,7 +65,7 @@ export const AddExamResPerClass = props => {
     const onFinish = results => {
         const student_marks = [];
         for (let [key, value] of Object.entries(results)) {
-            if (value !== undefined && value != null) {
+            if (value !== undefined && value !== null) {
                 student_marks.push({
                     student: Number(key),
                     marks: Number(value)
@@ -258,7 +261,7 @@ export const AddExamResPerClass = props => {
 
     // Fetch exam results
     function FetchResults() {
-        if (classs != null && subject != null) {
+        if (classs !== null && subject !== null) {
             props.getExamResultsPerClassPerExam(classs, subject);
         }
     }
@@ -268,7 +271,7 @@ export const AddExamResPerClass = props => {
         if (
             props.examResultsPerClassPerSubjectLoading === false &&
             SelectedDropDowns() === true &&
-            props.examResultsPerClassPerSubject != null &&
+            props.examResultsPerClassPerSubject !== null &&
             props.examResultsPerClassPerSubject.length !== 0
         ) {
             const the_results = props.examResultsPerClassPerSubject.find(

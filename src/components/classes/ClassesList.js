@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { getClasses } from "../../actions/classes/classes";
 
-import List from "antd/es/list";
+import { List } from "antd";
 
 export class ClassesList extends Component {
     static propTypes = {

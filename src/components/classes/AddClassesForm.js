@@ -1,13 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addClass } from "../../actions/classes/classes";
 import { getClassNumeral } from "../../actions/classes/classNumeral";
 import { getStreams } from "../../actions/classes/stream";
-import Form from "antd/es/form";
-import Select from "antd/es/select";
-import Button from "antd/es/button";
-import Divider from "antd/es/divider"; // TODO: Add other class fields
+// TODO: Add other class fields
+import { Form, Button, Divider, Select } from "antd";
 
 export const AddClassesForm = props => {
     // On Change

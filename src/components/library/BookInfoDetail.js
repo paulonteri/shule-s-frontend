@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux"; // In order to use redux
 import PropTypes from "prop-types";
 import { getBooks, deleteBook } from "../../actions/library/books";

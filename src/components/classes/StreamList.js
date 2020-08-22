@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { getStreams } from "../../actions/classes/stream";
 
-import List from "antd/es/list";
+import { List } from "antd";
 
 export class StreamList extends Component {
     static propTypes = {

@@ -8,7 +8,7 @@ export function findAndReplace(old_array, new_object) {
 
 export function deleteObject(old_array, deleted_object_id) {
     const dataAfterDelete = old_array.filter(
-        obj => obj.id != deleted_object_id
+        obj => obj.id !== deleted_object_id
     );
     return dataAfterDelete;
 }

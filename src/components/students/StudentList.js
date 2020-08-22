@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Table } from "antd";
 import { getStudents, deleteStudent } from "../../actions/students/students";
 
 export class StudentList extends Component {
