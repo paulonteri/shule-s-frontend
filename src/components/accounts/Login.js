@@ -5,9 +5,7 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../actions/auth/auth";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import SpinnerFull from "../common/SpinnerFull";
-import Input from "antd/es/input";
-import Form from "antd/es/form";
-import Button from "antd/es/button";
+import { Input, Form, Button } from "antd";
 
 export const Login = props => {
     const [form] = Form.useForm();
