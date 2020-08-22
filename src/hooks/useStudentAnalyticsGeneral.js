@@ -15,6 +15,7 @@ function useStudentAnalyticsGeneral() {
         } else {
             console.log("pass");
         }
+        // eslint-disable-next-line
     }, []);
 }
 

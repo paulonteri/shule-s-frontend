@@ -12,6 +12,7 @@ export const AddClassesForm = props => {
     useEffect(() => {
         props.getClassNumeral();
         props.getStreams();
+        // eslint-disable-next-line
     }, []);
 
     // forms

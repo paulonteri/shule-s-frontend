@@ -8,6 +8,7 @@ function BookInfoDetail(props) {
     // OnMount
     useEffect(() => {
         props.getBooks();
+        // eslint-disable-next-line
     }, []);
 
     return (

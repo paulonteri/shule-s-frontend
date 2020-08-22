@@ -40,11 +40,13 @@ function AddExamResPerStudent(props) {
         props.getStudents();
         props.getSubjects();
         getExamResults(student);
+        // eslint-disable-next-line
     }, []);
 
     // onChange
     useEffect(() => {
         getExamResults(student);
+        // eslint-disable-next-line
     }, [student]);
 
     // onChange
@@ -53,6 +55,7 @@ function AddExamResPerStudent(props) {
             getExamResults(student);
             form.resetFields();
         }
+        // eslint-disable-next-line
     }, [props.uploadedExamResultsPerStudent]);
 
     // OnSubmit

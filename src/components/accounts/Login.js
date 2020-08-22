@@ -19,6 +19,7 @@ export const Login = props => {
             email: "janedoe@gmail.com",
             password: "janedoe"
         });
+        // eslint-disable-next-line
     }, []);
 
     if (props.isAuthenticated) {

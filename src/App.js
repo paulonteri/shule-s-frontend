@@ -16,7 +16,6 @@ const Dashboard = React.lazy(() => import("./layout/Dashboard"));
 const Test = React.lazy(() => import("./components/common/Test"));
 const Login = React.lazy(() => import("./components/accounts/Login"));
 
-
 // Alerts Options
 const alertOptions = {
     timeout: 3250,
@@ -30,6 +29,7 @@ function App() {
         const url = `${URL}/api/ping/`;
         Http.open("GET", url);
         Http.send();
+        // eslint-disable-next-line
     }, []);
 
     return (

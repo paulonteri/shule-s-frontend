@@ -38,6 +38,7 @@ export const AddExamResPerClass = props => {
         props.getExams();
         props.getSubjects();
         props.getStudents();
+        // eslint-disable-next-line
     }, []);
 
     // On Change
@@ -45,6 +46,7 @@ export const AddExamResPerClass = props => {
         if (classs !== null && subject !== null) {
             FetchResults();
         }
+        // eslint-disable-next-line
     }, [classs, subject]);
 
     // On Change
@@ -53,6 +55,7 @@ export const AddExamResPerClass = props => {
             FetchResults();
             form.resetFields();
         }
+        // eslint-disable-next-line
     }, [props.uploadedExamResultsPerClass]);
 
     // forms

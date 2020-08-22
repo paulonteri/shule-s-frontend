@@ -44,6 +44,7 @@ function AddAssignment(props) {
         props.getClasses();
         props.getClassNumeral();
         props.getStreams();
+        // eslint-disable-next-line
     }, []);
 
     // state

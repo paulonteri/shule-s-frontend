@@ -11,6 +11,7 @@ function BookInfoForm(props) {
     // OnMount
     useEffect(() => {
         props.getSubjects();
+        // eslint-disable-next-line
     }, []);
 
     const [form] = Form.useForm();

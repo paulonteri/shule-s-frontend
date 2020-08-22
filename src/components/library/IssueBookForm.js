@@ -26,6 +26,7 @@ function IssueBookForm(props) {
         props.getStudents();
         props.getBookInstance();
         props.getBooks();
+        // eslint-disable-next-line
     }, []);
 
     const [form] = Form.useForm();

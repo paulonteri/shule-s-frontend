@@ -8,6 +8,7 @@ function BookTotalsCards(props) {
     // OnMount
     useEffect(() => {
         props.getBooksNum();
+        // eslint-disable-next-line
     }, []);
     return (
         <Fragment>

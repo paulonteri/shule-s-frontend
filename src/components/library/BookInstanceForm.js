@@ -13,6 +13,7 @@ function BookInstanceForm(props) {
     useEffect(() => {
         props.getBooks();
         props.getBooksNum();
+        // eslint-disable-next-line
     }, []);
 
     const [form] = Form.useForm();
