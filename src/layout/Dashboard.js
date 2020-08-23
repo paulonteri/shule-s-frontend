@@ -1,6 +1,6 @@
-import React, { Suspense, useState, Fragment } from "react";
+import React, { Suspense, useState } from "react";
 import Spinner from "../components/common/Spinner";
-import Layout from "antd/es/layout";
+import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
@@ -43,6 +43,11 @@ function Dashboard() {
 
                             break;
                         case false:
+                            setBroken(false);
+                            setCollapsed(false);
+                            break;
+
+                        default:
                             setBroken(false);
                             setCollapsed(false);
                             break;

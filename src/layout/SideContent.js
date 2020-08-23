@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import Menu from "antd/es/menu";
 import Link from "react-router-dom/es/Link";
+import { Menu } from "antd";
 import {
     IdcardOutlined,
     ReadOutlined,
