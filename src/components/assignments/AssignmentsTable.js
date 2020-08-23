@@ -173,11 +173,7 @@ export class AssignmentsTable extends Component {
                             new Date(a.time_added) - new Date(b.time_added)
                         }
                         render={record => (
-                            <span>
-                                <a style={{ marginRight: 16 }}>
-                                    {moment(record.time_added).calendar()}
-                                </a>
-                            </span>
+                            <span>{moment(record.time_added).calendar()}</span>
                         )}
                     />
                     <Column
@@ -195,11 +191,7 @@ export class AssignmentsTable extends Component {
                             new Date(a.time_starts) - new Date(b.time_starts)
                         }
                         render={record => (
-                            <span>
-                                <a style={{ marginRight: 16 }}>
-                                    {moment(record.time_starts).calendar()}
-                                </a>
-                            </span>
+                            <span>{moment(record.time_starts).calendar()}</span>
                         )}
                     />
 
@@ -214,9 +206,7 @@ export class AssignmentsTable extends Component {
                                         this.props.deleteAssignment(record.id)
                                     }
                                 >
-                                    <a>
-                                        <Text type="danger">Delete</Text>
-                                    </a>
+                                    <Text type="danger">Delete</Text>
                                 </Popconfirm>
                             </span>
                         )}

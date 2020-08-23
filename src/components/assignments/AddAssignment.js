@@ -365,6 +365,8 @@ function AddAssignment(props) {
                 case "file3":
                     setFile3(null);
                     break;
+                default:
+                    break;
             }
         }
 
@@ -392,6 +394,8 @@ function AddAssignment(props) {
                         break;
                     case "file3":
                         setFile3(docFile);
+                        break;
+                    default:
                         break;
                 }
                 return false;

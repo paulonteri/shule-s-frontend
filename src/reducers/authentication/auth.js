@@ -5,9 +5,9 @@ import {
     LOGIN_FAIL,
     LOGIN_LOADING,
     LOGIN_SUCCESS,
-    LOGOUT_SUCCESS,
-    REGISTER_FAIL,
-    REGISTER_SUCCESS
+    LOGOUT_SUCCESS
+    // REGISTER_FAIL,
+    // REGISTER_SUCCESS
 } from "../../actions/auth/types";
 
 const initialState = {

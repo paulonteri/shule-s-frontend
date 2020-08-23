@@ -1,7 +1,7 @@
 import {
     GET_DORMS,
-    ADD_DORM,
-    DELETE_DORM
+    // ADD_DORM,
+    // DELETE_DORM
 } from "../../actions/dormitories/types";
 
 const initialState = { dormitories: [] };

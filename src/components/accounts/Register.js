@@ -6,9 +6,9 @@ import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
 import { register } from "../../actions/auth/auth";
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+// function hasErrors(fieldsError) {
+//     return Object.keys(fieldsError).some(field => fieldsError[field]);
+// }
 
 export class Register extends Component {
     static propTypes = {

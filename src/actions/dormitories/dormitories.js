@@ -1,9 +1,9 @@
 import axios from "axios";
 import { URL } from "../url";
 
-import { GET_DORMS, ADD_DORM, DELETE_DORM } from "./types";
+import { GET_DORMS } from "./types";
 
-import { createMessage, returnErrors } from "../messages";
+import { returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
 
 // GET DORMS

@@ -14,3 +14,6 @@ const store = createStore(
 );
 
 export default store;
+
+// TODO:
+// https://www.pluralsight.com/guides/code-splitting-your-redux-application

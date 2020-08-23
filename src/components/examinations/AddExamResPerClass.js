@@ -125,9 +125,6 @@ export const AddExamResPerClass = props => {
                                                 max={100}
                                                 min={1}
                                                 size="small"
-                                                disabled={
-                                                    props.uploadingExamResultsPerClass
-                                                }
                                             />
                                         </Form.Item>
                                     );
