@@ -1,6 +1,6 @@
 {
-    "short_name": "School App",
-    "name": "School Application",
+    "short_name": "ShuleSuite",
+    "name": "ShuleSuite Application",
     "icons": [
         {
             "src": "favicon.ico",
@@ -8,18 +8,21 @@
             "type": "image/x-icon"
         },
         {
-            "src": "logo192.png",
-            "type": "image/png",
+            "src": "logo192.jpg",
+            "type": "image/jpg",
             "sizes": "192x192"
         },
         {
-            "src": "logo512.png",
-            "type": "image/png",
+            "src": "logo512.jpg",
+            "type": "image/jpg",
             "sizes": "512x512"
         }
     ],
     "start_url": ".",
     "display": "standalone",
     "theme_color": "#1890FF",
-    "background_color": "F0F2F5"
+    "background_color": "F0F2F5",
+    "lang": "English",
+    "orientation": "portrait",
+    "description": "ShuleSuite Application"
 }
