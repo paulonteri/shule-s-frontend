@@ -12,14 +12,10 @@ import { tokenConfig } from "../../auth/auth";
 // GET STUDENTS
 export const getStudentAnalytics = () => (dispatch, getState) => {
     dispatch({ type: GET_STUDENT_ANALYTICS_LOADING });
-    var invalidate_stud_cache = getState().studentsReducer
-        .invalidateStudentCache;
+    var reqData = tokenConfig(getState);
+    reqData.clearCacheEntry = getState().studentsReducer.invalidateStudentCache;
     cached_api
-        .get(
-            `${URL}/api/v2.0/students/analytics/general`,
-            { clearCacheEntry: invalidate_stud_cache },
-            tokenConfig(getState)
-        )
+        .get(`${URL}/api/v2.0/students/analytics/general`, reqData)
         .then(res => {
             dispatch({
                 type: GET_STUDENT_ANALYTICS_SUCCESS,

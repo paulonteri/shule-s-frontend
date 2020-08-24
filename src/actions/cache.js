@@ -4,7 +4,7 @@ export const cached_api = setup({
     cache: {
         // Invalidate only when a specific option is passed through config
         invalidate: async (config, request) => {
-            if (request.clearCacheEntry) {
+            if (request.clearCacheEntry === true) {
                 await config.store.removeItem(config.uuid);
             }
         },

@@ -22,12 +22,10 @@ export const getStudents = () => (dispatch, getState) => {
     dispatch({ type: GET_STUDENTS_LOADING });
     var invalidate_stud_cache = getState().studentsReducer
         .invalidateStudentCache;
+    var reqData = tokenConfig(getState);
+    reqData.clearCacheEntry = invalidate_stud_cache;
     cached_api
-        .get(
-            `${URL}/api/v2.0/students/students/`,
-            { clearCacheEntry: invalidate_stud_cache },
-            tokenConfig(getState)
-        )
+        .get(`${URL}/api/v2.0/students/students/`, reqData)
         .then(async res => {
             dispatch({
                 type: GET_STUDENTS_SUCCESS,
