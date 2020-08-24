@@ -1,9 +1,7 @@
 import React, { useEffect, Suspense } from "react";
-import Route from "react-router-dom/es/Route";
-import Switch from "react-router-dom/es/Switch";
-import HashRouter from "react-router-dom/es/HashRouter";
+import { Route, HashRouter, Switch } from "react-router-dom";
 import SpinnerFull from "./components/common/SpinnerFull";
-import Provider from "react-redux/es/components/Provider";
+import { Provider } from "react-redux";
 import store from "./store";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";

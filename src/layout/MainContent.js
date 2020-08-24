@@ -1,9 +1,6 @@
 import React, { Suspense } from "react";
+import { Route, HashRouter, Switch, Redirect } from "react-router-dom";
 import PrivateRoute from "../components/common/PrivateRoute";
-import Route from "react-router-dom/es/Route";
-import Switch from "react-router-dom/es/Switch";
-import Redirect from "react-router-dom/es/Redirect";
-import HashRouter from "react-router-dom/es/HashRouter";
 import Spinner from "../components/common/Spinner";
 import Homepage from "./Homepage";
 const Error404 = React.lazy(() => import("../components/common/Error404"));
