@@ -6,7 +6,9 @@ import App from "./App";
 
 Sentry.init({
     dsn: process.env.REACT_APP_SENTRY_DSN,
-    environment: process.env.NODE_ENV
+    environment: process.env.NODE_ENV,
+    sendDefaultPii: true,
+    normalizeDepth: 10
 });
 
 ReactDOM.render(<App />, document.getElementById("root"));

@@ -1,7 +1,11 @@
-import { createStore, applyMiddleware } from "redux";
-
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+import * as Sentry from "@sentry/react";
+
+const sentryReduxEnhancer = Sentry.createReduxEnhancer({
+    // Optionally pass options
+});
 
 const initialState = {};
 
@@ -23,7 +27,11 @@ function returnMiddleware() {
     }
 }
 
-const store = createStore(rootReducer, initialState, returnMiddleware());
+const store = createStore(
+    rootReducer,
+    initialState,
+    compose(returnMiddleware(), sentryReduxEnhancer)
+);
 
 export default store;
 
