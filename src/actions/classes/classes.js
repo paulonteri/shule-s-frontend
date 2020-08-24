@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URL } from "../url";
+import { short_cached_api } from "../cache";
 
 import {
     GET_CLASSES_SUCCESS,
@@ -22,7 +23,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASSES
 export const getClasses = () => (dispatch, getState) => {
     dispatch({ type: GET_CLASSES_LOADING });
-    axios
+    short_cached_api
         .get(`${URL}/api/v2.0/academics/classes/`, tokenConfig(getState))
         .then(res => {
             dispatch({

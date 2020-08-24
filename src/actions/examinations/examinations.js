@@ -1,4 +1,5 @@
 import axios from "axios";
+import { short_cached_api } from "../cache";
 import { URL } from "../url";
 import {
     GET_EXAMS_SUCCESS,
@@ -26,7 +27,7 @@ import { tokenConfig } from "../auth/auth";
 export const getExams = () => (dispatch, getState) => {
     // GET ALL EXAMS
     dispatch({ type: GET_EXAMS_LOADING });
-    axios
+    short_cached_api
         .get(URL.concat("/api/v2.0/exams/exams/"), tokenConfig(getState))
         .then(res => {
             dispatch({
@@ -43,7 +44,7 @@ export const getExams = () => (dispatch, getState) => {
 export const getExamResultsAll = () => (dispatch, getState) => {
     // GET ALL EXAM RESULTS
     dispatch({ type: GET_EXAMRESULTS_ALL_LOADING });
-    axios
+    short_cached_api
         .get(
             URL.concat("/api/v2.0/exams/results/get/all/"),
             tokenConfig(getState)
@@ -109,7 +110,7 @@ export const addExamResultsPerStudent = results => (dispatch, getState) => {
 export const getExamResultsPerStudent = student => (dispatch, getState) => {
     // GET PER STUDent EXAM RESULTS
     dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_LOADING });
-    axios
+    short_cached_api
         .get(
             `${URL}/api/v2.0/exams/results/get/student/${student}/`,
             tokenConfig(getState)
@@ -132,7 +133,7 @@ export const getExamResultsPerClassPerExam = (classs, subject) => (
 ) => {
     // GET PER CLASS PER EXAM
     dispatch({ type: GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING });
-    axios
+    short_cached_api
         .get(
             `${URL}/api/v2.0/exams/results/get/class/${classs}/subject/${subject}/`,
             tokenConfig(getState)

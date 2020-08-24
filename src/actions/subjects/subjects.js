@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URL } from "../url";
+import { short_cached_api } from "../cache";
 
 import {
     GET_SUBJECTS_SUCCESS,
@@ -14,7 +15,7 @@ import { tokenConfig } from "../auth/auth";
 // GET SUBJECTS ACTION
 export const getSubjects = () => (dispatch, getState) => {
     dispatch({ type: GET_SUBJECTS_LOADING });
-    axios
+    short_cached_api
         .get(URL.concat("/api/v2.0/academics/subject/"), tokenConfig(getState))
         .then(res => {
             dispatch({

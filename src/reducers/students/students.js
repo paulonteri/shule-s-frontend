@@ -3,11 +3,14 @@ import {
     GET_STUDENTS_FAILED,
     GET_STUDENTS_LOADING,
     DELETE_STUDENT,
-    ADD_STUDENT
+    ADD_STUDENT,
+    INVALIDATE_STUDENT_CACHE,
+    VALIDATE_STUDENT_CACHE
 } from "../../actions/students/types";
 
 const initialState = {
     students: [],
+    invalidateStudentCache: false,
     getSudentsLoading: false,
     getStudentsFailed: false
 };
@@ -44,6 +47,16 @@ export default function(state = initialState, action) {
                 students: state.students.filter(
                     stud => stud.student_id !== action.payload
                 )
+            };
+        case INVALIDATE_STUDENT_CACHE:
+            return {
+                ...state,
+                invalidateStudentCache: true
+            };
+        case VALIDATE_STUDENT_CACHE:
+            return {
+                ...state,
+                invalidateStudentCache: false
             };
         default:
             return state;

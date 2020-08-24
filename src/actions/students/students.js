@@ -5,10 +5,14 @@ import {
     GET_STUDENTS_SUCCESS,
     DELETE_STUDENT,
     GET_STUDENTS_LOADING,
-    GET_STUDENTS_FAILED
+    GET_STUDENTS_FAILED,
     // TODO:
     // PATCH_STUDENT
+    INVALIDATE_STUDENT_CACHE,
+    VALIDATE_STUDENT_CACHE
 } from "./types";
+
+import { cached_api } from "../cache";
 
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
@@ -16,13 +20,22 @@ import { tokenConfig } from "../auth/auth";
 // GET STUDENTS
 export const getStudents = () => (dispatch, getState) => {
     dispatch({ type: GET_STUDENTS_LOADING });
-    axios
-        .get(`${URL}/api/v2.0/students/students/`, tokenConfig(getState))
-        .then(res => {
+    var invalidate_stud_cache = getState().studentsReducer
+        .invalidateStudentCache;
+    cached_api
+        .get(
+            `${URL}/api/v2.0/students/students/`,
+            { clearCacheEntry: invalidate_stud_cache },
+            tokenConfig(getState)
+        )
+        .then(async res => {
             dispatch({
                 type: GET_STUDENTS_SUCCESS,
                 payload: res.data
             });
+            if (invalidate_stud_cache) {
+                dispatch({ type: VALIDATE_STUDENT_CACHE });
+            }
         })
         .catch(err => {
             dispatch({ type: GET_STUDENTS_FAILED });
@@ -44,6 +57,7 @@ export const addStudent = student => (dispatch, getState) => {
                 type: ADD_STUDENT,
                 payload: res.data
             });
+            dispatch({ type: INVALIDATE_STUDENT_CACHE });
         })
         .catch(err =>
             dispatch(returnErrors(err.response.data, err.response.status))
@@ -63,6 +77,7 @@ export const deleteStudent = student_id => (dispatch, getState) => {
                 type: DELETE_STUDENT,
                 payload: student_id
             });
+            dispatch({ type: INVALIDATE_STUDENT_CACHE });
         })
         .catch(err =>
             dispatch(returnErrors(err.response.data, err.response.status))

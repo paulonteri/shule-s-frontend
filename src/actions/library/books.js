@@ -13,10 +13,11 @@ import {
 } from "./types";
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
+import { short_cached_api } from "../cache";
 
 // GET BOOKS
 export const getBooks = () => (dispatch, getState) => {
-    axios
+    short_cached_api
         .get(URL.concat("/api/v2.0/library/books/"), tokenConfig(getState))
         .then(res => {
             dispatch({
@@ -71,7 +72,7 @@ export const deleteBook = id => (dispatch, getState) => {
 
 // GET BOOK ISSUED
 export const getBooksIssued = () => (dispatch, getState) => {
-    axios
+    short_cached_api
         .get(
             URL.concat("/api/v2.0/library/booksissued/"),
             tokenConfig(getState)
@@ -131,7 +132,7 @@ export const deleteBookIssued = id => (dispatch, getState) => {
 
 // GET BOOK INSTANCE
 export const getBookInstance = () => (dispatch, getState) => {
-    axios
+    short_cached_api
         .get(
             URL.concat("/api/v2.0/library/bookinstance/"),
             tokenConfig(getState)

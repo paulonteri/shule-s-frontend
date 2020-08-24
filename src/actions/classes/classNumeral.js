@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URL } from "../url";
+import { short_cached_api } from "../cache";
 
 import {
     GET_CLASS_NUMERALS_SUCCESS,
@@ -19,7 +20,7 @@ import { tokenConfig } from "../auth/auth";
 // GET CLASS NUMERAL
 export const getClassNumeral = () => (dispatch, getState) => {
     dispatch({ type: GET_CLASS_NUMERALS_LOADING });
-    axios
+    short_cached_api
         .get(
             URL.concat("/api/v2.0/academics/classNumeral/"),
             tokenConfig(getState)

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URL } from "../url";
+import { short_cached_api } from "../cache";
 import {
     GET_ASSIGNMENTS_FAILED,
     GET_ASSIGNMENTS_LOADING,
@@ -20,7 +21,7 @@ import { tokenConfig } from "../auth/auth";
 export const getAssignments = () => (dispatch, getState) => {
     // GET ALL ASSIGNMENTS
     dispatch({ type: GET_ASSIGNMENTS_LOADING });
-    axios
+    short_cached_api
         .get(`${URL}/api/v2.0/assignments/assignments/`, tokenConfig(getState))
         .then(res => {
             dispatch({

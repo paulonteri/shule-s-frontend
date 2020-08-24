@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URL } from "../url";
+import { short_cached_api } from "../cache";
 
 import {
     ADD_STREAM_FAILED,
@@ -18,7 +19,7 @@ import { tokenConfig } from "../auth/auth";
 // GET STREAM_SUCCESSS_SUCCESS ACTION
 export const getStreams = () => (dispatch, getState) => {
     dispatch({ type: GET_STREAMS_LOADING });
-    axios
+    short_cached_api
         .get(URL.concat("/api/v2.0/academics/stream/"), tokenConfig(getState))
         .then(res => {
             dispatch({
