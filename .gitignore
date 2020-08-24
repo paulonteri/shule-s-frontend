@@ -1,6 +1,8 @@
 .vscode
 .idea
 
+.env
+
 *.cache
 
 **/tailwind-purged.css
