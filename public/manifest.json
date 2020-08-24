@@ -21,7 +21,7 @@
     "start_url": ".",
     "display": "standalone",
     "theme_color": "#1890FF",
-    "background_color": "F0F2F5",
+    "background_color": "#f0f2f5",
     "lang": "English",
     "orientation": "portrait",
     "description": "ShuleSuite Application"
