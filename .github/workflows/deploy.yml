@@ -18,8 +18,6 @@ jobs:
       - name: Install Dependencies
         run: yarn
       - name: Build
-        env:
-          CI: false
         run: yarn build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
