@@ -18,6 +18,8 @@ jobs:
       - name: Install Dependencies
         run: yarn
       - name: Build
+        env:
+          REACT_APP_SENTRY_DSN: ${{ secrets.REACT_APP_SENTRY_DSN }}
         run: yarn build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
