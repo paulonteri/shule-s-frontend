@@ -10,6 +10,7 @@ import AlertTemplate from "react-alert-template-basic";
 import PrivateRoute from "./components/common/PrivateRoute";
 import { loadUser } from "./actions/auth/auth";
 import Alerts from "./components/common/Alerts";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { URL } from "./actions/url";
 const Dashboard = React.lazy(() => import("./layout/Dashboard"));
