@@ -2,11 +2,11 @@ import React, { Suspense, useState } from "react";
 import Spinner from "../components/common/Spinner";
 import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import MainContent from "./MainContent";
+import SideContent from "./SideContent";
+import AppFooter from "./AppFooter";
 
 const { Header, Sider, Content } = Layout;
-const MainContent = React.lazy(() => import("./MainContent"));
-const SideContent = React.lazy(() => import("./SideContent"));
-const AppFooter = React.lazy(() => import("./AppFooter"));
 
 function Dashboard() {
     // State
