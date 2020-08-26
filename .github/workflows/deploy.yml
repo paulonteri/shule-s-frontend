@@ -19,7 +19,7 @@ jobs:
           repository: ShuleSuite/core
           ref: master
           token: ${{ secrets.my_pat }}
-          path: ./my-tools
+          path: my-tools
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Content list
@@ -27,10 +27,10 @@ jobs:
         with:
           source: my-tools/
       - name: Install Requirements
-        run: ls -l
+        run: echo $PATH
       - name: Install Requirements
-        working-directory: my-tools
-        run: ls -l
+        working-directory: ./my-tools
+        run: echo $PATH
         
 
       - name: Setup Python
@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: 3.7
       - name: Install Requirements
-        working-directory: my-tools
+        working-directory: ./my-tools
         run: pip install -r requirements.txt
       - name: Install Dependencies
         run: yarn
