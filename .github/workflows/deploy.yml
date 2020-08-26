@@ -18,6 +18,7 @@ jobs:
         with:
           repository: ShuleSuite/core
           ref: master
+          token: ${{ secrets.my_pat }}
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Setup Python
