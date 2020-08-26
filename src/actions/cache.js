@@ -1,5 +1,15 @@
 import { setup } from "axios-cache-adapter";
 
+function cacheTime() {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+        return { cache: 0, long_cache: 0, short_cache: 0 };
+    } else {
+        return { cache: 300000, long_cache: 900000, short_cache: 60000 };
+    }
+}
+
+const cacheTimesVar = cacheTime();
+
 export const cached_api = setup({
     cache: {
         // Invalidate only when a specific option is passed through config
@@ -8,8 +18,7 @@ export const cached_api = setup({
                 await config.store.removeItem(config.uuid);
             }
         },
-        // milliseconds == 5 min
-        maxAge: 300000
+        maxAge: cacheTimesVar.cache
     }
 });
 
@@ -20,14 +29,12 @@ export const long_cached_api = setup({
                 await config.store.removeItem(config.uuid);
             }
         },
-        // 15 min
-        maxAge: 900000
+        maxAge: cacheTimesVar.long_cache
     }
 });
 
 export const short_cached_api = setup({
     cache: {
-        // 1 min
-        maxAge: 60000
+        maxAge: cacheTimesVar.short_cache
     }
 });
