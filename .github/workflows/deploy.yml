@@ -20,16 +20,40 @@ jobs:
           ref: master
           token: ${{ secrets.my_pat }}
           path: my-tools
+          
+      - name: Checkout Backend
+        uses: actions/checkout@master
+        with:
+          repository: ShuleSuite/core
+          ref: master
+          token: ${{ secrets.my_pat }}
+          path: .
+      - name: Checkout Backend
+        uses: actions/checkout@master
+        with:
+          repository: ShuleSuite/core
+          ref: master
+          token: ${{ secrets.my_pat }}
+          path: ./
+      - name: Checkout Backend
+        uses: actions/checkout@master
+        with:
+          repository: ShuleSuite/core
+          ref: master
+          token: ${{ secrets.my_pat }}
+          path: ./my-tools
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Content list
         uses: enricomarino/actions@v2
         with:
-          source: my-tools/
+          source: my-tools
       - name: Install Requirements
         run: echo $PATH
       - name: Install Requirements
-        working-directory: ./my-tools
+        run: ls
+      - name: Install Requirements
+        working-directory: my-tools
         run: echo $PATH
         
 
@@ -38,7 +62,7 @@ jobs:
         with:
           python-version: 3.7
       - name: Install Requirements
-        working-directory: ./my-tools
+        working-directory: my-tools
         run: pip install -r requirements.txt
       - name: Install Dependencies
         run: yarn
