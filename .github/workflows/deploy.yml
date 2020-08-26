@@ -13,12 +13,13 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
       - name: Checkout Backend
         uses: actions/checkout@master
         with:
           repository: ShuleSuite/core
+          ref: master
+      - name: Checkout Repo
+        uses: actions/checkout@master
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
