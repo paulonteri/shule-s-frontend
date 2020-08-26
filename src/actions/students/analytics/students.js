@@ -1,4 +1,4 @@
-import { cached_api } from "../../cache";
+import { long_cached_api } from "../../cache";
 import { URL } from "../../url";
 import {
     GET_STUDENT_ANALYTICS_SUCCESS,
@@ -14,7 +14,7 @@ export const getStudentAnalytics = () => (dispatch, getState) => {
     dispatch({ type: GET_STUDENT_ANALYTICS_LOADING });
     var reqData = tokenConfig(getState);
     reqData.clearCacheEntry = getState().studentsReducer.invalidateStudentCache;
-    cached_api
+    long_cached_api
         .get(`${URL}/api/v2.0/students/analytics/general`, reqData)
         .then(res => {
             dispatch({

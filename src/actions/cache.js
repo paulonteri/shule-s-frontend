@@ -8,8 +8,8 @@ export const cached_api = setup({
                 await config.store.removeItem(config.uuid);
             }
         },
-        // milliseconds
-        maxAge: 50000
+        // milliseconds == 5 min
+        maxAge: 300000
     }
 });
 
@@ -20,19 +20,14 @@ export const long_cached_api = setup({
                 await config.store.removeItem(config.uuid);
             }
         },
-        // 5 min
-        maxAge: 300000
+        // 15 min
+        maxAge: 900000
     }
 });
 
 export const short_cached_api = setup({
     cache: {
-        invalidate: async (config, request) => {
-            if (request.clearCacheEntry) {
-                await config.store.removeItem(config.uuid);
-            }
-        },
-        // 15 seconds
-        maxAge: 15000
+        // 1 min
+        maxAge: 60000
     }
 });
