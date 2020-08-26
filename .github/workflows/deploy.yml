@@ -24,7 +24,9 @@ jobs:
         uses: actions/checkout@master
       - name: Content list
         uses: enricomarino/actions@v2
-        working-directory: my-tools
+        with:
+          source: my-tools/
+        
 
       - name: Setup Python
         uses: actions/setup-python@v2
