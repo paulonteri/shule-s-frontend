@@ -34,6 +34,7 @@ jobs:
         with:
           python-version: 3.7
       - name: Install Requirements
+        working-directory: my-tools
         run: pip install -r my-tools/requirements.txt
       - name: Install Dependencies
         run: yarn
