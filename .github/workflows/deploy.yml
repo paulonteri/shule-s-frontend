@@ -26,6 +26,11 @@ jobs:
         uses: enricomarino/actions@v2
         with:
           source: my-tools/
+      - name: Install Requirements
+        run: ls
+      - name: Install Requirements
+        working-directory: my-tools
+        run: ls    
         
 
       - name: Setup Python
