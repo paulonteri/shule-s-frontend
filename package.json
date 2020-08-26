@@ -48,6 +48,7 @@
         "test": "react-app-rewired test",
         "eject": "react-app-rewired eject",
         "cypress": "cypress open",
+        "cypress-run": "cypress run --headless --browser chrome",
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
     },
