@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Checkout Backend
+        uses: actions/checkout@master
+        with:
+          name: ShuleSuite/core
       - name: Install Dependencies
         run: yarn
       - name: Test
