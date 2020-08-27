@@ -1,6 +1,7 @@
 {
     "baseUrl": "http://localhost:3000",
-    "requestTimeout": 25000,
+    "requestTimeout": 35000,
+    "defaultCommandTimeout": 25000,
     "video": false,
     "screenshotOnRunFailure": false
 }
