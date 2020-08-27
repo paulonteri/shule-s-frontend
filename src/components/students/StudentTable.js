@@ -20,12 +20,12 @@ export class StudentTable extends Component {
         getClasses: PropTypes.func.isRequired,
         classes: PropTypes.array.isRequired,
         dorms: PropTypes.array.isRequired,
-        getDorms: PropTypes.func.isRequired
+        getDorms: PropTypes.func.isRequired,
     };
 
     state = {
         searchText: "",
-        searchedColumn: ""
+        searchedColumn: "",
     };
 
     componentDidMount() {
@@ -34,7 +34,7 @@ export class StudentTable extends Component {
         this.props.getDorms();
     }
 
-    displayGender = genders => {
+    displayGender = (genders) => {
         if (genders === "m") {
             return <p>Male</p>;
         } else if (genders === "f") {
@@ -42,37 +42,37 @@ export class StudentTable extends Component {
         }
     };
 
-    displayClass = c => {
+    displayClass = (c) => {
         const classes = this.props.classes;
-        const cl = classes.filter(fc => fc.id === c);
-        return cl.map(sch_class => (
+        const cl = classes.filter((fc) => fc.id === c);
+        return cl.map((sch_class) => (
             <p key={sch_class.id}>
                 {sch_class.class_numeral} {sch_class.stream}
             </p>
         ));
     };
 
-    displayDorm = dormitory => {
+    displayDorm = (dormitory) => {
         const dormitories = this.props.dorms;
-        const d = dormitories.filter(dm => dm.id === dormitory);
-        return d.map(drm => <p key={drm.id}>{drm.dormitory_name}</p>);
+        const d = dormitories.filter((dm) => dm.id === dormitory);
+        return d.map((drm) => <p key={drm.id}>{drm.dormitory_name}</p>);
     };
 
-    getColumnSearchProps = dataIndex => ({
+    getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
             confirm,
-            clearFilters
+            clearFilters,
         }) => (
             <div style={{ padding: 8 }}>
                 <Input
-                    ref={node => {
+                    ref={(node) => {
                         this.searchInput = node;
                     }}
                     placeholder={`Search ${dataIndex}`}
                     value={selectedKeys[0]}
-                    onChange={e =>
+                    onChange={(e) =>
                         setSelectedKeys(e.target.value ? [e.target.value] : [])
                     }
                     onPressEnter={() =>
@@ -100,7 +100,7 @@ export class StudentTable extends Component {
                 </Button>
             </div>
         ),
-        filterIcon: filtered => (
+        filterIcon: (filtered) => (
             <SearchOutlined
                 style={{ color: filtered ? "var(--light-theme)" : undefined }}
             />
@@ -110,17 +110,17 @@ export class StudentTable extends Component {
                 .toString()
                 .toLowerCase()
                 .includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: visible => {
+        onFilterDropdownVisibleChange: (visible) => {
             if (visible) {
                 setTimeout(() => this.searchInput.select());
             }
         },
-        render: text =>
+        render: (text) =>
             this.state.searchedColumn === dataIndex ? (
                 <Highlighter
                     highlightStyle={{
                         backgroundColor: "var(--light-theme)",
-                        padding: 0
+                        padding: 0,
                     }}
                     searchWords={[this.state.searchText]}
                     autoEscape
@@ -128,18 +128,18 @@ export class StudentTable extends Component {
                 />
             ) : (
                 text
-            )
+            ),
     });
 
     handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         this.setState({
             searchText: selectedKeys[0],
-            searchedColumn: dataIndex
+            searchedColumn: dataIndex,
         });
     };
 
-    handleReset = clearFilters => {
+    handleReset = (clearFilters) => {
         clearFilters();
         this.setState({ searchText: "" });
     };
@@ -189,19 +189,19 @@ export class StudentTable extends Component {
                         title="Class"
                         dataIndex="class_ns"
                         key="class_ns"
-                        render={clas => this.displayClass(clas)}
+                        render={(clas) => this.displayClass(clas)}
                     />
                     <Column
                         title="Dormitory"
                         dataIndex="dormitory"
                         key="dormitory"
-                        render={dorm => this.displayDorm(dorm)}
+                        render={(dorm) => this.displayDorm(dorm)}
                     />
                     <Column
                         title="Gender"
                         dataIndex="gender"
                         key="gender"
-                        render={gend => this.displayGender(gend)}
+                        render={(gend) => this.displayGender(gend)}
                     />
                     {/* ///// DELETE STUDENT ///// */}
                     {/* <Column
@@ -227,15 +227,15 @@ export class StudentTable extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     student: state.studentsReducer.students,
     classes: state.classesReducer.classes,
-    dorms: state.dormitoriesReducer.dormitories
+    dorms: state.dormitoriesReducer.dormitories,
 });
 
 export default connect(mapStateToProps, {
     getStudents,
     deleteStudent,
     getClasses,
-    getDorms
+    getDorms,
 })(StudentTable);

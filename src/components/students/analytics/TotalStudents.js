@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Statistic from "antd/es/statistic";
 
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
-export const TotalStudents = props => {
+export const TotalStudents = (props) => {
     useStudentAnalyticsGeneral();
 
     return (
@@ -21,11 +21,12 @@ export const TotalStudents = props => {
 };
 
 TotalStudents.propTypes = {
-    totalStudents: PropTypes.object.isRequired
+    totalStudents: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-    totalStudents: state.studentAnalyticsReducer.studentAnalytics.total_students
+const mapStateToProps = (state) => ({
+    totalStudents:
+        state.studentAnalyticsReducer.studentAnalytics.total_students,
 });
 
 export default connect(mapStateToProps)(TotalStudents);

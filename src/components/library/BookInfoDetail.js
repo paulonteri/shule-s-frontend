@@ -44,14 +44,14 @@ function BookInfoDetail(props) {
 BookInfoDetail.propTypes = {
     books: PropTypes.array.isRequired,
     getBooks: PropTypes.func.isRequired,
-    deleteBook: PropTypes.func.isRequired
+    deleteBook: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
     const book_id = parseInt(ownProps.match.params.book_id);
 
     return {
-        books: state.booksReducer.books.find(books => books.id === book_id)
+        books: state.booksReducer.books.find((books) => books.id === book_id),
     };
 };
 

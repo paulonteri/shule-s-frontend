@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={props => {
+            render={(props) => {
                 if (isAuthenticated) {
                     return <Component {...props} />;
                 } else if (isAuthenticated === false) {
@@ -24,8 +24,8 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     );
 };
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.authReducer.isAuthenticated
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.authReducer.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

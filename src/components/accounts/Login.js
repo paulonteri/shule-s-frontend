@@ -7,17 +7,17 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import SpinnerFull from "../common/SpinnerFull";
 import { Input, Form, Button } from "antd";
 
-export const Login = props => {
+export const Login = (props) => {
     const [form] = Form.useForm();
 
-    const onFinish = e => {
+    const onFinish = (e) => {
         props.login(e.email, e.password);
     };
 
     useEffect(() => {
         form.setFieldsValue({
             email: "janedoe@gmail.com",
-            password: "janedoe"
+            password: "janedoe",
         });
         // eslint-disable-next-line
     }, []);
@@ -44,8 +44,8 @@ export const Login = props => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: "Please input your  email!"
-                                    }
+                                        message: "Please input your  email!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -68,8 +68,8 @@ export const Login = props => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: "Please input password!"
-                                    }
+                                        message: "Please input password!",
+                                    },
                                 ]}
                             >
                                 <Input.Password
@@ -99,12 +99,12 @@ export const Login = props => {
 Login.propTypes = {
     login: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     isAuthenticated: state.authReducer.isAuthenticated,
-    isLoading: state.authReducer.isLoading
+    isLoading: state.authReducer.isLoading,
 });
 
 export default connect(mapStateToProps, { login })(Login);

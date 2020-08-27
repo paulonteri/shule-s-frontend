@@ -8,13 +8,13 @@ import { tokenConfig } from "../auth/auth";
 export const getBooksNum = () => (dispatch, getState) => {
     short_cached_api
         .get(URL.concat("/api/v2.0/library/booksnum/"), tokenConfig(getState))
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_BOOKS_NUM,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err =>
+        .catch((err) =>
             dispatch(returnErrors(err.response.data, err.response.status))
         );
 };

@@ -17,7 +17,7 @@ import {
     WomanOutlined,
     PhoneOutlined,
     MailOutlined,
-    MedicineBoxOutlined
+    MedicineBoxOutlined,
 } from "@ant-design/icons";
 
 import { addStudent } from "../../actions/students/students";
@@ -32,7 +32,7 @@ export class StudentsForm extends Component {
         getClasses: PropTypes.func.isRequired,
         classes: PropTypes.array.isRequired,
         dorms: PropTypes.array.isRequired,
-        getDorms: PropTypes.func.isRequired
+        getDorms: PropTypes.func.isRequired,
     };
 
     formRef = React.createRef();
@@ -67,12 +67,12 @@ export class StudentsForm extends Component {
         home_county: "",
         home_town: "",
         religion: "",
-        health: ""
+        health: "",
     };
 
-    onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
 
-    handleCheck = event => {
+    handleCheck = (event) => {
         this.setState({ [event.target.name]: event.target.checked }); // handle checkboxes
     };
 
@@ -80,7 +80,7 @@ export class StudentsForm extends Component {
         this.setState({ [id]: dateString }); // handle date-picker
     };
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         const {
             student_id,
             class_ns,
@@ -106,7 +106,7 @@ export class StudentsForm extends Component {
             home_county,
             home_town,
             religion,
-            health
+            health,
         } = this.state; // get them from the state
 
         // student from above to the student const
@@ -135,7 +135,7 @@ export class StudentsForm extends Component {
             home_county,
             home_town,
             religion,
-            health
+            health,
         };
 
         // pass the student const to the action
@@ -155,7 +155,7 @@ export class StudentsForm extends Component {
                     initialValues={{
                         mother_alive: true,
                         father_alive: true,
-                        is_enrolled: true
+                        is_enrolled: true,
                     }}
                 >
                     {/* First Name */}
@@ -167,8 +167,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the student's first name!"
-                                    }
+                                            "Please input the student's first name!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -193,8 +193,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the student's family name!"
-                                    }
+                                            "Please input the student's family name!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -253,8 +253,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the student's identification number!"
-                                    }
+                                            "Please input the student's identification number!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -281,8 +281,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please select the student's class!"
-                                    }
+                                            "Please select the student's class!",
+                                    },
                                 ]}
                             >
                                 <select
@@ -299,7 +299,7 @@ export class StudentsForm extends Component {
                                     </option>
                                     {/* other options  */}
                                     {/* get classes  */}
-                                    {this.props.classes.map(my_class => (
+                                    {this.props.classes.map((my_class) => (
                                         <option
                                             key={my_class.id}
                                             value={my_class.id}
@@ -328,7 +328,7 @@ export class StudentsForm extends Component {
                                         Select Dormitory
                                     </option>
                                     {/* other options  */}
-                                    {this.props.dorms.map(dorm => (
+                                    {this.props.dorms.map((dorm) => (
                                         <option key={dorm.id} value={dorm.id}>
                                             {dorm.dormitory_name}
                                         </option>
@@ -344,8 +344,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the student's gender!"
-                                    }
+                                            "Please input the student's gender!",
+                                    },
                                 ]}
                             >
                                 <select
@@ -438,8 +438,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's first name!!"
-                                    }
+                                            "Please input the father's/male guardian's first name!!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -464,8 +464,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's family name!"
-                                    }
+                                            "Please input the father's/male guardian's family name!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -508,8 +508,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's phone number!!"
-                                    }
+                                            "Please input the father's/male guardian's phone number!!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -536,8 +536,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's email!"
-                                    }
+                                            "Please input the father's/male guardian's email!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -567,8 +567,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the mother's/female guardian's first name!"
-                                    }
+                                            "Please input the mother's/female guardian's first name!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -593,8 +593,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's family name!"
-                                    }
+                                            "Please input the father's/male guardian's family name!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -637,8 +637,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's phone number!"
-                                    }
+                                            "Please input the father's/male guardian's phone number!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -665,8 +665,8 @@ export class StudentsForm extends Component {
                                     {
                                         required: true,
                                         message:
-                                            "Please input the father's/male guardian's email!"
-                                    }
+                                            "Please input the father's/male guardian's email!",
+                                    },
                                 ]}
                             >
                                 <Input
@@ -754,9 +754,9 @@ export class StudentsForm extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     classes: state.classesReducer.classes,
-    dorms: state.dormitoriesReducer.dormitories
+    dorms: state.dormitoriesReducer.dormitories,
 });
 
 export default connect(mapStateToProps, { addStudent, getClasses, getDorms })(

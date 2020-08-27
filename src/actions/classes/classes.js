@@ -14,7 +14,7 @@ import {
     DELETE_CLASS_LOADING,
     DELETE_CLASS_FAILED,
     GET_CLASSES_FAILED,
-    GET_CLASSES_LOADING
+    GET_CLASSES_LOADING,
 } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
@@ -25,20 +25,20 @@ export const getClasses = () => (dispatch, getState) => {
     dispatch({ type: GET_CLASSES_LOADING });
     short_cached_api
         .get(`${URL}/api/v2.0/academics/classes/`, tokenConfig(getState))
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_CLASSES_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_CLASSES_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
 
 // ADD CLASS
-export const addClass = classs => (dispatch, getState) => {
+export const addClass = (classs) => (dispatch, getState) => {
     dispatch({ type: ADD_CLASS_LOADING });
     axios
         .post(
@@ -46,14 +46,14 @@ export const addClass = classs => (dispatch, getState) => {
             classs,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(createMessage({ addClassNumeral: "Class Added" }));
             dispatch({
                 type: ADD_CLASS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: ADD_CLASS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
@@ -68,14 +68,14 @@ export const patchClass = (id, classs) => (dispatch, getState) => {
             classs,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(createMessage({ addBook: "Class Updated" }));
             dispatch({
                 type: PATCH_CLASS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: PATCH_CLASS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
             console.log(err.response.data);
@@ -83,23 +83,23 @@ export const patchClass = (id, classs) => (dispatch, getState) => {
 };
 
 // DELETE CLASS NUMERAL
-export const deleteClass = id => (dispatch, getState) => {
+export const deleteClass = (id) => (dispatch, getState) => {
     dispatch({ type: DELETE_CLASS_LOADING });
     axios
         .delete(
             URL.concat(`/api/v2.0/academics/classes/${id}`),
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(
                 createMessage({ deleteClassNumeral: "Class Numeral Deleted!" })
             );
             dispatch({
                 type: DELETE_CLASS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: DELETE_CLASS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });

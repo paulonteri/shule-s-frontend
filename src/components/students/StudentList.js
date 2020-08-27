@@ -7,7 +7,7 @@ export class StudentList extends Component {
     static propTypes = {
         students: PropTypes.array.isRequired,
         getStudents: PropTypes.func.isRequired,
-        deleteStudent: PropTypes.func.isRequired
+        deleteStudent: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -22,7 +22,7 @@ export class StudentList extends Component {
                             <h4>Student List:</h4>
                         </div>
                     </div>
-                    {this.props.students.map(stud => (
+                    {this.props.students.map((stud) => (
                         <div className="row my-1">
                             <div className="col">
                                 <h5>
@@ -52,8 +52,8 @@ export class StudentList extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    students: state.studentsReducer.students
+const mapStateToProps = (state) => ({
+    students: state.studentsReducer.students,
 });
 
 export default connect(mapStateToProps, { getStudents, deleteStudent })(

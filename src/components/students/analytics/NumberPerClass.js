@@ -5,7 +5,7 @@ import { Polar } from "react-chartjs-2";
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
 import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
 
-export const NumberPerClass = props => {
+export const NumberPerClass = (props) => {
     useStudentAnalyticsGeneral();
     const [classes, setClasses] = useState(null);
     const [totals, setTotals] = useState(null);
@@ -14,10 +14,11 @@ export const NumberPerClass = props => {
         if (props.studentsPerClass !== undefined) {
             setClasses(
                 props.studentsPerClass.map(
-                    cl => `${cl.class_ns__class_numeral} ${cl.class_ns__stream}`
+                    (cl) =>
+                        `${cl.class_ns__class_numeral} ${cl.class_ns__stream}`
                 )
             );
-            setTotals(props.studentsPerClass.map(cl => cl.Total));
+            setTotals(props.studentsPerClass.map((cl) => cl.Total));
         }
     }, [props.studentsPerClass]);
 
@@ -27,16 +28,16 @@ export const NumberPerClass = props => {
             {
                 data: totals,
                 backgroundColor: backgroundColor,
-                hoverBackgroundColor: hoverBackgroundColor
-            }
-        ]
+                hoverBackgroundColor: hoverBackgroundColor,
+            },
+        ],
     };
 
     const legendOpts = {
         display: false,
         position: "bottom",
         fullWidth: false,
-        reverse: true
+        reverse: true,
     };
 
     return (
@@ -48,12 +49,12 @@ export const NumberPerClass = props => {
 };
 
 NumberPerClass.propTypes = {
-    studentsPerClass: PropTypes.array.isRequired
+    studentsPerClass: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     studentsPerClass:
-        state.studentAnalyticsReducer.studentAnalytics.students_per_class
+        state.studentAnalyticsReducer.studentAnalytics.students_per_class,
 });
 
 export default connect(mapStateToProps)(NumberPerClass);

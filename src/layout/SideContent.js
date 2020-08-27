@@ -7,11 +7,11 @@ import {
     ReadOutlined,
     TeamOutlined,
     FileProtectOutlined,
-    FormOutlined
+    FormOutlined,
 } from "@ant-design/icons";
 const { SubMenu } = Menu;
 
-export const SideContent = props => {
+export const SideContent = (props) => {
     return (
         <Fragment>
             <div className="logo mt-2 ml-3 pl-1 pt-2 ">
@@ -181,7 +181,7 @@ export const SideContent = props => {
     );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 

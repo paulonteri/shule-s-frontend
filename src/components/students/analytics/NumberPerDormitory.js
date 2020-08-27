@@ -5,7 +5,7 @@ import { Polar } from "react-chartjs-2";
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
 import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
 
-export const NumberPerDormitory = props => {
+export const NumberPerDormitory = (props) => {
     useStudentAnalyticsGeneral();
     const [dormitories, setDormitories] = useState(null);
     const [totals, setTotals] = useState(null);
@@ -14,10 +14,10 @@ export const NumberPerDormitory = props => {
         if (props.studentsPerDormitory !== undefined) {
             setDormitories(
                 props.studentsPerDormitory.map(
-                    dm => `${dm.dormitory__dormitory_name}`
+                    (dm) => `${dm.dormitory__dormitory_name}`
                 )
             );
-            setTotals(props.studentsPerDormitory.map(dm => dm.Total));
+            setTotals(props.studentsPerDormitory.map((dm) => dm.Total));
         }
     }, [props.studentsPerDormitory]);
 
@@ -27,16 +27,16 @@ export const NumberPerDormitory = props => {
             {
                 data: totals,
                 backgroundColor: backgroundColor,
-                hoverBackgroundColor: hoverBackgroundColor
-            }
-        ]
+                hoverBackgroundColor: hoverBackgroundColor,
+            },
+        ],
     };
 
     const legendOpts = {
         display: false,
         position: "bottom",
         fullWidth: false,
-        reverse: true
+        reverse: true,
     };
 
     return (
@@ -48,12 +48,12 @@ export const NumberPerDormitory = props => {
 };
 
 NumberPerDormitory.propTypes = {
-    studentsPerDormitory: PropTypes.array.isRequired
+    studentsPerDormitory: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     studentsPerDormitory:
-        state.studentAnalyticsReducer.studentAnalytics.dormitory
+        state.studentAnalyticsReducer.studentAnalytics.dormitory,
 });
 
 export default connect(mapStateToProps)(NumberPerDormitory);

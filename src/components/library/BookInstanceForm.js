@@ -23,11 +23,11 @@ function BookInstanceForm(props) {
         (state, newState) => ({ ...state, ...newState }),
         {
             id: "",
-            book: ""
+            book: "",
         }
     );
 
-    const onChange = e => {
+    const onChange = (e) => {
         setState({ [e.target.name]: e.target.value });
     };
 
@@ -35,12 +35,12 @@ function BookInstanceForm(props) {
         setState({ [e.props.name]: value });
     };
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         const { id, book } = state;
 
         const bookInst = {
             id: id,
-            book: book
+            book: book,
         };
 
         props.addBookInstance(bookInst);
@@ -54,7 +54,7 @@ function BookInstanceForm(props) {
             <Form
                 onFinish={onSubmit}
                 initialValues={{
-                    remember: true
+                    remember: true,
                 }}
                 form={form}
             >
@@ -63,8 +63,8 @@ function BookInstanceForm(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please select a book!"
-                        }
+                            message: "Please select a book!",
+                        },
                     ]}
                     name="book"
                 >
@@ -74,7 +74,7 @@ function BookInstanceForm(props) {
                         onChange={onChangeAntD}
                         optionFilterProp="search"
                     >
-                        {props.books.map(book_sel => (
+                        {props.books.map((book_sel) => (
                             <Option
                                 key={book_sel.id}
                                 value={book_sel.id}
@@ -94,8 +94,8 @@ function BookInstanceForm(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please input the book's id!"
-                        }
+                            message: "Please input the book's id!",
+                        },
                     ]}
                     name="id"
                 >
@@ -123,15 +123,15 @@ function BookInstanceForm(props) {
 BookInstanceForm.propTypes = {
     addBookInstance: PropTypes.func.isRequired,
     getBooks: PropTypes.func.isRequired,
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-    books: state.booksReducer.books
+const mapStateToProps = (state) => ({
+    books: state.booksReducer.books,
 });
 
 export default connect(mapStateToProps, {
     addBookInstance,
     getBooks,
-    getBooksNum
+    getBooksNum,
 })(BookInstanceForm);

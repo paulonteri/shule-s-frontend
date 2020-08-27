@@ -9,7 +9,7 @@ import { List } from "antd";
 export class ClassNList extends Component {
     static propTypes = {
         classNumerals: PropTypes.array.isRequired,
-        getClassNumeral: PropTypes.func.isRequired
+        getClassNumeral: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -26,7 +26,7 @@ export class ClassNList extends Component {
                     size="small"
                     header={<div>Class Numerals</div>}
                     dataSource={this.props.classNumerals}
-                    renderItem={classN => (
+                    renderItem={(classN) => (
                         <List.Item key={classN.name}>{classN.name}</List.Item>
                     )}
                 />
@@ -35,10 +35,10 @@ export class ClassNList extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    classNumerals: state.classNumeralsReducer.classNumerals
+const mapStateToProps = (state) => ({
+    classNumerals: state.classNumeralsReducer.classNumerals,
 });
 
 export default connect(mapStateToProps, {
-    getClassNumeral
+    getClassNumeral,
 })(ClassNList);

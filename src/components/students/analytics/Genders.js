@@ -5,7 +5,7 @@ import { Doughnut } from "react-chartjs-2";
 import useStudentAnalyticsGeneral from "../../../hooks/useStudentAnalyticsGeneral";
 import { backgroundColor, hoverBackgroundColor } from "../../../layout/colors";
 
-export const Gender = props => {
+export const Gender = (props) => {
     useStudentAnalyticsGeneral();
 
     const data = {
@@ -14,19 +14,19 @@ export const Gender = props => {
             {
                 data: [
                     props.studentAnalytics.female,
-                    props.studentAnalytics.male
+                    props.studentAnalytics.male,
                 ],
                 backgroundColor: backgroundColor,
-                hoverBackgroundColor: hoverBackgroundColor
-            }
-        ]
+                hoverBackgroundColor: hoverBackgroundColor,
+            },
+        ],
     };
 
     const legendOpts = {
         display: false,
         position: "bottom",
         fullWidth: false,
-        reverse: true
+        reverse: true,
     };
 
     return (
@@ -38,12 +38,13 @@ export const Gender = props => {
 };
 
 Gender.propTypes = {
-    studentAnalytics: PropTypes.object.isRequired
+    studentAnalytics: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     studentAnalytics: state.studentAnalyticsReducer.studentAnalytics,
-    totalStudents: state.studentAnalyticsReducer.studentAnalytics.total_students
+    totalStudents:
+        state.studentAnalyticsReducer.studentAnalytics.total_students,
 });
 
 export default connect(mapStateToProps)(Gender);

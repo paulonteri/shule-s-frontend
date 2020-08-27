@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Loader from "react-loader-spinner";
 
-export const SpinnerFull = props => {
+export const SpinnerFull = (props) => {
     return (
         <Fragment>
             <p className="pl-1">{props.info}</p>

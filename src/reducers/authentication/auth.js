@@ -5,7 +5,7 @@ import {
     LOGIN_FAIL,
     LOGIN_LOADING,
     LOGIN_SUCCESS,
-    LOGOUT_SUCCESS
+    LOGOUT_SUCCESS,
     // REGISTER_FAIL,
     // REGISTER_SUCCESS
 } from "../../actions/auth/types";
@@ -14,23 +14,23 @@ const initialState = {
     token: sessionStorage.getItem("token"),
     isAuthenticated: null,
     isLoading: false,
-    user: null
+    user: null,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case USER_LOADING:
         case LOGIN_LOADING:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
             };
         case USER_LOADED:
             return {
                 ...state,
                 isAuthenticated: true,
                 isLoading: false,
-                user: action.payload
+                user: action.payload,
             };
         case LOGIN_SUCCESS:
             sessionStorage.setItem("token", action.payload.token);
@@ -38,7 +38,7 @@ export default function(state = initialState, action) {
                 ...state,
                 ...action.payload,
                 isAuthenticated: true,
-                isLoading: false
+                isLoading: false,
             };
 
         case LOGIN_FAIL:
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
                 token: null,
                 user: null,
                 isAuthenticated: false,
-                isLoading: false
+                isLoading: false,
             };
 
         default:

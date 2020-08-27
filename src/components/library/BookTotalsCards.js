@@ -59,13 +59,13 @@ function BookTotalsCards(props) {
 BookTotalsCards.propTypes = {
     getBooksNum: PropTypes.func.isRequired,
 
-    books_num: PropTypes.array.isRequired
+    books_num: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-    books_num: state.libraryAnalyticsReducer.books_num
+const mapStateToProps = (state) => ({
+    books_num: state.libraryAnalyticsReducer.books_num,
 });
 
 export default connect(mapStateToProps, {
-    getBooksNum
+    getBooksNum,
 })(BookTotalsCards);

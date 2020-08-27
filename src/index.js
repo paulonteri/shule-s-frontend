@@ -8,7 +8,7 @@ Sentry.init({
     dsn: process.env.REACT_APP_SENTRY_DSN,
     environment: process.env.NODE_ENV,
     sendDefaultPii: true,
-    normalizeDepth: 10
+    normalizeDepth: 10,
 });
 
 ReactDOM.render(<App />, document.getElementById("root"));

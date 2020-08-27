@@ -16,7 +16,7 @@ import {
     ADD_EXAMRESULTS_PER_STUDENT_FAILED,
     GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS,
     GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING,
-    GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED
+    GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED,
 } from "../../actions/examinations/types";
 
 const initialState = {
@@ -37,29 +37,29 @@ const initialState = {
     uploadedExamResultsPerClass: false,
     uploadingExamResultsPerStudent: false,
     uploadingExamResultsPerStudentFailed: false,
-    uploadedExamResultsPerStudent: false
+    uploadedExamResultsPerStudent: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case GET_EXAMS_SUCCESS:
             return {
                 ...state,
                 exams: action.payload,
                 examsLoading: false,
-                examsFailed: false
+                examsFailed: false,
             };
         case GET_EXAMS_FAILED:
             return {
                 ...state,
                 examsLoading: false,
-                examsFailed: true
+                examsFailed: true,
             };
         case GET_EXAMS_LOADING:
             return {
                 ...state,
                 examsLoading: true,
-                examsFailed: false
+                examsFailed: false,
             };
         //
         case GET_EXAMRESULTS_ALL_SUCCESS:
@@ -67,19 +67,19 @@ export default function(state = initialState, action) {
                 ...state,
                 examResultsAll: action.payload,
                 examResultsAllLoading: false,
-                examResultsAllFailed: false
+                examResultsAllFailed: false,
             };
         case GET_EXAMRESULTS_ALL_FAILED:
             return {
                 ...state,
                 examResultsAllLoading: false,
-                examResultsAllFailed: true
+                examResultsAllFailed: true,
             };
         case GET_EXAMRESULTS_ALL_LOADING:
             return {
                 ...state,
                 examResultsAllLoading: true,
-                examResultsAllFailed: false
+                examResultsAllFailed: false,
             };
         //
         case ADD_EXAMRESULTS_PER_STUDENT_LOADING:
@@ -87,21 +87,21 @@ export default function(state = initialState, action) {
                 ...state,
                 uploadingExamResultsPerStudent: true,
                 uploadedExamResultsPerStudent: false,
-                uploadingExamResultsPerStudentFailed: false
+                uploadingExamResultsPerStudentFailed: false,
             };
         case ADD_EXAMRESULTS_PER_STUDENT_SUCCESS:
             return {
                 ...state,
                 uploadingExamResultsPerStudent: false,
                 uploadingExamResultsPerStudentFailed: false,
-                uploadedExamResultsPerStudent: true
+                uploadedExamResultsPerStudent: true,
             };
         case ADD_EXAMRESULTS_PER_STUDENT_FAILED:
             return {
                 ...state,
                 uploadingExamResultsPerStudentFailed: true,
                 uploadingExamResultsPerStudent: false,
-                uploadedExamResultsPerStudent: false
+                uploadedExamResultsPerStudent: false,
             };
         //
         case ADD_EXAMRESULTS_PER_CLASS_LOADING:
@@ -109,21 +109,21 @@ export default function(state = initialState, action) {
                 ...state,
                 uploadingExamResultsPerClass: true,
                 uploadedExamResultsPerClass: false,
-                uploadingExamResultsPerClassFailed: false
+                uploadingExamResultsPerClassFailed: false,
             };
         case ADD_EXAMRESULTS_PER_CLASS_SUCCESS:
             return {
                 ...state,
                 uploadingExamResultsPerClass: false,
                 uploadingExamResultsPerClassFailed: false,
-                uploadedExamResultsPerClass: true
+                uploadedExamResultsPerClass: true,
             };
         case ADD_EXAMRESULTS_PER_CLASS_FAILED:
             return {
                 ...state,
                 uploadingExamResultsPerClassFailed: true,
                 uploadingExamResultsPerClass: false,
-                uploadedExamResultsPerClass: false
+                uploadedExamResultsPerClass: false,
             };
         //
         case GET_EXAMRESULTS_PERSTUDENT_SUCCESS:
@@ -131,20 +131,20 @@ export default function(state = initialState, action) {
                 ...state,
                 examResultsPerStudent: action.payload,
                 examResultsPerStudentLoading: false,
-                examResultsPerStudentFailed: false
+                examResultsPerStudentFailed: false,
             };
         case GET_EXAMRESULTS_PERSTUDENT_FAILED:
             return {
                 ...state,
                 examResultsPerStudent: [],
                 examResultsPerStudentLoading: false,
-                examResultsPerStudentFailed: true
+                examResultsPerStudentFailed: true,
             };
         case GET_EXAMRESULTS_PERSTUDENT_LOADING:
             return {
                 ...state,
                 examResultsPerStudentLoading: true,
-                examResultsPerStudentFailed: false
+                examResultsPerStudentFailed: false,
             };
         //
         case GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS:
@@ -152,20 +152,20 @@ export default function(state = initialState, action) {
                 ...state,
                 examResultsPerClassPerSubject: action.payload,
                 examResultsPerClassPerSubjectLoading: false,
-                examResultsPerClassPerSubjectFailed: false
+                examResultsPerClassPerSubjectFailed: false,
             };
         case GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED:
             return {
                 ...state,
                 examResultsPerClassPerSubject: [],
                 examResultsPerClassPerSubjectLoading: false,
-                examResultsPerClassPerSubjectFailed: true
+                examResultsPerClassPerSubjectFailed: true,
             };
         case GET_EXAMRESULTS_PERCLASS_PERSUBJECT_LOADING:
             return {
                 ...state,
                 examResultsPerClassPerSubjectLoading: true,
-                examResultsPerClassPerSubjectFailed: false
+                examResultsPerClassPerSubjectFailed: false,
             };
         default:
             return state;

@@ -7,7 +7,7 @@ export const backgroundColor = [
     "#FF6384",
     "#99E98D",
     "#8E5EA2",
-    "#E4746D"
+    "#E4746D",
 ];
 export const hoverBackgroundColor = [
     "#00305c",
@@ -18,5 +18,5 @@ export const hoverBackgroundColor = [
     "#FF6384",
     "#99E98D",
     "#8E5EA2",
-    "#E4746D"
+    "#E4746D",
 ];

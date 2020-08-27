@@ -11,7 +11,7 @@ import {
     GET_CLASS_NUMERALS_LOADING,
     GET_CLASS_NUMERALS_FAILED,
     DELETE_CLASS_NUMERAL_FAILED,
-    DELETE_CLASS_NUMERAL_LOADING
+    DELETE_CLASS_NUMERAL_LOADING,
 } from "./types";
 
 import { createMessage, returnErrors } from "../messages";
@@ -25,20 +25,20 @@ export const getClassNumeral = () => (dispatch, getState) => {
             URL.concat("/api/v2.0/academics/classNumeral/"),
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_CLASS_NUMERALS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_CLASS_NUMERALS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
 
 // ADD CLASS NUMERAL
-export const addClassNumeral = classNumeral => (dispatch, getState) => {
+export const addClassNumeral = (classNumeral) => (dispatch, getState) => {
     dispatch({ type: ADD_CLASS_NUMERAL_LOADING });
     axios
         .post(
@@ -46,37 +46,37 @@ export const addClassNumeral = classNumeral => (dispatch, getState) => {
             classNumeral,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(createMessage({ addClassNumeral: "Class Numeral Added" }));
             dispatch({
                 type: ADD_CLASS_NUMERAL_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: ADD_CLASS_NUMERAL_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
 
 // DELETE CLASS NUMERAL
-export const deleteClassNumeral = name => (dispatch, getState) => {
+export const deleteClassNumeral = (name) => (dispatch, getState) => {
     dispatch({ type: DELETE_CLASS_NUMERAL_LOADING });
     axios
         .delete(
             URL.concat(`/api/v2.0/academics/classNumeral/${name}`),
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(
                 createMessage({ deleteClassNumeral: "Class Numeral Deleted!" })
             );
             dispatch({
                 type: DELETE_CLASS_NUMERAL_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: DELETE_CLASS_NUMERAL_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });

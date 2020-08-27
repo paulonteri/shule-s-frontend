@@ -7,7 +7,7 @@ import { getStreams } from "../../actions/classes/stream";
 // TODO: Add other class fields
 import { Form, Button, Divider, Select } from "antd";
 
-export const AddClassesForm = props => {
+export const AddClassesForm = (props) => {
     // On Change
     useEffect(() => {
         props.getClassNumeral();
@@ -18,12 +18,12 @@ export const AddClassesForm = props => {
     // forms
     const [form] = Form.useForm();
 
-    const onFinish = values => {
+    const onFinish = (values) => {
         props.addClass(values);
         form.resetFields();
     };
 
-    const onFinishFailed = errorInfo => {
+    const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
     };
 
@@ -42,12 +42,12 @@ export const AddClassesForm = props => {
                     rules={[
                         {
                             required: true,
-                            message: "Please select class numeral"
-                        }
+                            message: "Please select class numeral",
+                        },
                     ]}
                 >
                     <Select placeholder="Select Class Numeral">
-                        {props.classNumerals.map(cl_n => {
+                        {props.classNumerals.map((cl_n) => {
                             return (
                                 <Select.Option value={cl_n.name}>
                                     {cl_n.name}
@@ -61,12 +61,12 @@ export const AddClassesForm = props => {
                     rules={[
                         {
                             required: true,
-                            message: "Please select stream"
-                        }
+                            message: "Please select stream",
+                        },
                     ]}
                 >
                     <Select placeholder="Select Stream">
-                        {props.streams.map(cl_n => {
+                        {props.streams.map((cl_n) => {
                             return (
                                 <Select.Option value={cl_n.name}>
                                     {cl_n.name}
@@ -91,16 +91,16 @@ AddClassesForm.propTypes = {
     getClassNumeral: PropTypes.func.isRequired,
     getStreams: PropTypes.func.isRequired,
     streams: PropTypes.array.isRequired,
-    classNumerals: PropTypes.array.isRequired
+    classNumerals: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     streams: state.streamsReducer.streams,
-    classNumerals: state.classNumeralsReducer.classNumerals
+    classNumerals: state.classNumeralsReducer.classNumerals,
 });
 
 export default connect(mapStateToProps, {
     addClass,
     getClassNumeral,
-    getStreams
+    getStreams,
 })(AddClassesForm);

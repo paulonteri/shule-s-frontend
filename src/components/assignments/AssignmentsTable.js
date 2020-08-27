@@ -8,7 +8,7 @@ import {
     Input,
     Button,
     Skeleton,
-    Empty
+    Empty,
 } from "antd";
 import moment from "moment";
 import Highlighter from "react-highlight-words";
@@ -16,7 +16,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import {
     getAssignments,
     patchAssignment,
-    deleteAssignment
+    deleteAssignment,
 } from "../../actions/assignments/assignments";
 const { Column } = Table;
 const { Text } = Typography;
@@ -30,29 +30,29 @@ export class AssignmentsTable extends Component {
         assignments: PropTypes.array.isRequired,
         getAssignments: PropTypes.func.isRequired,
         deleteAssignment: PropTypes.func.isRequired,
-        patchAssignment: PropTypes.func.isRequired
+        patchAssignment: PropTypes.func.isRequired,
     };
 
     state = {
         searchText: "",
-        searchedColumn: ""
+        searchedColumn: "",
     };
 
-    getColumnSearchProps = dataIndex => ({
+    getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
             confirm,
-            clearFilters
+            clearFilters,
         }) => (
             <div style={{ padding: 8 }}>
                 <Input
-                    ref={node => {
+                    ref={(node) => {
                         this.searchInput = node;
                     }}
                     placeholder={`Search ${dataIndex}`}
                     value={selectedKeys[0]}
-                    onChange={e =>
+                    onChange={(e) =>
                         setSelectedKeys(e.target.value ? [e.target.value] : [])
                     }
                     onPressEnter={() =>
@@ -80,7 +80,7 @@ export class AssignmentsTable extends Component {
                 </Button>
             </div>
         ),
-        filterIcon: filtered => (
+        filterIcon: (filtered) => (
             <SearchOutlined
                 style={{ color: filtered ? "var(--light-theme)" : undefined }}
             />
@@ -90,17 +90,17 @@ export class AssignmentsTable extends Component {
                 .toString()
                 .toLowerCase()
                 .includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: visible => {
+        onFilterDropdownVisibleChange: (visible) => {
             if (visible) {
                 setTimeout(() => this.searchInput.select());
             }
         },
-        render: text =>
+        render: (text) =>
             this.state.searchedColumn === dataIndex ? (
                 <Highlighter
                     highlightStyle={{
                         backgroundColor: "var(--light-theme)",
-                        padding: 0
+                        padding: 0,
                     }}
                     searchWords={[this.state.searchText]}
                     autoEscape
@@ -108,18 +108,18 @@ export class AssignmentsTable extends Component {
                 />
             ) : (
                 text
-            )
+            ),
     });
 
     handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         this.setState({
             searchText: selectedKeys[0],
-            searchedColumn: dataIndex
+            searchedColumn: dataIndex,
         });
     };
 
-    handleReset = clearFilters => {
+    handleReset = (clearFilters) => {
         clearFilters();
         this.setState({ searchText: "" });
     };
@@ -172,7 +172,7 @@ export class AssignmentsTable extends Component {
                         sorter={(a, b) =>
                             new Date(a.time_added) - new Date(b.time_added)
                         }
-                        render={record => (
+                        render={(record) => (
                             <span>{moment(record.time_added).calendar()}</span>
                         )}
                     />
@@ -190,7 +190,7 @@ export class AssignmentsTable extends Component {
                         sorter={(a, b) =>
                             new Date(a.time_starts) - new Date(b.time_starts)
                         }
-                        render={record => (
+                        render={(record) => (
                             <span>{moment(record.time_starts).calendar()}</span>
                         )}
                     />
@@ -240,13 +240,13 @@ export class AssignmentsTable extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     assignments: state.assignmentsReducer.assignments,
-    assignmentsLoading: state.assignmentsReducer.assignmentsLoading
+    assignmentsLoading: state.assignmentsReducer.assignmentsLoading,
 });
 
 export default connect(mapStateToProps, {
     getAssignments,
     deleteAssignment,
-    patchAssignment
+    patchAssignment,
 })(AssignmentsTable);

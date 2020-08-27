@@ -19,7 +19,7 @@ import {
     ADD_EXAMRESULTS_PER_STUDENT_FAILED,
     GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
     GET_EXAMRESULTS_PERSTUDENT_LOADING,
-    GET_EXAMRESULTS_PERSTUDENT_FAILED
+    GET_EXAMRESULTS_PERSTUDENT_FAILED,
 } from "./types";
 import { createMessage, returnErrors } from "../messages";
 import { tokenConfig } from "../auth/auth";
@@ -29,13 +29,13 @@ export const getExams = () => (dispatch, getState) => {
     dispatch({ type: GET_EXAMS_LOADING });
     short_cached_api
         .get(URL.concat("/api/v2.0/exams/exams/"), tokenConfig(getState))
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_EXAMS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_EXAMS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
@@ -49,19 +49,19 @@ export const getExamResultsAll = () => (dispatch, getState) => {
             URL.concat("/api/v2.0/exams/results/get/all/"),
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_EXAMRESULTS_ALL_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_EXAMRESULTS_ALL_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
 
-export const addExamResultsPerClass = results => (dispatch, getState) => {
+export const addExamResultsPerClass = (results) => (dispatch, getState) => {
     // SAVE EXAM RESULTS PER CLASS
     dispatch({ type: ADD_EXAMRESULTS_PER_CLASS_LOADING });
     axios
@@ -70,21 +70,21 @@ export const addExamResultsPerClass = results => (dispatch, getState) => {
             results,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(createMessage({ addBook: "Class Results Saved" }));
             dispatch({
                 type: ADD_EXAMRESULTS_PER_CLASS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: ADD_EXAMRESULTS_PER_CLASS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
             console.log(err.response.data);
         });
 };
 
-export const addExamResultsPerStudent = results => (dispatch, getState) => {
+export const addExamResultsPerStudent = (results) => (dispatch, getState) => {
     // SAVE EXAM RESULTS PER STUDENT
     dispatch({ type: ADD_EXAMRESULTS_PER_STUDENT_LOADING });
     axios
@@ -93,21 +93,21 @@ export const addExamResultsPerStudent = results => (dispatch, getState) => {
             results,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch(createMessage({ addBook: "Student Results Saved" }));
             dispatch({
                 type: ADD_EXAMRESULTS_PER_STUDENT_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: ADD_EXAMRESULTS_PER_STUDENT_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
             console.log(err.response.data);
         });
 };
 
-export const getExamResultsPerStudent = student => (dispatch, getState) => {
+export const getExamResultsPerStudent = (student) => (dispatch, getState) => {
     // GET PER STUDent EXAM RESULTS
     dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_LOADING });
     short_cached_api
@@ -115,13 +115,13 @@ export const getExamResultsPerStudent = student => (dispatch, getState) => {
             `${URL}/api/v2.0/exams/results/get/student/${student}/`,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_EXAMRESULTS_PERSTUDENT_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_EXAMRESULTS_PERSTUDENT_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });
@@ -138,13 +138,13 @@ export const getExamResultsPerClassPerExam = (classs, subject) => (
             `${URL}/api/v2.0/exams/results/get/class/${classs}/subject/${subject}/`,
             tokenConfig(getState)
         )
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_EXAMRESULTS_PERCLASS_PERSUBJECT_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_EXAMRESULTS_PERCLASS_PERSUBJECT_FAILED });
             dispatch(console.log(err));
         });

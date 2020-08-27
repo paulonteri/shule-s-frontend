@@ -9,7 +9,7 @@ import {
     Select,
     Skeleton,
     Descriptions,
-    Empty
+    Empty,
 } from "antd";
 import { getSubjects } from "../../actions/subjects/subjects";
 import { getStudents } from "../../actions/students/students";
@@ -17,7 +17,7 @@ import {
     getExams,
     addExamResultsPerStudent,
     getExamResultsAll,
-    getExamResultsPerStudent
+    getExamResultsPerStudent,
 } from "../../actions/examinations/examinations";
 const { Option } = Select;
 
@@ -59,13 +59,13 @@ function AddExamResPerStudent(props) {
     }, [props.uploadedExamResultsPerStudent]);
 
     // OnSubmit
-    const onFinish = results => {
+    const onFinish = (results) => {
         const subject_marks = [];
         for (let [key, value] of Object.entries(results)) {
             if (value !== undefined && value !== null) {
                 subject_marks.push({
                     subject_id: Number(key),
-                    marks: Number(value)
+                    marks: Number(value),
                 });
             }
         }
@@ -73,7 +73,7 @@ function AddExamResPerStudent(props) {
         const q = {
             exam: exam,
             student: student,
-            subject_marks: subject_marks
+            subject_marks: subject_marks,
         };
         props.addExamResultsPerStudent(q);
     };
@@ -94,7 +94,7 @@ function AddExamResPerStudent(props) {
                 name="student&exam"
                 className="container mt-2"
                 initialValues={{
-                    remember: true
+                    remember: true,
                 }}
             >
                 <div className=" text-center mt-1 row-sm">
@@ -107,7 +107,7 @@ function AddExamResPerStudent(props) {
                             className="mr-2 my-1"
                             allowClear
                         >
-                            {props.exams.map(exam_sel => (
+                            {props.exams.map((exam_sel) => (
                                 <Option
                                     key={exam_sel.id}
                                     value={exam_sel.id}
@@ -127,7 +127,7 @@ function AddExamResPerStudent(props) {
                             optionFilterProp="search"
                             className="my-1"
                         >
-                            {props.students.map(student_sel => (
+                            {props.students.map((student_sel) => (
                                 <Option
                                     key={student_sel.student_id}
                                     value={student_sel.student_id}
@@ -172,13 +172,13 @@ function AddExamResPerStudent(props) {
                     form={form}
                     name="studentresults"
                     initialValues={{
-                        remember: true
+                        remember: true,
                     }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     className="container-sm"
                 >
-                    {props.subjects.map(subject => {
+                    {props.subjects.map((subject) => {
                         return (
                             <div key={subject.id} className="row-sm pl-1">
                                 <Form.Item
@@ -266,7 +266,7 @@ function AddExamResPerStudent(props) {
 
     // getSubjectName
     function getSubjectName(i) {
-        const sub = props.subjects.filter(subj => subj.id === i)[0];
+        const sub = props.subjects.filter((subj) => subj.id === i)[0];
         return sub.name;
     }
 
@@ -274,7 +274,7 @@ function AddExamResPerStudent(props) {
     function showResults() {
         if (props.examResultsPerStudent !== null) {
             const resultss = props.examResultsPerStudent.filter(
-                res => res.exam === exam
+                (res) => res.exam === exam
             );
 
             const results = resultss[0];
@@ -284,7 +284,7 @@ function AddExamResPerStudent(props) {
                 return (
                     <Fragment>
                         <Descriptions size="small" className="mb-2" bordered>
-                            {mks.map(marks => {
+                            {mks.map((marks) => {
                                 return (
                                     <Descriptions.Item
                                         span={3}
@@ -318,10 +318,10 @@ AddExamResPerStudent.propTypes = {
     getSubjectsLoading: PropTypes.bool.isRequired,
     uploadingExamResultsPerStudent: PropTypes.bool.isRequired,
     uploadedExamResultsPerStudent: PropTypes.bool.isRequired,
-    getExamResultsPerStudent: PropTypes.func.isRequired
+    getExamResultsPerStudent: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     getSubjectsLoading: state.subjectsReducer.getSubjectsLoading,
     subjects: state.subjectsReducer.subjects,
     exams: state.examinationsReducer.exams,
@@ -332,7 +332,7 @@ const mapStateToProps = state => ({
         state.examinationsReducer.uploadedExamResultsPerStudent,
     examResultsPerStudent: state.examinationsReducer.examResultsPerStudent,
     examResultsPerStudentLoading:
-        state.examinationsReducer.examResultsPerStudentLoading
+        state.examinationsReducer.examResultsPerStudentLoading,
 });
 
 export default connect(mapStateToProps, {
@@ -341,5 +341,5 @@ export default connect(mapStateToProps, {
     getExams,
     addExamResultsPerStudent,
     getExamResultsAll,
-    getExamResultsPerStudent
+    getExamResultsPerStudent,
 })(AddExamResPerStudent);

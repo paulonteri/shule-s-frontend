@@ -11,7 +11,7 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    LOGIN_LOADING
+    LOGIN_LOADING,
 } from "./types";
 
 // CHECK TOKEN & LOAD USER
@@ -20,70 +20,70 @@ export const loadUser = () => (dispatch, getState) => {
     dispatch({ type: USER_LOADING });
     axios
         .get(URL.concat("/api/v2.0/auth/user"), tokenConfig(getState))
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: USER_LOADED,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             console.log("loadUser fail");
             dispatch({
-                type: AUTH_ERROR
+                type: AUTH_ERROR,
             });
         });
 };
 
 ///// LOGIN USER /////
-export const login = (username, password) => dispatch => {
+export const login = (username, password) => (dispatch) => {
     dispatch({ type: LOGIN_LOADING });
     // Headers
     const config = {
         headers: {
-            "Content-Type": "application/json"
-        }
+            "Content-Type": "application/json",
+        },
     };
     // Request Body (change to string)
     const body = JSON.stringify({ username: username, password: password });
     axios
         .post(URL.concat("/api/v2.0/auth/login"), body, config)
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch(createMessage({ loginFail: "Login Failed" }));
             dispatch({
-                type: LOGIN_FAIL
+                type: LOGIN_FAIL,
             });
         });
 };
 
 ///// REGISTER USER /////
-export const register = ({ username, email, password }) => dispatch => {
+export const register = ({ username, email, password }) => (dispatch) => {
     // Headers
     const config = {
         headers: {
-            "Content-Type": "application/json"
-        }
+            "Content-Type": "application/json",
+        },
     };
     // Request Body (change to string)
     const body = JSON.stringify({ username, email, password });
     axios
         .post(URL.concat("/api/v2.0/auth/register"), body, config)
-        .then(res => {
+        .then((res) => {
             dispatch(createMessage({ registerUser: "User Regisered" }));
             dispatch({
                 type: REGISTER_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch(returnErrors(err.response.data, err.response.status));
             dispatch({
-                type: REGISTER_FAIL
+                type: REGISTER_FAIL,
             });
         });
 };
@@ -92,19 +92,19 @@ export const register = ({ username, email, password }) => dispatch => {
 export const logout = () => (dispatch, getState) => {
     axios
         .post(URL.concat("/api/v2.0/auth/logout/"), null, tokenConfig(getState))
-        .then(res => {
+        .then((res) => {
             dispatch({ type: "CLEAR_ALL" });
             dispatch({
-                type: LOGOUT_SUCCESS
+                type: LOGOUT_SUCCESS,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 };
 
 // Setup config with token - helper function
-export const tokenConfig = getState => {
+export const tokenConfig = (getState) => {
     // Headers
     const config = { headers: { "Content-Type": "application/json" } };
     // Get token from state

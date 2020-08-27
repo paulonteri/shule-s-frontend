@@ -6,7 +6,7 @@ import { BookOutlined, UserOutlined } from "@ant-design/icons";
 import {
     addBookIssued,
     getBookInstance,
-    getBooks
+    getBooks,
 } from "../../actions/library/books";
 import { getStudents } from "../../actions/students/students";
 const Option = Select.Option;
@@ -17,7 +17,7 @@ function IssueBookForm(props) {
         (state, newState) => ({ ...state, ...newState }),
         {
             student: "",
-            bookInstance: ""
+            bookInstance: "",
         }
     );
 
@@ -35,12 +35,12 @@ function IssueBookForm(props) {
         setState({ [e.props.name]: value });
     };
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         const { student, bookInstance } = state;
 
         const bookIssued = {
             student: student,
-            book: bookInstance
+            book: bookInstance,
         };
 
         props.addBookIssued(bookIssued);
@@ -49,9 +49,9 @@ function IssueBookForm(props) {
 
     const displayBookTitle = (bookInstID, bookInstBook) => {
         const books = props.books;
-        const b = books.filter(books => books.id === bookInstBook);
+        const b = books.filter((books) => books.id === bookInstBook);
 
-        return b.map(b => (
+        return b.map((b) => (
             <Option
                 key={bookInstID}
                 value={bookInstID}
@@ -71,7 +71,7 @@ function IssueBookForm(props) {
             <Form
                 onFinish={onSubmit}
                 initialValues={{
-                    remember: true
+                    remember: true,
                 }}
                 form={form}
             >
@@ -81,8 +81,8 @@ function IssueBookForm(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please select the student!"
-                        }
+                            message: "Please select the student!",
+                        },
                     ]}
                 >
                     <Select
@@ -96,7 +96,7 @@ function IssueBookForm(props) {
                         }
                         optionFilterProp="search"
                     >
-                        {props.students.map(student_sel => (
+                        {props.students.map((student_sel) => (
                             <Option
                                 key={student_sel.student_id}
                                 value={student_sel.student_id}
@@ -116,8 +116,8 @@ function IssueBookForm(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please select a book!"
-                        }
+                            message: "Please select a book!",
+                        },
                     ]}
                 >
                     <Select
@@ -131,7 +131,7 @@ function IssueBookForm(props) {
                             />
                         }
                     >
-                        {props.bookInstance.map(bookInst =>
+                        {props.bookInstance.map((bookInst) =>
                             displayBookTitle(bookInst.id, bookInst.book)
                         )}
                     </Select>
@@ -153,18 +153,18 @@ IssueBookForm.propTypes = {
     getStudents: PropTypes.func.isRequired,
     students: PropTypes.array.isRequired,
     getBooks: PropTypes.func.isRequired,
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     students: state.studentsReducer.students,
     bookInstance: state.booksReducer.bookInstances,
-    books: state.booksReducer.books
+    books: state.booksReducer.books,
 });
 
 export default connect(mapStateToProps, {
     getBookInstance,
     getStudents,
     addBookIssued,
-    getBooks
+    getBooks,
 })(IssueBookForm);

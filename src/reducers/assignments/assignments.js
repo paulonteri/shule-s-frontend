@@ -10,7 +10,7 @@ import {
     DELETE_ASSIGNMENT_SUCCESS,
     PATCH_ASSIGNMENT_FAILED,
     PATCH_ASSIGNMENT_LOADING,
-    PATCH_ASSIGNMENT_SUCCESS
+    PATCH_ASSIGNMENT_SUCCESS,
 } from "../../actions/assignments/types";
 import { findAndReplace, deleteObject } from "../common/algorithms";
 
@@ -26,29 +26,29 @@ const initialState = {
     deletedAssignments: false,
     uploadingAssignments: false,
     uploadingAssignmentsFailed: false,
-    uploadedAssignments: false
+    uploadedAssignments: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case GET_ASSIGNMENTS_SUCCESS:
             return {
                 ...state,
                 assignments: action.payload,
                 assignmentsLoading: false,
-                assignmentsFailed: false
+                assignmentsFailed: false,
             };
         case GET_ASSIGNMENTS_FAILED:
             return {
                 ...state,
                 assignmentsLoading: false,
-                assignmentsFailed: true
+                assignmentsFailed: true,
             };
         case GET_ASSIGNMENTS_LOADING:
             return {
                 ...state,
                 assignmentsLoading: true,
-                assignmentsFailed: false
+                assignmentsFailed: false,
             };
         //
         case ADD_ASSIGNMENT_LOADING:
@@ -56,7 +56,7 @@ export default function(state = initialState, action) {
                 ...state,
                 uploadingAssignments: true,
                 uploadedAssignments: false,
-                uploadingAssignmentsFailed: false
+                uploadingAssignmentsFailed: false,
             };
         case ADD_ASSIGNMENT_SUCCESS:
             return {
@@ -64,14 +64,14 @@ export default function(state = initialState, action) {
                 assignments: [...state.assignments, action.payload],
                 uploadingAssignments: false,
                 uploadingAssignmentsFailed: false,
-                uploadedAssignments: true
+                uploadedAssignments: true,
             };
         case ADD_ASSIGNMENT_FAILED:
             return {
                 ...state,
                 uploadingAssignmentsFailed: true,
                 uploadingAssignments: false,
-                uploadedAssignments: false
+                uploadedAssignments: false,
             };
         //
         case DELETE_ASSIGNMENT_LOADING:
@@ -79,7 +79,7 @@ export default function(state = initialState, action) {
                 ...state,
                 deletingAssignments: true,
                 deletedAssignments: false,
-                deletingAssignmentsFailed: false
+                deletingAssignmentsFailed: false,
             };
         case DELETE_ASSIGNMENT_SUCCESS:
             return {
@@ -87,14 +87,14 @@ export default function(state = initialState, action) {
                 assignments: deleteObject(state.assignments, action.payload),
                 deletingAssignments: false,
                 deletingAssignmentsFailed: false,
-                deletedAssignments: true
+                deletedAssignments: true,
             };
         case DELETE_ASSIGNMENT_FAILED:
             return {
                 ...state,
                 deletingAssignmentsFailed: true,
                 deletingAssignments: false,
-                deletedAssignments: false
+                deletedAssignments: false,
             };
         //
         //
@@ -103,7 +103,7 @@ export default function(state = initialState, action) {
                 ...state,
                 patchingAssignments: true,
                 patchedAssignments: false,
-                patchingAssignmentsFailed: false
+                patchingAssignmentsFailed: false,
             };
         case PATCH_ASSIGNMENT_SUCCESS:
             return {
@@ -111,14 +111,14 @@ export default function(state = initialState, action) {
                 assignments: findAndReplace(state.assignments, action.payload),
                 patchingAssignments: false,
                 patchingAssignmentsFailed: false,
-                patchedAssignments: true
+                patchedAssignments: true,
             };
         case PATCH_ASSIGNMENT_FAILED:
             return {
                 ...state,
                 patchingAssignmentsFailed: true,
                 patchingAssignments: false,
-                patchedAssignments: false
+                patchedAssignments: false,
             };
         //
 

@@ -35,7 +35,7 @@ function Dashboard() {
                 collapsed={collapsed}
                 breakpoint="md"
                 collapsedWidth="0"
-                onBreakpoint={broken => {
+                onBreakpoint={(broken) => {
                     switch (broken) {
                         case true:
                             setBroken(true);
@@ -64,7 +64,7 @@ function Dashboard() {
                     style={{
                         margin: 0,
                         padding: 0,
-                        backgroundColor: "white"
+                        backgroundColor: "white",
                     }}
                 >
                     <div className="pt-0 pl-2">
@@ -75,7 +75,7 @@ function Dashboard() {
                                 style={{
                                     margin: 0,
                                     padding: 0,
-                                    fontSize: "18px"
+                                    fontSize: "18px",
                                 }}
                             />
                         ) : (
@@ -85,7 +85,7 @@ function Dashboard() {
                                 style={{
                                     margin: 0,
                                     padding: 0,
-                                    fontSize: "18px"
+                                    fontSize: "18px",
                                 }}
                             />
                         )}

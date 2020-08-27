@@ -10,13 +10,13 @@ import { tokenConfig } from "../auth/auth";
 export const getDorms = () => (dispatch, getState) => {
     short_cached_api
         .get(URL.concat("/api/v2.0/dormitories/"), tokenConfig(getState))
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_DORMS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err =>
+        .catch((err) =>
             dispatch(returnErrors(err.response.data, err.response.status))
         );
 };

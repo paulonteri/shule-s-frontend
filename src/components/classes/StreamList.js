@@ -9,7 +9,7 @@ import { List } from "antd";
 export class StreamList extends Component {
     static propTypes = {
         streams: PropTypes.array.isRequired,
-        getStreams: PropTypes.func.isRequired
+        getStreams: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -26,7 +26,7 @@ export class StreamList extends Component {
                     size="small"
                     header={<div>Streams</div>}
                     dataSource={this.props.streams}
-                    renderItem={str => (
+                    renderItem={(str) => (
                         <List.Item key={str.name}> {str.name}</List.Item>
                     )}
                 />
@@ -35,8 +35,8 @@ export class StreamList extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    streams: state.streamsReducer.streams
+const mapStateToProps = (state) => ({
+    streams: state.streamsReducer.streams,
 });
 
 export default connect(mapStateToProps, { getStreams })(StreamList);

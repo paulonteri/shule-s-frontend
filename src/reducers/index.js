@@ -29,5 +29,5 @@ export default combineReducers({
     classNumeralsReducer: classNumerals,
     dormitoriesReducer: dormitories,
     examinationsReducer: examinations,
-    assignmentsReducer: assignments
+    assignmentsReducer: assignments,
 });

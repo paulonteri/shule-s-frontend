@@ -25,17 +25,17 @@ function BookInfoForm(props) {
             summary: "",
             ISBN: "",
             type: "",
-            subject: ""
+            subject: "",
         }
     );
 
-    const onChange = e => setState({ [e.target.name]: e.target.value });
+    const onChange = (e) => setState({ [e.target.name]: e.target.value });
 
     const onChangeAntD = (value, e) => {
         setState({ [e.props.name]: value });
     };
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         const { title, author, summary, ISBN, type, subject } = state;
 
         const book = {
@@ -44,7 +44,7 @@ function BookInfoForm(props) {
             summary: summary,
             ISBN: ISBN,
             type: type,
-            subject: subject
+            subject: subject,
         };
 
         props.addBook(book);
@@ -58,7 +58,7 @@ function BookInfoForm(props) {
             <Form
                 onFinish={onSubmit}
                 initialValues={{
-                    remember: true
+                    remember: true,
                 }}
                 form={form}
                 layout="vertical"
@@ -70,8 +70,8 @@ function BookInfoForm(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please input the book's title!"
-                        }
+                            message: "Please input the book's title!",
+                        },
                     ]}
                 >
                     <Input
@@ -94,8 +94,8 @@ function BookInfoForm(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please input the book's Author!"
-                        }
+                            message: "Please input the book's Author!",
+                        },
                     ]}
                 >
                     <Input
@@ -117,8 +117,8 @@ function BookInfoForm(props) {
                     name="ISBN"
                     rules={[
                         {
-                            required: false
-                        }
+                            required: false,
+                        },
                     ]}
                 >
                     <Input
@@ -137,8 +137,8 @@ function BookInfoForm(props) {
                             name="subject"
                             rules={[
                                 {
-                                    required: false
-                                }
+                                    required: false,
+                                },
                             ]}
                         >
                             <Select
@@ -147,7 +147,7 @@ function BookInfoForm(props) {
                                 optionFilterProp="value"
                                 onChange={onChangeAntD}
                             >
-                                {props.subjects.map(subject => (
+                                {props.subjects.map((subject) => (
                                     <Option
                                         name="subject"
                                         value={subject.id}
@@ -168,8 +168,8 @@ function BookInfoForm(props) {
                             name="type"
                             rules={[
                                 {
-                                    required: false
-                                }
+                                    required: false,
+                                },
                             ]}
                         >
                             <Input
@@ -188,8 +188,8 @@ function BookInfoForm(props) {
                     name="summary"
                     rules={[
                         {
-                            required: false
-                        }
+                            required: false,
+                        },
                     ]}
                 >
                     <Input
@@ -212,11 +212,11 @@ function BookInfoForm(props) {
 
 BookInfoForm.propTypes = {
     addBook: PropTypes.func.isRequired,
-    getSubjects: PropTypes.func.isRequired
+    getSubjects: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-    subjects: state.subjectsReducer.subjects
+const mapStateToProps = (state) => ({
+    subjects: state.subjectsReducer.subjects,
 });
 
 export default connect(mapStateToProps, { addBook, getSubjects })(BookInfoForm);

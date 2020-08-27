@@ -7,12 +7,12 @@ export class ClassNForm extends Component {
     state = { name: "" };
 
     static propTypes = {
-        addClassNumeral: PropTypes.func.isRequired
+        addClassNumeral: PropTypes.func.isRequired,
     };
 
-    onChange = e => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value }); // grab the name and set thet to the value
 
-    onSubmit = e => {
+    onSubmit = (e) => {
         e.preventDefault();
         const { name } = this.state;
         const classNumeral = { name };

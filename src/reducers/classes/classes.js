@@ -10,7 +10,7 @@ import {
     DELETE_CLASS_LOADING,
     DELETE_CLASS_FAILED,
     GET_CLASSES_FAILED,
-    GET_CLASSES_LOADING
+    GET_CLASSES_LOADING,
 } from "../../actions/classes/types";
 import { findAndReplace, deleteObject } from "../common/algorithms";
 
@@ -23,29 +23,29 @@ const initialState = {
     uploadingClassesFailed: false,
     patchingClasses: false,
     patchedClasses: false,
-    patchingClassesFailed: false
+    patchingClassesFailed: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case GET_CLASSES_SUCCESS:
             return {
                 ...state,
                 classes: action.payload,
                 getClassesLoading: false,
-                getClassesFail: false
+                getClassesFail: false,
             };
         case GET_CLASSES_LOADING:
             return {
                 ...state,
                 getClassesLoading: true,
-                getClassesFail: false
+                getClassesFail: false,
             };
         case GET_CLASSES_FAILED:
             return {
                 ...state,
                 getClassesLoading: false,
-                getClassesFail: true
+                getClassesFail: true,
             };
 
         //
@@ -54,7 +54,7 @@ export default function(state = initialState, action) {
                 ...state,
                 uploadingClasses: true,
                 uploadedClasses: false,
-                uploadingClassesFailed: false
+                uploadingClassesFailed: false,
             };
         case ADD_CLASS_SUCCESS:
             return {
@@ -62,14 +62,14 @@ export default function(state = initialState, action) {
                 classes: [...state.classes, action.payload],
                 uploadingClasses: false,
                 uploadingClassesFailed: false,
-                uploadedClasses: true
+                uploadedClasses: true,
             };
         case ADD_CLASS_FAILED:
             return {
                 ...state,
                 uploadingClassesFailed: true,
                 uploadingClasses: false,
-                uploadedClasses: false
+                uploadedClasses: false,
             };
         //
         case DELETE_CLASS_LOADING:
@@ -77,7 +77,7 @@ export default function(state = initialState, action) {
                 ...state,
                 deletingClasses: true,
                 deletedClasses: false,
-                deletingClassesFailed: false
+                deletingClassesFailed: false,
             };
         case DELETE_CLASS_SUCCESS:
             return {
@@ -85,14 +85,14 @@ export default function(state = initialState, action) {
                 classes: deleteObject(state.classes, action.payload),
                 deletingClasses: false,
                 deletingClassesFailed: false,
-                deletedClasses: true
+                deletedClasses: true,
             };
         case DELETE_CLASS_FAILED:
             return {
                 ...state,
                 deletingClassesFailed: true,
                 deletingClasses: false,
-                deletedClasses: false
+                deletedClasses: false,
             };
         //
         //
@@ -101,7 +101,7 @@ export default function(state = initialState, action) {
                 ...state,
                 patchingClasses: true,
                 patchedClasses: false,
-                patchingClassesFailed: false
+                patchingClassesFailed: false,
             };
         case PATCH_CLASS_SUCCESS:
             return {
@@ -109,14 +109,14 @@ export default function(state = initialState, action) {
                 classes: findAndReplace(state.classes, action.payload),
                 patchingClasses: false,
                 patchingClassesFailed: false,
-                patchedClasses: true
+                patchedClasses: true,
             };
         case PATCH_CLASS_FAILED:
             return {
                 ...state,
                 patchingClassesFailed: true,
                 patchingClasses: false,
-                patchedClasses: false
+                patchedClasses: false,
             };
         //
         default:

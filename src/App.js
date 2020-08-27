@@ -18,7 +18,7 @@ const Login = React.lazy(() => import("./components/accounts/Login"));
 // Alerts Options
 const alertOptions = {
     timeout: 3250,
-    position: "top center"
+    position: "top center",
 };
 function App() {
     // OnMount

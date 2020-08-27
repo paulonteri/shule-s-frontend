@@ -12,19 +12,19 @@ import { register } from "../../actions/auth/auth";
 
 export class Register extends Component {
     static propTypes = {
-        register: PropTypes.func.isRequired
+        register: PropTypes.func.isRequired,
     };
 
     state = {
         username: "",
         email: "",
         password: "",
-        password2: ""
+        password2: "",
     };
 
     state = { confirmDirty: false };
 
-    onSubmit = e => {
+    onSubmit = (e) => {
         e.preventDefault();
         const { email, username, password } = this.state;
         const newUser = { email, username, password };
@@ -32,7 +32,7 @@ export class Register extends Component {
         this.props.form.resetFields();
     };
 
-    onChange = e => this.setState({ [e.target.name]: e.target.value });
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
     compareToFirstPassword = (rule, value, callback) => {
         const { form } = this.props;
@@ -51,7 +51,7 @@ export class Register extends Component {
         callback();
     };
 
-    handleConfirmBlur = e => {
+    handleConfirmBlur = (e) => {
         const { value } = e.target;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
     };
@@ -69,8 +69,8 @@ export class Register extends Component {
                         rules={[
                             {
                                 required: true,
-                                message: "Please input your username!"
-                            }
+                                message: "Please input your username!",
+                            },
                         ]}
                     >
                         <Input
@@ -93,8 +93,8 @@ export class Register extends Component {
                         rules={[
                             {
                                 required: true,
-                                message: "Please input your email!"
-                            }
+                                message: "Please input your email!",
+                            },
                         ]}
                     >
                         <Input
@@ -118,11 +118,11 @@ export class Register extends Component {
                         rules={[
                             {
                                 required: true,
-                                message: "Please input password!"
+                                message: "Please input password!",
                             },
                             {
-                                validator: this.validateToNextPassword
-                            }
+                                validator: this.validateToNextPassword,
+                            },
                         ]}
                     >
                         <Input.Password
@@ -146,11 +146,11 @@ export class Register extends Component {
                         rules={[
                             {
                                 required: true,
-                                message: "Please input password!"
+                                message: "Please input password!",
                             },
                             {
-                                validator: this.validateToNextPassword
-                            }
+                                validator: this.validateToNextPassword,
+                            },
                         ]}
                     >
                         <Input.Password
@@ -178,6 +178,6 @@ export class Register extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, { register })(Register);

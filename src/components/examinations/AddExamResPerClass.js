@@ -8,7 +8,7 @@ import {
     getExams,
     addExamResultsPerClass,
     getExamResultsAll,
-    getExamResultsPerClassPerExam
+    getExamResultsPerClassPerExam,
 } from "../../actions/examinations/examinations";
 
 import {
@@ -19,14 +19,14 @@ import {
     Form,
     Button,
     Divider,
-    Select
+    Select,
 } from "antd";
 
 const { Option } = Select;
 
 //
 
-export const AddExamResPerClass = props => {
+export const AddExamResPerClass = (props) => {
     // State
     const [subject, setSubject] = useState(null);
     const [exam, setExam] = useState(null);
@@ -65,20 +65,20 @@ export const AddExamResPerClass = props => {
     const studz = props.students;
 
     // OnSubmit
-    const onFinish = results => {
+    const onFinish = (results) => {
         const student_marks = [];
         for (let [key, value] of Object.entries(results)) {
             if (value !== undefined && value !== null) {
                 student_marks.push({
                     student: Number(key),
-                    marks: Number(value)
+                    marks: Number(value),
                 });
             }
         }
         const q = {
             exam: exam,
             subject: subject,
-            student_marks: student_marks
+            student_marks: student_marks,
         };
 
         props.addExamResultsPerClass(q);
@@ -104,15 +104,15 @@ export const AddExamResPerClass = props => {
                             name="student&marks"
                             className="container mt-2"
                             initialValues={{
-                                remember: true
+                                remember: true,
                             }}
                             layout="vertical"
                             onFinish={onFinish}
                             onFinishFailed={onFinishFailed}
                         >
                             {props.students
-                                .filter(x => x.class_ns === classs)
-                                .map(stud => {
+                                .filter((x) => x.class_ns === classs)
+                                .map((stud) => {
                                     return (
                                         <Form.Item
                                             name={stud.student_id}
@@ -178,7 +178,7 @@ export const AddExamResPerClass = props => {
                 name="class&exam"
                 className="container mt-2"
                 initialValues={{
-                    remember: true
+                    remember: true,
                 }}
             >
                 <div className="row mt-1 align-items-center">
@@ -193,7 +193,7 @@ export const AddExamResPerClass = props => {
                                 className="mr-2 my-1"
                                 allowClear
                             >
-                                {props.exams.map(exam_sel => (
+                                {props.exams.map((exam_sel) => (
                                     <Option
                                         key={exam_sel.id}
                                         value={exam_sel.id}
@@ -217,7 +217,7 @@ export const AddExamResPerClass = props => {
                                 className="mr-2 my-1"
                                 allowClear
                             >
-                                {props.classes.map(class_sel => (
+                                {props.classes.map((class_sel) => (
                                     <Option
                                         key={class_sel.id}
                                         value={class_sel.id}
@@ -241,7 +241,7 @@ export const AddExamResPerClass = props => {
                                 className="mr-2 my-1"
                                 allowClear
                             >
-                                {props.subjects.map(subject_sel => (
+                                {props.subjects.map((subject_sel) => (
                                     <Option
                                         key={subject_sel.id}
                                         value={subject_sel.id}
@@ -275,7 +275,7 @@ export const AddExamResPerClass = props => {
             props.examResultsPerClassPerSubject.length !== 0
         ) {
             const the_results = props.examResultsPerClassPerSubject.find(
-                x => x.exam === exam
+                (x) => x.exam === exam
             );
 
             if (the_results == null) {
@@ -289,7 +289,7 @@ export const AddExamResPerClass = props => {
             } else {
                 return (
                     <Descriptions size="small" className="mb-2" bordered>
-                        {the_results["exam_results"].map(res => {
+                        {the_results["exam_results"].map((res) => {
                             return (
                                 <Descriptions.Item
                                     key={res.student_id}
@@ -326,7 +326,7 @@ export const AddExamResPerClass = props => {
 
     // Student Name
     function StudentName(s) {
-        const pupil = studz.filter(y => y.student_id === s)[0];
+        const pupil = studz.filter((y) => y.student_id === s)[0];
         return `${pupil.student_id}: ${pupil.surname} ${pupil.first_name}`;
     }
 };
@@ -338,10 +338,10 @@ AddExamResPerClass.propTypes = {
     getSubjectsLoading: PropTypes.bool.isRequired,
     uploadingExamResultsPerclass: PropTypes.bool.isRequired,
     uploadedExamResultsPerClass: PropTypes.bool.isRequired,
-    getExamResultsPerClassPerExam: PropTypes.func.isRequired
+    getExamResultsPerClassPerExam: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     getSubjectsLoading: state.subjectsReducer.getSubjectsLoading,
     subjects: state.subjectsReducer.subjects,
     exams: state.examinationsReducer.exams,
@@ -356,7 +356,7 @@ const mapStateToProps = state => ({
     examResultsPerClassPerSubjectLoading:
         state.examinationsReducer.examResultsPerClassPerSubjectLoading,
     examResultsPerClassPerSubject:
-        state.examinationsReducer.examResultsPerClassPerSubject
+        state.examinationsReducer.examResultsPerClassPerSubject,
 });
 
 export default connect(mapStateToProps, {
@@ -366,5 +366,5 @@ export default connect(mapStateToProps, {
     getClasses,
     addExamResultsPerClass,
     getExamResultsAll,
-    getExamResultsPerClassPerExam //
+    getExamResultsPerClassPerExam, //
 })(AddExamResPerClass);

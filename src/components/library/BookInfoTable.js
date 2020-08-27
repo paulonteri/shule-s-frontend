@@ -10,7 +10,7 @@ export class BookInfoTable extends Component {
     static propTypes = {
         books: PropTypes.array.isRequired,
         getBooks: PropTypes.func.isRequired,
-        deleteBook: PropTypes.func.isRequired
+        deleteBook: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -33,7 +33,7 @@ export class BookInfoTable extends Component {
                         <Column
                             title="Title"
                             key="title"
-                            render={parameter => (
+                            render={(parameter) => (
                                 <Link
                                     to={
                                         "/library/bookinfodetail/" +
@@ -57,7 +57,7 @@ export class BookInfoTable extends Component {
                         <Column
                             title="Action"
                             key="action"
-                            render={the_parameter => (
+                            render={(the_parameter) => (
                                 <span>
                                     <button
                                         className="btn btn-danger btn-sm"
@@ -78,8 +78,8 @@ export class BookInfoTable extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    books: state.booksReducer.books
+const mapStateToProps = (state) => ({
+    books: state.booksReducer.books,
 });
 
 export default connect(mapStateToProps, { getBooks, deleteBook })(

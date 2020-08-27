@@ -3,7 +3,7 @@ import { URL } from "../../url";
 import {
     GET_STUDENT_ANALYTICS_SUCCESS,
     GET_STUDENT_ANALYTICS_LOADING,
-    GET_STUDENT_ANALYTICS_FAILED
+    GET_STUDENT_ANALYTICS_FAILED,
 } from "./types";
 
 import { returnErrors } from "../../messages";
@@ -16,13 +16,13 @@ export const getStudentAnalytics = () => (dispatch, getState) => {
     reqData.clearCacheEntry = getState().studentsReducer.invalidateStudentCache;
     long_cached_api
         .get(`${URL}/api/v2.0/students/analytics/general`, reqData)
-        .then(res => {
+        .then((res) => {
             dispatch({
                 type: GET_STUDENT_ANALYTICS_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({ type: GET_STUDENT_ANALYTICS_FAILED });
             dispatch(returnErrors(err.response.data, err.response.status));
         });

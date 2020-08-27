@@ -18,8 +18,8 @@ export const cached_api = setup({
                 await config.store.removeItem(config.uuid);
             }
         },
-        maxAge: cacheTimesVar.cache
-    }
+        maxAge: cacheTimesVar.cache,
+    },
 });
 
 export const long_cached_api = setup({
@@ -29,12 +29,12 @@ export const long_cached_api = setup({
                 await config.store.removeItem(config.uuid);
             }
         },
-        maxAge: cacheTimesVar.long_cache
-    }
+        maxAge: cacheTimesVar.long_cache,
+    },
 });
 
 export const short_cached_api = setup({
     cache: {
-        maxAge: cacheTimesVar.short_cache
-    }
+        maxAge: cacheTimesVar.short_cache,
+    },
 });

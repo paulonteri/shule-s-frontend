@@ -16,7 +16,7 @@ import {
     Divider,
     message,
     Upload,
-    Select
+    Select,
 } from "antd";
 
 const { TextArea } = Input;
@@ -24,18 +24,18 @@ const { Option } = Select;
 
 const layout = {
     labelCol: {
-        span: 5
+        span: 5,
     },
     wrapperCol: {
-        span: 13
-    }
+        span: 13,
+    },
 };
 
 const tailLayout = {
     wrapperCol: {
         offset: 5,
-        span: 13
-    }
+        span: 13,
+    },
 };
 
 function AddAssignment(props) {
@@ -57,7 +57,7 @@ function AddAssignment(props) {
     const [form2] = Form.useForm();
 
     // OnSubmit
-    const onFinishDetails = assignment => {
+    const onFinishDetails = (assignment) => {
         // create formData
         const data = new FormData();
         for (let i of Object.entries(assignment)) {
@@ -109,7 +109,7 @@ function AddAssignment(props) {
                 {...layout}
                 name="assignment_details"
                 initialValues={{
-                    remember: true
+                    remember: true,
                 }}
                 onFinish={onFinishDetails}
                 onFinishFailed={onFinishFailedDetails}
@@ -121,8 +121,8 @@ function AddAssignment(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please give the task a name"
-                        }
+                            message: "Please give the task a name",
+                        },
                     ]}
                 >
                     <Input
@@ -139,8 +139,8 @@ function AddAssignment(props) {
                         {
                             required: true,
                             message:
-                                "Please give the a small description on what the task involves"
-                        }
+                                "Please give the a small description on what the task involves",
+                        },
                     ]}
                 >
                     <TextArea
@@ -181,15 +181,15 @@ function AddAssignment(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please select the classes involved"
-                        }
+                            message: "Please select the classes involved",
+                        },
                     ]}
                 >
                     <Select
                         mode="multiple"
                         placeholder="Select classes involved"
                     >
-                        {props.classes.map(cl => (
+                        {props.classes.map((cl) => (
                             <Option value={cl.id}>
                                 {cl.class_numeral}
                                 {cl.stream}
@@ -206,8 +206,8 @@ function AddAssignment(props) {
                         {
                             required: true,
                             message:
-                                "Please select the time when the task starts"
-                        }
+                                "Please select the time when the task starts",
+                        },
                     ]}
                 >
                     <DatePicker
@@ -227,7 +227,8 @@ function AddAssignment(props) {
                     rules={[
                         {
                             required: true,
-                            message: "Please select the deadline for completion"
+                            message:
+                                "Please select the deadline for completion",
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
@@ -240,8 +241,8 @@ function AddAssignment(props) {
                                 return Promise.reject(
                                     "The time the task is required should be before it starts"
                                 );
-                            }
-                        })
+                            },
+                        }),
                     ]}
                 >
                     <DatePicker
@@ -267,7 +268,7 @@ function AddAssignment(props) {
                         alignment="inline"
                         name="assignment_files"
                         initialValues={{
-                            remember: true
+                            remember: true,
                         }}
                     >
                         <div className="row ">
@@ -279,7 +280,7 @@ function AddAssignment(props) {
                                         disabled={props.uploadingAssignments}
                                         className="avatar-uploader"
                                         showUploadList={false}
-                                        beforeUpload={e =>
+                                        beforeUpload={(e) =>
                                             beforeUpload(e, "file1")
                                         }
                                     >
@@ -299,7 +300,7 @@ function AddAssignment(props) {
                                         disabled={props.uploadingAssignments}
                                         className="avatar-uploader"
                                         showUploadList={false}
-                                        beforeUpload={e =>
+                                        beforeUpload={(e) =>
                                             beforeUpload(e, "file2")
                                         }
                                     >
@@ -319,7 +320,7 @@ function AddAssignment(props) {
                                         disabled={props.uploadingAssignments}
                                         className="avatar-uploader"
                                         showUploadList={false}
-                                        beforeUpload={e =>
+                                        beforeUpload={(e) =>
                                             beforeUpload(e, "file3")
                                         }
                                     >
@@ -430,10 +431,10 @@ AddAssignment.propTypes = {
     getClassNumeral: PropTypes.func.isRequired,
     getClassesLoading: PropTypes.bool.isRequired,
     getClassNumeralsLoading: PropTypes.bool.isRequired,
-    getStreamsLoading: PropTypes.bool.isRequired
+    getStreamsLoading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     uploadingAssignments: state.assignmentsReducer.uploadingAssignments,
     uploadedAssignments: state.assignmentsReducer.uploadedAssignments,
     classes: state.classesReducer.classes,
@@ -441,12 +442,12 @@ const mapStateToProps = state => ({
     streams: state.streamsReducer.streams,
     getClassesLoading: state.classesReducer.getClassesLoading,
     getClassNumeralsLoading: state.classNumeralsReducer.getClassNumeralsLoading,
-    getStreamsLoading: state.streamsReducer.getStreamsLoading
+    getStreamsLoading: state.streamsReducer.getStreamsLoading,
 });
 
 export default connect(mapStateToProps, {
     getClasses,
     getStreams,
     getClassNumeral,
-    addAssignment
+    addAssignment,
 })(AddAssignment);

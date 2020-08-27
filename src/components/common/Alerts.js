@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 export class Alerts extends Component {
     static propTypes = {
         error: PropTypes.object.isRequired,
-        message: PropTypes.object.isRequired
+        message: PropTypes.object.isRequired,
     };
 
     componentDidUpdate(prevProps) {
@@ -78,9 +78,9 @@ export class Alerts extends Component {
 }
 
 // get errors from the state
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     error: state.errorsReducer,
-    message: state.messagesReducer
+    message: state.messagesReducer,
 });
 
 export default connect(mapStateToProps)(withAlert()(Alerts));
