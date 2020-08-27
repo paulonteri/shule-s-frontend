@@ -31,7 +31,12 @@ jobs:
         working-directory: backend
         run: |
           pip install -r requirements.txt
-          python manage.py runserver
+          python manage.py runserver &
+        env:
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USER: ${{ secrets.DB_USER }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
       - name: Install Dependencies
         run: yarn
       - name: Test
