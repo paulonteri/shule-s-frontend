@@ -21,28 +21,17 @@ jobs:
         with:
           repository: ShuleSuite/core
           token: ${{ secrets.MY_PAT }}
-          path: my-tools
-        
-      - name: Content list
-        working-directory: ${{ github.workspace }}  
-        run: ls -la 
-        
-      - name: Content list
-        working-directory: my-tools
-        run: ls -la
-        
-      - name: Install Requirements
-        working-directory: my-tools
-        run: echo $PATH
-        
+          path: backend  
 
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
       - name: Install Requirements
-        working-directory: my-tools
-        run: pip install -r requirements.txt
+        working-directory: backend
+        run: |
+          pip install -r requirements.txt
+          python manage.py runserver
       - name: Install Dependencies
         run: yarn
       - name: Test
