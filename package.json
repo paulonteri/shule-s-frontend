@@ -82,7 +82,7 @@
         "cypress-react-selector": "^2.0.2",
         "less": "^3.10.3",
         "less-loader": "^5.0.0",
-        "prettier": "1.19.1",
+        "prettier": "^2.1.1",
         "react-app-rewired": "^2.1.6",
         "source-map-explorer": "^2.4.2",
         "style-loader": "^1.1.3",

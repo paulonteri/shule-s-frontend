@@ -10,9 +10,9 @@ describe("Smoke Test", () => {
 describe("Login", () => {
     it("Must Login to access pages", () => {
         cy.visit("/#/students", {
-            onBeforeLoad: win => {
+            onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
-            }
+            },
         });
         cy.contains("Kindly login");
         cy.url().should("eq", Cypress.config().baseUrl + "/#/login");
@@ -20,9 +20,9 @@ describe("Login", () => {
 
     it("Login Page works", () => {
         cy.visit("/#/login", {
-            onBeforeLoad: win => {
+            onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
-            }
+            },
         });
     });
 
@@ -45,7 +45,7 @@ describe("Login", () => {
             cy.route("POST", API_URL + "/auth/login").as("attemptLogin");
             cy.get(".ant-btn").click();
 
-            cy.wait("@attemptLogin").then(xhr => {
+            cy.wait("@attemptLogin").then((xhr) => {
                 assert.equal(xhr.status, 200);
                 assert.isNotNull(
                     xhr.response.body.data,
@@ -84,21 +84,21 @@ describe("Student", () => {
     it("Student Table Page", () => {
         cy.visit("/#/students/table");
         cy.get(".table-responsive");
-        cy.wait("@getStudents").then(xhr => {
+        cy.wait("@getStudents").then((xhr) => {
             assert.equal(xhr.status, 200);
             assert.isNotNull(
                 xhr.response.body.data,
                 "Students API call has data"
             );
         });
-        cy.wait("@getClasses").then(xhr => {
+        cy.wait("@getClasses").then((xhr) => {
             assert.equal(xhr.status, 200);
             assert.isNotNull(
                 xhr.response.body.data,
                 "Classes API call has data"
             );
         });
-        cy.wait("@getDormitories").then(xhr => {
+        cy.wait("@getDormitories").then((xhr) => {
             assert.equal(xhr.status, 200);
             assert.isNotNull(
                 xhr.response.body.data,
@@ -133,18 +133,18 @@ describe("Library", () => {
         cy.get('[data-row-key="1"] > :nth-child(1) > a');
 
         // API Calls
-        cy.wait("@getBooks").then(xhr => {
+        cy.wait("@getBooks").then((xhr) => {
             assert.equal(xhr.status, 200);
             assert.isNotNull(xhr.response.body.data, "Books API call has data");
         });
-        cy.wait("@getBooksNum").then(xhr => {
+        cy.wait("@getBooksNum").then((xhr) => {
             assert.equal(xhr.status, 200);
             assert.isNotNull(
                 xhr.response.body.data,
                 "BooksNum API call has data"
             );
         });
-        cy.wait("@getSubjects").then(xhr => {
+        cy.wait("@getSubjects").then((xhr) => {
             assert.equal(xhr.status, 200);
             assert.isNotNull(
                 xhr.response.body.data,
