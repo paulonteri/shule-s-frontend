@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ShuleSuite/core
-          token: ${{ secrets.GitHub_PAT }}
+          token: ${{ secrets.MY_PAT }}
           path: my-tools
         
       - name: Content list
