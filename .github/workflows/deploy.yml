@@ -13,21 +13,28 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Backend
-        working-directory: ${{ github.workspace }}  
-        run: git clone "https://${{ secrets.my_pat }}@github.com/ShuleSuite/core.git"
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: main
 
-      - name: Checkout Repo
-        uses: actions/checkout@master
+      - name: Checkout private tools
+        uses: actions/checkout@v2
+        with:
+          repository: ShuleSuite/core
+          token: ${{ secrets.GitHub_PAT }}
+          path: my-tools
         
       - name: Content list
         working-directory: ${{ github.workspace }}  
         run: ls -la 
         
-      - name: Install Requirements
-        run: echo $PATH
-      - name: Install Requirements
-        run: ls
+      - name: Content list
+        working-directory: main 
+        run: ls -la 
+      - name: Content list
+        working-directory: my-tools
+        run: ls -la 
       - name: Install Requirements
         working-directory: my-tools
         run: echo $PATH
