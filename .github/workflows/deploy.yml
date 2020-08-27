@@ -69,7 +69,7 @@ jobs:
       - name: End to End Test
         run: |
           yarn start &
-          yarn cypress-run
+          yarn cypress run --record --key ${{ secrets.CYPRESS_KEY }}
         
       - name: Build
         env:
