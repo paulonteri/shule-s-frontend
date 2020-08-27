@@ -51,7 +51,7 @@
         "cypress": "cypress open",
         "cypress-run": "cypress run --headless --browser chrome",
         "analyze": "source-map-explorer 'build/static/js/*.js'",
-        "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
+        "pretty": "prettier --write \"src/**/*.{js,jsx}\""
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -80,8 +80,10 @@
         "customize-cra": "^1.0.0",
         "cypress": "^5.0.0",
         "cypress-react-selector": "^2.0.2",
+        "husky": "^4.2.5",
         "less": "^3.10.3",
         "less-loader": "^5.0.0",
+        "lint-staged": "^10.2.13",
         "prettier": "^2.1.1",
         "react-app-rewired": "^2.1.6",
         "source-map-explorer": "^2.4.2",
@@ -90,6 +92,17 @@
     },
     "prettier": {
         "tabWidth": 4
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "prettier --write",
+            "git add"
+        ]
     },
     "author": "Paul Onteri - Lead Software Engineer, ShuleSuite.com",
     "license": "Proprietary",
