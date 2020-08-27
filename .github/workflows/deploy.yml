@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build & Deploy
+    name: Test, Build & Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,6 +42,12 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
+      - name: Yarn Cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install Node Dependencies
         run: yarn
         
@@ -49,7 +55,9 @@ jobs:
         run: yarn test
         
       - name: End to End Test
-        run: yarn cypress-run
+        run: |
+          yarn start &
+          yarn cypress-run
         
       - name: Build
         env:
