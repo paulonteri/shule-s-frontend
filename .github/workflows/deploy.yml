@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          path: main
 
       - name: Checkout private tools
         uses: actions/checkout@v2
@@ -30,11 +28,9 @@ jobs:
         run: ls -la 
         
       - name: Content list
-        working-directory: main 
-        run: ls -la 
-      - name: Content list
         working-directory: my-tools
-        run: ls -la 
+        run: ls -la
+        
       - name: Install Requirements
         working-directory: my-tools
         run: echo $PATH
