@@ -14,34 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Backend
-        uses: actions/checkout@master
-        with:
-          repository: ShuleSuite/core
-          ref: master
-          token: ${{ secrets.my_pat }}
-          path: my-tools
-          
-      - name: Checkout Backend
-        uses: actions/checkout@master
-        with:
-          repository: ShuleSuite/core
-          ref: master
-          token: ${{ secrets.my_pat }}
-          path: .
-      - name: Checkout Backend
-        uses: actions/checkout@master
-        with:
-          repository: ShuleSuite/core
-          ref: master
-          token: ${{ secrets.my_pat }}
-          path: ./
-      - name: Checkout Backend
-        uses: actions/checkout@master
-        with:
-          repository: ShuleSuite/core
-          ref: master
-          token: ${{ secrets.my_pat }}
-          path: ./my-tools
+        run: git clone"https://${{ secrets.my_pat }}@github.com/ShuleSuite/core.git" /other-private-repo
+
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Content list
