@@ -48,7 +48,7 @@
         "test": "react-app-rewired test",
         "full-test": "yarn react-app-rewired test --watchAll=false --detectOpenHandles && yarn cypress-run",
         "eject": "react-app-rewired eject",
-        "cypress": "cypress open",
+        "cypress-open": "cypress open",
         "cypress-run": "cypress run --headless --browser chrome",
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "pretty": "prettier --write \"src/**/*.{js,jsx}\""

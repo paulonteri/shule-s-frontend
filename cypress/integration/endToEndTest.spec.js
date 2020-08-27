@@ -1,3 +1,6 @@
+// GUIDES:
+// https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html
+// https://www.cypress.io/blog/2018/11/14/testing-redux-store/
 const SERVER_URL = "http://localhost:8000";
 const API_URL = SERVER_URL + "/api/v2.0";
 
@@ -178,6 +181,7 @@ describe("Library", () => {
                 "getSubjects API call has data"
             );
         });
+        //
         cy.url().should("eq", Cypress.config().baseUrl + "/#/library");
     });
 
@@ -240,6 +244,7 @@ describe("Library", () => {
                 "Subjects API call has data"
             );
         });
+        //
         cy.url().should(
             "eq",
             Cypress.config().baseUrl + "/#/library/bookinfoform"

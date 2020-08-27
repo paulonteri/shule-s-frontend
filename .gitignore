@@ -7,6 +7,10 @@
 
 **/tailwind-purged.css
 
+/cypress/videos/
+/cypress/screenshots/
+
+
 # dependencies
 /node_modules
 /.pnp
