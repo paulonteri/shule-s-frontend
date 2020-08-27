@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Backend
-        run: git clone"https://${{ secrets.my_pat }}@github.com/ShuleSuite/core.git" /other-private-repo
+        run: git clone "https://${{ secrets.my_pat }}@github.com/ShuleSuite/core.git"
 
       - name: Checkout Repo
         uses: actions/checkout@master
+        
       - name: Content list
-        uses: enricomarino/actions@v2
-        with:
-          source: my-tools
+        run: ls
+        
       - name: Install Requirements
         run: echo $PATH
       - name: Install Requirements
