@@ -51,8 +51,9 @@ jobs:
           DEBUG : False
           TESTING: False
         working-directory: backend
+        # Hacky check whether the backend is okay and start in the background
         run: |
-          python manage.py test --noinput
+          python manage.py check
           python manage.py runserver & 
 
       - name: Yarn Cache
