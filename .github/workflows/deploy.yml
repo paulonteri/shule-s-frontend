@@ -14,13 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Backend
+        working-directory: ${{ github.workspace }}  
         run: git clone "https://${{ secrets.my_pat }}@github.com/ShuleSuite/core.git"
 
       - name: Checkout Repo
         uses: actions/checkout@master
         
       - name: Content list
-        run: ls
+        working-directory: ${{ github.workspace }}  
+        run: ls -la 
         
       - name: Install Requirements
         run: echo $PATH
