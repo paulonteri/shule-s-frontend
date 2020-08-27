@@ -2,27 +2,80 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - deploy
       - master
-  pull_request:
-    branches:
-      - deploy
 
 jobs:
   build:
-    name: Build & Deploy
+    name: Test, Build & Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Install Dependencies
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout private tools
+        uses: actions/checkout@v2
+        with:
+          repository: ShuleSuite/core
+          token: ${{ secrets.MY_PAT }}
+          path: backend
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+          
+      - name: Pip Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Requirements
+        working-directory: backend
+        run: pip install -r requirements.txt
+        
+      - name: Run Backend
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USER: ${{ secrets.DB_USER }}
+          SECRET_KEY: shulesuite.com
+          DJANGO_SETTINGS_MODULE: school.settings.production
+          DEBUG : False
+          TESTING: False
+        working-directory: backend
+        # Hacky check whether the backend is okay and start in the background
+        run: |
+          python manage.py check
+          python manage.py runserver & 
+
+      - name: Yarn Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Node Dependencies
         run: yarn
-      - name: Test
+        
+      - name: Simple Test
         run: yarn test
+        
+      - name: End to End Test
+        run: |
+          yarn start &
+          yarn cypress-run
+        
       - name: Build
         env:
           REACT_APP_SENTRY_DSN: ${{ secrets.REACT_APP_SENTRY_DSN }}
         run: yarn build
+        
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
