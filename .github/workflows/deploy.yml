@@ -30,6 +30,7 @@ jobs:
           
       - uses: actions/cache@v2
         with:
+          id: python-cacche
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
@@ -40,19 +41,19 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Run Backend
-        working-directory: backend
-        run: |
-          python manage.py test --noinput
-          python manage.py runserver & 
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_USER: ${{ secrets.DB_USER }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SECRET_KEY: shulesuite.com
           DJANGO_SETTINGS_MODULE: school.settings.production
           DEBUG : False
           TESTING: False
+        working-directory: backend
+        run: |
+          python manage.py test --noinput
+          python manage.py runserver & 
 
       - name: Yarn Cache
         uses: actions/cache@v2
