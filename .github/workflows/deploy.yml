@@ -42,6 +42,7 @@ jobs:
       - name: Run Backend
         working-directory: backend
         run: |
+          python manage.py test
           python manage.py runserver & 
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
