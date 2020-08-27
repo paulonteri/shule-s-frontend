@@ -42,13 +42,16 @@ jobs:
       - name: Run Backend
         working-directory: backend
         run: |
-          python manage.py test
+          python manage.py test --noinput
           python manage.py runserver & 
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_USER: ${{ secrets.DB_USER }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DJANGO_SETTINGS_MODULE: school.settings.production
+          DEBUG : False
+          TESTING: False
 
       - name: Yarn Cache
         uses: actions/cache@v2
