@@ -3,5 +3,8 @@
     "requestTimeout": 35000,
     "defaultCommandTimeout": 25000,
     "screenshotOnRunFailure": true,
-    "projectId": "vet4z2"
+    "projectId": "vet4z2",
+    "env": {
+        "API_URL": "http://localhost:8000/api/v2.0"
+    }
 }

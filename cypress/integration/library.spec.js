@@ -1,46 +1,15 @@
-// GUIDES:
-// https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html
-// https://www.cypress.io/blog/2018/11/14/testing-redux-store/
-const SERVER_URL = "http://localhost:8000";
-const API_URL = SERVER_URL + "/api/v2.0";
-
-describe("Smoke Test", () => {
-    it("Smoke Test", () => {
-        cy.visit("/");
-    });
-});
+const API_URL = Cypress.env("API_URL");
 
 // Authentication
 describe("Login", () => {
-    it("Must Login to access pages", () => {
-        cy.visit("/#/students", {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.clear();
-            },
-        });
-        cy.contains("Kindly login");
-        cy.url().should("eq", Cypress.config().baseUrl + "/#/login");
-    });
-
-    it("Login works", () => {
-        cy.visit("/#/login", {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.clear();
-            },
-        });
-    });
-
-    it("Login elements", () => {
-        cy.clearLocalStorage().then(() => {
-            cy.get("#email");
-            cy.get("#password");
-            cy.get(".ant-btn");
-        });
-    });
-
     it("Login data submission", () => {
         cy.clearLocalStorage().then(() => {
             cy.server();
+            cy.visit("/#/login", {
+                onBeforeLoad: (win) => {
+                    win.sessionStorage.clear();
+                },
+            });
             // Check form
             cy.get("#email").clear();
             cy.get("#password").clear();
@@ -58,80 +27,6 @@ describe("Login", () => {
                 cy.url().should("eq", Cypress.config().baseUrl + "/#/");
             });
         });
-    });
-});
-
-// Student Data
-describe("Student", () => {
-    beforeEach(() => {
-        cy.server();
-        cy.route("GET", API_URL + "/students/students/").as("getStudents");
-        cy.route("GET", API_URL + "/academics/classes").as("getClasses");
-        cy.route("GET", API_URL + "/dormitories").as("getDormitories");
-    });
-
-    it("Dashboard", () => {
-        cy.visit("/#/students");
-        // Analytics cards
-        cy.get(":nth-child(1) > .container");
-        cy.get(":nth-child(2) > .container");
-        cy.get(":nth-child(3) > .container");
-        cy.contains("Total students");
-        cy.contains("Students per class");
-        cy.contains("Students per dormitory");
-        // Calender
-        cy.get(".col > .container-fluid");
-        cy.contains("School Events");
-        cy.url().should("eq", Cypress.config().baseUrl + "/#/students");
-    });
-
-    it("Student Add", () => {
-        cy.visit("/#/students/add");
-        cy.get("#first_name");
-        cy.get("h5");
-        cy.wait("@getClasses").then((xhr) => {
-            assert.equal(xhr.status, 200);
-            assert.isNotNull(
-                xhr.response.body.data,
-                "Classes API call has data"
-            );
-        });
-        cy.wait("@getDormitories").then((xhr) => {
-            assert.equal(xhr.status, 200);
-            assert.isNotNull(
-                xhr.response.body.data,
-                "Dormitories API call has data"
-            );
-        });
-        cy.url().should("eq", Cypress.config().baseUrl + "/#/students/add");
-    });
-
-    it("Student Table", () => {
-        cy.visit("/#/students/table");
-        cy.get(".table-responsive");
-        // API Calls
-        cy.wait("@getStudents").then((xhr) => {
-            assert.equal(xhr.status, 200);
-            assert.isNotNull(
-                xhr.response.body.data,
-                "Students API call has data"
-            );
-        });
-        cy.wait("@getClasses").then((xhr) => {
-            assert.equal(xhr.status, 200);
-            assert.isNotNull(
-                xhr.response.body.data,
-                "Classes API call has data"
-            );
-        });
-        cy.wait("@getDormitories").then((xhr) => {
-            assert.equal(xhr.status, 200);
-            assert.isNotNull(
-                xhr.response.body.data,
-                "Dormitories API call has data"
-            );
-        });
-        cy.url().should("eq", Cypress.config().baseUrl + "/#/students/table");
     });
 });
 
@@ -204,20 +99,21 @@ describe("Library", () => {
                 xhr.response.body.data,
                 "Students API call has data"
             );
+            // Fill Form
+            cy.get("#student").click();
+            cy.get(
+                ".ant-select-item-option-active > .ant-select-item-option-content"
+            ).click();
+            cy.get("#bookInstance").click();
+            cy.get(
+                ".ant-select-item-option-active > .ant-select-item-option-content"
+            )
+                .last()
+                .click();
+            // Submit Form Data
+            cy.get(".ant-btn").click();
         });
-        // Fill Form
-        cy.get("#student").click();
-        cy.get(
-            ".ant-select-item-option-active > .ant-select-item-option-content"
-        ).click();
-        cy.get("#bookInstance").click();
-        cy.get(
-            ".ant-select-item-option-active > .ant-select-item-option-content"
-        )
-            .last()
-            .click();
-        // Submit Form Data
-        cy.get(".ant-btn").click();
+
         cy.wait("@addIssueBook").then((xhr) => {
             assert.equal(xhr.status, 201);
         });
