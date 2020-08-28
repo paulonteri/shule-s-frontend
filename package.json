@@ -1,7 +1,7 @@
 {
     "name": "shulesuite-app",
     "version": "0.1.0",
-    "description": "Shule Suite Web App",
+    "description": "ShuleSuite Web App",
     "private": true,
     "dependencies": {
         "-": "^0.0.1",
@@ -80,6 +80,7 @@
         "customize-cra": "^1.0.0",
         "cypress": "^5.0.0",
         "cypress-react-selector": "^2.0.2",
+        "faker": "^5.1.0",
         "husky": "^4.2.5",
         "less": "^3.10.3",
         "less-loader": "^5.0.0",
