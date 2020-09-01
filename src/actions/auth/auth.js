@@ -18,7 +18,6 @@ import {
 export const loadUser = () => (dispatch, getState) => {
     //
     var tkn = tokenConfig(getState);
-    console.log(tkn);
     if (tkn && tkn.headers && tkn.headers.Authorization) {
         // User Loading
         dispatch({ type: USER_LOADING });
@@ -31,7 +30,6 @@ export const loadUser = () => (dispatch, getState) => {
                 });
             })
             .catch((err) => {
-                console.log("loadUser fail");
                 dispatch({
                     type: AUTH_ERROR,
                 });

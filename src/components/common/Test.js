@@ -21,7 +21,7 @@ export const Test = (props) => {
             setTotals(props.studentsPerClass.map((cl) => cl.Total));
         }
     }, [props.studentsPerClass]);
-    console.log(classes, totals);
+    // console.log(classes, totals);
 
     const data = {
         labels: classes,

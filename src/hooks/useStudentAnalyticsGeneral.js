@@ -13,7 +13,7 @@ function useStudentAnalyticsGeneral() {
             dispatch(getStudentAnalytics());
             setTime(today.getMinutes());
         } else {
-            console.log("pass");
+            // console.log("pass");
         }
         // eslint-disable-next-line
     }, []);

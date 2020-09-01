@@ -4,7 +4,7 @@ function cacheTime() {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
         return { cache: 0, long_cache: 0, short_cache: 0 };
     } else {
-        return { cache: 300000, long_cache: 900000, short_cache: 60000 };
+        return { cache: 300000, long_cache: 900000, short_cache: 120000 };
     }
 }
 
