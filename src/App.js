@@ -22,14 +22,17 @@ const alertOptions = {
 };
 function App() {
     // OnMount
+    // eslint-disable-next-line
     useEffect(() => {
-        store.dispatch(loadUser());
-        const Http = new XMLHttpRequest();
-        const url = `${URL}/api/ping/`;
-        Http.open("GET", url);
-        Http.send();
+        if (store.getState().authReducer.isAuthenticated !== true) {
+            store.dispatch(loadUser());
+            const Http = new XMLHttpRequest();
+            const url = `${URL}/api/ping/`;
+            Http.open("GET", url);
+            Http.send();
+        }
         // eslint-disable-next-line
-    }, []);
+    }, [store.getState().authReducer.isAuthenticated]);
 
     return (
         <Provider store={store}>

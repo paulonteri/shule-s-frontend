@@ -12,10 +12,3 @@ it("<App /> renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(<App />, div);
 });
-
-it("<App /> loading screen", () => {
-    const { getByText } = render(<App />);
-    expect(
-        getByText("Establishing a secure connection...")
-    ).toBeInTheDocument();
-});

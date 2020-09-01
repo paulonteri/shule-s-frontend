@@ -17,8 +17,9 @@ import {
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
     //
-    var tkn = tokenConfig(getState)
-    if (tkn && tkn.headers && tkn.headers.Authorization){
+    var tkn = tokenConfig(getState);
+    console.log(tkn);
+    if (tkn && tkn.headers && tkn.headers.Authorization) {
         // User Loading
         dispatch({ type: USER_LOADING });
         axios
@@ -36,7 +37,7 @@ export const loadUser = () => (dispatch, getState) => {
                 });
             });
     } else {
-        dispatch({type: AUTH_ERROR,}); 
+        dispatch({ type: AUTH_ERROR });
     }
 };
 
