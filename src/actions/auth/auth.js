@@ -16,22 +16,28 @@ import {
 
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
-    // User Loading
-    dispatch({ type: USER_LOADING });
-    axios
-        .get(URL.concat("/api/v2.0/auth/user"), tokenConfig(getState))
-        .then((res) => {
-            dispatch({
-                type: USER_LOADED,
-                payload: res.data,
+    //
+    var tkn = tokenConfig(getState)
+    if (tkn && tkn.headers && tkn.headers.Authorization){
+        // User Loading
+        dispatch({ type: USER_LOADING });
+        axios
+            .get(URL.concat("/api/v2.0/auth/user"), tkn)
+            .then((res) => {
+                dispatch({
+                    type: USER_LOADED,
+                    payload: res.data,
+                });
+            })
+            .catch((err) => {
+                console.log("loadUser fail");
+                dispatch({
+                    type: AUTH_ERROR,
+                });
             });
-        })
-        .catch((err) => {
-            console.log("loadUser fail");
-            dispatch({
-                type: AUTH_ERROR,
-            });
-        });
+    } else {
+        dispatch({type: AUTH_ERROR,}); 
+    }
 };
 
 ///// LOGIN USER /////
